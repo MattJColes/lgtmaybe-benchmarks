@@ -11,7 +11,7 @@ from pathlib import Path
 import pytest
 
 from lgtmaybe_bench import runner
-from lgtmaybe_bench.cli import build_parser, main, resolved_concurrency
+from lgtmaybe_bench.cli import build_parser, main, resolve_lgtmaybe_command, resolved_concurrency
 from lgtmaybe_bench.runner import (
     RunConfig,
     _parse_uv_tool_version,
@@ -57,6 +57,52 @@ def test_cli_rejects_missing_lgtmaybe() -> None:
         main(["run", "--provider", "ollama", "--model", "fake", "--lgtmaybe", "missing-x"])
 
     assert error.value.code == 2
+
+
+def test_cli_bootstraps_latest_lgtmaybe_with_uv(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        shutil, "which", lambda command: "C:/tools/uv.exe" if command == "uv" else None
+    )
+    calls: list[list[str]] = []
+
+    def run(command: list[str], **_: object) -> subprocess.CompletedProcess[str]:
+        calls.append(command)
+        return subprocess.CompletedProcess(command, 0, stdout="lgtmaybe 1.15.0\n", stderr="")
+
+    monkeypatch.setattr(subprocess, "run", run)
+
+    command = resolve_lgtmaybe_command(None)
+
+    assert calls == [
+        [
+            "C:/tools/uv.exe",
+            "tool",
+            "run",
+            "--refresh-package",
+            "lgtmaybe",
+            "lgtmaybe@latest",
+            "--version",
+        ]
+    ]
+    assert command == ["C:/tools/uv.exe", "tool", "run", "lgtmaybe@latest"]
+
+
+def test_cli_fails_when_latest_lgtmaybe_cannot_be_bootstrapped(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        shutil, "which", lambda command: "C:/tools/uv.exe" if command == "uv" else None
+    )
+    monkeypatch.setattr(
+        subprocess,
+        "run",
+        lambda command, **kwargs: subprocess.CompletedProcess(
+            command, 1, stdout="", stderr="failed"
+        ),
+    )
+
+    with pytest.raises(ValueError, match="latest lgtmaybe release"):
+        resolve_lgtmaybe_command(None)
 
 
 def test_parser_separates_json_and_profile() -> None:

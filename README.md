@@ -10,7 +10,7 @@ uv run bench run --provider ollama --model qwen3.5:4b --repeats 1
 uv run bench report
 ```
 
-`lgtmaybe` must already be available on `PATH`. Provider credentials stay in the environment and are never written to raw results.
+Each run uses `uv` to download and cache the latest stable `lgtmaybe` release before benchmarking, including in a fresh container. Provider credentials stay in the environment and are never written to raw results.
 
 Hosted providers use their usual environment credentials:
 
