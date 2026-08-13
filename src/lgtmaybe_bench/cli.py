@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -29,7 +30,7 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--api-base")
     run.add_argument("--concurrency", type=int)
     run.add_argument("--timeout", type=int, default=7200)
-    run.add_argument("--lgtmaybe", default="lgtmaybe", help=argparse.SUPPRESS)
+    run.add_argument("--lgtmaybe", help=argparse.SUPPRESS)
     subparsers.add_parser("report", help="regenerate Markdown from stored raw results")
     return parser
 
@@ -37,6 +38,41 @@ def build_parser() -> argparse.ArgumentParser:
 def _positive(parser: argparse.ArgumentParser, name: str, value: int) -> None:
     if value < 1:
         parser.error(f"{name} must be at least 1")
+
+
+def resolve_lgtmaybe_command(requested: str | None) -> list[str]:
+    if requested is not None:
+        executable = shutil.which(requested)
+        if executable is None:
+            raise ValueError(f"lgtmaybe executable not found: {requested}")
+        return [executable]
+
+    uv = shutil.which("uv")
+    if uv is None:
+        raise ValueError("uv executable not found; uv is required to install lgtmaybe")
+
+    command = [uv, "tool", "run", "lgtmaybe@latest"]
+    try:
+        preflight = subprocess.run(
+            [
+                uv,
+                "tool",
+                "run",
+                "--refresh-package",
+                "lgtmaybe",
+                "lgtmaybe@latest",
+                "--version",
+            ],
+            capture_output=True,
+            text=True,
+            timeout=120,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise ValueError("could not install the latest lgtmaybe release") from exc
+    if preflight.returncode != 0:
+        raise ValueError("could not install the latest lgtmaybe release")
+    return command
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -53,9 +89,10 @@ def main(argv: list[str] | None = None) -> None:
         _positive(parser, "--timeout", args.timeout)
         if args.concurrency is not None:
             _positive(parser, "--concurrency", args.concurrency)
-        executable = shutil.which(args.lgtmaybe)
-        if executable is None:
-            parser.error(f"lgtmaybe executable not found: {args.lgtmaybe}")
+        try:
+            executable = resolve_lgtmaybe_command(args.lgtmaybe)
+        except ValueError as exc:
+            parser.error(str(exc))
         from lgtmaybe_bench.runner import execute_benchmark
 
         execute_benchmark(root, args, executable)
