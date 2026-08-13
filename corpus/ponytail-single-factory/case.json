@@ -1,0 +1,19 @@
+{
+  "name": "ponytail-single-factory",
+  "changed_file": "mailer.py",
+  "expected": [
+    {
+      "label": "factory class has only one implementation",
+      "lens": "ponytail",
+      "line": 1,
+      "keywords": [
+        "factory",
+        "one implementation",
+        "yagni",
+        "needless"
+      ],
+      "severity_at_least": "low"
+    }
+  ],
+  "forbidden": []
+}

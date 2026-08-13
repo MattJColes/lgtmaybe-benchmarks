@@ -1,0 +1,33 @@
+{
+  "name": "spec-batched-export",
+  "changed_file": "export.py",
+  "commit_message": "feat: implement bounded batched export",
+  "expected": [
+    {
+      "label": "export materializes all rows instead of bounded batches",
+      "lens": "spec",
+      "line": 2,
+      "keywords": [
+        "spec",
+        "batch",
+        "memory",
+        "bounded"
+      ],
+      "severity_at_least": "high"
+    },
+    {
+      "label": "export no longer records audit count",
+      "lens": "spec",
+      "file": "audit.py",
+      "line": 2,
+      "keywords": [
+        "spec",
+        "audit",
+        "record",
+        "count"
+      ],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

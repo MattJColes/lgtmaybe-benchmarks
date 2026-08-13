@@ -1,0 +1,19 @@
+{
+  "name": "missing-boundary-test",
+  "changed_file": "tests/test_page.py",
+  "expected": [
+    {
+      "label": "boundary regression test was removed",
+      "lens": "tests",
+      "line": 1,
+      "keywords": [
+        "boundary",
+        "missing test",
+        "exact",
+        "coverage"
+      ],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

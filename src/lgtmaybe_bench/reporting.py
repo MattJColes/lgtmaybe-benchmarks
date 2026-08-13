@@ -1,0 +1,247 @@
+"""Rescore raw runs and generate deterministic Markdown reports."""
+
+from __future__ import annotations
+
+import json
+from dataclasses import dataclass
+from pathlib import Path
+from statistics import median
+from typing import Any
+
+from lgtmaybe_bench.scoring import (
+    CaseScore,
+    Range,
+    RepeatMetrics,
+    aggregate_repeats,
+    effort_label,
+    parse_case,
+    parse_findings,
+    score_case,
+)
+
+START = "<!-- BENCH_RESULTS_START -->"
+END = "<!-- BENCH_RESULTS_END -->"
+LENSES = (
+    "security",
+    "correctness",
+    "performance",
+    "complexity",
+    "tests",
+    "documentation",
+    "deprecation",
+    "intent",
+    "ponytail",
+    "spec",
+)
+
+
+@dataclass(frozen=True, slots=True)
+class ScoredRun:
+    raw: dict[str, Any]
+    repeats: list[RepeatMetrics]
+    per_lens: dict[str, Range]
+    clean: bool
+
+
+def _combine(scores: list[CaseScore]) -> CaseScore:
+    caught = sum(score.caught for score in scores)
+    planted = sum(score.planted for score in scores)
+    forbidden = sum(score.forbidden_hits for score in scores)
+    unexpected = sum(score.unexpected for score in scores)
+    adjudicable = sum(score.adjudicable for score in scores)
+    recall = caught / planted
+    precision = 1.0 if adjudicable == 0 else 1 - (forbidden + unexpected) / adjudicable
+    combined = 0.0 if recall + precision == 0 else 2 * recall * precision / (recall + precision)
+    lenses = {lens for score in scores for lens in score.per_lens_counts}
+    per_lens_counts: dict[str, tuple[int, int]] = {}
+    for lens in lenses:
+        lens_caught = sum(score.per_lens_counts.get(lens, (0, 0))[0] for score in scores)
+        lens_planted = sum(score.per_lens_counts.get(lens, (0, 0))[1] for score in scores)
+        per_lens_counts[lens] = (lens_caught, lens_planted)
+    per_lens = {
+        lens: lens_caught / lens_planted
+        for lens, (lens_caught, lens_planted) in per_lens_counts.items()
+    }
+    return CaseScore(
+        caught,
+        planted,
+        forbidden,
+        unexpected,
+        adjudicable,
+        recall,
+        precision,
+        combined,
+        forbidden == 0,
+        per_lens,
+        per_lens_counts,
+    )
+
+
+def _score_run(raw: dict[str, Any]) -> ScoredRun:
+    grouped: dict[int, list[dict[str, Any]]] = {}
+    for observation in raw["observations"]:
+        grouped.setdefault(int(observation["repeat"]), []).append(observation)
+    repeats: list[RepeatMetrics] = []
+    lens_values: dict[str, list[float]] = {}
+    clean = True
+    max_tokens = raw["configuration"].get("max_tokens")
+    for repeat_observations in grouped.values():
+        scores = [
+            score_case(parse_case(obs["ground_truth"]), parse_findings(obs["findings"]))
+            for obs in repeat_observations
+        ]
+        combined = _combine(scores)
+        clean = clean and combined.clean
+        for lens, value in combined.per_lens.items():
+            lens_values.setdefault(lens, []).append(value)
+        truncation_lenses: list[str] = []
+        wall_excluding_truncation = 0.0
+        for observation in repeat_observations:
+            truncated_calls = [
+                call
+                for call in observation.get("calls", [])
+                if call.get("truncated")
+                or (max_tokens is not None and int(call.get("output_tokens", 0)) >= int(max_tokens))
+            ]
+            truncation_lenses.extend(observation["truncation_lenses"])
+            truncation_lenses.extend(str(call["label"]) for call in truncated_calls)
+            wall_excluding_truncation += (
+                max(
+                    0.0,
+                    float(observation["wall_seconds"])
+                    - sum(float(call["elapsed_seconds"]) for call in truncated_calls),
+                )
+                if truncated_calls
+                else float(observation["wall_excluding_truncation_seconds"])
+            )
+        repeats.append(
+            RepeatMetrics(
+                combined,
+                sum(float(obs["wall_seconds"]) for obs in repeat_observations),
+                wall_excluding_truncation,
+                tuple(truncation_lenses),
+                sum(int(obs["input_tokens"]) for obs in repeat_observations),
+                sum(int(obs["output_tokens"]) for obs in repeat_observations),
+                sum(int(obs["reasoning_tokens"]) for obs in repeat_observations),
+                sum(int(obs["failures"]) for obs in repeat_observations),
+            )
+        )
+    if not repeats:
+        raise ValueError("raw run contains no observations")
+    return ScoredRun(
+        raw,
+        repeats,
+        {
+            lens: Range(float(median(values)), min(values), max(values))
+            for lens, values in lens_values.items()
+        },
+        clean,
+    )
+
+
+def _range(value: Any, *, percent: bool = False) -> str:
+    scale = 100 if percent else 1
+    suffix = "%" if percent else ""
+    digits = 1 if percent else 2
+    med = f"{value.median * scale:.{digits}f}{suffix}"
+    if value.minimum == value.maximum:
+        return med
+    return f"{med} [{value.minimum * scale:.{digits}f}–{value.maximum * scale:.{digits}f}{suffix}]"
+
+
+def render_results(raw_runs: list[dict[str, Any]]) -> str:
+    if not raw_runs:
+        return "No benchmark runs recorded.\n"
+    runs = sorted(
+        (_score_run(raw) for raw in raw_runs), key=lambda run: run.raw["timestamp"], reverse=True
+    )
+    header = (
+        "| date | lgtmaybe | provider | model | cases | effort | preset | max_tok | max_in | api | "
+        "conc | timeout | repeats | score | recall | precision | clean | trunc | failures | "
+        "wall (med) | wall-ex-trunc | in_tok | out_tok | reason_tok |\n"
+        "|---|---|---|---|---|---|---|---:|---:|---|---:|---:|---:|---:|---:|---:|---|---:|---:|---:|---:|---:|---:|---:|\n"
+    )
+    rows: list[str] = []
+    for run in runs:
+        raw, config = run.raw, run.raw["configuration"]
+        metrics = aggregate_repeats(run.repeats)
+        values = (
+            raw["timestamp"],
+            raw["lgtmaybe_version"],
+            config["provider"],
+            config["model"],
+            ", ".join(config["cases"]),
+            effort_label(config["provider"], config.get("reasoning_effort")),
+            config["preset"],
+            config.get("max_tokens") or "-",
+            config.get("max_input_tokens") or "-",
+            config.get("api_base") or "-",
+            config["concurrency"],
+            config["timeout"],
+            config["repeats"],
+            _range(metrics.score, percent=True),
+            _range(metrics.recall, percent=True),
+            _range(metrics.precision, percent=True),
+            "yes" if run.clean else "no",
+            _range(metrics.truncations),
+            _range(metrics.failures),
+            _range(metrics.wall_seconds),
+            _range(metrics.wall_excluding_truncation_seconds),
+            _range(metrics.input_tokens),
+            _range(metrics.output_tokens),
+            _range(metrics.reasoning_tokens),
+        )
+        rows.append("| " + " | ".join(str(value).replace("|", "\\|") for value in values) + " |")
+
+    lens_header = "| date | provider | model | " + " | ".join(LENSES) + " |\n"
+    lens_rule = "|---|---|---|" + "---:|" * len(LENSES) + "\n"
+    lens_rows = []
+    for run in runs:
+        config = run.raw["configuration"]
+        lens_row = [run.raw["timestamp"], config["provider"], config["model"]]
+        lens_row.extend(
+            _range(run.per_lens[lens], percent=True) if lens in run.per_lens else "-"
+            for lens in LENSES
+        )
+        lens_rows.append("| " + " | ".join(lens_row) + " |")
+    return (
+        "> Local and hosted wall times are not comparable; provider concurrency differs. "
+        "Wall-ex-trunc is derived by subtracting truncated call durations.\n\n"
+        "## Leaderboard\n\n"
+        + header
+        + "\n".join(rows)
+        + "\n\n## Per-lens recall\n\n"
+        + lens_header
+        + lens_rule
+        + "\n".join(lens_rows)
+        + "\n"
+    )
+
+
+def _write_atomic(path: Path, content: str) -> None:
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(content, encoding="utf-8", newline="\n")
+    temporary.replace(path)
+
+
+def regenerate_reports(root: Path) -> None:
+    raw_dir = root / "results" / "raw"
+    raw_runs = (
+        [json.loads(path.read_text(encoding="utf-8")) for path in sorted(raw_dir.glob("*.json"))]
+        if raw_dir.exists()
+        else []
+    )
+    rendered = render_results(raw_runs)
+    _write_atomic(
+        root / "RESULTS.md",
+        "# lgtmaybe benchmark results\n\n"
+        "Generated by `bench report` from `results/raw/*.json`. Do not edit by hand.\n\n"
+        + rendered,
+    )
+    readme_path = root / "README.md"
+    readme = readme_path.read_text(encoding="utf-8")
+    if START not in readme or END not in readme:
+        raise ValueError("README.md is missing benchmark result markers")
+    before, remainder = readme.split(START, 1)
+    _, after = remainder.split(END, 1)
+    _write_atomic(readme_path, f"{before}{START}\n{rendered.rstrip()}\n{END}{after}")

@@ -1,0 +1,18 @@
+{
+  "name": "off-by-one-page",
+  "changed_file": "page.py",
+  "expected": [
+    {
+      "label": "last item is skipped by range bound",
+      "lens": "correctness",
+      "line": 2,
+      "keywords": [
+        "off-by-one",
+        "last item",
+        "range"
+      ],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

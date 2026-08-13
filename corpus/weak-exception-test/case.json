@@ -1,0 +1,19 @@
+{
+  "name": "weak-exception-test",
+  "changed_file": "tests/test_parser.py",
+  "expected": [
+    {
+      "label": "test passes when parser does not raise",
+      "lens": "tests",
+      "line": 2,
+      "keywords": [
+        "does not fail",
+        "missing assertion",
+        "false positive",
+        "pytest.raises"
+      ],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

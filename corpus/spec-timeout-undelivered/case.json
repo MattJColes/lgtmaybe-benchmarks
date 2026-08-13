@@ -1,0 +1,19 @@
+{
+  "name": "spec-timeout-undelivered",
+  "changed_file": "client.py",
+  "expected": [
+    {
+      "label": "implementation violates required five-second timeout",
+      "lens": "spec",
+      "line": 2,
+      "keywords": [
+        "spec",
+        "timeout",
+        "requirement",
+        "5 second"
+      ],
+      "severity_at_least": "high"
+    }
+  ],
+  "forbidden": []
+}

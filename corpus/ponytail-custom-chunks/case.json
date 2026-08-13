@@ -1,0 +1,19 @@
+{
+  "name": "ponytail-custom-chunks",
+  "changed_file": "chunks.py",
+  "expected": [
+    {
+      "label": "custom chunker reinvents itertools.batched",
+      "lens": "ponytail",
+      "line": 2,
+      "keywords": [
+        "itertools.batched",
+        "standard library",
+        "needless",
+        "reinvent"
+      ],
+      "severity_at_least": "low"
+    }
+  ],
+  "forbidden": []
+}

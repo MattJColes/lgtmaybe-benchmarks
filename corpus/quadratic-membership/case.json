@@ -1,0 +1,19 @@
+{
+  "name": "quadratic-membership",
+  "changed_file": "tags.py",
+  "expected": [
+    {
+      "label": "nested scan makes shared quadratic",
+      "lens": "performance",
+      "line": 2,
+      "keywords": [
+        "quadratic",
+        "o(n^2)",
+        "nested",
+        "set"
+      ],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

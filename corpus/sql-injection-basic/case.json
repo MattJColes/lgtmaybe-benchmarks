@@ -1,0 +1,28 @@
+{
+  "name": "sql-injection-basic",
+  "changed_file": "app.py",
+  "expected": [
+    {
+      "label": "string-interpolated SQL in get_user",
+      "lens": "security",
+      "line": 2,
+      "keywords": [
+        "sql injection",
+        "parameteriz",
+        "interpolat"
+      ],
+      "severity_at_least": "high"
+    }
+  ],
+  "forbidden": [
+    {
+      "label": "claims authentication is missing (handled by middleware)",
+      "lens": "security",
+      "line": 1,
+      "keywords": [
+        "missing auth",
+        "unauthenticated"
+      ]
+    }
+  ]
+}

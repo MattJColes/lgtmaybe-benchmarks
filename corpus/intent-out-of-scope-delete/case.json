@@ -1,0 +1,20 @@
+{
+  "name": "intent-out-of-scope-delete",
+  "changed_file": "cleanup.py",
+  "commit_message": "fix: validate email addresses",
+  "expected": [
+    {
+      "label": "unrelated destructive purge contradicts stated intent",
+      "lens": "intent",
+      "line": 2,
+      "keywords": [
+        "out of scope",
+        "unrelated",
+        "delete",
+        "intent"
+      ],
+      "severity_at_least": "high"
+    }
+  ],
+  "forbidden": []
+}

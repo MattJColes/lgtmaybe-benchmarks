@@ -1,0 +1,19 @@
+{
+  "name": "nullable-owner",
+  "changed_file": "owners.py",
+  "expected": [
+    {
+      "label": "None owner is indexed",
+      "lens": "correctness",
+      "line": 3,
+      "keywords": [
+        "none",
+        "null",
+        "owner",
+        "typeerror"
+      ],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

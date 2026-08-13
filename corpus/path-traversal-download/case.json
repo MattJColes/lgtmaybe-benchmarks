@@ -1,0 +1,18 @@
+{
+  "name": "path-traversal-download",
+  "changed_file": "download.py",
+  "expected": [
+    {
+      "label": "unvalidated path permits directory traversal",
+      "lens": "security",
+      "line": 4,
+      "keywords": [
+        "path traversal",
+        "directory traversal",
+        "resolve"
+      ],
+      "severity_at_least": "high"
+    }
+  ],
+  "forbidden": []
+}

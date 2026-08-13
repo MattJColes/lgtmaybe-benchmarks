@@ -1,0 +1,19 @@
+{
+  "name": "stale-readme-default",
+  "changed_file": "README.md",
+  "expected": [
+    {
+      "label": "documented timeout contradicts signature",
+      "lens": "documentation",
+      "line": 3,
+      "keywords": [
+        "stale",
+        "contradict",
+        "timeout",
+        "documentation"
+      ],
+      "severity_at_least": "low"
+    }
+  ],
+  "forbidden": []
+}

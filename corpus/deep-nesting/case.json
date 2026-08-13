@@ -1,0 +1,19 @@
+{
+  "name": "deep-nesting",
+  "changed_file": "accounts.py",
+  "expected": [
+    {
+      "label": "needlessly deep conditional nesting",
+      "lens": "complexity",
+      "line": 2,
+      "keywords": [
+        "nest",
+        "early return",
+        "guard clause",
+        "complex"
+      ],
+      "severity_at_least": "low"
+    }
+  ],
+  "forbidden": []
+}

@@ -1,0 +1,19 @@
+{
+  "name": "n-plus-one-orders",
+  "changed_file": "orders.py",
+  "expected": [
+    {
+      "label": "query inside loop causes N+1",
+      "lens": "performance",
+      "line": 4,
+      "keywords": [
+        "n+1",
+        "query",
+        "loop",
+        "batch"
+      ],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

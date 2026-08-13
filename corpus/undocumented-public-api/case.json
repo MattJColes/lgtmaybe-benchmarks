@@ -1,0 +1,19 @@
+{
+  "name": "undocumented-public-api",
+  "changed_file": "client.py",
+  "expected": [
+    {
+      "label": "new public method lacks documentation",
+      "lens": "documentation",
+      "line": 4,
+      "keywords": [
+        "document",
+        "docstring",
+        "public",
+        "stream_events"
+      ],
+      "severity_at_least": "low"
+    }
+  ],
+  "forbidden": []
+}

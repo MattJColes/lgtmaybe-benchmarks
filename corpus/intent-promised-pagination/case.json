@@ -1,0 +1,20 @@
+{
+  "name": "intent-promised-pagination",
+  "changed_file": "api.py",
+  "commit_message": "feat: add cursor pagination to list_items",
+  "expected": [
+    {
+      "label": "cursor pagination promised but cursor is ignored",
+      "lens": "intent",
+      "line": 1,
+      "keywords": [
+        "cursor",
+        "ignored",
+        "intent",
+        "pagination"
+      ],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

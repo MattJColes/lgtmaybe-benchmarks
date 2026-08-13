@@ -1,0 +1,19 @@
+{
+  "name": "deprecated-imp-module",
+  "changed_file": "plugins.py",
+  "expected": [
+    {
+      "label": "removed imp module is used",
+      "lens": "deprecation",
+      "line": 1,
+      "keywords": [
+        "deprecated",
+        "removed",
+        "imp",
+        "importlib"
+      ],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

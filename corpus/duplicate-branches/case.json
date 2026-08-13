@@ -1,0 +1,19 @@
+{
+  "name": "duplicate-branches",
+  "changed_file": "pricing.py",
+  "expected": [
+    {
+      "label": "duplicated branch structure obscures rate selection",
+      "lens": "complexity",
+      "line": 2,
+      "keywords": [
+        "duplicat",
+        "mapping",
+        "branch",
+        "complex"
+      ],
+      "severity_at_least": "low"
+    }
+  ],
+  "forbidden": []
+}
