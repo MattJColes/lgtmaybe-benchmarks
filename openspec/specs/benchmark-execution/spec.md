@@ -22,11 +22,15 @@ For every case and repeat, the runner SHALL create an isolated temporary git rep
 - **THEN** the command receives the resolved provider, model, configuration flags, base revision, `--format json`, and `--profile`
 
 ### Requirement: Complete resolved configuration
-Every configuration run SHALL record the UTC time, lgtmaybe version, provider, model, reasoning effort, preset, max output tokens, max input tokens, API base when supplied, repeats, selected cases, explicit concurrency, and execution timeout. Secrets and API credentials MUST NOT be stored.
+Every configuration run SHALL record the UTC time, lgtmaybe version, provider, model, reasoning effort, preset, max output tokens, max input tokens, API base when supplied, repeats, selected cases, whether the run covered the full corpus, explicit concurrency, and execution timeout. Secrets and API credentials MUST NOT be stored.
 
 #### Scenario: Record an Ollama configuration
 - **WHEN** the provider is `ollama`
-- **THEN** the stored and reported effort states that thinking is disabled and concurrency records the value actually passed to lgtmaybe
+- **THEN** the stored effort states that thinking is disabled and concurrency records the value actually passed to lgtmaybe
+
+#### Scenario: Record benchmark scope
+- **WHEN** a user runs the full corpus or supplies focused `--case` values
+- **THEN** raw configuration records the selected cases and whether the run covered the full corpus
 
 ### Requirement: Raw observation retention
 The runner SHALL write one uniquely named JSON file under `results/raw/` for each configuration run. It SHALL retain each observation's findings, raw stdout and stderr, process wall time, parsed provider-call timings, token counts, truncation errors, exit status, and a snapshot of case ground truth.

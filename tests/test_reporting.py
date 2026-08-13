@@ -27,15 +27,16 @@ def raw(timestamp: str, model: str, caught: bool) -> dict[str, object]:
         "configuration": {
             "provider": "ollama",
             "model": model,
-            "reasoning_effort": "high",
-            "max_tokens": 1000,
-            "max_input_tokens": 2000,
+            "reasoning_effort": None,
+            "max_tokens": None,
+            "max_input_tokens": None,
             "preset": "full",
-            "api_base": "http://localhost:11434",
+            "api_base": None,
             "concurrency": 1,
             "timeout": 7200,
-            "repeats": 1,
+            "repeats": 3,
             "cases": ["case"],
+            "full_corpus": True,
         },
         "observations": [
             {
@@ -62,43 +63,85 @@ def raw(timestamp: str, model: str, caught: bool) -> dict[str, object]:
     }
 
 
-def test_render_is_newest_first_and_contains_full_metrics() -> None:
+def test_render_is_newest_first_and_contains_one_per_lens_table() -> None:
     rendered = render_results(
         [raw("2026-01-01T00:00:00Z", "old", False), raw("2026-02-01T00:00:00Z", "new", True)]
     )
 
     assert rendered.index("new") < rendered.index("old")
-    assert "score" in rendered
-    assert "precision" in rendered
-    assert "high (thinking off)" in rendered
-    assert "security" in rendered
-    assert "local and hosted wall times are not comparable" in rendered.casefold()
-    assert "http://localhost:11434" in rendered
-    assert "7200" in rendered
-    assert "case" in rendered
+    header = next(line for line in rendered.splitlines() if line.startswith("| date"))
+    assert header == (
+        "| date | lgtmaybe version | provider | model | score | security | correctness | "
+        "performance | complexity | tests | documentation | deprecation | intent | ponytail | "
+        "spec | settings |"
+    )
+    assert sum(line.startswith("|---") for line in rendered.splitlines()) == 1
+    assert "100.0%" in rendered
+    for removed in (
+        "cases",
+        "recall",
+        "precision",
+        "clean",
+        "trunc",
+        "failures",
+        "wall",
+        "in_tok",
+        "out_tok",
+        "reason_tok",
+    ):
+        assert removed not in header
 
 
-def test_render_infers_truncation_from_a_call_at_the_configured_ceiling() -> None:
-    run = raw("2026-01-01T00:00:00Z", "ceiling", False)
-    observations = run["observations"]
-    assert isinstance(observations, list)
-    observation = observations[0]
-    assert isinstance(observation, dict)
-    observation["truncation_lenses"] = []
-    observation["wall_excluding_truncation_seconds"] = 10.0
-    observation["calls"] = [
+def test_render_excludes_focused_runs_and_keeps_legacy_full_runs() -> None:
+    legacy = raw("2026-01-01T00:00:00Z", "legacy-model", False)
+    config = legacy["configuration"]
+    assert isinstance(config, dict)
+    del config["full_corpus"]
+    focused = raw("2026-02-01T00:00:00Z", "focused-model", True)
+    focused_config = focused["configuration"]
+    assert isinstance(focused_config, dict)
+    focused_config["full_corpus"] = False
+    full = raw("2026-03-01T00:00:00Z", "full-model", True)
+
+    rendered = render_results([legacy, focused, full])
+
+    assert "legacy-model" in rendered
+    assert "full-model" in rendered
+    assert "focused-model" not in rendered
+
+
+def test_default_settings_render_as_dash() -> None:
+    rendered = render_results([raw("2026-01-01T00:00:00Z", "defaults", True)])
+
+    row = next(line for line in rendered.splitlines() if "defaults" in line)
+    assert row.endswith("| — |")
+
+
+def test_non_default_settings_render_in_fixed_order() -> None:
+    run = raw("2026-01-01T00:00:00Z", "custom", True)
+    config = run["configuration"]
+    assert isinstance(config, dict)
+    config.update(
         {
-            "label": "ponytail",
-            "elapsed_seconds": 4.0,
-            "output_tokens": 1000,
-            "truncated": False,
+            "provider": "openai",
+            "reasoning_effort": "high",
+            "preset": "fast",
+            "max_tokens": 512,
+            "max_input_tokens": 2000,
+            "api_base": "https://example.test/v1",
+            "concurrency": 2,
+            "repeats": 1,
+            "timeout": 30,
         }
-    ]
+    )
 
     rendered = render_results([run])
 
-    row = next(line for line in rendered.splitlines() if "ceiling" in line)
-    assert "| 1.00 | 0.00 | 10.00 | 6.00 |" in row
+    row = next(line for line in rendered.splitlines() if "custom" in line)
+    assert row.endswith(
+        "| effort high; preset fast; max tokens 512; max input tokens 2000; "
+        "api base https://example.test/v1; concurrency 2; repeats 1; timeout 30s |"
+    )
 
 
 def test_in_progress_run_is_listed_but_never_scored() -> None:

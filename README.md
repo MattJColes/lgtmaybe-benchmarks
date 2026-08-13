@@ -24,33 +24,27 @@ The default is three repeats. Use repeatable `--case` flags for a focused run. T
 ## Results
 
 <!-- BENCH_RESULTS_START -->
-> Local and hosted wall times are not comparable; provider concurrency differs. Wall-ex-trunc is derived by subtracting truncated call durations.
-
-## Leaderboard
-
-| date | lgtmaybe | provider | model | cases | effort | preset | max_tok | max_in | api | conc | timeout | repeats | score | recall | precision | clean | trunc | failures | wall (med) | wall-ex-trunc | in_tok | out_tok | reason_tok |
-|---|---|---|---|---|---|---|---:|---:|---|---:|---:|---:|---:|---:|---:|---|---:|---:|---:|---:|---:|---:|---:|
-| 2026-08-13T13:38:59Z | lgtmaybe 1.14.1 | ollama | qwen2.5-coder:3b | deep-nesting, deprecated-imp-module, deprecated-utcnow, duplicate-branches, intent-out-of-scope-delete, intent-promised-pagination, missing-boundary-test, n-plus-one-orders, nullable-owner, off-by-one-page, path-traversal-download, ponytail-custom-chunks, ponytail-single-factory, quadratic-membership, spec-batched-export, spec-timeout-undelivered, sql-injection-basic, stale-readme-default, undocumented-public-api, weak-exception-test | default (thinking off) | full | 512 | - | - | 1 | 7200 | 1 | 21.4% | 14.3% | 42.9% | yes | 2.00 | 0.00 | 1198.88 | 1160.41 | 548864.00 | 24471.00 | 0.00 |
+Full-corpus runs only. Complete configuration and diagnostic evidence remain in `results/raw/`.
 
 ## Per-lens recall
 
-| date | provider | model | security | correctness | performance | complexity | tests | documentation | deprecation | intent | ponytail | spec |
-|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 2026-08-13T13:38:59Z | ollama | qwen2.5-coder:3b | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 100.0% | 50.0% | 0.0% | 0.0% |
+| date | lgtmaybe version | provider | model | score | security | correctness | performance | complexity | tests | documentation | deprecation | intent | ponytail | spec | settings |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| 2026-08-13T13:38:59Z | lgtmaybe 1.14.1 | ollama | qwen2.5-coder:3b | 21.4% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 100.0% | 50.0% | 0.0% | 0.0% | max tokens 512; repeats 1 |
 <!-- BENCH_RESULTS_END -->
 
-See [RESULTS.md](RESULTS.md) for the generated leaderboard and per-lens detail.
+See [RESULTS.md](RESULTS.md) for the full historical results. Focused `--case` runs remain in raw data and do not appear in the public table.
 
 ## Metrics
 
 - Recall is the share of planted findings caught. Precision discounts forbidden traps and unexpected findings near catalogued lines; distant findings are not adjudicated.
 - Score is the harmonic mean of recall and precision. Clean means no forbidden trap fired.
-- Every repeated metric is shown as median and min–max. Truncations remain visible and wall-ex-trunc subtracts their recorded call time.
-- Local and hosted wall times are not comparable because their actual concurrency differs.
+- The results table shows full-corpus score and per-lens recall. Repeated scores are shown as median and min–max.
+- Settings lists only values changed from the benchmark defaults. Timing, tokens, precision, clean status, truncation, and failures remain in raw data.
 
 ## Raw data and recovery
 
-Each configuration run writes an append-only JSON document under `results/raw/` before updating Markdown. `uv run bench report` rescans those files and regenerates `RESULTS.md` and the marked README section byte-identically. Raw data contains the API base but never credentials.
+Each configuration run writes an append-only JSON document under `results/raw/` before updating Markdown. `uv run bench report` rescans those files and regenerates `RESULTS.md` and the marked README section byte-identically. Raw data retains focused runs and complete diagnostic evidence. It contains the API base but never credentials.
 
 ## Contributing cases
 

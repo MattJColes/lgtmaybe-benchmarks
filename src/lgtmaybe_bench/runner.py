@@ -312,6 +312,7 @@ def execute_benchmark(root: Path, args: Any, executable: str | list[str]) -> Pat
                 "api_base": _redact_api_base(config.api_base),
                 "repeats": args.repeats,
                 "cases": [c.truth.name for c in cases],
+                "full_corpus": args.case is None,
             },
             "observations": observations,
         }

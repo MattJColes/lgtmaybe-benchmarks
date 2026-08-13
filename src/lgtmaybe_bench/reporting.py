@@ -8,6 +8,7 @@ from pathlib import Path
 from statistics import median
 from typing import Any
 
+from lgtmaybe_bench.cli import resolved_concurrency
 from lgtmaybe_bench.runner import RAW_COMPLETE as COMPLETE
 from lgtmaybe_bench.scoring import (
     CaseScore,
@@ -175,7 +176,34 @@ def _render_incomplete(raw_runs: list[dict[str, Any]]) -> str:
     )
 
 
+def _settings(config: dict[str, Any]) -> str:
+    provider = str(config["provider"])
+    values: list[str] = []
+    if effort := config.get("reasoning_effort"):
+        values.append(f"effort {effort_label(provider, effort)}")
+    if config.get("preset", "full") != "full":
+        values.append(f"preset {config['preset']}")
+    if config.get("max_tokens") is not None:
+        values.append(f"max tokens {config['max_tokens']}")
+    if config.get("max_input_tokens") is not None:
+        values.append(f"max input tokens {config['max_input_tokens']}")
+    if config.get("api_base"):
+        values.append(f"api base {config['api_base']}")
+    concurrency = int(config.get("concurrency", resolved_concurrency(provider, None)))
+    if concurrency != resolved_concurrency(provider, None):
+        values.append(f"concurrency {concurrency}")
+    repeats = int(config.get("repeats", 3))
+    if repeats != 3:
+        values.append(f"repeats {repeats}")
+    timeout = int(config.get("timeout", 7200))
+    if timeout != 7200:
+        values.append(f"timeout {timeout}s")
+    return "; ".join(values) or "—"
+
+
 def render_results(raw_runs: list[dict[str, Any]]) -> str:
+    if not raw_runs:
+        return "No benchmark runs recorded.\n"
     finished = [raw.get("status", COMPLETE) == COMPLETE for raw in raw_runs]
     complete = [raw for raw, done in zip(raw_runs, finished, strict=True) if done]
     incomplete = _render_incomplete(
@@ -183,68 +211,41 @@ def render_results(raw_runs: list[dict[str, Any]]) -> str:
     )
     if not complete:
         return "No benchmark runs recorded.\n" + incomplete
+    full_runs = [raw for raw in complete if raw.get("configuration", {}).get("full_corpus", True)]
+    if not full_runs:
+        return "No full benchmark runs recorded.\n" + incomplete
     runs = sorted(
-        (_score_run(raw) for raw in complete), key=lambda run: run.raw["timestamp"], reverse=True
+        (_score_run(raw) for raw in full_runs), key=lambda run: run.raw["timestamp"], reverse=True
     )
     header = (
-        "| date | lgtmaybe | provider | model | cases | effort | preset | max_tok | max_in | api | "
-        "conc | timeout | repeats | score | recall | precision | clean | trunc | failures | "
-        "wall (med) | wall-ex-trunc | in_tok | out_tok | reason_tok |\n"
-        "|---|---|---|---|---|---|---|---:|---:|---|---:|---:|---:|---:|---:|---:|---|---:|---:|---:|---:|---:|---:|---:|\n"
+        "| date | lgtmaybe version | provider | model | score | "
+        + " | ".join(LENSES)
+        + " | settings |\n"
     )
+    rule = "|---|---|---|---|---:|" + "---:|" * len(LENSES) + "---|\n"
     rows: list[str] = []
     for run in runs:
         raw, config = run.raw, run.raw["configuration"]
         metrics = aggregate_repeats(run.repeats)
-        values = (
+        values: list[object] = [
             raw["timestamp"],
             raw["lgtmaybe_version"],
             config["provider"],
             config["model"],
-            ", ".join(config["cases"]),
-            effort_label(config["provider"], config.get("reasoning_effort")),
-            config["preset"],
-            config.get("max_tokens") or "-",
-            config.get("max_input_tokens") or "-",
-            config.get("api_base") or "-",
-            config["concurrency"],
-            config["timeout"],
-            config["repeats"],
             _range(metrics.score, percent=True),
-            _range(metrics.recall, percent=True),
-            _range(metrics.precision, percent=True),
-            "yes" if run.clean else "no",
-            _range(metrics.truncations),
-            _range(metrics.failures),
-            _range(metrics.wall_seconds),
-            _range(metrics.wall_excluding_truncation_seconds),
-            _range(metrics.input_tokens),
-            _range(metrics.output_tokens),
-            _range(metrics.reasoning_tokens),
-        )
-        rows.append("| " + " | ".join(str(value).replace("|", "\\|") for value in values) + " |")
-
-    lens_header = "| date | provider | model | " + " | ".join(LENSES) + " |\n"
-    lens_rule = "|---|---|---|" + "---:|" * len(LENSES) + "\n"
-    lens_rows = []
-    for run in runs:
-        config = run.raw["configuration"]
-        lens_row = [run.raw["timestamp"], config["provider"], config["model"]]
-        lens_row.extend(
+        ]
+        values.extend(
             _range(run.per_lens[lens], percent=True) if lens in run.per_lens else "-"
             for lens in LENSES
         )
-        lens_rows.append("| " + " | ".join(lens_row) + " |")
+        values.append(_settings(config))
+        rows.append("| " + " | ".join(str(value).replace("|", "\\|") for value in values) + " |")
     return (
-        "> Local and hosted wall times are not comparable; provider concurrency differs. "
-        "Wall-ex-trunc is derived by subtracting truncated call durations.\n\n"
-        "## Leaderboard\n\n"
+        "Full-corpus runs only. Complete configuration and diagnostic evidence remain in "
+        "`results/raw/`.\n\n## Per-lens recall\n\n"
         + header
+        + rule
         + "\n".join(rows)
-        + "\n\n## Per-lens recall\n\n"
-        + lens_header
-        + lens_rule
-        + "\n".join(lens_rows)
         + "\n"
         + incomplete
     )

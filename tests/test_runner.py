@@ -280,11 +280,17 @@ def test_fake_cli_runs_end_to_end_with_visible_truncation(tmp_path: Path) -> Non
     raw_path = execute_benchmark(tmp_path, _bench_args(), [sys.executable, str(fake)])
 
     raw = json.loads(raw_path.read_text(encoding="utf-8"))
+    assert raw["configuration"]["full_corpus"] is False
+    assert raw["configuration"]["cases"] == ["sql-injection-basic"]
     assert raw["observations"][0]["truncation_lenses"] == ["security"]
     assert raw["status"] == "complete"
     assert "secret" not in raw_path.read_text(encoding="utf-8")
-    assert "100.0%" in (tmp_path / "RESULTS.md").read_text(encoding="utf-8")
-    assert "security" in (tmp_path / "README.md").read_text(encoding="utf-8")
+    assert "No full benchmark runs recorded." in (tmp_path / "RESULTS.md").read_text(
+        encoding="utf-8"
+    )
+    assert "No full benchmark runs recorded." in (tmp_path / "README.md").read_text(
+        encoding="utf-8"
+    )
 
 
 def test_late_case_failure_retains_completed_observations(
@@ -325,3 +331,41 @@ def test_checkpoints_reuse_one_reserved_file(tmp_path: Path) -> None:
     raw = json.loads(raw_path.read_text(encoding="utf-8"))
     assert len(raw["observations"]) == 4
     assert raw["status"] == "complete"
+
+
+def test_full_fake_cli_run_records_full_corpus_scope(tmp_path: Path) -> None:
+    shutil.copytree("corpus", tmp_path / "corpus")
+    (tmp_path / "README.md").write_text(
+        "# Bench\n\n<!-- BENCH_RESULTS_START -->\nempty\n<!-- BENCH_RESULTS_END -->\n",
+        encoding="utf-8",
+    )
+    fake = tmp_path / "fake_lgtmaybe.py"
+    fake.write_text(
+        "import sys\n"
+        "if '--version' in sys.argv:\n"
+        "    print('lgtmaybe fake-1.0')\n"
+        "else:\n"
+        "    print('[]')\n"
+        f"    print({PROFILE!r})\n",
+        encoding="utf-8",
+    )
+    args = Namespace(
+        provider="ollama",
+        model="fake",
+        reasoning_effort=None,
+        max_tokens=None,
+        max_input_tokens=None,
+        preset="full",
+        repeats=1,
+        case=None,
+        api_base=None,
+        concurrency=None,
+        timeout=7200,
+    )
+
+    raw_path = execute_benchmark(tmp_path, args, [sys.executable, str(fake)])
+
+    raw = json.loads(raw_path.read_text(encoding="utf-8"))
+    assert raw["configuration"]["full_corpus"] is True
+    assert len(raw["configuration"]["cases"]) == 20
+    assert "## Per-lens recall" in (tmp_path / "RESULTS.md").read_text(encoding="utf-8")
