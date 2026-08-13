@@ -17,6 +17,8 @@ from urllib.parse import urlsplit, urlunsplit
 from lgtmaybe_bench.scoring import Finding, parse_findings
 
 TRUNCATION_MARKERS = ("truncat", "output_limit", "length", "max_tokens")
+RAW_IN_PROGRESS = "in_progress"
+RAW_COMPLETE = "complete"
 CALL_PATTERN = re.compile(
     r"^(?P<label>\S+)\s+(?P<batch>\d+)\s+(?P<tries>\d+)\s+"
     r"(?P<elapsed>[\d.]+)s\s+(?P<input>\d+)\s+(?P<output>\d+)\s+"
@@ -213,7 +215,8 @@ def run_review(repo: Path, config: RunConfig, executable: list[str]) -> Observat
     )
 
 
-def save_raw_result(directory: Path, timestamp: str, slug: str, data: dict[str, Any]) -> Path:
+def reserve_raw_result_path(directory: Path, timestamp: str, slug: str) -> Path:
+    """Claim the single unused path a configuration run writes to for its whole life."""
     directory.mkdir(parents=True, exist_ok=True)
     stamp = timestamp.replace(":", "").replace("-", "").replace("T", "-").replace("Z", "")
     path = directory / f"{stamp}-{slug}.json"
@@ -221,12 +224,21 @@ def save_raw_result(directory: Path, timestamp: str, slug: str, data: dict[str, 
     while path.exists():
         path = directory / f"{stamp}-{slug}-{suffix}.json"
         suffix += 1
+    return path
+
+
+def write_raw_result(path: Path, data: dict[str, Any]) -> Path:
+    """Replace a raw result atomically so an interrupted write cannot truncate evidence."""
     temporary = path.with_suffix(".tmp")
     temporary.write_text(
         json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
     )
     temporary.replace(path)
     return path
+
+
+def save_raw_result(directory: Path, timestamp: str, slug: str, data: dict[str, Any]) -> Path:
+    return write_raw_result(reserve_raw_result_path(directory, timestamp, slug), data)
 
 
 def _jsonable_observation(observation: Observation) -> dict[str, Any]:
@@ -288,6 +300,24 @@ def execute_benchmark(root: Path, args: Any, executable: str | list[str]) -> Pat
     version = _lgtmaybe_version(executable_parts)
     timestamp = datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
     observations: list[dict[str, Any]] = []
+
+    def record(status: str) -> dict[str, Any]:
+        return {
+            "schema_version": 1,
+            "status": status,
+            "timestamp": timestamp,
+            "lgtmaybe_version": version,
+            "configuration": {
+                **asdict(config),
+                "api_base": _redact_api_base(config.api_base),
+                "repeats": args.repeats,
+                "cases": [c.truth.name for c in cases],
+            },
+            "observations": observations,
+        }
+
+    slug = re.sub(r"[^a-z0-9]+", "-", f"{args.provider}-{args.model}".casefold()).strip("-")
+    path = reserve_raw_result_path(root / "results" / "raw", timestamp, slug)
     for repeat in range(1, args.repeats + 1):
         for case in cases:
             with tempfile.TemporaryDirectory(prefix="lgtmaybe-bench-") as temporary:
@@ -301,19 +331,7 @@ def execute_benchmark(root: Path, args: Any, executable: str | list[str]) -> Pat
                     **_jsonable_observation(observation),
                 }
             )
-    data = {
-        "schema_version": 1,
-        "timestamp": timestamp,
-        "lgtmaybe_version": version,
-        "configuration": {
-            **asdict(config),
-            "api_base": _redact_api_base(config.api_base),
-            "repeats": args.repeats,
-            "cases": [c.truth.name for c in cases],
-        },
-        "observations": observations,
-    }
-    slug = re.sub(r"[^a-z0-9]+", "-", f"{args.provider}-{args.model}".casefold()).strip("-")
-    path = save_raw_result(root / "results" / "raw", timestamp, slug, data)
+            write_raw_result(path, record(RAW_IN_PROGRESS))
+    write_raw_result(path, record(RAW_COMPLETE))
     regenerate_reports(root)
     return path

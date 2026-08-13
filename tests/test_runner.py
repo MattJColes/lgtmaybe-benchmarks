@@ -10,6 +10,7 @@ from pathlib import Path
 
 import pytest
 
+from lgtmaybe_bench import runner
 from lgtmaybe_bench.cli import build_parser, main, resolved_concurrency
 from lgtmaybe_bench.runner import (
     RunConfig,
@@ -236,7 +237,7 @@ def test_case_parser_accepts_multi_file_entry() -> None:
     assert case.expected[0].file == "spec.md"
 
 
-def test_fake_cli_runs_end_to_end_with_visible_truncation(tmp_path: Path) -> None:
+def _bench_workspace(tmp_path: Path) -> Path:
     shutil.copytree("corpus", tmp_path / "corpus")
     (tmp_path / "README.md").write_text(
         "# Bench\n\n<!-- BENCH_RESULTS_START -->\nempty\n<!-- BENCH_RESULTS_END -->\n",
@@ -253,24 +254,74 @@ def test_fake_cli_runs_end_to_end_with_visible_truncation(tmp_path: Path) -> Non
         f"    print({PROFILE!r})\n",
         encoding="utf-8",
     )
-    args = Namespace(
-        provider="ollama",
-        model="fake",
-        reasoning_effort="high",
-        max_tokens=1000,
-        max_input_tokens=2000,
-        preset="full",
-        repeats=1,
-        case=["sql-injection-basic"],
-        api_base="http://user:secret@localhost?key=secret",
-        concurrency=1,
-        timeout=30,
-    )
+    return fake
 
-    raw_path = execute_benchmark(tmp_path, args, [sys.executable, str(fake)])
+
+def _bench_args(**overrides: object) -> Namespace:
+    defaults: dict[str, object] = {
+        "provider": "ollama",
+        "model": "fake",
+        "reasoning_effort": "high",
+        "max_tokens": 1000,
+        "max_input_tokens": 2000,
+        "preset": "full",
+        "repeats": 1,
+        "case": ["sql-injection-basic"],
+        "api_base": "http://user:secret@localhost?key=secret",
+        "concurrency": 1,
+        "timeout": 30,
+    }
+    return Namespace(**{**defaults, **overrides})
+
+
+def test_fake_cli_runs_end_to_end_with_visible_truncation(tmp_path: Path) -> None:
+    fake = _bench_workspace(tmp_path)
+
+    raw_path = execute_benchmark(tmp_path, _bench_args(), [sys.executable, str(fake)])
 
     raw = json.loads(raw_path.read_text(encoding="utf-8"))
     assert raw["observations"][0]["truncation_lenses"] == ["security"]
+    assert raw["status"] == "complete"
     assert "secret" not in raw_path.read_text(encoding="utf-8")
     assert "100.0%" in (tmp_path / "RESULTS.md").read_text(encoding="utf-8")
     assert "security" in (tmp_path / "README.md").read_text(encoding="utf-8")
+
+
+def test_late_case_failure_retains_completed_observations(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fake = _bench_workspace(tmp_path)
+    original = runner.build_case_repo
+    calls = {"count": 0}
+
+    def failing_build(case_dir: Path, destination: Path) -> Path:
+        calls["count"] += 1
+        if calls["count"] == 2:
+            raise subprocess.CalledProcessError(1, ["git", "commit"])
+        return original(case_dir, destination)
+
+    monkeypatch.setattr(runner, "build_case_repo", failing_build)
+    args = _bench_args(case=["sql-injection-basic", "off-by-one-page", "deep-nesting"])
+
+    with pytest.raises(subprocess.CalledProcessError):
+        execute_benchmark(tmp_path, args, [sys.executable, str(fake)])
+
+    raw_files = list((tmp_path / "results" / "raw").glob("*.json"))
+    assert len(raw_files) == 1
+    raw = json.loads(raw_files[0].read_text(encoding="utf-8"))
+    assert raw["status"] == "in_progress"
+    assert [observation["case"] for observation in raw["observations"]] == ["sql-injection-basic"]
+    assert "secret" not in raw_files[0].read_text(encoding="utf-8")
+    assert not list((tmp_path / "results" / "raw").glob("*.tmp"))
+
+
+def test_checkpoints_reuse_one_reserved_file(tmp_path: Path) -> None:
+    fake = _bench_workspace(tmp_path)
+    args = _bench_args(case=["sql-injection-basic", "off-by-one-page"], repeats=2)
+
+    raw_path = execute_benchmark(tmp_path, args, [sys.executable, str(fake)])
+
+    assert list((tmp_path / "results" / "raw").glob("*.json")) == [raw_path]
+    raw = json.loads(raw_path.read_text(encoding="utf-8"))
+    assert len(raw["observations"]) == 4
+    assert raw["status"] == "complete"

@@ -101,6 +101,39 @@ def test_render_infers_truncation_from_a_call_at_the_configured_ceiling() -> Non
     assert "| 1.00 | 0.00 | 10.00 | 6.00 |" in row
 
 
+def test_in_progress_run_is_listed_but_never_scored() -> None:
+    complete = raw("2026-01-01T00:00:00Z", "finished", True)
+    partial = raw("2026-02-01T00:00:00Z", "interrupted", True)
+    partial["status"] = "in_progress"
+
+    rendered = render_results([complete, partial])
+
+    leaderboard, incomplete = rendered.split("## Incomplete runs")
+    assert "interrupted" not in leaderboard
+    assert "finished" in leaderboard
+    assert "interrupted" in incomplete
+    assert "1" in incomplete
+
+
+def test_only_in_progress_runs_render_without_a_leaderboard() -> None:
+    partial = raw("2026-02-01T00:00:00Z", "interrupted", True)
+    partial["status"] = "in_progress"
+
+    rendered = render_results([partial])
+
+    assert "No benchmark runs recorded." in rendered
+    assert "interrupted" in rendered.split("## Incomplete runs")[1]
+
+
+def test_status_free_and_complete_runs_render_identically() -> None:
+    without_status = raw("2026-01-01T00:00:00Z", "one", True)
+    with_status = raw("2026-01-01T00:00:00Z", "one", True)
+    with_status["status"] = "complete"
+
+    assert render_results([with_status]) == render_results([without_status])
+    assert "Incomplete runs" not in render_results([without_status])
+
+
 def test_report_regeneration_is_byte_identical_and_bounded(tmp_path: Path) -> None:
     raw_dir = tmp_path / "results" / "raw"
     raw_dir.mkdir(parents=True)

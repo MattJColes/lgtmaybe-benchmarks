@@ -8,6 +8,7 @@ from pathlib import Path
 from statistics import median
 from typing import Any
 
+from lgtmaybe_bench.runner import RAW_COMPLETE as COMPLETE
 from lgtmaybe_bench.scoring import (
     CaseScore,
     Range,
@@ -149,11 +150,41 @@ def _range(value: Any, *, percent: bool = False) -> str:
     return f"{med} [{value.minimum * scale:.{digits}f}–{value.maximum * scale:.{digits}f}{suffix}]"
 
 
-def render_results(raw_runs: list[dict[str, Any]]) -> str:
+def _render_incomplete(raw_runs: list[dict[str, Any]]) -> str:
     if not raw_runs:
-        return "No benchmark runs recorded.\n"
+        return ""
+    rows = [
+        "| "
+        + " | ".join(
+            (
+                raw["timestamp"],
+                raw["configuration"]["provider"],
+                raw["configuration"]["model"],
+                str(len(raw["observations"])),
+                str(raw["configuration"]["repeats"] * len(raw["configuration"]["cases"])),
+            )
+        )
+        + " |"
+        for raw in sorted(raw_runs, key=lambda raw: raw["timestamp"], reverse=True)
+    ]
+    return (
+        "\n## Incomplete runs\n\n"
+        "Recorded observations from runs that did not finish. Excluded from every metric above.\n\n"
+        "| date | provider | model | observations | expected |\n"
+        "|---|---|---|---:|---:|\n" + "\n".join(rows) + "\n"
+    )
+
+
+def render_results(raw_runs: list[dict[str, Any]]) -> str:
+    finished = [raw.get("status", COMPLETE) == COMPLETE for raw in raw_runs]
+    complete = [raw for raw, done in zip(raw_runs, finished, strict=True) if done]
+    incomplete = _render_incomplete(
+        [raw for raw, done in zip(raw_runs, finished, strict=True) if not done]
+    )
+    if not complete:
+        return "No benchmark runs recorded.\n" + incomplete
     runs = sorted(
-        (_score_run(raw) for raw in raw_runs), key=lambda run: run.raw["timestamp"], reverse=True
+        (_score_run(raw) for raw in complete), key=lambda run: run.raw["timestamp"], reverse=True
     )
     header = (
         "| date | lgtmaybe | provider | model | cases | effort | preset | max_tok | max_in | api | "
@@ -215,6 +246,7 @@ def render_results(raw_runs: list[dict[str, Any]]) -> str:
         + lens_rule
         + "\n".join(lens_rows)
         + "\n"
+        + incomplete
     )
 
 
