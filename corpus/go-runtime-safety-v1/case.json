@@ -1,0 +1,15 @@
+{
+  "name": "go-runtime-safety-v1",
+  "language": "go",
+  "changed_file": "report.go",
+  "clean": false,
+  "commit_message": "feat: preserve report rows for named users",
+  "coverage": ["multi-file"],
+  "expected": [
+    {"label": "user reaches sh -c", "lens": "security", "line": 6, "keywords": ["command injection", "sh", "exec.command"], "severity_at_least": "high"},
+    {"label": "slice drops the first row", "lens": "correctness", "line": 7, "keywords": ["first row", "rows[1:]", "drops"], "severity_at_least": "medium"},
+    {"label": "nil assertion misses row loss", "lens": "tests", "file": "report_test.go", "line": 6, "keywords": ["nil", "weak assertion", "preserve"], "severity_at_least": "medium"},
+    {"label": "slice violates preserve-every-row spec", "lens": "spec", "line": 7, "keywords": ["spec", "preserve every", "rows[1:]"], "severity_at_least": "medium"}
+  ],
+  "forbidden": []
+}

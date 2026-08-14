@@ -1,0 +1,15 @@
+{
+  "name": "dart-runtime-safety-v1",
+  "language": "dart",
+  "changed_file": "lib/report.dart",
+  "clean": false,
+  "commit_message": "feat: preserve report rows for named users",
+  "coverage": ["multi-file"],
+  "expected": [
+    {"label": "user value reaches sh -c", "lens": "security", "line": 5, "keywords": ["command injection", "sh", "argument"], "severity_at_least": "high"},
+    {"label": "sublist drops the first row", "lens": "correctness", "line": 6, "keywords": ["first row", "sublist(1)", "drops"], "severity_at_least": "medium"},
+    {"label": "isNotNull assertion misses row loss", "lens": "tests", "file": "test/report_test.dart", "line": 5, "keywords": ["isnotnull", "weak assertion", "preserve"], "severity_at_least": "medium"},
+    {"label": "sublist violates preserve-every-row spec", "lens": "spec", "line": 6, "keywords": ["spec", "preserve every", "sublist"], "severity_at_least": "medium"}
+  ],
+  "forbidden": []
+}

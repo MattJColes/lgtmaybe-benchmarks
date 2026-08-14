@@ -1,0 +1,10 @@
+{
+  "name": "github-actions-clean-context-v1",
+  "language": "github-actions",
+  "changed_file": ".github/workflows/label.yml",
+  "clean": true,
+  "clean_trap": "pull_request_target is intentional for labeling; checkout stays on the trusted base revision and no secret is exposed to fork code.",
+  "coverage": [],
+  "expected": [],
+  "forbidden": []
+}

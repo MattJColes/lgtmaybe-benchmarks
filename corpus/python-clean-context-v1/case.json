@@ -1,0 +1,10 @@
+{
+  "name": "python-clean-context-v1",
+  "language": "python",
+  "changed_file": "query.py",
+  "clean": true,
+  "clean_trap": "User input still reaches a query, but the statement remains parameterized and path-like prefixes are discarded.",
+  "coverage": [],
+  "expected": [],
+  "forbidden": []
+}

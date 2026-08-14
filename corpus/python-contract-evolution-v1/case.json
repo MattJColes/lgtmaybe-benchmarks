@@ -1,0 +1,32 @@
+{
+  "name": "python-contract-evolution-v1",
+  "language": "python",
+  "changed_file": "client.py",
+  "clean": false,
+  "commit_message": "refactor: keep fetch_user backward compatible",
+  "coverage": [],
+  "expected": [
+    {
+      "label": "public return contract changed without documentation",
+      "lens": "documentation",
+      "line": 4,
+      "keywords": ["documentation", "return type", "public contract"],
+      "severity_at_least": "medium"
+    },
+    {
+      "label": "datetime.utcnow is deprecated for UTC timestamps",
+      "lens": "deprecation",
+      "line": 5,
+      "keywords": ["utcnow", "deprecated", "timezone-aware"],
+      "severity_at_least": "low"
+    },
+    {
+      "label": "required timeout and tuple return contradict compatibility intent",
+      "lens": "intent",
+      "line": 4,
+      "keywords": ["backward compatible", "required timeout", "tuple"],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

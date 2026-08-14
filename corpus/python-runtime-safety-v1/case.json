@@ -1,0 +1,40 @@
+{
+  "name": "python-runtime-safety-v1",
+  "language": "python",
+  "changed_file": "report.py",
+  "clean": false,
+  "commit_message": "feat: preserve report behavior while accepting user names",
+  "coverage": ["multi-file"],
+  "expected": [
+    {
+      "label": "shell injection through user name",
+      "lens": "security",
+      "line": 6,
+      "keywords": ["shell injection", "shell=true", "argument vector"],
+      "severity_at_least": "high"
+    },
+    {
+      "label": "first report row is dropped",
+      "lens": "correctness",
+      "line": 7,
+      "keywords": ["first row", "drops", "rows[1:]"],
+      "severity_at_least": "medium"
+    },
+    {
+      "label": "replacement test no longer checks row preservation",
+      "lens": "tests",
+      "file": "tests/test_report.py",
+      "line": 5,
+      "keywords": ["weak assertion", "is not none", "preserve"],
+      "severity_at_least": "medium"
+    },
+    {
+      "label": "implementation violates the row-preservation specification",
+      "lens": "spec",
+      "line": 7,
+      "keywords": ["specification", "preserve every", "rows[1:]"],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

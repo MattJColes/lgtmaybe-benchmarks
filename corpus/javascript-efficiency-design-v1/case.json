@@ -1,0 +1,13 @@
+{
+  "name": "javascript-efficiency-design-v1",
+  "language": "javascript",
+  "changed_file": "enrichment.js",
+  "clean": false,
+  "coverage": [],
+  "expected": [
+    {"label": "repository loads serialize inside loop", "lens": "performance", "line": 10, "keywords": ["sequential", "loadmany", "n+1"], "severity_at_least": "medium"},
+    {"label": "three nested conditions obscure eligibility", "lens": "complexity", "line": 13, "keywords": ["nesting", "guard clause", "predicate"], "severity_at_least": "low"},
+    {"label": "one-use array factory adds indirection", "lens": "ponytail", "line": 1, "keywords": ["factory", "indirection", "array literal"], "severity_at_least": "low"}
+  ],
+  "forbidden": []
+}

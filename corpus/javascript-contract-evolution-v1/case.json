@@ -1,0 +1,14 @@
+{
+  "name": "javascript-contract-evolution-v1",
+  "language": "javascript",
+  "changed_file": "client.js",
+  "clean": false,
+  "commit_message": "refactor: preserve fetchUser compatibility",
+  "coverage": [],
+  "expected": [
+    {"label": "export return shape changed without API docs", "lens": "documentation", "line": 1, "keywords": ["documentation", "return shape", "array"], "severity_at_least": "medium"},
+    {"label": "toGMTString is deprecated", "lens": "deprecation", "line": 2, "keywords": ["togmtstring", "deprecated", "toutcstring"], "severity_at_least": "low"},
+    {"label": "required timeout and array return break compatibility intent", "lens": "intent", "line": 1, "keywords": ["compatibility", "default", "array"], "severity_at_least": "medium"}
+  ],
+  "forbidden": []
+}

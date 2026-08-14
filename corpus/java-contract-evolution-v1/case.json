@@ -1,0 +1,14 @@
+{
+  "name": "java-contract-evolution-v1",
+  "language": "java",
+  "changed_file": "src/main/java/UserClient.java",
+  "clean": false,
+  "commit_message": "refactor: preserve UserClient caller compatibility",
+  "coverage": [],
+  "expected": [
+    {"label": "public Map.Entry return is undocumented", "lens": "documentation", "line": 4, "keywords": ["documentation", "return type", "map.entry"], "severity_at_least": "medium"},
+    {"label": "Date.toGMTString is deprecated", "lens": "deprecation", "line": 5, "keywords": ["togmtstring", "deprecated", "datetimeformatter"], "severity_at_least": "low"},
+    {"label": "primitive timeout and Map.Entry break compatibility", "lens": "intent", "line": 4, "keywords": ["compatibility", "integer", "map.entry"], "severity_at_least": "medium"}
+  ],
+  "forbidden": []
+}

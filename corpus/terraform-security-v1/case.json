@@ -1,0 +1,11 @@
+{
+  "name": "terraform-security-v1",
+  "language": "terraform",
+  "changed_file": "main.tf",
+  "clean": false,
+  "coverage": [],
+  "expected": [
+    {"label": "SSH ingress is open to the internet", "lens": "security", "line": 6, "keywords": ["0.0.0.0/0", "ssh", "public internet"], "severity_at_least": "high"}
+  ],
+  "forbidden": []
+}

@@ -1,0 +1,15 @@
+{
+  "name": "java-runtime-safety-v1",
+  "language": "java",
+  "changed_file": "src/main/java/ReportService.java",
+  "clean": false,
+  "commit_message": "feat: preserve report rows for named users",
+  "coverage": ["multi-file"],
+  "expected": [
+    {"label": "user reaches /bin/sh -c", "lens": "security", "line": 5, "keywords": ["command injection", "/bin/sh", "processbuilder"], "severity_at_least": "high"},
+    {"label": "subList removes the first row", "lens": "correctness", "line": 6, "keywords": ["first row", "sublist", "drops"], "severity_at_least": "medium"},
+    {"label": "assertNotNull misses row loss", "lens": "tests", "file": "src/test/java/ReportServiceTest.java", "line": 3, "keywords": ["assertnotnull", "weak assertion", "preserve"], "severity_at_least": "medium"},
+    {"label": "subList violates preserve-every-row spec", "lens": "spec", "line": 6, "keywords": ["spec", "preserve every", "sublist"], "severity_at_least": "medium"}
+  ],
+  "forbidden": []
+}

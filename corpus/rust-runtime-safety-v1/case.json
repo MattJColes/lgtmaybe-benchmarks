@@ -1,0 +1,15 @@
+{
+  "name": "rust-runtime-safety-v1",
+  "language": "rust",
+  "changed_file": "src/lib.rs",
+  "clean": false,
+  "commit_message": "feat: preserve report rows for named users",
+  "coverage": ["multi-file"],
+  "expected": [
+    {"label": "user name reaches sh -c", "lens": "security", "line": 5, "keywords": ["command injection", "sh -c", "argument"], "severity_at_least": "high"},
+    {"label": "iterator skips the first row", "lens": "correctness", "line": 6, "keywords": ["first row", "skip(1)", "drops"], "severity_at_least": "medium"},
+    {"label": "non-empty assertion misses row loss", "lens": "tests", "file": "tests/report.rs", "line": 5, "keywords": ["weak assertion", "is_empty", "preserve"], "severity_at_least": "medium"},
+    {"label": "skip contradicts preserve-every-row spec", "lens": "spec", "line": 6, "keywords": ["spec", "preserve every", "skip"], "severity_at_least": "medium"}
+  ],
+  "forbidden": []
+}

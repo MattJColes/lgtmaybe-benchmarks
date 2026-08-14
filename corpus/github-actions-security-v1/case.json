@@ -1,0 +1,11 @@
+{
+  "name": "github-actions-security-v1",
+  "language": "github-actions",
+  "changed_file": ".github/workflows/review.yml",
+  "clean": false,
+  "coverage": [],
+  "expected": [
+    {"label": "pull_request_target executes untrusted head with a secret", "lens": "security", "line": 11, "keywords": ["pull_request_target", "untrusted", "secret"], "severity_at_least": "critical"}
+  ],
+  "forbidden": []
+}

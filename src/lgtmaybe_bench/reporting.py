@@ -3,23 +3,30 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from statistics import median
 from typing import Any
 
 from lgtmaybe_bench.cli import resolved_concurrency
 from lgtmaybe_bench.runner import RAW_COMPLETE as COMPLETE
+from lgtmaybe_bench.runner import get_profile
 from lgtmaybe_bench.scoring import (
     CaseScore,
     Range,
     RepeatMetrics,
+    SuiteAggregateMetrics,
+    SuiteObservation,
+    SuiteRepeatMetrics,
     aggregate_repeats,
+    aggregate_suite_repeats,
     effort_label,
+    load_adjudications,
     overall_score,
     parse_case,
     parse_findings,
     score_case,
+    score_suite,
 )
 
 START = "<!-- BENCH_RESULTS_START -->"
@@ -44,6 +51,13 @@ class ScoredRun:
     repeats: list[RepeatMetrics]
     per_lens: dict[str, Range]
     clean: bool
+
+
+@dataclass(frozen=True, slots=True)
+class ScoredSuiteRun:
+    raw: dict[str, Any]
+    repeats: list[SuiteRepeatMetrics]
+    aggregate: SuiteAggregateMetrics
 
 
 def _combine(scores: list[CaseScore]) -> CaseScore:
@@ -142,6 +156,62 @@ def _score_run(raw: dict[str, Any]) -> ScoredRun:
     )
 
 
+def _score_suite_run(
+    raw: dict[str, Any], adjudications: dict[str, str] | None = None
+) -> ScoredSuiteRun:
+    grouped: dict[int, list[dict[str, Any]]] = {}
+    for observation in raw["observations"]:
+        grouped.setdefault(int(observation["repeat"]), []).append(observation)
+    repeats: list[SuiteRepeatMetrics] = []
+    max_tokens = raw["configuration"].get("max_tokens")
+    for repeat_observations in grouped.values():
+        score = score_suite(
+            [
+                SuiteObservation(
+                    parse_case(observation["ground_truth"]),
+                    parse_findings(observation["findings"]),
+                )
+                for observation in repeat_observations
+            ],
+            adjudications,
+        )
+        truncation_lenses: list[str] = []
+        wall_excluding_truncation = 0.0
+        for observation in repeat_observations:
+            truncated_calls = [
+                call
+                for call in observation.get("calls", [])
+                if call.get("truncated")
+                or (max_tokens is not None and int(call.get("output_tokens", 0)) >= int(max_tokens))
+            ]
+            truncation_lenses.extend(observation.get("truncation_lenses", []))
+            truncation_lenses.extend(str(call["label"]) for call in truncated_calls)
+            wall_excluding_truncation += (
+                max(
+                    0.0,
+                    float(observation["wall_seconds"])
+                    - sum(float(call["elapsed_seconds"]) for call in truncated_calls),
+                )
+                if truncated_calls
+                else float(observation["wall_excluding_truncation_seconds"])
+            )
+        repeats.append(
+            SuiteRepeatMetrics(
+                score,
+                sum(float(observation["wall_seconds"]) for observation in repeat_observations),
+                wall_excluding_truncation,
+                tuple(truncation_lenses),
+                sum(int(observation["input_tokens"]) for observation in repeat_observations),
+                sum(int(observation["output_tokens"]) for observation in repeat_observations),
+                sum(int(observation["reasoning_tokens"]) for observation in repeat_observations),
+                sum(int(observation["failures"]) for observation in repeat_observations),
+            )
+        )
+    if not repeats:
+        raise ValueError("raw run contains no observations")
+    return ScoredSuiteRun(raw, repeats, aggregate_suite_repeats(repeats))
+
+
 def _range(value: Any, *, percent: bool = False) -> str:
     scale = 100 if percent else 1
     suffix = "%" if percent else ""
@@ -165,14 +235,45 @@ def _count_range(value: Range) -> str:
 
 def _settings(config: dict[str, Any]) -> str:
     provider = str(config["provider"])
+    profile_values: dict[str, Any] | None = None
+    resolved = config.get("resolved_profile")
+    base_profile = config.get("base_profile")
+    if config.get("profile") == "diagnostic-custom-v1" and isinstance(base_profile, str):
+        try:
+            profile_values = asdict(get_profile(base_profile))
+        except ValueError:
+            profile_values = None
+    elif isinstance(resolved, dict):
+        profile_values = resolved
+    elif isinstance(config.get("profile"), str):
+        try:
+            profile = get_profile(config["profile"])
+        except ValueError:
+            pass
+        else:
+            profile_values = {
+                "reasoning_effort": profile.reasoning_effort,
+                "preset": profile.preset,
+                "max_tokens": profile.max_tokens,
+                "max_input_tokens": profile.max_input_tokens,
+                "repeats": profile.repeats,
+            }
     values: list[str] = []
-    if effort := config.get("reasoning_effort"):
+    if (effort := config.get("reasoning_effort")) and (
+        profile_values is None or effort != profile_values.get("reasoning_effort")
+    ):
         values.append(f"effort {effort_label(provider, effort)}")
-    if config.get("preset", "full") != "full":
+    default_preset = profile_values.get("preset") if profile_values is not None else "full"
+    if config.get("preset", "full") != default_preset:
         values.append(f"preset {config['preset']}")
-    if config.get("max_tokens") is not None:
+    if config.get("max_tokens") is not None and (
+        profile_values is None or config.get("max_tokens") != profile_values.get("max_tokens")
+    ):
         values.append(f"max tokens {config['max_tokens']}")
-    if config.get("max_input_tokens") is not None:
+    if config.get("max_input_tokens") is not None and (
+        profile_values is None
+        or config.get("max_input_tokens") != profile_values.get("max_input_tokens")
+    ):
         values.append(f"max input tokens {config['max_input_tokens']}")
     if config.get("api_base"):
         values.append(f"api base {config['api_base']}")
@@ -180,7 +281,8 @@ def _settings(config: dict[str, Any]) -> str:
     if concurrency != resolved_concurrency(provider, None):
         values.append(f"concurrency {concurrency}")
     repeats = int(config.get("repeats", 3))
-    if repeats != 3:
+    profile_repeats = int(profile_values.get("repeats", 3)) if profile_values else 3
+    if repeats != profile_repeats:
         values.append(f"repeats {repeats}")
     timeout = int(config.get("timeout", 7200))
     if timeout != 7200:
@@ -188,10 +290,367 @@ def _settings(config: dict[str, Any]) -> str:
     return "; ".join(values) or "—"
 
 
-def render_results(raw_runs: list[dict[str, Any]]) -> str:
+def _render_v2_canonical(
+    raw_runs: list[dict[str, Any]],
+    adjudications: dict[str, str] | None,
+) -> str | None:
+    eligible = [
+        raw
+        for raw in raw_runs
+        if raw.get("status", COMPLETE) == COMPLETE
+        and raw.get("configuration", {}).get("suite") == "v2"
+        and raw.get("configuration", {}).get("profile") == "canonical-v1"
+        and raw.get("configuration", {}).get("profile_canonical", True)
+        and raw.get("configuration", {}).get("full_corpus", False)
+        and not any(observation.get("failures", 0) for observation in raw.get("observations", []))
+    ]
+    if not eligible:
+        return None
+    newest = max(eligible, key=lambda raw: raw["timestamp"])
+    key = (
+        newest["configuration"]["suite"],
+        newest["configuration"]["profile"],
+        newest["lgtmaybe_version"],
+    )
+    partition = [
+        raw
+        for raw in eligible
+        if (
+            raw["configuration"]["suite"],
+            raw["configuration"]["profile"],
+            raw["lgtmaybe_version"],
+        )
+        == key
+    ]
+    runs = sorted(
+        (_score_suite_run(raw, adjudications) for raw in partition),
+        key=lambda run: (run.aggregate.balanced_f1.median, run.raw["timestamp"]),
+        reverse=True,
+    )
+    rows: list[str] = []
+    for run in runs:
+        score = _range(run.aggregate.balanced_f1, percent=True)
+        if any(repeat.score.provisional for repeat in run.repeats):
+            score += " provisional"
+        rows.append(
+            "| "
+            + " | ".join(
+                (
+                    _iso_date(run.raw["timestamp"]),
+                    run.raw["configuration"]["provider"],
+                    run.raw["configuration"]["model"],
+                    score,
+                    _range(run.aggregate.balanced_recall, percent=True),
+                    _range(run.aggregate.precision, percent=True),
+                    _count_range(run.aggregate.false_positives),
+                    _range(run.aggregate.clean_pass_rate, percent=True),
+                    _range(run.aggregate.adjudication_coverage, percent=True),
+                    _audit_label(run.raw),
+                    _settings(run.raw["configuration"]),
+                )
+            )
+            + " |"
+        )
+    return (
+        f"Comparison key: `{key[0]} / {key[1]} / {key[2]}`.\n\n"
+        "| date | provider | model | balanced F1 | balanced recall | precision | "
+        "false positives | clean pass | adjudication | audit | settings |\n"
+        "|---|---|---|---:|---:|---:|---:|---:|---:|---|---|\n" + "\n".join(rows) + "\n"
+    )
+
+
+def _audit_label(raw: dict[str, Any]) -> str:
+    states = {
+        observation.get("audit", {}).get("state", "unsupported")
+        for observation in raw.get("observations", [])
+    }
+    if states and states <= {"completed"}:
+        return "yes"
+    if states & {"completed", "partial", "interrupted", "failed", "malformed"}:
+        return "partial"
+    return "no"
+
+
+def build_dashboard_data(
+    raw_runs: list[dict[str, Any]], adjudications: dict[str, str] | None = None
+) -> dict[str, Any]:
+    """Build one deterministic, lossless-enough exploration model from stored runs."""
+    rows: list[dict[str, Any]] = []
+    for raw in sorted(
+        raw_runs,
+        key=lambda item: (
+            str(item.get("timestamp", "")),
+            str(item.get("run_id", "")),
+            str(item.get("configuration", {}).get("model", "")),
+        ),
+        reverse=True,
+    ):
+        config = raw.get("configuration", {})
+        suite = str(config.get("suite", "legacy-v1"))
+        profile = str(config.get("profile", "legacy-v1"))
+        status = str(raw.get("status", COMPLETE))
+        focused = not bool(config.get("full_corpus", True))
+        failed = any(observation.get("failures", 0) for observation in raw.get("observations", []))
+        canonical = (
+            status == COMPLETE
+            and suite == "v2"
+            and profile == "canonical-v1"
+            and bool(config.get("profile_canonical", True))
+            and not focused
+            and not failed
+        )
+        metrics: dict[str, Any] | None = None
+        if status == COMPLETE and raw.get("observations") and not failed:
+            if suite == "v2":
+                scored = _score_suite_run(raw, adjudications)
+                aggregate = scored.aggregate
+                classes = sorted(
+                    {
+                        name
+                        for repeat in scored.repeats
+                        for name in repeat.score.false_positive_classes
+                    }
+                )
+                metrics = {
+                    "score_kind": "balanced_f1",
+                    "balanced_f1": aggregate.balanced_f1.median,
+                    "balanced_recall": aggregate.balanced_recall.median,
+                    "precision": aggregate.precision.median,
+                    "false_positives": aggregate.false_positives.median,
+                    "false_positive_classes": {
+                        name: float(
+                            median(
+                                repeat.score.false_positive_classes.get(name, 0)
+                                for repeat in scored.repeats
+                            )
+                        )
+                        for name in classes
+                    },
+                    "clean_pass_rate": aggregate.clean_pass_rate.median,
+                    "adjudication_coverage": aggregate.adjudication_coverage.median,
+                    "true_positives": aggregate.true_positives.median,
+                    "duplicates": aggregate.duplicates.median,
+                    "unadjudicated": aggregate.unadjudicated.median,
+                    "provisional": any(repeat.score.provisional for repeat in scored.repeats),
+                    "per_language": {
+                        name: value.median for name, value in aggregate.per_language.items()
+                    },
+                    "per_lens": {name: value.median for name, value in aggregate.per_lens.items()},
+                    "truncations": aggregate.truncations.median,
+                    "truncation_lenses": list(aggregate.truncation_lenses),
+                    "failures": aggregate.failures.median,
+                    "input_tokens": aggregate.input_tokens.median,
+                    "output_tokens": aggregate.output_tokens.median,
+                    "reasoning_tokens": aggregate.reasoning_tokens.median,
+                    "wall_seconds": aggregate.wall_seconds.median,
+                }
+            else:
+                scored_legacy = _score_run(raw)
+                aggregate_legacy = aggregate_repeats(scored_legacy.repeats)
+                metrics = {
+                    "score_kind": "legacy_f1",
+                    "balanced_f1": aggregate_legacy.score.median,
+                    "balanced_recall": aggregate_legacy.recall.median,
+                    "precision": aggregate_legacy.precision.median,
+                    "false_positives": None,
+                    "false_positive_classes": {},
+                    "clean_pass_rate": None,
+                    "adjudication_coverage": None,
+                    "true_positives": None,
+                    "duplicates": None,
+                    "unadjudicated": None,
+                    "provisional": False,
+                    "per_language": {},
+                    "per_lens": {
+                        name: value.median for name, value in scored_legacy.per_lens.items()
+                    },
+                    "truncations": aggregate_legacy.truncations.median,
+                    "truncation_lenses": list(aggregate_legacy.truncation_lenses),
+                    "failures": aggregate_legacy.failures.median,
+                    "input_tokens": aggregate_legacy.input_tokens.median,
+                    "output_tokens": aggregate_legacy.output_tokens.median,
+                    "reasoning_tokens": aggregate_legacy.reasoning_tokens.median,
+                    "wall_seconds": aggregate_legacy.wall_seconds.median,
+                }
+        run_id = raw.get("run_id") or ":".join(
+            (
+                "legacy",
+                str(raw.get("timestamp", "")),
+                str(config.get("provider", "")),
+                str(config.get("model", "")),
+            )
+        )
+        rows.append(
+            {
+                "run_id": run_id,
+                "raw_path": raw.get("_source_path"),
+                "timestamp": raw.get("timestamp"),
+                "date": _iso_date(str(raw.get("timestamp", ""))),
+                "suite": suite,
+                "profile": profile,
+                "lgtmaybe_version": raw.get("lgtmaybe_version", "unknown"),
+                "comparison_key": f"{suite} / {profile} / {raw.get('lgtmaybe_version', 'unknown')}",
+                "provider": config.get("provider"),
+                "model": config.get("model"),
+                "status": status,
+                "focused": focused,
+                "canonical": canonical,
+                "audit": _audit_label(raw),
+                "audit_paths": sorted(
+                    {
+                        path
+                        for observation in raw.get("observations", [])
+                        if isinstance((audit := observation.get("audit")), dict)
+                        and isinstance((path := audit.get("path")), str)
+                    }
+                ),
+                "settings": _settings(config),
+                "metrics": metrics,
+            }
+        )
+    return {"schema_version": 1, "runs": rows}
+
+
+def render_dashboard(data: dict[str, Any]) -> str:
+    serialized = json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    serialized = serialized.replace("</", "<\\/")
+    template = """<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>lgtmaybe benchmark explorer</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+    body { margin: 0 auto; max-width: 96rem; padding: 1.5rem; }
+    h1 { margin-bottom: .25rem; }
+    .filters { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); margin: 1.5rem 0; }
+    label { display: grid; gap: .25rem; font-weight: 600; }
+    input, select, button { font: inherit; padding: .45rem; }
+    .table-wrap { overflow-x: auto; }
+    table { border-collapse: collapse; min-width: 80rem; width: 100%; }
+    th, td { border-bottom: 1px solid currentColor; padding: .55rem; text-align: left; }
+    th button { background: none; border: 0; color: inherit; cursor: pointer; font-weight: 700; padding: 0; }
+    td.numeric { text-align: right; }
+    .muted { opacity: .75; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>lgtmaybe benchmark explorer</h1>
+    <p class="muted">Every stored run remains visible. Canonical rankings compare only one suite, profile, and lgtmaybe version.</p>
+    <p><a href="../RESULTS.md">Open the complete Markdown results</a></p>
+    <section class="filters" aria-label="Result filters">
+      <label>Search model or provider<input id="search" type="search"></label>
+      <label>Suite<select id="suite"><option value="">All suites</option></select></label>
+      <label>Profile<select id="profile"><option value="">All profiles</option></select></label>
+      <label>lgtmaybe version<select id="version"><option value="">All versions</option></select></label>
+      <label>Provider<select id="provider"><option value="">All providers</option></select></label>
+      <label>Language<select id="language"><option value="">All languages</option></select></label>
+      <label>Lens<select id="lens"><option value="">All lenses</option></select></label>
+      <label>Audit<select id="audit"><option value="">All audit states</option></select></label>
+    </section>
+    <p id="result-count" aria-live="polite"></p>
+    <div class="table-wrap">
+      <table id="results-table">
+        <thead><tr>
+          <th aria-sort="none"><button type="button" data-sort="date" data-type="text">Date</button></th>
+          <th aria-sort="none"><button type="button" data-sort="provider" data-type="text">Provider</button></th>
+          <th aria-sort="none"><button type="button" data-sort="model" data-type="text">Model</button></th>
+          <th aria-sort="none"><button type="button" data-sort="suite" data-type="text">Suite</button></th>
+          <th aria-sort="none"><button type="button" data-sort="profile" data-type="text">Profile</button></th>
+          <th aria-sort="none"><button type="button" data-sort="lgtmaybe_version" data-type="text">lgtmaybe</button></th>
+          <th aria-sort="none"><button type="button" data-sort="balanced_f1" data-type="number">Balanced F1</button></th>
+          <th aria-sort="none"><button type="button" data-sort="balanced_recall" data-type="number">Recall</button></th>
+          <th aria-sort="none"><button type="button" data-sort="precision" data-type="number">Precision</button></th>
+          <th aria-sort="none"><button type="button" data-sort="false_positives" data-type="number">False positives</button></th>
+          <th aria-sort="none"><button type="button" data-sort="clean_pass_rate" data-type="number">Clean pass</button></th>
+          <th aria-sort="none"><button type="button" data-sort="audit" data-type="text">Audit</button></th>
+          <th aria-sort="none"><button type="button" data-sort="status" data-type="text">Status</button></th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <noscript><p>JavaScript is disabled. Use <a href="../RESULTS.md">RESULTS.md</a> for every stored result.</p></noscript>
+  </main>
+  <script id="benchmark-data" type="application/json">__DATA__</script>
+  <script>
+    const runs = JSON.parse(document.querySelector('#benchmark-data').textContent).runs;
+    const controls = Object.fromEntries(['search','suite','profile','version','provider','language','lens','audit'].map(id => [id, document.getElementById(id)]));
+    let sortKey = 'balanced_f1';
+    let sortDirection = -1;
+    const metric = (run, key) => run.metrics && run.metrics[key] != null ? run.metrics[key] : null;
+    const value = (run, key) => key in run ? run[key] : metric(run, key);
+    const text = value => value == null ? '—' : String(value);
+    const percent = value => value == null ? '—' : `${(value * 100).toFixed(1)}%`;
+    const escapeHtml = value => text(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+    function addOptions(control, values) {
+      [...new Set(values.filter(Boolean))].sort().forEach(value => control.add(new Option(value, value)));
+    }
+    addOptions(controls.suite, runs.map(run => run.suite));
+    addOptions(controls.profile, runs.map(run => run.profile));
+    addOptions(controls.version, runs.map(run => run.lgtmaybe_version));
+    addOptions(controls.provider, runs.map(run => run.provider));
+    addOptions(controls.audit, runs.map(run => run.audit));
+    addOptions(controls.language, runs.flatMap(run => Object.keys(run.metrics?.per_language || {})));
+    addOptions(controls.lens, runs.flatMap(run => Object.keys(run.metrics?.per_lens || {})));
+    function visible(run) {
+      const query = controls.search.value.trim().toLowerCase();
+      return (!query || `${run.model} ${run.provider}`.toLowerCase().includes(query))
+        && (!controls.suite.value || run.suite === controls.suite.value)
+        && (!controls.profile.value || run.profile === controls.profile.value)
+        && (!controls.version.value || run.lgtmaybe_version === controls.version.value)
+        && (!controls.provider.value || run.provider === controls.provider.value)
+        && (!controls.audit.value || run.audit === controls.audit.value)
+        && (!controls.language.value || controls.language.value in (run.metrics?.per_language || {}))
+        && (!controls.lens.value || controls.lens.value in (run.metrics?.per_lens || {}));
+    }
+    function compare(a, b) {
+      const left = value(a, sortKey);
+      const right = value(b, sortKey);
+      if (left == null && right == null) return 0;
+      if (left == null) return 1;
+      if (right == null) return -1;
+      if (typeof left === 'number' && typeof right === 'number') return (left - right) * sortDirection;
+      return String(left).localeCompare(String(right), undefined, {numeric: true}) * sortDirection;
+    }
+    function render() {
+      const filtered = runs.filter(visible).sort(compare);
+      document.querySelector('#result-count').textContent = `${filtered.length} result${filtered.length === 1 ? '' : 's'}`;
+      document.querySelector('#results-table tbody').innerHTML = filtered.map(run => `<tr>
+        <td>${escapeHtml(run.date)}</td><td>${escapeHtml(run.provider)}</td><td>${escapeHtml(run.model)}</td>
+        <td>${escapeHtml(run.suite)}</td><td>${escapeHtml(run.profile)}</td><td>${escapeHtml(run.lgtmaybe_version)}</td>
+        <td class="numeric">${percent(metric(run, 'balanced_f1'))}</td><td class="numeric">${percent(metric(run, 'balanced_recall'))}</td>
+        <td class="numeric">${percent(metric(run, 'precision'))}</td><td class="numeric">${escapeHtml(metric(run, 'false_positives'))}</td>
+        <td class="numeric">${percent(metric(run, 'clean_pass_rate'))}</td><td>${escapeHtml(run.audit)}</td><td>${escapeHtml(run.status)}</td>
+      </tr>`).join('');
+    }
+    Object.values(controls).forEach(control => control.addEventListener('input', render));
+    document.querySelectorAll('[data-sort]').forEach(button => button.addEventListener('click', () => {
+      const next = button.dataset.sort;
+      sortDirection = sortKey === next ? -sortDirection : (button.dataset.type === 'number' ? -1 : 1);
+      sortKey = next;
+      document.querySelectorAll('th[aria-sort]').forEach(header => header.setAttribute('aria-sort', 'none'));
+      button.parentElement.setAttribute('aria-sort', sortDirection === 1 ? 'ascending' : 'descending');
+      render();
+    }));
+    render();
+  </script>
+</body>
+</html>
+"""  # noqa: E501 - embedded dependency-free HTML, CSS, and JavaScript
+    return template.replace("__DATA__", serialized)
+
+
+def render_results(
+    raw_runs: list[dict[str, Any]], adjudications: dict[str, str] | None = None
+) -> str:
     if not raw_runs:
         return "No benchmark runs recorded.\n"
     complete = [raw for raw in raw_runs if raw.get("status", COMPLETE) == COMPLETE]
+    v2 = _render_v2_canonical(raw_runs, adjudications)
+    if v2 is not None:
+        return v2
     if not complete:
         return "No benchmark runs recorded.\n"
     full_runs = [
@@ -237,6 +696,108 @@ def render_results(raw_runs: list[dict[str, Any]]) -> str:
     )
 
 
+def render_detailed_results(data: dict[str, Any]) -> str:
+    runs = [run for run in data["runs"] if run["status"] == COMPLETE]
+    if not runs:
+        return "No benchmark runs recorded.\n"
+
+    def escaped(value: Any) -> str:
+        return str(value).replace("|", "\\|")
+
+    def percentage(value: Any) -> str:
+        return "—" if value is None else f"{float(value) * 100:.1f}%"
+
+    rows: list[str] = []
+    language_rows: list[str] = []
+    lens_rows: list[str] = []
+    false_positive_rows: list[str] = []
+    for run in runs:
+        metrics = run["metrics"] or {}
+        raw_link = f"[raw]({run['raw_path']})" if isinstance(run.get("raw_path"), str) else "—"
+        audit_links = (
+            ", ".join(
+                f"[trace {index}]({path})"
+                for index, path in enumerate(run.get("audit_paths", []), start=1)
+            )
+            or "—"
+        )
+        rows.append(
+            "| "
+            + " | ".join(
+                escaped(value)
+                for value in (
+                    run["date"],
+                    run["provider"],
+                    run["model"],
+                    run["suite"],
+                    run["profile"],
+                    run["lgtmaybe_version"],
+                    run["status"],
+                    percentage(metrics.get("balanced_f1")),
+                    percentage(metrics.get("balanced_recall")),
+                    percentage(metrics.get("precision")),
+                    metrics.get("false_positives", "—"),
+                    percentage(metrics.get("clean_pass_rate")),
+                    percentage(metrics.get("adjudication_coverage")),
+                    run["audit"],
+                    raw_link,
+                    audit_links,
+                    run["settings"],
+                )
+            )
+            + " |"
+        )
+        for language, recall in sorted(metrics.get("per_language", {}).items()):
+            language_rows.append(
+                f"| {escaped(run['model'])} | {escaped(run['comparison_key'])} | "
+                f"{escaped(language)} | {percentage(recall)} |"
+            )
+        for lens, recall in sorted(metrics.get("per_lens", {}).items()):
+            lens_rows.append(
+                f"| {escaped(run['model'])} | {escaped(run['comparison_key'])} | "
+                f"{escaped(lens)} | {percentage(recall)} |"
+            )
+        for classification, count in sorted(metrics.get("false_positive_classes", {}).items()):
+            false_positive_rows.append(
+                f"| {escaped(run['model'])} | {escaped(run['comparison_key'])} | "
+                f"{escaped(classification)} | {escaped(count)} |"
+            )
+
+    sections = [
+        "## All stored runs\n\n"
+        "Canonical, diagnostic, focused, and legacy completed runs are retained here. "
+        "Only identical comparison keys are directly rankable.\n\n"
+        "| date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | "
+        "balanced recall | precision | false positives | clean pass | adjudication | audit | "
+        "raw | traces | settings |\n"
+        "|---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---|---|---|---|\n"
+        + "\n".join(rows)
+        + "\n"
+    ]
+    if language_rows:
+        sections.append(
+            "\n## Per-language recall\n\n"
+            "| model | comparison key | language | recall |\n|---|---|---|---:|\n"
+            + "\n".join(language_rows)
+            + "\n"
+        )
+    if lens_rows:
+        sections.append(
+            "\n## Per-lens recall\n\n"
+            "| model | comparison key | lens | recall |\n|---|---|---|---:|\n"
+            + "\n".join(lens_rows)
+            + "\n"
+        )
+    if false_positive_rows:
+        sections.append(
+            "\n## False-positive classes\n\n"
+            "| model | comparison key | class | median count |\n|---|---|---|---:|\n"
+            + "\n".join(false_positive_rows)
+            + "\n"
+        )
+    return "".join(sections)
+
+
 def _write_atomic(path: Path, content: str) -> None:
     temporary = path.with_suffix(path.suffix + ".tmp")
     temporary.write_text(content, encoding="utf-8", newline="\n")
@@ -245,17 +806,25 @@ def _write_atomic(path: Path, content: str) -> None:
 
 def regenerate_reports(root: Path) -> None:
     raw_dir = root / "results" / "raw"
-    raw_runs = (
-        [json.loads(path.read_text(encoding="utf-8")) for path in sorted(raw_dir.glob("*.json"))]
-        if raw_dir.exists()
-        else []
-    )
-    rendered = render_results(raw_runs)
+    raw_runs: list[dict[str, Any]] = []
+    if raw_dir.exists():
+        for path in sorted(raw_dir.glob("*.json")):
+            raw = json.loads(path.read_text(encoding="utf-8"))
+            raw["_source_path"] = path.relative_to(root).as_posix()
+            raw_runs.append(raw)
+    history = load_adjudications(root, raw_runs)
+    adjudications = {
+        event.evidence_id: event.classification
+        for event in history.current.values()
+        if event.evidence_kind == "finding"
+    }
+    rendered = render_results(raw_runs, adjudications)
+    dashboard_data = build_dashboard_data(raw_runs, adjudications)
     _write_atomic(
         root / "RESULTS.md",
         "# lgtmaybe benchmark results\n\n"
         "Generated by `bench report` from `results/raw/*.json`. Do not edit by hand.\n\n"
-        + rendered,
+        + render_detailed_results(dashboard_data),
     )
     readme_path = root / "README.md"
     readme = readme_path.read_text(encoding="utf-8")
@@ -264,3 +833,10 @@ def regenerate_reports(root: Path) -> None:
     before, remainder = readme.split(START, 1)
     _, after = remainder.split(END, 1)
     _write_atomic(readme_path, f"{before}{START}\n{rendered.rstrip()}\n{END}{after}")
+    dashboard = root / "dashboard"
+    dashboard.mkdir(parents=True, exist_ok=True)
+    _write_atomic(
+        dashboard / "data.json",
+        json.dumps(dashboard_data, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
+    )
+    _write_atomic(dashboard / "index.html", render_dashboard(dashboard_data))

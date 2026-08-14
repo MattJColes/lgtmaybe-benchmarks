@@ -1,0 +1,10 @@
+{
+  "name": "java-clean-context-v1",
+  "language": "java",
+  "changed_file": "src/main/java/UserRepository.java",
+  "clean": true,
+  "clean_trap": "User-controlled text reaches a SQL operation only through PreparedStatement.setString, so it cannot alter query syntax.",
+  "coverage": [],
+  "expected": [],
+  "forbidden": []
+}

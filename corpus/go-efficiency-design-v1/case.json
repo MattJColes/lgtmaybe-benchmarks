@@ -1,0 +1,13 @@
+{
+  "name": "go-efficiency-design-v1",
+  "language": "go",
+  "changed_file": "enrichment.go",
+  "clean": false,
+  "coverage": [],
+  "expected": [
+    {"label": "repository loads once per ID", "lens": "performance", "line": 10, "keywords": ["n+1", "loadmany", "per id"], "severity_at_least": "medium"},
+    {"label": "three nested conditions obscure eligibility", "lens": "complexity", "line": 13, "keywords": ["nesting", "guard clause", "predicate"], "severity_at_least": "low"},
+    {"label": "one-use slice factory adds indirection", "lens": "ponytail", "line": 3, "keywords": ["factory", "indirection", "slice literal"], "severity_at_least": "low"}
+  ],
+  "forbidden": []
+}

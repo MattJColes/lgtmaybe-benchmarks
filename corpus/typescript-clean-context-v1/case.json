@@ -1,0 +1,10 @@
+{
+  "name": "typescript-clean-context-v1",
+  "language": "typescript",
+  "changed_file": "query.ts",
+  "clean": true,
+  "clean_trap": "Normalized user input still reaches SQL, but it remains a bound parameter rather than query text.",
+  "coverage": [],
+  "expected": [],
+  "forbidden": []
+}

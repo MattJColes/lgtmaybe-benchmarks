@@ -1,0 +1,10 @@
+{
+  "name": "terraform-clean-context-v1",
+  "language": "terraform",
+  "changed_file": "main.tf",
+  "clean": true,
+  "clean_trap": "The ingress CIDR became configurable, but its safe default and validation explicitly reject public admin access.",
+  "coverage": [],
+  "expected": [],
+  "forbidden": []
+}

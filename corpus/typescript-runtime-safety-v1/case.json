@@ -1,0 +1,40 @@
+{
+  "name": "typescript-runtime-safety-v1",
+  "language": "typescript",
+  "changed_file": "report.ts",
+  "clean": false,
+  "commit_message": "feat: preserve report behavior for named users",
+  "coverage": ["multi-file"],
+  "expected": [
+    {
+      "label": "template reaches a shell command",
+      "lens": "security",
+      "line": 5,
+      "keywords": ["command injection", "execsync", "shell"],
+      "severity_at_least": "high"
+    },
+    {
+      "label": "slice drops the first report row",
+      "lens": "correctness",
+      "line": 6,
+      "keywords": ["first row", "slice(1)", "drops"],
+      "severity_at_least": "medium"
+    },
+    {
+      "label": "test no longer asserts row content",
+      "lens": "tests",
+      "file": "report.test.ts",
+      "line": 4,
+      "keywords": ["tobedefined", "weak assertion", "row content"],
+      "severity_at_least": "medium"
+    },
+    {
+      "label": "slice contradicts row-preservation spec",
+      "lens": "spec",
+      "line": 6,
+      "keywords": ["spec", "preserve every", "slice"],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}
