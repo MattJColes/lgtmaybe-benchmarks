@@ -112,14 +112,13 @@ def test_render_complete_row_uses_iso_date() -> None:
     assert "2026-08-14T01:44:23Z" not in rendered
 
 
-def test_render_incomplete_row_uses_iso_date() -> None:
+def test_render_omits_incomplete_run() -> None:
     partial = raw("2026-08-14T01:44:23Z", "interrupted", True)
     partial["status"] = "in_progress"
 
     rendered = render_results([partial])
 
-    assert "| 2026-08-14 |" in rendered
-    assert "2026-08-14T01:44:23Z" not in rendered
+    assert rendered == "No benchmark runs recorded.\n"
 
 
 def test_render_excludes_focused_runs_and_keeps_legacy_full_runs() -> None:
@@ -188,28 +187,25 @@ def test_non_default_settings_render_in_fixed_order() -> None:
     )
 
 
-def test_in_progress_run_is_listed_but_never_scored() -> None:
+def test_in_progress_run_is_omitted() -> None:
     complete = raw("2026-01-01T00:00:00Z", "finished", True)
     partial = raw("2026-02-01T00:00:00Z", "interrupted", True)
     partial["status"] = "in_progress"
 
     rendered = render_results([complete, partial])
 
-    leaderboard, incomplete = rendered.split("## Incomplete runs")
-    assert "interrupted" not in leaderboard
-    assert "finished" in leaderboard
-    assert "interrupted" in incomplete
-    assert "1" in incomplete
+    assert "finished" in rendered
+    assert "interrupted" not in rendered
+    assert "Incomplete runs" not in rendered
 
 
-def test_only_in_progress_runs_render_without_a_leaderboard() -> None:
+def test_only_in_progress_runs_render_empty_state() -> None:
     partial = raw("2026-02-01T00:00:00Z", "interrupted", True)
     partial["status"] = "in_progress"
 
     rendered = render_results([partial])
 
-    assert "No benchmark runs recorded." in rendered
-    assert "interrupted" in rendered.split("## Incomplete runs")[1]
+    assert rendered == "No benchmark runs recorded.\n"
 
 
 def test_status_free_and_complete_runs_render_identically() -> None:

@@ -38,12 +38,3 @@ Full-corpus runs only. Complete configuration and diagnostic evidence remain in 
 | 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-opus-5 | 9.1% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 50.0% | 0.0% | max tokens 4096; repeats 1 |
 | 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-opus-4.8 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | max tokens 8192; repeats 1 |
 | 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-opus-4.8 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | max tokens 4096; repeats 1 |
-
-## Incomplete runs
-
-Recorded observations from runs that did not finish. Excluded from every metric above.
-
-| date | provider | model | observations | expected |
-|---|---|---|---:|---:|
-| 2026-08-13 | openrouter | qwen/qwen3.8-max | 19 | 20 |
-| 2026-08-13 | openrouter | qwen/qwen3.6-35b-a3b | 1 | 60 |
