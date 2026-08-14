@@ -1,7 +1,7 @@
 ## MODIFIED Requirements
 
 ### Requirement: Reproducible generated reports
-`bench report` SHALL read all valid raw result files, rescore them, and regenerate `RESULTS.md` byte-identically for unchanged inputs. It SHALL also replace only the marked generated section of `README.md`. The generated Markdown SHALL contain one newest-first table for full-corpus runs with ISO calendar date (`YYYY-MM-DD`), lgtmaybe version, provider, model, overall score, every per-lens recall value, and a final settings summary. Incomplete-run rows SHALL use the same ISO calendar date format. It SHALL omit focused runs, the selected-case list, and separate leaderboard, timing, token, precision, clean, truncation, and failure columns. Complete timestamps and data SHALL remain in raw JSON, and newest-first ordering SHALL continue to use the complete timestamp.
+`bench report` SHALL read all valid raw result files, rescore them, and regenerate `RESULTS.md` byte-identically for unchanged inputs. It SHALL also replace only the marked generated section of `README.md`. The generated Markdown SHALL contain one table for full-corpus runs ordered by median overall score descending, then complete timestamp descending, with ISO calendar date (`YYYY-MM-DD`), lgtmaybe version, provider, model, overall score, every per-lens recall value, and a final settings summary. Incomplete-run rows SHALL use the same ISO calendar date format and remain newest-first. It SHALL omit focused runs, the selected-case list, and separate leaderboard, timing, token, precision, clean, truncation, and failure columns. Complete timestamps and data SHALL remain in raw JSON.
 
 The settings summary SHALL list only non-default values among reasoning effort, preset, max output tokens, max input tokens, API base, concurrency, repeats, and execution timeout. It SHALL render `—` when no listed setting differs from its default. Raw results created before the full-corpus marker existed SHALL be treated as full-corpus runs for backward compatibility.
 
@@ -19,7 +19,11 @@ The settings summary SHALL list only non-default values among reasoning effort, 
 
 #### Scenario: Render report dates
 - **WHEN** a raw result timestamp is `2026-08-14T01:44:23Z`
-- **THEN** its generated complete or incomplete result row shows `2026-08-14` while retaining the full raw timestamp for ordering and evidence
+- **THEN** its generated complete or incomplete result row shows `2026-08-14` while retaining the full raw timestamp for tie-breaking, incomplete-run ordering, and evidence
+
+#### Scenario: Order comparison rows by score
+- **WHEN** complete full-corpus runs have different median overall scores
+- **THEN** the generated comparison table lists the highest score first and uses newest timestamp first when scores tie
 
 #### Scenario: Render custom settings
 - **WHEN** a full-corpus run uses `max_tokens=512` and one repeat while every other listed setting remains at its default

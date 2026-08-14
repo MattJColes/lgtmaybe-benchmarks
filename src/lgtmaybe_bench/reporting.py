@@ -219,7 +219,9 @@ def render_results(raw_runs: list[dict[str, Any]]) -> str:
     if not full_runs:
         return "No full benchmark runs recorded.\n" + incomplete
     runs = sorted(
-        (_score_run(raw) for raw in full_runs), key=lambda run: run.raw["timestamp"], reverse=True
+        (_score_run(raw) for raw in full_runs),
+        key=lambda run: (aggregate_repeats(run.repeats).score.median, run.raw["timestamp"]),
+        reverse=True,
     )
     header = (
         "| date | lgtmaybe version | provider | model | score | "

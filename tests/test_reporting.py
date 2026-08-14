@@ -63,12 +63,9 @@ def raw(timestamp: str, model: str, caught: bool) -> dict[str, object]:
     }
 
 
-def test_render_is_newest_first_and_contains_one_per_lens_table() -> None:
-    rendered = render_results(
-        [raw("2026-01-01T00:00:00Z", "old", False), raw("2026-02-01T00:00:00Z", "new", True)]
-    )
+def test_render_contains_one_per_lens_table() -> None:
+    rendered = render_results([raw("2026-01-01T00:00:00Z", "model", True)])
 
-    assert rendered.index("new") < rendered.index("old")
     header = next(line for line in rendered.splitlines() if line.startswith("| date"))
     assert header == (
         "| date | lgtmaybe version | provider | model | score | security | correctness | "
@@ -90,6 +87,22 @@ def test_render_is_newest_first_and_contains_one_per_lens_table() -> None:
         "reason_tok",
     ):
         assert removed not in header
+
+
+def test_render_orders_highest_score_first() -> None:
+    rendered = render_results(
+        [raw("2026-02-01T00:00:00Z", "low", False), raw("2026-01-01T00:00:00Z", "high", True)]
+    )
+
+    assert rendered.index("high") < rendered.index("low")
+
+
+def test_render_orders_score_ties_newest_first() -> None:
+    rendered = render_results(
+        [raw("2026-01-01T00:00:00Z", "old", True), raw("2026-02-01T00:00:00Z", "new", True)]
+    )
+
+    assert rendered.index("new") < rendered.index("old")
 
 
 def test_render_complete_row_uses_iso_date() -> None:
