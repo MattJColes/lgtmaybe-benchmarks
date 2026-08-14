@@ -155,31 +155,6 @@ def _iso_date(timestamp: str) -> str:
     return timestamp.partition("T")[0]
 
 
-def _render_incomplete(raw_runs: list[dict[str, Any]]) -> str:
-    if not raw_runs:
-        return ""
-    rows = [
-        "| "
-        + " | ".join(
-            (
-                _iso_date(raw["timestamp"]),
-                raw["configuration"]["provider"],
-                raw["configuration"]["model"],
-                str(len(raw["observations"])),
-                str(raw["configuration"]["repeats"] * len(raw["configuration"]["cases"])),
-            )
-        )
-        + " |"
-        for raw in sorted(raw_runs, key=lambda raw: raw["timestamp"], reverse=True)
-    ]
-    return (
-        "\n## Incomplete runs\n\n"
-        "Recorded observations from runs that did not finish. Excluded from every metric above.\n\n"
-        "| date | provider | model | observations | expected |\n"
-        "|---|---|---|---:|---:|\n" + "\n".join(rows) + "\n"
-    )
-
-
 def _settings(config: dict[str, Any]) -> str:
     provider = str(config["provider"])
     values: list[str] = []
@@ -208,13 +183,9 @@ def _settings(config: dict[str, Any]) -> str:
 def render_results(raw_runs: list[dict[str, Any]]) -> str:
     if not raw_runs:
         return "No benchmark runs recorded.\n"
-    finished = [raw.get("status", COMPLETE) == COMPLETE for raw in raw_runs]
-    complete = [raw for raw, done in zip(raw_runs, finished, strict=True) if done]
-    incomplete = _render_incomplete(
-        [raw for raw, done in zip(raw_runs, finished, strict=True) if not done]
-    )
+    complete = [raw for raw in raw_runs if raw.get("status", COMPLETE) == COMPLETE]
     if not complete:
-        return "No benchmark runs recorded.\n" + incomplete
+        return "No benchmark runs recorded.\n"
     full_runs = [
         raw
         for raw in complete
@@ -222,7 +193,7 @@ def render_results(raw_runs: list[dict[str, Any]]) -> str:
         and not any(observation.get("failures", 0) for observation in raw["observations"])
     ]
     if not full_runs:
-        return "No full benchmark runs recorded.\n" + incomplete
+        return "No full benchmark runs recorded.\n"
     runs = sorted(
         (_score_run(raw) for raw in full_runs),
         key=lambda run: (aggregate_repeats(run.repeats).score.median, run.raw["timestamp"]),
@@ -253,12 +224,7 @@ def render_results(raw_runs: list[dict[str, Any]]) -> str:
         rows.append("| " + " | ".join(str(value).replace("|", "\\|") for value in values) + " |")
     return (
         "Full-corpus runs only. Complete configuration and diagnostic evidence remain in "
-        "`results/raw/`.\n\n## Per-lens recall\n\n"
-        + header
-        + rule
-        + "\n".join(rows)
-        + "\n"
-        + incomplete
+        "`results/raw/`.\n\n## Per-lens recall\n\n" + header + rule + "\n".join(rows) + "\n"
     )
 
 
