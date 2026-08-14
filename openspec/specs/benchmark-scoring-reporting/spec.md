@@ -23,11 +23,25 @@ A finding SHALL match a catalogued entry only when its file agrees, its line is 
 - **THEN** the forbidden-hit count increases and the observation is not clean
 
 ### Requirement: Recall, precision, and score
-Each repeat SHALL report caught and planted counts, overall and per-lens recall, forbidden hits, unexpected findings, adjudicable findings, precision, clean status, and score. Precision SHALL equal `1 - (forbidden hits + unexpected findings) / adjudicable findings`, with precision defined as one when there are no adjudicable findings. Findings far from every catalogued line SHALL be excluded from precision. Score SHALL be the harmonic mean of recall and precision.
+Each repeat SHALL report caught and planted counts, overall and per-lens recall, false positives, forbidden hits, unexpected findings, adjudicable findings, precision, clean status, and score. False positives SHALL include every finding that does not match an uncaught expected planted entry, even when the finding may describe a genuine issue that is absent from the benchmark ground truth. Precision SHALL equal `caught / (caught + false positives)`, with precision defined as one when there are no returned findings, and SHALL remain a diagnostic metric.
 
-#### Scenario: Score noisy findings
-- **WHEN** a repeat catches planted bugs but also produces adjudicable forbidden or unexpected findings
-- **THEN** its precision and harmonic-mean score are lower than its recall and clean is false when any forbidden trap fired
+The base score SHALL be the harmonic mean of recall and perfect precision. The final score SHALL deduct exactly `0.02` for each false positive and SHALL be clamped to a minimum of zero: `max(0, base score - 0.02 * false positives)`.
+
+#### Scenario: Apply one fixed false-positive penalty
+- **WHEN** two otherwise identical repeats differ by one false positive and neither score reaches the zero floor
+- **THEN** the noisy repeat's score is exactly two percentage points lower
+
+#### Scenario: Floor a noisy score at zero
+- **WHEN** false-positive deductions exceed the base score
+- **THEN** the final score is zero rather than negative
+
+#### Scenario: Preserve diagnostic precision
+- **WHEN** a repeat catches planted bugs and produces false positives
+- **THEN** precision still describes the share of returned findings that matched planted findings while the fixed deduction determines overall score
+
+#### Scenario: Plausible uncatalogued issue
+- **WHEN** a finding may identify a real issue but does not match an uncaught planted entry
+- **THEN** it still counts as a false positive and deducts two percentage points for that immutable benchmark run
 
 ### Requirement: Repeat aggregation
 Configuration summaries SHALL aggregate recall, precision, score, total wall time, and wall time excluding truncated calls as median with minimum and maximum. They SHALL include truncation count and lenses plus input, output, and reasoning token totals when reported. A single repeat SHALL still render through the same aggregate format.
