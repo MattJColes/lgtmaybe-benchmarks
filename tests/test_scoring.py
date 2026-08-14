@@ -65,16 +65,17 @@ def test_expected_finding_matches_at_line_window_boundary() -> None:
     assert result.score == pytest.approx(2 / 3)
 
 
-def test_finding_outside_line_window_is_not_adjudicated() -> None:
+def test_finding_outside_line_window_is_a_false_positive() -> None:
     result = score_case(
         parse_case(truth()),
         parse_findings([finding(10 + LINE_WINDOW + 1, "Off-by-one")]),
     )
 
     assert result.caught == 0
-    assert result.adjudicable == 0
-    assert result.unexpected == 0
-    assert result.precision == 1.0
+    assert result.adjudicable == 1
+    assert result.unexpected == 1
+    assert result.false_positives == 1
+    assert result.precision == 0.0
 
 
 def test_keyword_with_wrong_severity_is_unexpected() -> None:
@@ -85,6 +86,7 @@ def test_keyword_with_wrong_severity_is_unexpected() -> None:
 
     assert result.caught == 0
     assert result.unexpected == 1
+    assert result.false_positives == 1
     assert result.adjudicable == 1
     assert result.precision == 0.0
 
@@ -96,6 +98,7 @@ def test_forbidden_hit_makes_run_unclean() -> None:
     )
 
     assert result.forbidden_hits == 1
+    assert result.false_positives == 1
     assert result.clean is False
     assert result.precision == 0.0
 
@@ -108,6 +111,7 @@ def test_duplicate_expected_finding_counts_as_noise() -> None:
 
     assert result.caught == 1
     assert result.unexpected == 1
+    assert result.false_positives == 1
     assert result.adjudicable == 2
     assert result.precision == 0.5
 
@@ -125,10 +129,20 @@ def test_aggregate_reports_median_min_max_and_tokens() -> None:
     case = parse_case(truth())
     scores = [
         score_case(case, parse_findings([])),
-        score_case(case, parse_findings([finding(10, "Off-by-one")])),
         score_case(
             case,
-            parse_findings([finding(10, "Off-by-one"), finding(20, "Missing test")]),
+            parse_findings([finding(10, "Off-by-one"), finding(100, "Plausible issue")]),
+        ),
+        score_case(
+            case,
+            parse_findings(
+                [
+                    finding(10, "Off-by-one"),
+                    finding(20, "Missing test"),
+                    finding(100, "Plausible issue"),
+                    finding(110, "Another plausible issue"),
+                ]
+            ),
         ),
     ]
     repeats = [
@@ -145,6 +159,11 @@ def test_aggregate_reports_median_min_max_and_tokens() -> None:
         1.0,
     )
     assert result.wall_seconds.median == 60.0
+    assert (
+        result.false_positives.median,
+        result.false_positives.minimum,
+        result.false_positives.maximum,
+    ) == (1.0, 0.0, 2.0)
     assert result.input_tokens.median == 200
     assert result.truncations.maximum == 1
     assert result.truncation_lenses == ("correctness",)
