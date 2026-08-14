@@ -92,6 +92,23 @@ def test_render_is_newest_first_and_contains_one_per_lens_table() -> None:
         assert removed not in header
 
 
+def test_render_complete_row_uses_iso_date() -> None:
+    rendered = render_results([raw("2026-08-14T01:44:23Z", "model", True)])
+
+    assert "| 2026-08-14 |" in rendered
+    assert "2026-08-14T01:44:23Z" not in rendered
+
+
+def test_render_incomplete_row_uses_iso_date() -> None:
+    partial = raw("2026-08-14T01:44:23Z", "interrupted", True)
+    partial["status"] = "in_progress"
+
+    rendered = render_results([partial])
+
+    assert "| 2026-08-14 |" in rendered
+    assert "2026-08-14T01:44:23Z" not in rendered
+
+
 def test_render_excludes_focused_runs_and_keeps_legacy_full_runs() -> None:
     legacy = raw("2026-01-01T00:00:00Z", "legacy-model", False)
     config = legacy["configuration"]
