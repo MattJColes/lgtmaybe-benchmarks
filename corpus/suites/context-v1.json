@@ -1,0 +1,10 @@
+{
+  "id": "context-v1",
+  "cases": [
+    "python-context-small-v1",
+    "python-context-medium-v1",
+    "python-context-large-v1",
+    "python-context-xlarge-v1",
+    "python-context-clean-large-v1"
+  ]
+}

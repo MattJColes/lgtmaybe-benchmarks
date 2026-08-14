@@ -371,6 +371,97 @@ def _audit_label(raw: dict[str, Any]) -> str:
     return "no"
 
 
+CONTEXT_SUITE_ID = "context-v1"
+CONTEXT_PROFILE_ID = "context-canonical-v1"
+
+
+def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
+    """Render per-case metrics for complete canonical context-scaling runs."""
+    eligible = [
+        raw
+        for raw in raw_runs
+        if raw.get("status", COMPLETE) == COMPLETE
+        and raw.get("configuration", {}).get("suite") == CONTEXT_SUITE_ID
+        and raw.get("configuration", {}).get("profile") == CONTEXT_PROFILE_ID
+        and raw.get("configuration", {}).get("full_corpus", False)
+        and not any(observation.get("failures", 0) for observation in raw.get("observations", []))
+    ]
+    if not eligible:
+        return None
+    rows: list[str] = []
+    header = (
+        "| date | provider | model | case | recall | precision | findings | input tokens | "
+        "output tokens | truncated | wall (s) |\n"
+        "|---|---|---|---|---:|---:|---:|---:|---:|---|---:|\n"
+    )
+    for raw in sorted(
+        eligible,
+        key=lambda item: (
+            str(item["configuration"].get("model", "")),
+            str(item["timestamp"]),
+            str(item.get("run_id", "")),
+        ),
+    ):
+        config = raw["configuration"]
+        case_order = []
+        observations_by_case: dict[str, list[dict[str, Any]]] = {}
+        for observation in raw.get("observations", []):
+            case = str(observation.get("case", ""))
+            if case not in observations_by_case:
+                case_order.append(case)
+            observations_by_case.setdefault(case, []).append(observation)
+        for case in case_order:
+            repeats = observations_by_case[case]
+            planted = len(parse_case(repeats[0]["ground_truth"]).expected)
+            if planted:
+                scores = [
+                    score_case(parse_case(obs["ground_truth"]), parse_findings(obs["findings"]))
+                    for obs in repeats
+                ]
+                recall = median(score.recall for score in scores)
+                precision = median(score.precision for score in scores)
+                recall_cell = f"{recall * 100:.1f}%"
+            else:
+                precision = median(1.0 if not obs["findings"] else 0.0 for obs in repeats)
+                recall_cell = "—"
+            findings = median(float(len(obs["findings"])) for obs in repeats)
+            input_tokens = median(int(obs["input_tokens"]) for obs in repeats)
+            output_tokens = median(int(obs["output_tokens"]) for obs in repeats)
+            wall = median(float(obs["wall_seconds"]) for obs in repeats)
+            truncated = bool(
+                any(obs.get("truncation_lenses") for obs in repeats)
+                or any(
+                    call.get("truncated") for obs in repeats for call in obs.get("calls", [])
+                )
+            )
+            rows.append(
+                "| "
+                + " | ".join(
+                    (
+                        _iso_date(str(raw["timestamp"])),
+                        str(config.get("provider", "")),
+                        str(config.get("model", "")),
+                        case,
+                        recall_cell,
+                        f"{precision * 100:.1f}%",
+                        f"{findings:.1f}",
+                        f"{int(input_tokens):,}",
+                        f"{int(output_tokens):,}",
+                        "yes" if truncated else "no",
+                        f"{wall:.1f}",
+                    )
+                )
+                + " |"
+            )
+    return (
+        "## Context scaling\n\n"
+        "Complete `context-v1` runs with profile `context-canonical-v1` only. "
+        "Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting "
+        "eight bugs at the same relative positions; the clean case plants none. Recall is "
+        "per-case over the eight planted findings.\n\n" + header + "\n".join(rows) + "\n"
+    )
+
+
 def build_dashboard_data(
     raw_runs: list[dict[str, Any]], adjudications: dict[str, str] | None = None
 ) -> dict[str, Any]:
@@ -648,19 +739,23 @@ def render_results(
     if not raw_runs:
         return "No benchmark runs recorded.\n"
     complete = [raw for raw in raw_runs if raw.get("status", COMPLETE) == COMPLETE]
+    context = _render_context_scaling(raw_runs)
     v2 = _render_v2_canonical(raw_runs, adjudications)
     if v2 is not None:
-        return v2
+        return v2 if context is None else v2 + "\n" + context
     if not complete:
         return "No benchmark runs recorded.\n"
     full_runs = [
         raw
         for raw in complete
         if raw.get("configuration", {}).get("full_corpus", True)
+        and raw.get("configuration", {}).get("suite") != CONTEXT_SUITE_ID
         and not any(observation.get("failures", 0) for observation in raw["observations"])
     ]
     if not full_runs:
-        return "No full benchmark runs recorded.\n"
+        if context is None:
+            return "No full benchmark runs recorded.\n"
+        return context
     runs = sorted(
         (_score_run(raw) for raw in full_runs),
         key=lambda run: (aggregate_repeats(run.repeats).score.median, run.raw["timestamp"]),
@@ -693,7 +788,7 @@ def render_results(
     return (
         "Full-corpus runs only. Complete configuration and diagnostic evidence remain in "
         "`results/raw/`.\n\n## Per-lens recall\n\n" + header + rule + "\n".join(rows) + "\n"
-    )
+    ) + ("" if context is None else "\n" + context)
 
 
 def render_detailed_results(data: dict[str, Any]) -> str:

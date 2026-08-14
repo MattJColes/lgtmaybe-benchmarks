@@ -1,0 +1,15 @@
+{
+  "name": "python-context-clean-large-v1",
+  "language": "python",
+  "changed_file": "audit/pipeline.py",
+  "clean": true,
+  "commit_message": "Refactor 24 pipeline modules ahead of the quarterly review",
+  "coverage": [
+    "context-scaling",
+    "multi-file",
+    "large-diff"
+  ],
+  "expected": [],
+  "forbidden": [],
+  "clean_trap": "A broad mechanical refactor with renamed locals and retuned constants; reviewers may mistake the churn for behaviour changes."
+}

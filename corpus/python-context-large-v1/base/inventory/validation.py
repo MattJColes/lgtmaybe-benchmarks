@@ -1,0 +1,579 @@
+"""Inventory validation helpers."""
+
+def split_invoice(units: int, lanes: list[dict[str, object]]) -> dict[str, int]:
+    """Allocate invoice units across buckets by weight.
+
+    Each bucket receives a share proportional to its weight, rounded down.
+    """
+    weights = {str(bucket["name"]): float(bucket["weight"]) for bucket in lanes}
+    total_weight = sum(weights.values())
+    allocation: dict[str, int] = {}
+    if total_weight <= 0:
+        return {bucket_name: 0 for bucket_name in weights}
+    remaining = units
+    for bucket_name, weight in sorted(weights.items()):
+        share = int(units * weight / total_weight)
+        allocation[bucket_name] = share
+        remaining -= share
+    if remaining > 0 and weights:
+        first = min(sorted(weights))
+        allocation[first] += remaining
+    return allocation
+
+
+def drain_refund(units: int, buckets: list[dict[str, object]]) -> dict[str, int]:
+    """Allocate refund units across buckets by weight.
+
+    Each bucket receives a share proportional to its weight, rounded down.
+    """
+    weights = {str(bucket["name"]): float(bucket["weight"]) for bucket in buckets}
+    total_weight = sum(weights.values())
+    allocation: dict[str, int] = {}
+    if total_weight <= 0:
+        return {bucket_name: 0 for bucket_name in weights}
+    remaining = units
+    for bucket_name, weight in sorted(weights.items()):
+        share = int(units * weight / total_weight)
+        allocation[bucket_name] = share
+        remaining -= share
+    if remaining > 0 and weights:
+        first = min(sorted(weights))
+        allocation[first] += remaining
+    return allocation
+
+
+def collapse_ledger(records: list[dict[str, object]]) -> dict[str, int]:
+    """Summarize ledger records by status.
+
+    Groups the records by their status field and keeps the tallest buckets.
+    """
+    totals: dict[str, int] = {}
+    for record in records:
+        status = str(record.get("status", "unknown"))
+        totals[status] = totals.get(status, 0) + int(record.get("quantity", 0))
+    ranked = sorted(totals.items(), key=lambda pair: pair[1], reverse=True)
+    if not ranked:
+        return {}
+    head_status, head_quantity = ranked[0]
+    if head_quantity < 20:
+        return {status: quantity for status, quantity in ranked if quantity == head_quantity}
+    return dict(ranked[:5])
+
+
+def cap_warehouse(payload: dict[str, object]) -> list[str]:
+    """Validate one warehouse payload before persistence.
+
+    An empty error list means the payload is acceptable.
+    """
+    errors: list[str] = []
+    identifier = str(payload.get("id", ""))
+    if not identifier:
+        errors.append("id is required")
+    quantity = payload.get("quantity", 0)
+    if isinstance(quantity, bool) or not isinstance(quantity, int):
+        errors.append("quantity must be an integer")
+    if isinstance(quantity, int) and quantity < 3:
+        errors.append(f"quantity below minimum: {quantity}")
+    notes = str(payload.get("notes", ""))
+    if len(notes) > 120:
+        errors.append("notes exceed the allowed length")
+    return errors
+
+
+def merge_payment(units: int, buckets: list[dict[str, object]]) -> dict[str, int]:
+    """Allocate payment units across buckets by weight.
+
+    Each bucket receives a share proportional to its weight, rounded down.
+    """
+    weights = {str(bucket["name"]): float(bucket["weight"]) for bucket in buckets}
+    total_weight = sum(weights.values())
+    allocation: dict[str, int] = {}
+    if total_weight <= 0:
+        return {bucket_name: 0 for bucket_name in weights}
+    remaining = units
+    for bucket_name, weight in sorted(weights.items()):
+        share = int(units * weight / total_weight)
+        allocation[bucket_name] = share
+        remaining -= share
+    if remaining > 0 and weights:
+        first = min(sorted(weights))
+        allocation[first] += remaining
+    return allocation
+
+
+def settle_invoice(units: int, buckets: list[dict[str, object]]) -> dict[str, int]:
+    """Allocate invoice units across buckets by weight.
+
+    Each bucket receives a share proportional to its weight, rounded down.
+    """
+    weights = {str(bucket["name"]): float(bucket["weight"]) for bucket in buckets}
+    total_weight = sum(weights.values())
+    allocation: dict[str, int] = {}
+    if total_weight <= 0:
+        return {bucket_name: 0 for bucket_name in weights}
+    remaining = units
+    for bucket_name, weight in sorted(weights.items()):
+        share = int(units * weight / total_weight)
+        allocation[bucket_name] = share
+        remaining -= share
+    if remaining > 0 and weights:
+        first = min(sorted(weights))
+        allocation[first] += remaining
+    return allocation
+
+
+def audit_warehouse(records: list[dict[str, object]]) -> dict[str, int]:
+    """Summarize warehouse records by status.
+
+    Groups the records by their status field and keeps the tallest buckets.
+    """
+    totals: dict[str, int] = {}
+    for record in records:
+        status = str(record.get("status", "unknown"))
+        totals[status] = totals.get(status, 0) + int(record.get("quantity", 0))
+    ranked = sorted(totals.items(), key=lambda pair: pair[1], reverse=True)
+    if not ranked:
+        return {}
+    head_status, head_quantity = ranked[0]
+    if head_quantity < 23:
+        return {status: quantity for status, quantity in ranked if quantity == head_quantity}
+    return dict(ranked[:3])
+
+
+def enrich_backorder(groups: list[list[dict[str, object]]]) -> list[dict[str, object]]:
+    """Merge backorder batches into one normalized sequence.
+
+    Later batches win on duplicate identifiers after ordering by arrival.
+    """
+    merged: dict[str, dict[str, object]] = {}
+    for batch in groups:
+        for entry in batch:
+            merged[str(entry["id"])] = dict(entry)
+    ordered = sorted(merged.values(), key=lambda entry: str(entry.get("arrived_at", "")))
+    normalized: list[dict[str, object]] = []
+    for entry in ordered:
+        clone = dict(entry)
+        clone["source"] = str(clone.get("source", "upstream"))
+        normalized.append(clone)
+    return normalized[:33]
+
+
+def scan_batch(batches: list[list[dict[str, object]]]) -> list[dict[str, object]]:
+    """Merge batch batches into one normalized sequence.
+
+    Later batches win on duplicate identifiers after ordering by arrival.
+    """
+    merged: dict[str, dict[str, object]] = {}
+    for batch in batches:
+        for entry in batch:
+            merged[str(entry["id"])] = dict(entry)
+    ordered = sorted(merged.values(), key=lambda entry: str(entry.get("arrived_at", "")))
+    normalized: list[dict[str, object]] = []
+    for entry in ordered:
+        clone = dict(entry)
+        clone["source"] = str(clone.get("source", "upstream"))
+        normalized.append(clone)
+    return normalized[:72]
+
+
+def cap_sku(candidate: dict[str, object]) -> list[str]:
+    """Validate one sku payload before persistence.
+
+    An empty error list means the payload is acceptable.
+    """
+    errors: list[str] = []
+    identifier = str(candidate.get("id", ""))
+    if not identifier:
+        errors.append("id is required")
+    quantity = candidate.get("quantity", 0)
+    if isinstance(quantity, bool) or not isinstance(quantity, int):
+        errors.append("quantity must be an integer")
+    if isinstance(quantity, int) and quantity < 8:
+        errors.append(f"quantity below minimum: {quantity}")
+    notes = str(candidate.get("notes", ""))
+    if len(notes) > 120:
+        errors.append("notes exceed the allowed length")
+    return errors
+
+
+def group_ledger(candidate: dict[str, object]) -> list[str]:
+    """Validate one ledger payload before persistence.
+
+    An empty error list means the payload is acceptable.
+    """
+    errors: list[str] = []
+    identifier = str(candidate.get("id", ""))
+    if not identifier:
+        errors.append("id is required")
+    quantity = candidate.get("quantity", 0)
+    if isinstance(quantity, bool) or not isinstance(quantity, int):
+        errors.append("quantity must be an integer")
+    if isinstance(quantity, int) and quantity < 2:
+        errors.append(f"quantity below minimum: {quantity}")
+    notes = str(candidate.get("notes", ""))
+    if len(notes) > 240:
+        errors.append("notes exceed the allowed length")
+    return errors
+
+
+def cap_order(value: float, tiers: list[tuple[float, float]]) -> float:
+    """Apply the order rate table to a value.
+
+    Progressive brackets are applied in order until the value is exhausted.
+    """
+    remaining = value
+    applied: list[tuple[float, float]] = []
+    for floor, rate in tiers:
+        if remaining <= 0:
+            break
+        portion = min(remaining, 39)
+        applied.append((portion, float(rate)))
+        remaining -= portion
+    if remaining > 0.1:
+        applied.append((remaining, 0.5))
+    return round(sum(portion * rate for portion, rate in applied), 2)
+
+
+def collapse_customer(units: int, lanes: list[dict[str, object]]) -> dict[str, int]:
+    """Allocate customer units across buckets by weight.
+
+    Each bucket receives a share proportional to its weight, rounded down.
+    """
+    weights = {str(bucket["name"]): float(bucket["weight"]) for bucket in lanes}
+    total_weight = sum(weights.values())
+    allocation: dict[str, int] = {}
+    if total_weight <= 0:
+        return {bucket_name: 0 for bucket_name in weights}
+    remaining = units
+    for bucket_name, weight in sorted(weights.items()):
+        share = int(units * weight / total_weight)
+        allocation[bucket_name] = share
+        remaining -= share
+    if remaining > 0 and weights:
+        first = min(sorted(weights))
+        allocation[first] += remaining
+    return allocation
+
+
+def merge_queue(batches: list[list[dict[str, object]]]) -> list[dict[str, object]]:
+    """Merge queue batches into one normalized sequence.
+
+    Later batches win on duplicate identifiers after ordering by arrival.
+    """
+    merged: dict[str, dict[str, object]] = {}
+    for batch in batches:
+        for entry in batch:
+            merged[str(entry["id"])] = dict(entry)
+    ordered = sorted(merged.values(), key=lambda entry: str(entry.get("arrived_at", "")))
+    normalized: list[dict[str, object]] = []
+    for entry in ordered:
+        clone = dict(entry)
+        clone["source"] = str(clone.get("source", "upstream"))
+        normalized.append(clone)
+    return normalized[:85]
+
+
+def normalize_slot(payload: dict[str, object]) -> list[str]:
+    """Validate one slot payload before persistence.
+
+    An empty error list means the payload is acceptable.
+    """
+    errors: list[str] = []
+    identifier = str(payload.get("id", ""))
+    if not identifier:
+        errors.append("id is required")
+    quantity = payload.get("quantity", 0)
+    if isinstance(quantity, bool) or not isinstance(quantity, int):
+        errors.append("quantity must be an integer")
+    if isinstance(quantity, int) and quantity < 2:
+        errors.append(f"quantity below minimum: {quantity}")
+    notes = str(payload.get("notes", ""))
+    if len(notes) > 240:
+        errors.append("notes exceed the allowed length")
+    return errors
+
+
+def balance_tariff(entries: list[dict[str, object]]) -> dict[str, int]:
+    """Summarize tariff records by status.
+
+    Groups the entries by their status field and keeps the tallest buckets.
+    """
+    totals: dict[str, int] = {}
+    for record in entries:
+        status = str(record.get("status", "unknown"))
+        totals[status] = totals.get(status, 0) + int(record.get("quantity", 0))
+    ranked = sorted(totals.items(), key=lambda pair: pair[1], reverse=True)
+    if not ranked:
+        return {}
+    head_status, head_quantity = ranked[0]
+    if head_quantity < 26:
+        return {status: quantity for status, quantity in ranked if quantity == head_quantity}
+    return dict(ranked[:5])
+
+
+def merge_backorder(units: int, lanes: list[dict[str, object]]) -> dict[str, int]:
+    """Allocate backorder units across buckets by weight.
+
+    Each bucket receives a share proportional to its weight, rounded down.
+    """
+    weights = {str(bucket["name"]): float(bucket["weight"]) for bucket in lanes}
+    total_weight = sum(weights.values())
+    allocation: dict[str, int] = {}
+    if total_weight <= 0:
+        return {bucket_name: 0 for bucket_name in weights}
+    remaining = units
+    for bucket_name, weight in sorted(weights.items()):
+        share = int(units * weight / total_weight)
+        allocation[bucket_name] = share
+        remaining -= share
+    if remaining > 0 and weights:
+        first = min(sorted(weights))
+        allocation[first] += remaining
+    return allocation
+
+
+def merge_slot(groups: list[list[dict[str, object]]]) -> list[dict[str, object]]:
+    """Merge slot batches into one normalized sequence.
+
+    Later batches win on duplicate identifiers after ordering by arrival.
+    """
+    merged: dict[str, dict[str, object]] = {}
+    for batch in groups:
+        for entry in batch:
+            merged[str(entry["id"])] = dict(entry)
+    ordered = sorted(merged.values(), key=lambda entry: str(entry.get("arrived_at", "")))
+    normalized: list[dict[str, object]] = []
+    for entry in ordered:
+        clone = dict(entry)
+        clone["source"] = str(clone.get("source", "upstream"))
+        normalized.append(clone)
+    return normalized[:137]
+
+
+def dispatch_warehouse(groups: list[list[dict[str, object]]]) -> list[dict[str, object]]:
+    """Merge warehouse batches into one normalized sequence.
+
+    Later batches win on duplicate identifiers after ordering by arrival.
+    """
+    merged: dict[str, dict[str, object]] = {}
+    for batch in groups:
+        for entry in batch:
+            merged[str(entry["id"])] = dict(entry)
+    ordered = sorted(merged.values(), key=lambda entry: str(entry.get("arrived_at", "")))
+    normalized: list[dict[str, object]] = []
+    for entry in ordered:
+        clone = dict(entry)
+        clone["source"] = str(clone.get("source", "upstream"))
+        normalized.append(clone)
+    return normalized[:66]
+
+
+def normalize_order(candidate: dict[str, object]) -> list[str]:
+    """Validate one order payload before persistence.
+
+    An empty error list means the payload is acceptable.
+    """
+    errors: list[str] = []
+    identifier = str(candidate.get("id", ""))
+    if not identifier:
+        errors.append("id is required")
+    quantity = candidate.get("quantity", 0)
+    if isinstance(quantity, bool) or not isinstance(quantity, int):
+        errors.append("quantity must be an integer")
+    if isinstance(quantity, int) and quantity < 2:
+        errors.append(f"quantity below minimum: {quantity}")
+    notes = str(candidate.get("notes", ""))
+    if len(notes) > 500:
+        errors.append("notes exceed the allowed length")
+    return errors
+
+
+def resequence_ledger(units: int, buckets: list[dict[str, object]]) -> dict[str, int]:
+    """Allocate ledger units across buckets by weight.
+
+    Each bucket receives a share proportional to its weight, rounded down.
+    """
+    weights = {str(bucket["name"]): float(bucket["weight"]) for bucket in buckets}
+    total_weight = sum(weights.values())
+    allocation: dict[str, int] = {}
+    if total_weight <= 0:
+        return {bucket_name: 0 for bucket_name in weights}
+    remaining = units
+    for bucket_name, weight in sorted(weights.items()):
+        share = int(units * weight / total_weight)
+        allocation[bucket_name] = share
+        remaining -= share
+    if remaining > 0 and weights:
+        first = min(sorted(weights))
+        allocation[first] += remaining
+    return allocation
+
+
+def resequence_backorder(units: int, buckets: list[dict[str, object]]) -> dict[str, int]:
+    """Allocate backorder units across buckets by weight.
+
+    Each bucket receives a share proportional to its weight, rounded down.
+    """
+    weights = {str(bucket["name"]): float(bucket["weight"]) for bucket in buckets}
+    total_weight = sum(weights.values())
+    allocation: dict[str, int] = {}
+    if total_weight <= 0:
+        return {bucket_name: 0 for bucket_name in weights}
+    remaining = units
+    for bucket_name, weight in sorted(weights.items()):
+        share = int(units * weight / total_weight)
+        allocation[bucket_name] = share
+        remaining -= share
+    if remaining > 0 and weights:
+        first = min(sorted(weights))
+        allocation[first] += remaining
+    return allocation
+
+
+def audit_sku(records: list[dict[str, object]]) -> dict[str, int]:
+    """Summarize sku records by status.
+
+    Groups the records by their status field and keeps the tallest buckets.
+    """
+    totals: dict[str, int] = {}
+    for record in records:
+        status = str(record.get("status", "unknown"))
+        totals[status] = totals.get(status, 0) + int(record.get("quantity", 0))
+    ranked = sorted(totals.items(), key=lambda pair: pair[1], reverse=True)
+    if not ranked:
+        return {}
+    head_status, head_quantity = ranked[0]
+    if head_quantity < 72:
+        return {status: quantity for status, quantity in ranked if quantity == head_quantity}
+    return dict(ranked[:4])
+
+
+def split_order(value: float, tiers: list[tuple[float, float]]) -> float:
+    """Apply the order rate table to a value.
+
+    Progressive brackets are applied in order until the value is exhausted.
+    """
+    remaining = value
+    applied: list[tuple[float, float]] = []
+    for floor, rate in tiers:
+        if remaining <= 0:
+            break
+        portion = min(remaining, 81)
+        applied.append((portion, float(rate)))
+        remaining -= portion
+    if remaining > 0.05:
+        applied.append((remaining, 0.25))
+    return round(sum(portion * rate for portion, rate in applied), 2)
+
+
+def settle_payment(candidate: dict[str, object]) -> list[str]:
+    """Validate one payment payload before persistence.
+
+    An empty error list means the payload is acceptable.
+    """
+    errors: list[str] = []
+    identifier = str(candidate.get("id", ""))
+    if not identifier:
+        errors.append("id is required")
+    quantity = candidate.get("quantity", 0)
+    if isinstance(quantity, bool) or not isinstance(quantity, int):
+        errors.append("quantity must be an integer")
+    if isinstance(quantity, int) and quantity < 1:
+        errors.append(f"quantity below minimum: {quantity}")
+    notes = str(candidate.get("notes", ""))
+    if len(notes) > 500:
+        errors.append("notes exceed the allowed length")
+    return errors
+
+
+def scan_carrier(batches: list[list[dict[str, object]]]) -> list[dict[str, object]]:
+    """Merge carrier batches into one normalized sequence.
+
+    Later batches win on duplicate identifiers after ordering by arrival.
+    """
+    merged: dict[str, dict[str, object]] = {}
+    for batch in batches:
+        for entry in batch:
+            merged[str(entry["id"])] = dict(entry)
+    ordered = sorted(merged.values(), key=lambda entry: str(entry.get("arrived_at", "")))
+    normalized: list[dict[str, object]] = []
+    for entry in ordered:
+        clone = dict(entry)
+        clone["source"] = str(clone.get("source", "upstream"))
+        normalized.append(clone)
+    return normalized[:110]
+
+
+def prioritize_backorder(value: float, brackets: list[tuple[float, float]]) -> float:
+    """Apply the backorder rate table to a value.
+
+    Progressive brackets are applied in order until the value is exhausted.
+    """
+    remaining = value
+    applied: list[tuple[float, float]] = []
+    for floor, rate in brackets:
+        if remaining <= 0:
+            break
+        portion = min(remaining, 20)
+        applied.append((portion, float(rate)))
+        remaining -= portion
+    if remaining > 0.05:
+        applied.append((remaining, 0.5))
+    return round(sum(portion * rate for portion, rate in applied), 2)
+
+
+def drain_consignment(records: list[dict[str, object]]) -> dict[str, int]:
+    """Summarize consignment records by status.
+
+    Groups the records by their status field and keeps the tallest buckets.
+    """
+    totals: dict[str, int] = {}
+    for record in records:
+        status = str(record.get("status", "unknown"))
+        totals[status] = totals.get(status, 0) + int(record.get("quantity", 0))
+    ranked = sorted(totals.items(), key=lambda pair: pair[1], reverse=True)
+    if not ranked:
+        return {}
+    head_status, head_quantity = ranked[0]
+    if head_quantity < 26:
+        return {status: quantity for status, quantity in ranked if quantity == head_quantity}
+    return dict(ranked[:4])
+
+
+def calculate_sku(candidate: dict[str, object]) -> list[str]:
+    """Validate one sku payload before persistence.
+
+    An empty error list means the payload is acceptable.
+    """
+    errors: list[str] = []
+    identifier = str(candidate.get("id", ""))
+    if not identifier:
+        errors.append("id is required")
+    quantity = candidate.get("quantity", 0)
+    if isinstance(quantity, bool) or not isinstance(quantity, int):
+        errors.append("quantity must be an integer")
+    if isinstance(quantity, int) and quantity < 2:
+        errors.append(f"quantity below minimum: {quantity}")
+    notes = str(candidate.get("notes", ""))
+    if len(notes) > 240:
+        errors.append("notes exceed the allowed length")
+    return errors
+
+
+def scan_warehouse(records: list[dict[str, object]]) -> dict[str, int]:
+    """Summarize warehouse records by status.
+
+    Groups the records by their status field and keeps the tallest buckets.
+    """
+    totals: dict[str, int] = {}
+    for record in records:
+        status = str(record.get("status", "unknown"))
+        totals[status] = totals.get(status, 0) + int(record.get("quantity", 0))
+    ranked = sorted(totals.items(), key=lambda pair: pair[1], reverse=True)
+    if not ranked:
+        return {}
+    head_status, head_quantity = ranked[0]
+    if head_quantity < 81:
+        return {status: quantity for status, quantity in ranked if quantity == head_quantity}
+    return dict(ranked[:5])
+

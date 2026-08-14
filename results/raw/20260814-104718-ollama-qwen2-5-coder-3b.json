@@ -1,0 +1,342 @@
+{
+  "configuration": {
+    "api_base": null,
+    "audit_available": false,
+    "base_profile": "context-canonical-v1",
+    "cases": [
+      "python-context-small-v1",
+      "python-context-medium-v1"
+    ],
+    "concurrency": 1,
+    "diagnostic_overrides": [],
+    "full_corpus": false,
+    "max_input_tokens": 100000,
+    "max_tokens": null,
+    "mid_review_retrieval": false,
+    "model": "qwen2.5-coder:3b",
+    "preset": "full",
+    "profile": "context-canonical-v1",
+    "profile_canonical": false,
+    "profile_schema_version": 1,
+    "provider": "ollama",
+    "reasoning_effort": null,
+    "recursive": true,
+    "reflect": true,
+    "repeats": 1,
+    "resolved_profile": {
+      "base_profile_id": "context-canonical-v1",
+      "canonical": false,
+      "diagnostic_overrides": [],
+      "id": "context-canonical-v1",
+      "max_input_tokens": 100000,
+      "max_tokens": null,
+      "mid_review_retrieval": false,
+      "preset": "full",
+      "reasoning_effort": null,
+      "recursive": true,
+      "reflect": true,
+      "repeats": 1,
+      "schema_version": 1,
+      "spec_review": true,
+      "static_analysis": false
+    },
+    "spec_review": true,
+    "static_analysis": false,
+    "suite": "context-v1",
+    "timeout": 7200
+  },
+  "lgtmaybe_version": "lgtmaybe 2.1.3",
+  "observations": [
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [],
+      "case": "python-context-small-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [],
+      "ground_truth": {
+        "changed_file": "billing/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 2 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 13
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 58
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 90
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 10
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 36
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 88
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 118
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-small-v1"
+      },
+      "input_tokens": 0,
+      "observation_id": "20260814-104718-ollama-qwen2-5-coder-3b:repeat:1:case:python-context-small-v1",
+      "output_tokens": 0,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 78.2s\n\nstage              elapsed\nredact               0.00s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.37s\nbatch                0.00s\ndirectory_context     0.00s\nreview              55.34s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect              3.96s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nsecurity             1     1    12.69s     6797      178         -        -        0        0        1  -\ndocumentation        1     1    10.54s     6322      414         -        -        0        0        1  -\nperformance          1     1     6.15s     6514      181         -        -        0        0        1  -\nintent               1     1     4.98s     6717      219         -        -        0        0        1  -\nponytail             1     1     4.74s     6444      201         -        -        0        0        1  -\ndeprecation          1     1     4.25s     6453      180         -        -        0        0        1  -\ntests                1     1     4.10s     6497      170         -        -        0        0        1  -\ncorrectness          1     1     4.03s     6635      173         -        -        0        0        1  -\nreflect              0     1     3.96s     6695      174         -        -        0        0        -  -\ncomplexity           1     1     3.86s     6445      160         -        -        0        0        1  -\n\ncache: 0 tokens read / 0 created across 10 calls\nfindings: 9 parsed / 0 returned\ntokens: 67,569 billable (65,519 in / 2,050 out) across 10 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.3\", \"provider\": \"ollama\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 1, \"max_tokens\": 8192, \"max_tokens_source\": \"provider default\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.37}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 2, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6797, \"output_tokens\": 178, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 12.692}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6635, \"output_tokens\": 173, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 4.029}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6453, \"output_tokens\": 180, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 4.248}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6497, \"output_tokens\": 170, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 4.097}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6322, \"output_tokens\": 414, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 10.544}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6514, \"output_tokens\": 181, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 6.147}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6445, \"output_tokens\": 160, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 3.864}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6717, \"output_tokens\": 219, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 4.982}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6444, \"output_tokens\": 201, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 4.736}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 55.342}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 1, \"title\": \"Remove unused import\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 2, \"title\": \"Remove unused import\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 1, \"title\": \"Remove redundant docstring\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 1, \"title\": \"Remove unused import\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 1, \"title\": \"Document the prioritize_route contract\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 1, \"title\": \"Remove unused import\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 1, \"title\": \"Remove unnecessary docstring\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 103, \"to\": 3}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 149, \"to\": 3}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reflecting on findings\", \"findings\": 4}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"reflect\", \"batch\": 0, \"attempts\": 1, \"input_tokens\": 6695, \"output_tokens\": 174, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"elapsed_s\": 3.959}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.reflect\", \"message\": \"reflection deferral unresolved \\u2014 dropping unverifiable findings\", \"count\": 2, \"hop\": 0, \"had_fetcher\": true}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"reflect\", \"elapsed_s\": 3.963}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[]\n== lgtmaybe profile ==\ntotal wall time: 78.2s\n\nstage              elapsed\nredact               0.00s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.37s\nbatch                0.00s\ndirectory_context     0.00s\nreview              55.34s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect              3.96s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nsecurity             1     1    12.69s     6797      178         -        -        0        0        1  -\ndocumentation        1     1    10.54s     6322      414         -        -        0        0        1  -\nperformance          1     1     6.15s     6514      181         -        -        0        0        1  -\nintent               1     1     4.98s     6717      219         -        -        0        0        1  -\nponytail             1     1     4.74s     6444      201         -        -        0        0        1  -\ndeprecation          1     1     4.25s     6453      180         -        -        0        0        1  -\ntests                1     1     4.10s     6497      170         -        -        0        0        1  -\ncorrectness          1     1     4.03s     6635      173         -        -        0        0        1  -\nreflect              0     1     3.96s     6695      174         -        -        0        0        -  -\ncomplexity           1     1     3.86s     6445      160         -        -        0        0        1  -\n\ncache: 0 tokens read / 0 created across 10 calls\nfindings: 9 parsed / 0 returned\ntokens: 67,569 billable (65,519 in / 2,050 out) across 10 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 79.71289819999947,
+      "wall_seconds": 79.71289819999947
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [],
+      "case": "python-context-medium-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [
+        {
+          "anchor": "-def audit_shipment(units: int, buckets: list[dict[str, object]]) -> dict[str, int]:",
+          "anchored": true,
+          "body": "The `audit_shipment` function is not used anywhere in the codebase. It can be removed for simplicity.",
+          "broad": true,
+          "category": "ponytail",
+          "confidence": 0,
+          "failure_scenario": null,
+          "finding_id": "20260814-104718-ollama-qwen2-5-coder-3b:repeat:1:case:python-context-medium-v1:finding:1",
+          "line": 154,
+          "path": "billing/pipeline.py",
+          "severity": "medium",
+          "side": "LEFT",
+          "suggestion": null,
+          "title": "Remove unused function `audit_shipment`"
+        }
+      ],
+      "ground_truth": {
+        "changed_file": "billing/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 8 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 143
+          },
+          {
+            "file": "inventory/pipeline.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 21
+          },
+          {
+            "file": "ledger/pipeline.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 86
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 145
+          },
+          {
+            "file": "routing/pipeline.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 23
+          },
+          {
+            "file": "routing/pipeline.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 234
+          },
+          {
+            "file": "shipping/pipeline.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 161
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-medium-v1"
+      },
+      "input_tokens": 0,
+      "observation_id": "20260814-104718-ollama-qwen2-5-coder-3b:repeat:1:case:python-context-medium-v1",
+      "output_tokens": 0,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 267.9s\n\nstage              elapsed\nredact               0.00s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.28s\nbatch                0.01s\ndirectory_context     0.00s\nreview              63.11s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect            201.88s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nreflect              0     1   201.82s    20201     8192         -        -        0        0        -  ProviderTruncated\nsecurity             1     1    13.94s    19897      193         -        -        0        0        1  -\nintent               1     1     7.99s    19817      311         -        -        0        0        1  -\nponytail             1     1     7.05s    19544      202         -        -        0        0        1  -\ndeprecation          1     1     6.82s    19553      188         -        -        0        0        1  -\nperformance          1     1     6.67s    19614      186         -        -        0        0        1  -\ndocumentation        1     1     6.15s    19422      241         -        -        0        0        1  -\ncorrectness          1     1     6.08s    19735      187         -        -        0        0        1  -\ntests                1     1     4.54s    19597      173         -        -        0        0        1  -\ncomplexity           1     1     3.87s    19545      155         -        -        0        0        1  -\n\ncache: 0 tokens read / 0 created across 10 calls\nfindings: 9 parsed / 1 returned\ntokens: 206,953 billable (196,925 in / 10,028 out) across 10 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.3\", \"provider\": \"ollama\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 1, \"max_tokens\": 8192, \"max_tokens_source\": \"provider default\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.004}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.277}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.007}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 8, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19897, \"output_tokens\": 193, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 13.942}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19735, \"output_tokens\": 187, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 6.076}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19553, \"output_tokens\": 188, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 6.824}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19597, \"output_tokens\": 173, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 4.539}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19422, \"output_tokens\": 241, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 6.15}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19614, \"output_tokens\": 186, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 6.668}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19545, \"output_tokens\": 155, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 3.867}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19817, \"output_tokens\": 311, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 7.988}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19544, \"output_tokens\": 202, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"output_ceiling\": 8192, \"findings\": 1, \"elapsed_s\": 7.055}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 63.113}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 1, \"title\": \"Remove redundant import statement\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 2, \"title\": \"Remove unused import\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 1, \"title\": \"Remove redundant docstring\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 1, \"title\": \"Remove unused import\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 1, \"title\": \"Document the billing pipeline helpers module\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 1, \"title\": \"Remove unused import\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 10, \"title\": \"Code duplication: `load_order_rows` and `audit_shipment` are similar\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 173, \"to\": 154}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reflecting on findings\", \"findings\": 4}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"reflect\", \"batch\": 0, \"attempts\": 1, \"input_tokens\": 20201, \"output_tokens\": 8192, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated\", \"output_ceiling\": 8192, \"elapsed_s\": 201.82}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.reflect\", \"message\": \"reflection pass failed; keeping all findings\", \"findings\": 4, \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"C:\\\\Users\\\\Matt\\\\AppData\\\\Local\\\\uv\\\\cache\\\\archive-v0\\\\Xra3RFgsbriJTIPr\\\\Lib\\\\site-packages\\\\lgtmaybe\\\\engine\\\\reflect.py\\\", line 168, in reflect_findings\\n    verdicts, grounded_paths = _audit(\\n                               ^^^^^^^\\n  File \\\"C:\\\\Users\\\\Matt\\\\AppData\\\\Local\\\\uv\\\\cache\\\\archive-v0\\\\Xra3RFgsbriJTIPr\\\\Lib\\\\site-packages\\\\lgtmaybe\\\\engine\\\\reflect.py\\\", line 328, in _audit\\n    result = timed_complete(\\n             ^^^^^^^^^^^^^^^\\n  File \\\"C:\\\\Users\\\\Matt\\\\AppData\\\\Local\\\\uv\\\\cache\\\\archive-v0\\\\Xra3RFgsbriJTIPr\\\\Lib\\\\site-packages\\\\lgtmaybe\\\\engine\\\\profiling.py\\\", line 386, in timed_complete\\n    result = provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"C:\\\\Users\\\\Matt\\\\AppData\\\\Local\\\\uv\\\\cache\\\\archive-v0\\\\Xra3RFgsbriJTIPr\\\\Lib\\\\site-packages\\\\lgtmaybe\\\\providers\\\\litellm_provider.py\\\", line 499, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"C:\\\\Users\\\\Matt\\\\AppData\\\\Local\\\\uv\\\\cache\\\\archive-v0\\\\Xra3RFgsbriJTIPr\\\\Lib\\\\site-packages\\\\lgtmaybe\\\\providers\\\\litellm_provider.py\\\", line 570, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"C:\\\\Users\\\\Matt\\\\AppData\\\\Local\\\\uv\\\\cache\\\\archive-v0\\\\Xra3RFgsbriJTIPr\\\\Lib\\\\site-packages\\\\tenacity\\\\__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"C:\\\\Users\\\\Matt\\\\AppData\\\\Local\\\\uv\\\\cache\\\\archive-v0\\\\Xra3RFgsbriJTIPr\\\\Lib\\\\site-packages\\\\tenacity\\\\__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"C:\\\\Users\\\\Matt\\\\AppData\\\\Local\\\\uv\\\\cache\\\\archive-v0\\\\Xra3RFgsbriJTIPr\\\\Lib\\\\site-packages\\\\tenacity\\\\__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"C:\\\\Users\\\\Matt\\\\AppData\\\\Local\\\\uv\\\\cache\\\\archive-v0\\\\Xra3RFgsbriJTIPr\\\\Lib\\\\site-packages\\\\tenacity\\\\__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"C:\\\\Users\\\\Matt\\\\AppData\\\\Roaming\\\\uv\\\\python\\\\cpython-3.12-windows-x86_64-none\\\\Lib\\\\concurrent\\\\futures\\\\_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"C:\\\\Users\\\\Matt\\\\AppData\\\\Roaming\\\\uv\\\\python\\\\cpython-3.12-windows-x86_64-none\\\\Lib\\\\concurrent\\\\futures\\\\_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"C:\\\\Users\\\\Matt\\\\AppData\\\\Local\\\\uv\\\\cache\\\\archive-v0\\\\Xra3RFgsbriJTIPr\\\\Lib\\\\site-packages\\\\tenacity\\\\__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"C:\\\\Users\\\\Matt\\\\AppData\\\\Local\\\\uv\\\\cache\\\\archive-v0\\\\Xra3RFgsbriJTIPr\\\\Lib\\\\site-packages\\\\lgtmaybe\\\\providers\\\\litellm_provider.py\\\", line 556, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"C:\\\\Users\\\\Matt\\\\AppData\\\\Local\\\\uv\\\\cache\\\\archive-v0\\\\Xra3RFgsbriJTIPr\\\\Lib\\\\site-packages\\\\lgtmaybe\\\\providers\\\\litellm_provider.py\\\", line 599, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"C:\\\\Users\\\\Matt\\\\AppData\\\\Local\\\\uv\\\\cache\\\\archive-v0\\\\Xra3RFgsbriJTIPr\\\\Lib\\\\site-packages\\\\lgtmaybe\\\\providers\\\\litellm_provider.py\\\", line 733, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 8192-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"reflect\", \"elapsed_s\": 201.876}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[{\"path\": \"billing/pipeline.py\", \"line\": 154, \"side\": \"LEFT\", \"severity\": \"medium\", \"title\": \"Remove unused function `audit_shipment`\", \"body\": \"The `audit_shipment` function is not used anywhere in the codebase. It can be removed for simplicity.\", \"failure_scenario\": null, \"suggestion\": null, \"anchor\": \"-def audit_shipment(units: int, buckets: list[dict[str, object]]) -> dict[str, int]:\", \"anchored\": true, \"broad\": true, \"confidence\": 0, \"category\": \"ponytail\"}]\n== lgtmaybe profile ==\ntotal wall time: 267.9s\n\nstage              elapsed\nredact               0.00s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.28s\nbatch                0.01s\ndirectory_context     0.00s\nreview              63.11s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect            201.88s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nreflect              0     1   201.82s    20201     8192         -        -        0        0        -  ProviderTruncated\nsecurity             1     1    13.94s    19897      193         -        -        0        0        1  -\nintent               1     1     7.99s    19817      311         -        -        0        0        1  -\nponytail             1     1     7.05s    19544      202         -        -        0        0        1  -\ndeprecation          1     1     6.82s    19553      188         -        -        0        0        1  -\nperformance          1     1     6.67s    19614      186         -        -        0        0        1  -\ndocumentation        1     1     6.15s    19422      241         -        -        0        0        1  -\ncorrectness          1     1     6.08s    19735      187         -        -        0        0        1  -\ntests                1     1     4.54s    19597      173         -        -        0        0        1  -\ncomplexity           1     1     3.87s    19545      155         -        -        0        0        1  -\n\ncache: 0 tokens read / 0 created across 10 calls\nfindings: 9 parsed / 1 returned\ntokens: 206,953 billable (196,925 in / 10,028 out) across 10 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 269.68804960000125,
+      "wall_seconds": 269.68804960000125
+    }
+  ],
+  "run_id": "20260814-104718-ollama-qwen2-5-coder-3b",
+  "schema_version": 2,
+  "status": "complete",
+  "timestamp": "2026-08-14T10:47:18Z"
+}

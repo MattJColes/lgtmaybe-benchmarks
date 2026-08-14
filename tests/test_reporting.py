@@ -427,3 +427,148 @@ def test_report_regeneration_is_byte_identical_and_bounded(tmp_path: Path) -> No
     assert b'id="results-table"' in first_dashboard
     assert b"Keep me." in first_readme
     assert b"Tail." in first_readme
+
+
+def context_raw(
+    timestamp: str,
+    model: str,
+    *,
+    suite: str = "context-v1",
+    profile: str = "context-canonical-v1",
+    full_corpus: bool = True,
+    status: str = "complete",
+) -> dict[str, object]:
+    defect_truth = {
+        "name": "python-context-small-v1",
+        "changed_file": "orders/pipeline.py",
+        "language": "python",
+        "expected": [
+            {
+                "label": "sql-injection @ first-file",
+                "lens": "security",
+                "file": "orders/pipeline.py",
+                "line": 12,
+                "keywords": ["sql"],
+            }
+        ],
+        "forbidden": [],
+    }
+    clean_truth = {
+        "name": "python-context-clean-large-v1",
+        "changed_file": "orders/pipeline.py",
+        "language": "python",
+        "clean": True,
+        "clean_trap": "broad refactor with no behaviour change",
+        "expected": [],
+        "forbidden": [],
+    }
+    caught = [
+        {
+            "file": "orders/pipeline.py",
+            "line": 12,
+            "severity": "high",
+            "title": "SQL injection in query",
+            "body": "interpolates customer_id into the sql query",
+        }
+    ]
+    return {
+        "schema_version": 2,
+        "run_id": f"context-{model}",
+        "status": status,
+        "timestamp": timestamp,
+        "lgtmaybe_version": "lgtmaybe 2.0",
+        "configuration": {
+            "provider": "openrouter",
+            "model": model,
+            "reasoning_effort": None,
+            "max_tokens": None,
+            "max_input_tokens": 100_000,
+            "preset": "full",
+            "api_base": None,
+            "concurrency": 1,
+            "timeout": 7200,
+            "repeats": 1,
+            "cases": ["python-context-small-v1", "python-context-clean-large-v1"],
+            "suite": suite,
+            "profile": profile,
+            "profile_canonical": False,
+            "full_corpus": full_corpus,
+        },
+        "observations": [
+            {
+                "repeat": 1,
+                "case": "python-context-small-v1",
+                "ground_truth": defect_truth,
+                "findings": caught,
+                "wall_seconds": 30.0,
+                "wall_excluding_truncation_seconds": 30.0,
+                "truncation_lenses": [],
+                "input_tokens": 4_000,
+                "output_tokens": 900,
+                "reasoning_tokens": 0,
+                "failures": 0,
+            },
+            {
+                "repeat": 1,
+                "case": "python-context-clean-large-v1",
+                "ground_truth": clean_truth,
+                "findings": [],
+                "wall_seconds": 60.0,
+                "wall_excluding_truncation_seconds": 60.0,
+                "truncation_lenses": [],
+                "input_tokens": 50_000,
+                "output_tokens": 0,
+                "reasoning_tokens": 0,
+                "failures": 0,
+            },
+        ],
+    }
+
+
+def test_context_scaling_section_renders_per_case_metrics() -> None:
+    rendered = render_results([context_raw("2026-08-14T00:00:00Z", "scaler")])
+
+    assert "## Context scaling" in rendered
+    lines = [line for line in rendered.splitlines() if line.startswith("|")]
+    assert any(
+        "scaler" in line
+        and "python-context-small-v1" in line
+        and "100.0%" in line
+        and "4,000" in line
+        for line in lines
+    )
+    assert any(
+        "scaler" in line
+        and "python-context-clean-large-v1" in line
+        and "—" in line
+        and "50,000" in line
+        for line in lines
+    )
+
+
+def test_context_scaling_section_rendering_is_deterministic() -> None:
+    runs = [
+        context_raw("2026-08-14T00:00:00Z", "scaler"),
+        context_raw("2026-08-13T00:00:00Z", "other"),
+    ]
+
+    assert render_results(runs) == render_results(runs)
+
+
+def test_context_scaling_section_excludes_ineligible_runs() -> None:
+    focused = context_raw("2026-08-14T00:00:00Z", "focused", full_corpus=False)
+    diagnostic = context_raw("2026-08-14T00:00:00Z", "diag", profile="diagnostic-custom-v1")
+    incomplete = context_raw("2026-08-14T00:00:00Z", "partial", status="in_progress")
+
+    for run in (focused, diagnostic, incomplete):
+        rendered = render_results([run])
+        assert "## Context scaling" not in rendered
+
+
+def test_context_scaling_section_coexists_with_v2_leaderboard() -> None:
+    runs = [v2_raw("2026-08-14T00:00:00Z", "ranked"), context_raw("2026-08-14T01:00:00Z", "scaler")]
+
+    rendered = render_results(runs)
+
+    assert "Comparison key: `v2 / canonical-v1 / lgtmaybe 2.0`" in rendered
+    assert "## Context scaling" in rendered

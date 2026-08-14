@@ -1,0 +1,110 @@
+{
+  "name": "python-context-xlarge-v1",
+  "language": "python",
+  "changed_file": "audit/allocation.py",
+  "clean": false,
+  "commit_message": "Refactor 48 pipeline modules ahead of the quarterly review",
+  "coverage": [
+    "context-scaling",
+    "multi-file",
+    "large-diff"
+  ],
+  "expected": [
+    {
+      "label": "sql-injection @ first-file",
+      "lens": "security",
+      "file": "audit/allocation.py",
+      "line": 5,
+      "keywords": [
+        "sql",
+        "injection",
+        "interpolat"
+      ]
+    },
+    {
+      "label": "off-by-one-skip @ 10%",
+      "lens": "correctness",
+      "file": "billing/pipeline.py",
+      "line": 44,
+      "keywords": [
+        "off by one",
+        "off-by-one",
+        "skip",
+        "skips",
+        "first element"
+      ]
+    },
+    {
+      "label": "mutable-default-argument @ 25%",
+      "lens": "correctness",
+      "file": "catalog/validation.py",
+      "line": 21,
+      "keywords": [
+        "mutable",
+        "default argument",
+        "default value"
+      ]
+    },
+    {
+      "label": "quadratic-membership-scan @ 40%",
+      "lens": "performance",
+      "file": "inventory/summaries.py",
+      "line": 9,
+      "keywords": [
+        "quadratic",
+        "o(n",
+        "performance",
+        "set",
+        "membership"
+      ]
+    },
+    {
+      "label": "nested-routing-loops @ 55%",
+      "lens": "complexity",
+      "file": "orders/allocation.py",
+      "line": 166,
+      "keywords": [
+        "nested",
+        "complexity",
+        "cyclomatic"
+      ]
+    },
+    {
+      "label": "misleading-constant-time-docstring @ 70%",
+      "lens": "documentation",
+      "file": "pricing/summaries.py",
+      "line": 141,
+      "keywords": [
+        "docstring",
+        "documentation",
+        "constant time",
+        "constant-time",
+        "misleading",
+        "contradict"
+      ]
+    },
+    {
+      "label": "deprecated-utcnow @ 85%",
+      "lens": "deprecation",
+      "file": "routing/reconciliation.py",
+      "line": 807,
+      "keywords": [
+        "utcnow",
+        "deprecat"
+      ]
+    },
+    {
+      "label": "ignored-threshold @ last-file",
+      "lens": "intent",
+      "file": "shipping/validation.py",
+      "line": 151,
+      "keywords": [
+        "threshold",
+        "hardcod",
+        "ignor",
+        "unused"
+      ]
+    }
+  ],
+  "forbidden": []
+}

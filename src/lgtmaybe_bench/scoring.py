@@ -459,7 +459,7 @@ def score_case(case: CaseTruth, findings: tuple[Finding, ...]) -> CaseScore:
 
     caught = len(case.expected) - len(unmatched_expected)
     planted = len(case.expected)
-    recall = caught / planted
+    recall = caught / planted if planted else 0.0
     false_positives = forbidden_hits + unexpected
     precision = 1.0 if adjudicable == 0 else caught / (caught + false_positives)
     combined = overall_score(recall, false_positives)
