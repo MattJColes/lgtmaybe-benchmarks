@@ -116,6 +116,28 @@ def test_duplicate_expected_finding_counts_as_noise() -> None:
     assert result.precision == 0.5
 
 
+def test_each_false_positive_deducts_two_percentage_points() -> None:
+    case = parse_case(truth())
+    clean = score_case(case, parse_findings([finding(10, "Off-by-one")]))
+    noisy = score_case(
+        case,
+        parse_findings([finding(10, "Off-by-one"), finding(100, "Plausible issue")]),
+    )
+
+    assert noisy.score == pytest.approx(clean.score - 0.02)
+
+
+def test_false_positive_penalty_cannot_reduce_score_below_zero() -> None:
+    case = parse_case(truth())
+    findings = [finding(10, "Off-by-one")]
+    findings.extend(finding(100 + index, f"Noise {index}") for index in range(34))
+
+    result = score_case(case, parse_findings(findings))
+
+    assert result.false_positives == 34
+    assert result.score == 0.0
+
+
 def test_per_lens_recall_includes_zeroes() -> None:
     result = score_case(
         parse_case(truth()),
