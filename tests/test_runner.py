@@ -212,19 +212,24 @@ def test_cli_rejects_missing_lgtmaybe() -> None:
     assert error.value.code == 2
 
 
-def test_cli_bootstraps_latest_lgtmaybe_with_uv(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_cli_pins_the_bootstrapped_lgtmaybe_release(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(
         shutil, "which", lambda command: "C:/tools/uv.exe" if command == "uv" else None
     )
     calls: list[list[str]] = []
+    latest_version = "1.15.0"
 
     def run(command: list[str], **_: object) -> subprocess.CompletedProcess[str]:
         calls.append(command)
-        return subprocess.CompletedProcess(command, 0, stdout="lgtmaybe 1.15.0\n", stderr="")
+        package = next((part for part in command if part.startswith("lgtmaybe==")), None)
+        version = package.removeprefix("lgtmaybe==") if package else latest_version
+        return subprocess.CompletedProcess(command, 0, stdout=f"lgtmaybe {version}\n", stderr="")
 
     monkeypatch.setattr(subprocess, "run", run)
 
     command = resolve_lgtmaybe_command(None)
+    latest_version = "1.16.0"
+    resolved = subprocess.run([*command, "--version"], capture_output=True, text=True)
 
     assert calls == [
         [
@@ -235,9 +240,18 @@ def test_cli_bootstraps_latest_lgtmaybe_with_uv(monkeypatch: pytest.MonkeyPatch)
             "lgtmaybe",
             "lgtmaybe@latest",
             "--version",
-        ]
+        ],
+        [*command, "--version"],
     ]
-    assert command == ["C:/tools/uv.exe", "tool", "run", "lgtmaybe@latest"]
+    assert command == [
+        "C:/tools/uv.exe",
+        "tool",
+        "run",
+        "--from",
+        "lgtmaybe==1.15.0",
+        "lgtmaybe",
+    ]
+    assert resolved.stdout == "lgtmaybe 1.15.0\n"
 
 
 def test_cli_fails_when_latest_lgtmaybe_cannot_be_bootstrapped(
@@ -825,6 +839,25 @@ def test_late_case_failure_retains_completed_observations(
     assert [observation["case"] for observation in raw["observations"]] == ["sql-injection-basic"]
     assert "secret" not in raw_files[0].read_text(encoding="utf-8")
     assert not list((tmp_path / "results" / "raw").glob("*.tmp"))
+
+
+def test_late_version_mismatch_retains_completed_observations(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fake = _bench_workspace(tmp_path)
+    versions = iter(("lgtmaybe fake-1.0", "lgtmaybe fake-1.0", "lgtmaybe fake-2.0"))
+    monkeypatch.setattr(runner, "_lgtmaybe_version", lambda _: next(versions))
+    args = _bench_args(case=["sql-injection-basic", "off-by-one-page"])
+
+    with pytest.raises(ValueError, match="lgtmaybe version changed during run"):
+        execute_benchmark(tmp_path, args, [sys.executable, str(fake)])
+
+    raw_files = list((tmp_path / "results" / "raw").glob("*.json"))
+    assert len(raw_files) == 1
+    raw = json.loads(raw_files[0].read_text(encoding="utf-8"))
+    assert raw["lgtmaybe_version"] == "lgtmaybe fake-1.0"
+    assert raw["status"] == "in_progress"
+    assert [observation["case"] for observation in raw["observations"]] == ["sql-injection-basic"]
 
 
 def test_checkpoints_reuse_one_reserved_file(tmp_path: Path) -> None:
