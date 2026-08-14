@@ -557,6 +557,12 @@ def execute_benchmark(root: Path, args: Any, executable: str | list[str]) -> Pat
     run_id = path.stem
     for repeat in range(1, profile.repeats + 1):
         for case in cases:
+            observed_version = _lgtmaybe_version(executable_parts)
+            if observed_version != version:
+                raise ValueError(
+                    "lgtmaybe version changed during run: "
+                    f"expected {version}, got {observed_version}"
+                )
             with tempfile.TemporaryDirectory(prefix="lgtmaybe-bench-") as temporary:
                 temporary_path = Path(temporary)
                 repo = build_case_repo(case.path, temporary_path / "repo")

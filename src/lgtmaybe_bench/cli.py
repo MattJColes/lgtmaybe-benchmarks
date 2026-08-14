@@ -53,7 +53,6 @@ def resolve_lgtmaybe_command(requested: str | None) -> list[str]:
     if uv is None:
         raise ValueError("uv executable not found; uv is required to install lgtmaybe")
 
-    command = [uv, "tool", "run", "lgtmaybe@latest"]
     try:
         preflight = subprocess.run(
             [
@@ -72,9 +71,13 @@ def resolve_lgtmaybe_command(requested: str | None) -> list[str]:
         )
     except (OSError, subprocess.TimeoutExpired) as exc:
         raise ValueError("could not install the latest lgtmaybe release") from exc
-    if preflight.returncode != 0:
+    from lgtmaybe_bench.runner import _parse_uv_tool_version
+
+    resolved_version = _parse_uv_tool_version(preflight.stdout)
+    if preflight.returncode != 0 or resolved_version is None:
         raise ValueError("could not install the latest lgtmaybe release")
-    return command
+    version = resolved_version.removeprefix("lgtmaybe ")
+    return [uv, "tool", "run", "--from", f"lgtmaybe=={version}", "lgtmaybe"]
 
 
 def main(argv: list[str] | None = None) -> None:
