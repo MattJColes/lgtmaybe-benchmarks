@@ -68,9 +68,9 @@ def test_render_contains_one_per_lens_table() -> None:
 
     header = next(line for line in rendered.splitlines() if line.startswith("| date"))
     assert header == (
-        "| date | lgtmaybe version | provider | model | score | security | correctness | "
-        "performance | complexity | tests | documentation | deprecation | intent | ponytail | "
-        "spec | settings |"
+        "| date | lgtmaybe version | provider | model | score | false positives | security | "
+        "correctness | performance | complexity | tests | documentation | deprecation | intent | "
+        "ponytail | spec | settings |"
     )
     assert sum(line.startswith("|---") for line in rendered.splitlines()) == 1
     assert "100.0%" in rendered
@@ -87,6 +87,30 @@ def test_render_contains_one_per_lens_table() -> None:
         "reason_tok",
     ):
         assert removed not in header
+
+
+def test_render_counts_every_unmatched_finding_as_a_false_positive() -> None:
+    run = raw("2026-01-01T00:00:00Z", "noisy", True)
+    observations = run["observations"]
+    assert isinstance(observations, list)
+    observation = observations[0]
+    assert isinstance(observation, dict)
+    findings = observation["findings"]
+    assert isinstance(findings, list)
+    findings.append(
+        {
+            "file": "other.py",
+            "line": 99,
+            "severity": "high",
+            "title": "Plausible uncatalogued issue",
+            "body": "Still a benchmark false positive",
+        }
+    )
+
+    rendered = render_results([run])
+    row = next(line for line in rendered.splitlines() if "noisy" in line)
+
+    assert row.split(" | ")[5] == "1"
 
 
 def test_render_orders_highest_score_first() -> None:

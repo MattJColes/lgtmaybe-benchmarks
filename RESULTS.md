@@ -6,35 +6,35 @@ Full-corpus runs only. Complete configuration and diagnostic evidence remain in 
 
 ## Per-lens recall
 
-| date | lgtmaybe version | provider | model | score | security | correctness | performance | complexity | tests | documentation | deprecation | intent | ponytail | spec | settings |
-|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | z-ai/glm-4.7 | 90.5% | 100.0% | 100.0% | 100.0% | 50.0% | 50.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | max tokens 4096; repeats 1 |
-| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | z-ai/glm-5.2 | 90.0% | 100.0% | 100.0% | 100.0% | 100.0% | 50.0% | 50.0% | 100.0% | 100.0% | 50.0% | 100.0% | max tokens 4096; repeats 1 |
-| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | moonshotai/kimi-k3 | 88.9% | 100.0% | 100.0% | 100.0% | 100.0% | 50.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | max tokens 4096; repeats 1 |
-| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | moonshotai/kimi-k2.7-code | 85.7% | 100.0% | 100.0% | 100.0% | 100.0% | 50.0% | 50.0% | 100.0% | 100.0% | 100.0% | 66.7% | max tokens 4096; repeats 1 |
-| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | google/gemma-4-26b-a4b-it | 84.4% | 100.0% | 100.0% | 100.0% | 100.0% | 50.0% | 50.0% | 100.0% | 100.0% | 100.0% | 100.0% | max tokens 4096; repeats 1 |
-| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | qwen/qwen3-coder-next | 81.1% | 100.0% | 100.0% | 50.0% | 100.0% | 0.0% | 100.0% | 100.0% | 100.0% | 0.0% | 66.7% | max tokens 4096; repeats 1 |
-| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | qwen/qwen3.8-max | 80.0% | 100.0% | 100.0% | 100.0% | 50.0% | 50.0% | 50.0% | 100.0% | 100.0% | 50.0% | 66.7% | max tokens 8192; repeats 1 |
-| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | qwen/qwen3.6-27b | 78.0% | 100.0% | 100.0% | 100.0% | 50.0% | 50.0% | 0.0% | 100.0% | 100.0% | 100.0% | 66.7% | max tokens 4096; repeats 1 |
-| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | meta/muse-glimmer-30b | 76.5% | 100.0% | 100.0% | 50.0% | 50.0% | 50.0% | 50.0% | 100.0% | 50.0% | 50.0% | 33.3% | max tokens 4096; repeats 1 |
-| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | kwaipilot/kat-coder-air-v2.5 | 73.2% | 50.0% | 100.0% | 100.0% | 50.0% | 50.0% | 50.0% | 100.0% | 100.0% | 50.0% | 66.7% | max tokens 4096; repeats 1 |
-| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | kwaipilot/kat-coder-air-v2.5 | 68.3% | 100.0% | 100.0% | 100.0% | 0.0% | 50.0% | 50.0% | 100.0% | 50.0% | 50.0% | 66.7% | max tokens 8192; repeats 1 |
-| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | qwen/qwen3.6-35b-a3b | 66.7% | 100.0% | 100.0% | 100.0% | 0.0% | 50.0% | 0.0% | 100.0% | 0.0% | 0.0% | 66.7% | max tokens 8192; repeats 1 |
-| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | qwen/qwen3.8-max | 66.7% | 100.0% | 100.0% | 100.0% | 100.0% | 0.0% | 0.0% | 50.0% | 50.0% | 0.0% | 33.3% | max tokens 4096; repeats 1 |
-| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | openai/gpt-5.6-terra | 66.7% | 50.0% | 100.0% | 50.0% | 50.0% | 50.0% | 50.0% | 100.0% | 100.0% | 50.0% | 33.3% | max tokens 4096; repeats 1 |
-| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | openai/gpt-5.6-luna | 66.7% | 50.0% | 100.0% | 50.0% | 50.0% | 50.0% | 0.0% | 100.0% | 50.0% | 50.0% | 100.0% | max tokens 4096; repeats 1 |
-| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | openai/gpt-5.6-sol | 64.9% | 50.0% | 100.0% | 0.0% | 100.0% | 50.0% | 50.0% | 100.0% | 50.0% | 50.0% | 33.3% | max tokens 4096; repeats 1 |
-| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | qwen/qwen3.6-35b-a3b | 62.5% | 50.0% | 100.0% | 50.0% | 0.0% | 0.0% | 0.0% | 100.0% | 50.0% | 0.0% | 100.0% | max tokens 4096; repeats 1 |
-| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | qwen/qwen3.6-35b-a3b | 62.5% | 50.0% | 100.0% | 50.0% | 50.0% | 0.0% | 50.0% | 100.0% | 0.0% | 0.0% | 66.7% | max tokens 4096; repeats 1 |
-| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | z-ai/glm-4.7-flash | 60.6% | 50.0% | 50.0% | 100.0% | 50.0% | 50.0% | 50.0% | 50.0% | 100.0% | 0.0% | 0.0% | max tokens 4096; repeats 1 |
-| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | deepseek/deepseek-v4-flash-0731 | 58.8% | 100.0% | 100.0% | 50.0% | 50.0% | 50.0% | 0.0% | 100.0% | 0.0% | 50.0% | 0.0% | max tokens 4096; repeats 1 |
-| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | minimax/minimax-m3 | 56.2% | 50.0% | 100.0% | 50.0% | 50.0% | 0.0% | 50.0% | 50.0% | 0.0% | 0.0% | 66.7% | max tokens 4096; repeats 1 |
-| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | deepseek/deepseek-v4-pro-0813 | 55.2% | 100.0% | 100.0% | 50.0% | 0.0% | 0.0% | 0.0% | 50.0% | 50.0% | 0.0% | 33.3% | max tokens 4096; repeats 1 |
-| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-sonnet-5 | 48.3% | 50.0% | 0.0% | 50.0% | 0.0% | 50.0% | 50.0% | 0.0% | 50.0% | 0.0% | 66.7% | max tokens 8192; repeats 1 |
-| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-haiku-4.5 | 46.7% | 0.0% | 0.0% | 50.0% | 50.0% | 50.0% | 50.0% | 50.0% | 100.0% | 0.0% | 0.0% | max tokens 4096; repeats 1 |
-| 2026-08-13 | lgtmaybe 1.14.1 | ollama | qwen2.5-coder:3b | 21.4% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 100.0% | 50.0% | 0.0% | 0.0% | max tokens 512; repeats 1 |
-| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-opus-5 | 9.1% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 50.0% | 0.0% | max tokens 8192; repeats 1 |
-| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-sonnet-5 | 9.1% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 50.0% | 0.0% | 0.0% | max tokens 4096; repeats 1 |
-| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-opus-5 | 9.1% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 50.0% | 0.0% | max tokens 4096; repeats 1 |
-| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-opus-4.8 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | max tokens 8192; repeats 1 |
-| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-opus-4.8 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | max tokens 4096; repeats 1 |
+| date | lgtmaybe version | provider | model | score | false positives | security | correctness | performance | complexity | tests | documentation | deprecation | intent | ponytail | spec | settings |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | z-ai/glm-4.7 | 84.4% | 5 | 100.0% | 100.0% | 100.0% | 50.0% | 50.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | max tokens 4096; repeats 1 |
+| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | z-ai/glm-5.2 | 80.0% | 6 | 100.0% | 100.0% | 100.0% | 100.0% | 50.0% | 50.0% | 100.0% | 100.0% | 50.0% | 100.0% | max tokens 4096; repeats 1 |
+| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | google/gemma-4-26b-a4b-it | 79.2% | 8 | 100.0% | 100.0% | 100.0% | 100.0% | 50.0% | 50.0% | 100.0% | 100.0% | 100.0% | 100.0% | max tokens 4096; repeats 1 |
+| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | moonshotai/kimi-k3 | 78.4% | 10 | 100.0% | 100.0% | 100.0% | 100.0% | 50.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | max tokens 4096; repeats 1 |
+| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | moonshotai/kimi-k2.7-code | 78.3% | 7 | 100.0% | 100.0% | 100.0% | 100.0% | 50.0% | 50.0% | 100.0% | 100.0% | 100.0% | 66.7% | max tokens 4096; repeats 1 |
+| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | qwen/qwen3.8-max | 78.0% | 4 | 100.0% | 100.0% | 100.0% | 50.0% | 50.0% | 50.0% | 100.0% | 100.0% | 50.0% | 66.7% | max tokens 8192; repeats 1 |
+| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | qwen/qwen3-coder-next | 76.9% | 3 | 100.0% | 100.0% | 50.0% | 100.0% | 0.0% | 100.0% | 100.0% | 100.0% | 0.0% | 66.7% | max tokens 4096; repeats 1 |
+| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | qwen/qwen3.6-27b | 74.4% | 6 | 100.0% | 100.0% | 100.0% | 50.0% | 50.0% | 0.0% | 100.0% | 100.0% | 100.0% | 66.7% | max tokens 4096; repeats 1 |
+| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | meta/muse-glimmer-30b | 72.2% | 2 | 100.0% | 100.0% | 50.0% | 50.0% | 50.0% | 50.0% | 100.0% | 50.0% | 50.0% | 33.3% | max tokens 4096; repeats 1 |
+| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | kwaipilot/kat-coder-air-v2.5 | 69.8% | 7 | 50.0% | 100.0% | 100.0% | 50.0% | 50.0% | 50.0% | 100.0% | 100.0% | 50.0% | 66.7% | max tokens 4096; repeats 1 |
+| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | qwen/qwen3.6-35b-a3b | 64.7% | 2 | 100.0% | 100.0% | 100.0% | 0.0% | 50.0% | 0.0% | 100.0% | 0.0% | 0.0% | 66.7% | max tokens 8192; repeats 1 |
+| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | qwen/qwen3.8-max | 62.9% | 3 | 100.0% | 100.0% | 100.0% | 100.0% | 0.0% | 0.0% | 50.0% | 50.0% | 0.0% | 33.3% | max tokens 4096; repeats 1 |
+| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | kwaipilot/kat-coder-air-v2.5 | 62.2% | 10 | 100.0% | 100.0% | 100.0% | 0.0% | 50.0% | 50.0% | 100.0% | 50.0% | 50.0% | 66.7% | max tokens 8192; repeats 1 |
+| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | openai/gpt-5.6-luna | 61.9% | 8 | 50.0% | 100.0% | 50.0% | 50.0% | 50.0% | 0.0% | 100.0% | 50.0% | 50.0% | 100.0% | max tokens 4096; repeats 1 |
+| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | openai/gpt-5.6-sol | 61.5% | 6 | 50.0% | 100.0% | 0.0% | 100.0% | 50.0% | 50.0% | 100.0% | 50.0% | 50.0% | 33.3% | max tokens 4096; repeats 1 |
+| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | qwen/qwen3.6-35b-a3b | 60.6% | 2 | 50.0% | 100.0% | 50.0% | 0.0% | 0.0% | 0.0% | 100.0% | 50.0% | 0.0% | 100.0% | max tokens 4096; repeats 1 |
+| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | openai/gpt-5.6-terra | 60.5% | 9 | 50.0% | 100.0% | 50.0% | 50.0% | 50.0% | 50.0% | 100.0% | 100.0% | 50.0% | 33.3% | max tokens 4096; repeats 1 |
+| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | z-ai/glm-4.7-flash | 58.8% | 3 | 50.0% | 50.0% | 100.0% | 50.0% | 50.0% | 50.0% | 50.0% | 100.0% | 0.0% | 0.0% | max tokens 4096; repeats 1 |
+| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | qwen/qwen3.6-35b-a3b | 58.8% | 3 | 50.0% | 100.0% | 50.0% | 50.0% | 0.0% | 50.0% | 100.0% | 0.0% | 0.0% | 66.7% | max tokens 4096; repeats 1 |
+| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | deepseek/deepseek-v4-pro-0813 | 55.2% | 0 | 100.0% | 100.0% | 50.0% | 0.0% | 0.0% | 0.0% | 50.0% | 50.0% | 0.0% | 33.3% | max tokens 4096; repeats 1 |
+| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | minimax/minimax-m3 | 52.9% | 4 | 50.0% | 100.0% | 50.0% | 50.0% | 0.0% | 50.0% | 50.0% | 0.0% | 0.0% | 66.7% | max tokens 4096; repeats 1 |
+| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | deepseek/deepseek-v4-flash-0731 | 52.6% | 7 | 100.0% | 100.0% | 50.0% | 50.0% | 50.0% | 0.0% | 100.0% | 0.0% | 50.0% | 0.0% | max tokens 4096; repeats 1 |
+| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-haiku-4.5 | 45.2% | 3 | 0.0% | 0.0% | 50.0% | 50.0% | 50.0% | 50.0% | 50.0% | 100.0% | 0.0% | 0.0% | max tokens 4096; repeats 1 |
+| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-sonnet-5 | 43.7% | 4 | 50.0% | 0.0% | 50.0% | 0.0% | 50.0% | 50.0% | 0.0% | 50.0% | 0.0% | 66.7% | max tokens 8192; repeats 1 |
+| 2026-08-13 | lgtmaybe 1.14.1 | ollama | qwen2.5-coder:3b | 20.7% | 5 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 100.0% | 50.0% | 0.0% | 0.0% | max tokens 512; repeats 1 |
+| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-opus-5 | 9.1% | 0 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 50.0% | 0.0% | max tokens 8192; repeats 1 |
+| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-sonnet-5 | 9.1% | 0 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 50.0% | 0.0% | 0.0% | max tokens 4096; repeats 1 |
+| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-opus-5 | 8.7% | 1 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 50.0% | 0.0% | max tokens 4096; repeats 1 |
+| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-opus-4.8 | 0.0% | 0 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | max tokens 8192; repeats 1 |
+| 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-opus-4.8 | 0.0% | 0 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | max tokens 4096; repeats 1 |

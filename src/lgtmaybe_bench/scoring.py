@@ -51,6 +51,10 @@ class CaseScore:
     per_lens: dict[str, float]
     per_lens_counts: dict[str, tuple[int, int]]
 
+    @property
+    def false_positives(self) -> int:
+        return self.forbidden_hits + self.unexpected
+
 
 @dataclass(frozen=True, slots=True)
 class RepeatMetrics:
@@ -76,6 +80,7 @@ class AggregateMetrics:
     recall: Range
     precision: Range
     score: Range
+    false_positives: Range
     wall_seconds: Range
     wall_excluding_truncation_seconds: Range
     truncations: Range
@@ -185,7 +190,8 @@ def score_case(case: CaseTruth, findings: tuple[Finding, ...]) -> CaseScore:
     """Classify each finding once and count each planted bug once."""
     unmatched_expected = set(range(len(case.expected)))
     caught_by_lens: dict[str, int] = {}
-    forbidden_hits = unexpected = adjudicable = 0
+    forbidden_hits = unexpected = 0
+    adjudicable = len(findings)
 
     for finding in findings:
         expected_match = next(
@@ -200,20 +206,17 @@ def score_case(case: CaseTruth, findings: tuple[Finding, ...]) -> CaseScore:
             entry = case.expected[expected_match]
             unmatched_expected.remove(expected_match)
             caught_by_lens[entry.lens] = caught_by_lens.get(entry.lens, 0) + 1
-            adjudicable += 1
             continue
         if any(_matches(finding, entry) for entry in case.forbidden):
             forbidden_hits += 1
-            adjudicable += 1
             continue
-        if any(_near(finding, entry) for entry in (*case.expected, *case.forbidden)):
-            unexpected += 1
-            adjudicable += 1
+        unexpected += 1
 
     caught = len(case.expected) - len(unmatched_expected)
     planted = len(case.expected)
     recall = caught / planted
-    precision = 1.0 if adjudicable == 0 else 1 - (forbidden_hits + unexpected) / adjudicable
+    false_positives = forbidden_hits + unexpected
+    precision = 1.0 if adjudicable == 0 else caught / (caught + false_positives)
     combined = 0.0 if recall + precision == 0 else 2 * recall * precision / (recall + precision)
     totals: dict[str, int] = {}
     for entry in case.expected:
@@ -248,6 +251,7 @@ def aggregate_repeats(repeats: list[RepeatMetrics]) -> AggregateMetrics:
         recall=_range([repeat.score.recall for repeat in repeats]),
         precision=_range([repeat.score.precision for repeat in repeats]),
         score=_range([repeat.score.score for repeat in repeats]),
+        false_positives=_range([repeat.score.false_positives for repeat in repeats]),
         wall_seconds=_range([repeat.wall_seconds for repeat in repeats]),
         wall_excluding_truncation_seconds=_range(
             [repeat.wall_excluding_truncation_seconds for repeat in repeats]

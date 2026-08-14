@@ -52,7 +52,7 @@ def _combine(scores: list[CaseScore]) -> CaseScore:
     unexpected = sum(score.unexpected for score in scores)
     adjudicable = sum(score.adjudicable for score in scores)
     recall = caught / planted
-    precision = 1.0 if adjudicable == 0 else 1 - (forbidden + unexpected) / adjudicable
+    precision = 1.0 if adjudicable == 0 else caught / adjudicable
     combined = 0.0 if recall + precision == 0 else 2 * recall * precision / (recall + precision)
     lenses = {lens for score in scores for lens in score.per_lens_counts}
     per_lens_counts: dict[str, tuple[int, int]] = {}
@@ -155,6 +155,13 @@ def _iso_date(timestamp: str) -> str:
     return timestamp.partition("T")[0]
 
 
+def _count_range(value: Range) -> str:
+    rendered = f"{value.median:g}"
+    if value.minimum == value.maximum:
+        return rendered
+    return f"{rendered} [{value.minimum:g}–{value.maximum:g}]"
+
+
 def _settings(config: dict[str, Any]) -> str:
     provider = str(config["provider"])
     values: list[str] = []
@@ -200,11 +207,11 @@ def render_results(raw_runs: list[dict[str, Any]]) -> str:
         reverse=True,
     )
     header = (
-        "| date | lgtmaybe version | provider | model | score | "
+        "| date | lgtmaybe version | provider | model | score | false positives | "
         + " | ".join(LENSES)
         + " | settings |\n"
     )
-    rule = "|---|---|---|---|---:|" + "---:|" * len(LENSES) + "---|\n"
+    rule = "|---|---|---|---|---:|---:|" + "---:|" * len(LENSES) + "---|\n"
     rows: list[str] = []
     for run in runs:
         raw, config = run.raw, run.raw["configuration"]
@@ -215,6 +222,7 @@ def render_results(raw_runs: list[dict[str, Any]]) -> str:
             config["provider"],
             config["model"],
             _range(metrics.score, percent=True),
+            _count_range(metrics.false_positives),
         ]
         values.extend(
             _range(run.per_lens[lens], percent=True) if lens in run.per_lens else "-"
