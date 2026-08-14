@@ -46,11 +46,11 @@ Canonical v2 contains 32 paired-revision cases with 72 planted findings and 9 ve
 | **Total** | **32** | **72** | **9** | Ten review lenses plus cross-cutting security evidence |
 
 1. Each case is a small Git repository with a clean base revision and a changed revision. The runner invokes lgtmaybe as an external command against the diff, three times per canonical configuration.
-2. The scorer deterministically matches every final finding to planted, forbidden, clean-case, nearby, or duplicate evidence. Findings outside those rules remain unadjudicated rather than being silently guessed.
+2. A final finding matches a planted or forbidden entry only when the file agrees, the line is within three lines, an expected keyword appears in its title or body, and any minimum severity is met. Each planted entry can be caught once; clean-case findings, nearby mismatches, forbidden claims, and duplicates are false positives, while findings outside those rules remain unadjudicated.
 3. Human decisions are stored as append-only adjudication events. A result stays provisional while any finding is unadjudicated, and report regeneration applies the latest decisions without changing the raw model output.
 4. Each repeat is scored independently, then every reported metric is aggregated as its median with the full minimum–maximum range.
 
-Balanced recall is the arithmetic mean of recall in 70 core cells: seven programming languages × ten review lenses, with one planted finding per cell. The two extra GitHub Actions and Terraform security findings remain in the detailed evidence and pooled precision, but do not give security extra weight in balanced recall. Pooled precision is `true positives / (true positives + false positives)` across classified final findings; false positives are reported by class. Balanced F1 is `2 × balanced recall × precision / (balanced recall + precision)`.
+Balanced recall is the arithmetic mean of recall in 70 core cells: seven programming languages × ten review lenses, with one planted finding per cell. The two extra GitHub Actions and Terraform security findings remain in the detailed evidence and pooled precision, but do not give security extra weight in balanced recall. Pooled precision is `true positives / (true positives + false positives)` across classified final findings and is defined as 100% when no classified findings exist; false positives are reported by class. Balanced F1 is `2 × balanced recall × precision / (balanced recall + precision)`.
 
 Legacy-v1 results use a separate historical formula: harmonic recall against perfect precision, followed by a fixed two-percentage-point deduction for each false positive. They are not directly comparable with v2 balanced F1.
 
