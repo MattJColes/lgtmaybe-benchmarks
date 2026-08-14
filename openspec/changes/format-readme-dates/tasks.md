@@ -17,3 +17,13 @@
 
 - [x] 4.1 Regenerate `README.md` and `RESULTS.md` with score ordering.
 - [x] 4.2 Run pytest, ruff, mypy, report determinism, and strict OpenSpec validation.
+
+## 5. Failed Run Filtering
+
+- [x] 5.1 Add behavioural coverage that excludes complete runs containing failed observations.
+- [x] 5.2 Filter failed runs before scoring while retaining raw evidence.
+
+## 6. Final Output and Verification
+
+- [x] 6.1 Regenerate `README.md` and `RESULTS.md` without failed score rows.
+- [x] 6.2 Run pytest, ruff, mypy, report determinism, and strict OpenSpec validation.

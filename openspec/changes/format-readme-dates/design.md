@@ -8,6 +8,7 @@ Raw results store second-precision UTC timestamps and the report renderer curren
 
 - Show `YYYY-MM-DD` in generated report date cells.
 - Put the highest-scoring complete runs first with newest-first tie-breaking.
+- Exclude any run containing a failed observation from public score tables.
 - Keep full raw timestamps and incomplete-run sorting unchanged.
 - Use one small formatting function for complete and incomplete rows.
 
@@ -24,7 +25,10 @@ Apply the same formatter to complete and incomplete tables because both are gene
 
 Sort scored runs by median overall score descending, then by full timestamp descending. This gives the comparison table a useful default order without client-side JavaScript, which GitHub README rendering does not support, and keeps ties deterministic.
 
+Filter failed runs before scoring. A completed benchmark loop only means every case was attempted; provider or command failures do not constitute model evidence and SHALL remain available only in raw JSON for diagnosis.
+
 ## Risks / Trade-offs
 
 - Multiple runs on one day display the same date, reducing visible precision. Score ties still use full raw timestamps, and exact times remain in raw JSON.
 - The Markdown table is not interactively sortable. The highest-score-first default provides the useful ordering supported by GitHub rendering.
+- Failed runs disappear from generated Markdown rather than moving to the incomplete table because their execution finished; raw JSON remains the diagnostic source.

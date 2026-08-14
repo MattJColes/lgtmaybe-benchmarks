@@ -1,7 +1,7 @@
 ## MODIFIED Requirements
 
 ### Requirement: Reproducible generated reports
-`bench report` SHALL read all valid raw result files, rescore them, and regenerate `RESULTS.md` byte-identically for unchanged inputs. It SHALL also replace only the marked generated section of `README.md`. The generated Markdown SHALL contain one table for full-corpus runs ordered by median overall score descending, then complete timestamp descending, with ISO calendar date (`YYYY-MM-DD`), lgtmaybe version, provider, model, overall score, every per-lens recall value, and a final settings summary. Incomplete-run rows SHALL use the same ISO calendar date format and remain newest-first. It SHALL omit focused runs, the selected-case list, and separate leaderboard, timing, token, precision, clean, truncation, and failure columns. Complete timestamps and data SHALL remain in raw JSON.
+`bench report` SHALL read all valid raw result files, rescore them, and regenerate `RESULTS.md` byte-identically for unchanged inputs. It SHALL also replace only the marked generated section of `README.md`. The generated Markdown SHALL contain one table for full-corpus runs with no failed observations, ordered by median overall score descending, then complete timestamp descending, with ISO calendar date (`YYYY-MM-DD`), lgtmaybe version, provider, model, overall score, every per-lens recall value, and a final settings summary. Incomplete-run rows SHALL use the same ISO calendar date format and remain newest-first. Complete runs containing any failed observation SHALL be excluded from generated Markdown while remaining in raw JSON. It SHALL omit focused runs, the selected-case list, and separate leaderboard, timing, token, precision, clean, truncation, and failure columns. Complete timestamps and data SHALL remain in raw JSON.
 
 The settings summary SHALL list only non-default values among reasoning effort, preset, max output tokens, max input tokens, API base, concurrency, repeats, and execution timeout. It SHALL render `—` when no listed setting differs from its default. Raw results created before the full-corpus marker existed SHALL be treated as full-corpus runs for backward compatibility.
 
@@ -24,6 +24,10 @@ The settings summary SHALL list only non-default values among reasoning effort, 
 #### Scenario: Order comparison rows by score
 - **WHEN** complete full-corpus runs have different median overall scores
 - **THEN** the generated comparison table lists the highest score first and uses newest timestamp first when scores tie
+
+#### Scenario: Exclude a failed run
+- **WHEN** a complete full-corpus run contains one or more observations with failures
+- **THEN** the run remains in raw JSON but does not appear in generated Markdown score tables
 
 #### Scenario: Render custom settings
 - **WHEN** a full-corpus run uses `max_tokens=512` and one repeat while every other listed setting remains at its default
