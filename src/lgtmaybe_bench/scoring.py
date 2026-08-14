@@ -7,6 +7,7 @@ from statistics import median
 from typing import Any
 
 LINE_WINDOW = 3
+FALSE_POSITIVE_PENALTY = 0.02
 SEVERITY_ORDER = {"info": 0, "low": 1, "medium": 2, "high": 3, "critical": 4}
 
 
@@ -186,6 +187,11 @@ def _matches(finding: Finding, entry: CatalogEntry) -> bool:
     )
 
 
+def overall_score(recall: float, false_positives: int) -> float:
+    base_score = 2 * recall / (recall + 1)
+    return max(0.0, base_score - false_positives * FALSE_POSITIVE_PENALTY)
+
+
 def score_case(case: CaseTruth, findings: tuple[Finding, ...]) -> CaseScore:
     """Classify each finding once and count each planted bug once."""
     unmatched_expected = set(range(len(case.expected)))
@@ -217,7 +223,7 @@ def score_case(case: CaseTruth, findings: tuple[Finding, ...]) -> CaseScore:
     recall = caught / planted
     false_positives = forbidden_hits + unexpected
     precision = 1.0 if adjudicable == 0 else caught / (caught + false_positives)
-    combined = 0.0 if recall + precision == 0 else 2 * recall * precision / (recall + precision)
+    combined = overall_score(recall, false_positives)
     totals: dict[str, int] = {}
     for entry in case.expected:
         totals[entry.lens] = totals.get(entry.lens, 0) + 1

@@ -16,6 +16,7 @@ from lgtmaybe_bench.scoring import (
     RepeatMetrics,
     aggregate_repeats,
     effort_label,
+    overall_score,
     parse_case,
     parse_findings,
     score_case,
@@ -53,7 +54,7 @@ def _combine(scores: list[CaseScore]) -> CaseScore:
     adjudicable = sum(score.adjudicable for score in scores)
     recall = caught / planted
     precision = 1.0 if adjudicable == 0 else caught / adjudicable
-    combined = 0.0 if recall + precision == 0 else 2 * recall * precision / (recall + precision)
+    combined = overall_score(recall, forbidden + unexpected)
     lenses = {lens for score in scores for lens in score.per_lens_counts}
     per_lens_counts: dict[str, tuple[int, int]] = {}
     for lens in lenses:
