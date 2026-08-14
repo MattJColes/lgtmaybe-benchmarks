@@ -19,12 +19,6 @@ from lgtmaybe_bench.scoring import Finding, parse_findings
 TRUNCATION_MARKERS = ("truncat", "output_limit", "length", "max_tokens")
 RAW_IN_PROGRESS = "in_progress"
 RAW_COMPLETE = "complete"
-CALL_PATTERN = re.compile(
-    r"^(?P<label>\S+)\s+(?P<batch>\d+)\s+(?P<tries>\d+)\s+"
-    r"(?P<elapsed>[\d.]+)s\s+(?P<input>\d+)\s+(?P<output>\d+)\s+"
-    r"(?P<reasoning>\d+)\s+(?P<cache_read>\d+)\s+(?P<cache_write>\d+)\s+"
-    r"(?P<error>.+)$"
-)
 
 
 @dataclass(frozen=True, slots=True)
@@ -51,6 +45,7 @@ class ProfileCall:
     reasoning_tokens: int
     cache_read_tokens: int
     cache_creation_tokens: int
+    findings: int | None
     error: str | None
     truncated: bool
 
@@ -107,30 +102,42 @@ def parse_review_output(stdout: str) -> tuple[tuple[Finding, ...], str, tuple[Pr
         raise ValueError("lgtmaybe stdout did not start with valid JSON") from exc
     profile = stdout.lstrip()[end:].strip()
     calls: list[ProfileCall] = []
+    columns: list[str] | None = None
     for line in profile.splitlines():
-        match = CALL_PATTERN.match(line.strip())
-        if not match:
+        stripped = line.strip()
+        if stripped.startswith("call "):
+            columns = stripped.split()
             continue
-        values = match.groupdict()
-        raw_error = values["error"].strip()
-        error = None if raw_error == "-" else raw_error
-        calls.append(
-            ProfileCall(
-                label=values["label"],
-                batch=int(values["batch"]),
-                attempts=int(values["tries"]),
-                elapsed_seconds=float(values["elapsed"]),
-                input_tokens=int(values["input"]),
-                output_tokens=int(values["output"]),
-                reasoning_tokens=int(values["reasoning"]),
-                cache_read_tokens=int(values["cache_read"]),
-                cache_creation_tokens=int(values["cache_write"]),
-                error=error,
-                truncated=bool(
-                    error and any(marker in error.casefold() for marker in TRUNCATION_MARKERS)
-                ),
+        if columns is None:
+            continue
+        fields = stripped.split(maxsplit=len(columns) - 1)
+        if len(fields) != len(columns):
+            continue
+        values = dict(zip(columns, fields, strict=True))
+        try:
+            raw_error = values["error"]
+            error = None if raw_error == "-" else raw_error
+            raw_finding_count = values.get("findings")
+            calls.append(
+                ProfileCall(
+                    label=values["call"],
+                    batch=int(values["batch"]),
+                    attempts=int(values["tries"]),
+                    elapsed_seconds=float(values["elapsed"].removesuffix("s")),
+                    input_tokens=int(values["in_tok"]),
+                    output_tokens=int(values["out_tok"]),
+                    reasoning_tokens=int(values["think_tok"]),
+                    cache_read_tokens=int(values["cache_rd"]),
+                    cache_creation_tokens=int(values["cache_wr"]),
+                    findings=(None if raw_finding_count in (None, "-") else int(raw_finding_count)),
+                    error=error,
+                    truncated=bool(
+                        error and any(marker in error.casefold() for marker in TRUNCATION_MARKERS)
+                    ),
+                )
             )
-        )
+        except (KeyError, ValueError):
+            continue
     return parse_findings(raw_findings), profile, tuple(calls)
 
 

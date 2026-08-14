@@ -129,7 +129,39 @@ def test_parser_separates_json_and_profile() -> None:
     assert calls[0].label == "security"
     assert calls[0].elapsed_seconds == 7.5
     assert calls[0].reasoning_tokens == 5
+    assert calls[0].findings is None
     assert calls[0].truncated is True
+
+
+@pytest.mark.parametrize(
+    ("header", "row", "expected_findings"),
+    [
+        (
+            "call batch tries elapsed in_tok out_tok think_tok think_% cache_rd cache_wr error",
+            "security 1 1 8.50s 5943 88 72 2% 0 4580 -",
+            None,
+        ),
+        (
+            "call batch tries elapsed in_tok out_tok think_tok think_% cache_rd cache_wr "
+            "findings error",
+            "security 1 1 8.50s 5943 88 72 2% 0 4580 0 -",
+            0,
+        ),
+        (
+            "call batch tries elapsed in_tok out_tok think_tok think_% cache_rd cache_wr "
+            "findings error",
+            "reflect 0 1 1.00s 100 15 0 - 0 0 - -",
+            None,
+        ),
+    ],
+)
+def test_parser_accepts_additive_profile_columns(
+    header: str, row: str, expected_findings: int | None
+) -> None:
+    _, _, calls = parse_review_output(f"[]\n== lgtmaybe profile ==\n{header}\n{row}\n")
+
+    assert len(calls) == 1
+    assert calls[0].findings == expected_findings
 
 
 def test_build_case_repo_produces_committed_diff(tmp_path: Path) -> None:
