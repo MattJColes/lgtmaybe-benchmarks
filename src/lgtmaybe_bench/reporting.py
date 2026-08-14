@@ -151,6 +151,10 @@ def _range(value: Any, *, percent: bool = False) -> str:
     return f"{med} [{value.minimum * scale:.{digits}f}–{value.maximum * scale:.{digits}f}{suffix}]"
 
 
+def _iso_date(timestamp: str) -> str:
+    return timestamp.partition("T")[0]
+
+
 def _render_incomplete(raw_runs: list[dict[str, Any]]) -> str:
     if not raw_runs:
         return ""
@@ -158,7 +162,7 @@ def _render_incomplete(raw_runs: list[dict[str, Any]]) -> str:
         "| "
         + " | ".join(
             (
-                raw["timestamp"],
+                _iso_date(raw["timestamp"]),
                 raw["configuration"]["provider"],
                 raw["configuration"]["model"],
                 str(len(raw["observations"])),
@@ -228,7 +232,7 @@ def render_results(raw_runs: list[dict[str, Any]]) -> str:
         raw, config = run.raw, run.raw["configuration"]
         metrics = aggregate_repeats(run.repeats)
         values: list[object] = [
-            raw["timestamp"],
+            _iso_date(raw["timestamp"]),
             raw["lgtmaybe_version"],
             config["provider"],
             config["model"],
