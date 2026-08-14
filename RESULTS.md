@@ -31,8 +31,6 @@ Full-corpus runs only. Complete configuration and diagnostic evidence remain in 
 | 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-sonnet-5 | 9.1% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 50.0% | 0.0% | 0.0% | max tokens 4096; repeats 1 |
 | 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-opus-5 | 9.1% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 50.0% | 0.0% | max tokens 4096; repeats 1 |
 | 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-opus-4.8 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | max tokens 4096; repeats 1 |
-| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | kwaipilot/kat-coder-air-v2.5 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | max tokens 4096; repeats 1 |
-| 2026-08-13 | lgtmaybe 2.1.0 | openrouter | qwen/qwen3.8-max | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | max tokens 4096; repeats 1 |
 
 ## Incomplete runs
 

@@ -6,6 +6,7 @@ Generated report tables currently show full UTC timestamps and order runs by tim
 
 - Render benchmark dates as `YYYY-MM-DD` in generated Markdown tables.
 - Sort complete result rows by overall score descending, using newest timestamp as the deterministic tie-breaker.
+- Exclude runs containing failed observations from generated score tables while preserving their raw evidence.
 - Preserve full timestamps in raw result files and use them for incomplete-run ordering and score ties.
 - Cover date formatting and score ordering with behavioural tests.
 
@@ -17,7 +18,7 @@ None.
 
 ### Modified Capabilities
 
-- `benchmark-scoring-reporting`: Generated report dates use ISO calendar dates and complete rows are ordered by overall score.
+- `benchmark-scoring-reporting`: Generated report dates use ISO calendar dates, valid complete rows are ordered by overall score, and failed runs are excluded.
 
 ## Impact
 

@@ -215,7 +215,12 @@ def render_results(raw_runs: list[dict[str, Any]]) -> str:
     )
     if not complete:
         return "No benchmark runs recorded.\n" + incomplete
-    full_runs = [raw for raw in complete if raw.get("configuration", {}).get("full_corpus", True)]
+    full_runs = [
+        raw
+        for raw in complete
+        if raw.get("configuration", {}).get("full_corpus", True)
+        and not any(observation.get("failures", 0) for observation in raw["observations"])
+    ]
     if not full_runs:
         return "No full benchmark runs recorded.\n" + incomplete
     runs = sorted(

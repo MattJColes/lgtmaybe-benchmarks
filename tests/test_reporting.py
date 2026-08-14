@@ -140,6 +140,20 @@ def test_render_excludes_focused_runs_and_keeps_legacy_full_runs() -> None:
     assert "focused-model" not in rendered
 
 
+def test_render_excludes_complete_runs_with_failures() -> None:
+    failed = raw("2026-02-01T00:00:00Z", "failed-model", False)
+    observations = failed["observations"]
+    assert isinstance(observations, list)
+    observation = observations[0]
+    assert isinstance(observation, dict)
+    observation["failures"] = 1
+
+    rendered = render_results([raw("2026-01-01T00:00:00Z", "valid-model", True), failed])
+
+    assert "valid-model" in rendered
+    assert "failed-model" not in rendered
+
+
 def test_default_settings_render_as_dash() -> None:
     rendered = render_results([raw("2026-01-01T00:00:00Z", "defaults", True)])
 
