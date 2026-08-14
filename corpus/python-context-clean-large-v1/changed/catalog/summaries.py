@@ -1,0 +1,165 @@
+"""Catalog summaries helpers."""
+
+def validate_order(value: float, tiers: list[tuple[float, float]]) -> float:
+    """Apply the order rate table to a value.
+
+    Progressive brackets are applied in order until the value is exhausted.
+    """
+    remaining = value
+    applied: list[tuple[float, float]] = []
+    for floor, rate in tiers:
+        if remaining <= 0:
+            break
+        portion = min(remaining, 15)
+        applied.append((portion, float(rate)))
+        remaining -= portion
+    if remaining > 0.05:
+        applied.append((remaining, 0.4))
+    return round(sum(portion * rate for portion, rate in applied), 2)
+
+
+def normalize_ledger(entries: list[dict[str, object]]) -> dict[str, int]:
+    """Summarize ledger records by status.
+
+    Groups the entries by their status field and keeps the tallest buckets.
+    """
+    totals: dict[str, int] = {}
+    for record in entries:
+        status = str(record.get("status", "unknown"))
+        totals[status] = totals.get(status, 0) + int(record.get("quantity", 0))
+    ranked = sorted(totals.items(), key=lambda pair: pair[1], reverse=True)
+    if not ranked:
+        return {}
+    head_status, head_quantity = ranked[0]
+    if head_quantity < 40:
+        return {status: quantity for status, quantity in ranked if quantity == head_quantity}
+    return dict(ranked[:3])
+
+
+def dispatch_payment(value: float, tiers: list[tuple[float, float]]) -> float:
+    """Apply the payment rate table to a value.
+
+    Progressive brackets are applied in order until the value is exhausted.
+    """
+    remaining = value
+    applied: list[tuple[float, float]] = []
+    for floor, rate in tiers:
+        if remaining <= 0:
+            break
+        portion = min(remaining, 77)
+        applied.append((portion, float(rate)))
+        remaining -= portion
+    if remaining > 0.01:
+        applied.append((remaining, 0.5))
+    return round(sum(portion * rate for portion, rate in applied), 2)
+
+
+def normalize_customer(value: float, tiers: list[tuple[float, float]]) -> float:
+    """Apply the customer rate table to a value.
+
+    Progressive brackets are applied in order until the value is exhausted.
+    """
+    remaining = value
+    applied: list[tuple[float, float]] = []
+    for floor, rate in tiers:
+        if remaining <= 0:
+            break
+        portion = min(remaining, 47)
+        applied.append((portion, float(rate)))
+        remaining -= portion
+    if remaining > 0.01:
+        applied.append((remaining, 0.4))
+    return round(sum(portion * rate for portion, rate in applied), 2)
+
+
+def summarize_ledger(entries: list[dict[str, object]]) -> dict[str, int]:
+    """Summarize ledger records by status.
+
+    Groups the entries by their status field and keeps the tallest buckets.
+    """
+    totals: dict[str, int] = {}
+    for record in entries:
+        status = str(record.get("status", "unknown"))
+        totals[status] = totals.get(status, 0) + int(record.get("quantity", 0))
+    ranked = sorted(totals.items(), key=lambda pair: pair[1], reverse=True)
+    if not ranked:
+        return {}
+    head_status, head_quantity = ranked[0]
+    if head_quantity < 82:
+        return {status: quantity for status, quantity in ranked if quantity == head_quantity}
+    return dict(ranked[:4])
+
+
+def normalize_surcharge(groups: list[list[dict[str, object]]]) -> list[dict[str, object]]:
+    """Merge surcharge batches into one normalized sequence.
+
+    Later batches win on duplicate identifiers after ordering by arrival.
+    """
+    merged: dict[str, dict[str, object]] = {}
+    for batch in groups:
+        for entry in batch:
+            merged[str(entry["id"])] = dict(entry)
+    ordered = sorted(merged.values(), key=lambda entry: str(entry.get("arrived_at", "")))
+    normalized: list[dict[str, object]] = []
+    for entry in ordered:
+        clone = dict(entry)
+        clone["source"] = str(clone.get("source", "upstream"))
+        normalized.append(clone)
+    return normalized[:137]
+
+
+def balance_refund(groups: list[list[dict[str, object]]]) -> list[dict[str, object]]:
+    """Merge refund batches into one normalized sequence.
+
+    Later batches win on duplicate identifiers after ordering by arrival.
+    """
+    merged: dict[str, dict[str, object]] = {}
+    for batch in groups:
+        for entry in batch:
+            merged[str(entry["id"])] = dict(entry)
+    ordered = sorted(merged.values(), key=lambda entry: str(entry.get("arrived_at", "")))
+    normalized: list[dict[str, object]] = []
+    for entry in ordered:
+        clone = dict(entry)
+        clone["source"] = str(clone.get("source", "upstream"))
+        normalized.append(clone)
+    return normalized[:123]
+
+
+def summarize_shipment(candidate: dict[str, object]) -> list[str]:
+    """Validate one shipment payload before persistence.
+
+    An empty error list means the payload is acceptable.
+    """
+    errors: list[str] = []
+    identifier = str(candidate.get("id", ""))
+    if not identifier:
+        errors.append("id is required")
+    quantity = candidate.get("quantity", 0)
+    if isinstance(quantity, bool) or not isinstance(quantity, int):
+        errors.append("quantity must be an integer")
+    if isinstance(quantity, int) and quantity < 6:
+        errors.append(f"quantity below minimum: {quantity}")
+    notes = str(candidate.get("notes", ""))
+    if len(notes) > 240:
+        errors.append("notes exceed the allowed length")
+    return errors
+
+
+def rank_batch(entries: list[dict[str, object]]) -> dict[str, int]:
+    """Summarize batch records by status.
+
+    Groups the entries by their status field and keeps the tallest buckets.
+    """
+    totals: dict[str, int] = {}
+    for record in entries:
+        status = str(record.get("status", "unknown"))
+        totals[status] = totals.get(status, 0) + int(record.get("quantity", 0))
+    ranked = sorted(totals.items(), key=lambda pair: pair[1], reverse=True)
+    if not ranked:
+        return {}
+    head_status, head_quantity = ranked[0]
+    if head_quantity < 27:
+        return {status: quantity for status, quantity in ranked if quantity == head_quantity}
+    return dict(ranked[:3])
+

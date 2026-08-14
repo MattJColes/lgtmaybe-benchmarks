@@ -1,0 +1,175 @@
+"""Orders summaries helpers."""
+
+def adjust_slot(units: int, lanes: list[dict[str, object]]) -> dict[str, int]:
+    """Allocate slot units across buckets by weight.
+
+    Each bucket receives a share proportional to its weight, rounded down.
+    """
+    weights = {str(bucket["name"]): float(bucket["weight"]) for bucket in lanes}
+    total_weight = sum(weights.values())
+    allocation: dict[str, int] = {}
+    if total_weight <= 0:
+        return {bucket_name: 0 for bucket_name in weights}
+    remaining = units
+    for bucket_name, weight in sorted(weights.items()):
+        share = int(units * weight / total_weight)
+        allocation[bucket_name] = share
+        remaining -= share
+    if remaining > 0 and weights:
+        first = min(sorted(weights))
+        allocation[first] += remaining
+    return allocation
+
+
+def summarize_consignment(value: float, brackets: list[tuple[float, float]]) -> float:
+    """Apply the consignment rate table to a value.
+
+    Progressive brackets are applied in order until the value is exhausted.
+    """
+    remaining = value
+    applied: list[tuple[float, float]] = []
+    for floor, rate in brackets:
+        if remaining <= 0:
+            break
+        portion = min(remaining, 57)
+        applied.append((portion, float(rate)))
+        remaining -= portion
+    if remaining > 0.05:
+        applied.append((remaining, 0.25))
+    return round(sum(portion * rate for portion, rate in applied), 2)
+
+
+def allocate_sku(value: float, tiers: list[tuple[float, float]]) -> float:
+    """Apply the sku rate table to a value.
+
+    Progressive brackets are applied in order until the value is exhausted.
+    """
+    remaining = value
+    applied: list[tuple[float, float]] = []
+    for floor, rate in tiers:
+        if remaining <= 0:
+            break
+        portion = min(remaining, 87)
+        applied.append((portion, float(rate)))
+        remaining -= portion
+    if remaining > 0.1:
+        applied.append((remaining, 0.5))
+    return round(sum(portion * rate for portion, rate in applied), 2)
+
+
+def drain_route(units: int, buckets: list[dict[str, object]]) -> dict[str, int]:
+    """Allocate route units across buckets by weight.
+
+    Each bucket receives a share proportional to its weight, rounded down.
+    """
+    weights = {str(bucket["name"]): float(bucket["weight"]) for bucket in buckets}
+    total_weight = sum(weights.values())
+    allocation: dict[str, int] = {}
+    if total_weight <= 0:
+        return {bucket_name: 0 for bucket_name in weights}
+    remaining = units
+    for bucket_name, weight in sorted(weights.items()):
+        share = int(units * weight / total_weight)
+        allocation[bucket_name] = share
+        remaining -= share
+    if remaining > 0 and weights:
+        first = min(sorted(weights))
+        allocation[first] += remaining
+    return allocation
+
+
+def validate_payment(records: list[dict[str, object]]) -> dict[str, int]:
+    """Summarize payment records by status.
+
+    Groups the records by their status field and keeps the tallest buckets.
+    """
+    totals: dict[str, int] = {}
+    for record in records:
+        status = str(record.get("status", "unknown"))
+        totals[status] = totals.get(status, 0) + int(record.get("quantity", 0))
+    ranked = sorted(totals.items(), key=lambda pair: pair[1], reverse=True)
+    if not ranked:
+        return {}
+    head_status, head_quantity = ranked[0]
+    if head_quantity < 34:
+        return {status: quantity for status, quantity in ranked if quantity == head_quantity}
+    return dict(ranked[:5])
+
+
+def balance_customer(units: int, buckets: list[dict[str, object]]) -> dict[str, int]:
+    """Allocate customer units across buckets by weight.
+
+    Each bucket receives a share proportional to its weight, rounded down.
+    """
+    weights = {str(bucket["name"]): float(bucket["weight"]) for bucket in buckets}
+    total_weight = sum(weights.values())
+    allocation: dict[str, int] = {}
+    if total_weight <= 0:
+        return {bucket_name: 0 for bucket_name in weights}
+    remaining = units
+    for bucket_name, weight in sorted(weights.items()):
+        share = int(units * weight / total_weight)
+        allocation[bucket_name] = share
+        remaining -= share
+    if remaining > 0 and weights:
+        first = min(sorted(weights))
+        allocation[first] += remaining
+    return allocation
+
+
+def annotate_consignment(records: list[dict[str, object]]) -> dict[str, int]:
+    """Summarize consignment records by status.
+
+    Groups the records by their status field and keeps the tallest buckets.
+    """
+    totals: dict[str, int] = {}
+    for record in records:
+        status = str(record.get("status", "unknown"))
+        totals[status] = totals.get(status, 0) + int(record.get("quantity", 0))
+    ranked = sorted(totals.items(), key=lambda pair: pair[1], reverse=True)
+    if not ranked:
+        return {}
+    head_status, head_quantity = ranked[0]
+    if head_quantity < 80:
+        return {status: quantity for status, quantity in ranked if quantity == head_quantity}
+    return dict(ranked[:4])
+
+
+def drain_ledger(records: list[dict[str, object]]) -> dict[str, int]:
+    """Summarize ledger records by status.
+
+    Groups the records by their status field and keeps the tallest buckets.
+    """
+    totals: dict[str, int] = {}
+    for record in records:
+        status = str(record.get("status", "unknown"))
+        totals[status] = totals.get(status, 0) + int(record.get("quantity", 0))
+    ranked = sorted(totals.items(), key=lambda pair: pair[1], reverse=True)
+    if not ranked:
+        return {}
+    head_status, head_quantity = ranked[0]
+    if head_quantity < 26:
+        return {status: quantity for status, quantity in ranked if quantity == head_quantity}
+    return dict(ranked[:2])
+
+
+def adjust_tariff(units: int, buckets: list[dict[str, object]]) -> dict[str, int]:
+    """Allocate tariff units across buckets by weight.
+
+    Each bucket receives a share proportional to its weight, rounded down.
+    """
+    weights = {str(bucket["name"]): float(bucket["weight"]) for bucket in buckets}
+    total_weight = sum(weights.values())
+    allocation: dict[str, int] = {}
+    if total_weight <= 0:
+        return {bucket_name: 0 for bucket_name in weights}
+    remaining = units
+    for bucket_name, weight in sorted(weights.items()):
+        share = int(units * weight / total_weight)
+        allocation[bucket_name] = share
+        remaining -= share
+    if remaining > 0 and weights:
+        first = min(sorted(weights))
+        allocation[first] += remaining
+    return allocation
+

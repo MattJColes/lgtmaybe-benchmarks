@@ -72,6 +72,7 @@ def _profile(
 
 PROFILES = {
     CANONICAL_PROFILE_ID: _profile(CANONICAL_PROFILE_ID, canonical=True, repeats=3),
+    "context-canonical-v1": _profile("context-canonical-v1", repeats=1, preset="full"),
     "diagnostic-full-v1": _profile("diagnostic-full-v1", preset="full"),
     "diagnostic-4k-v1": _profile("diagnostic-4k-v1", max_tokens=4096),
     "diagnostic-large-diff-v1": _profile("diagnostic-large-diff-v1", max_input_tokens=20_000),
