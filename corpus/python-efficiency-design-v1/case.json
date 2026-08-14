@@ -1,0 +1,31 @@
+{
+  "name": "python-efficiency-design-v1",
+  "language": "python",
+  "changed_file": "enrichment.py",
+  "clean": false,
+  "coverage": ["large-diff"],
+  "expected": [
+    {
+      "label": "repository lookup runs once per item",
+      "lens": "performance",
+      "line": 10,
+      "keywords": ["n+1", "load_many", "per item"],
+      "severity_at_least": "medium"
+    },
+    {
+      "label": "nested eligibility checks obscure one predicate",
+      "lens": "complexity",
+      "line": 13,
+      "keywords": ["deep nesting", "guard clause", "predicate"],
+      "severity_at_least": "low"
+    },
+    {
+      "label": "single-use result-list factory adds needless indirection",
+      "lens": "ponytail",
+      "line": 1,
+      "keywords": ["factory", "indirection", "plain list"],
+      "severity_at_least": "low"
+    }
+  ],
+  "forbidden": []
+}

@@ -1,0 +1,14 @@
+{
+  "name": "dart-contract-evolution-v1",
+  "language": "dart",
+  "changed_file": "lib/client.dart",
+  "clean": false,
+  "commit_message": "refactor: keep fetchUser callers compatible",
+  "coverage": [],
+  "expected": [
+    {"label": "public record return is undocumented", "lens": "documentation", "line": 3, "keywords": ["documentation", "return type", "record"], "severity_at_least": "medium"},
+    {"label": "dart:html is deprecated in favor of package:web", "lens": "deprecation", "line": 1, "keywords": ["dart:html", "deprecated", "package:web"], "severity_at_least": "low"},
+    {"label": "required timeout and record break caller compatibility", "lens": "intent", "line": 3, "keywords": ["compatible", "optional", "record"], "severity_at_least": "medium"}
+  ],
+  "forbidden": []
+}

@@ -1,0 +1,10 @@
+{
+  "name": "dart-clean-context-v1",
+  "language": "dart",
+  "changed_file": "lib/query.dart",
+  "clean": true,
+  "clean_trap": "Normalized input is passed alongside SQL, but the placeholder API binds it as data.",
+  "coverage": [],
+  "expected": [],
+  "forbidden": []
+}

@@ -1,0 +1,13 @@
+{
+  "name": "java-efficiency-design-v1",
+  "language": "java",
+  "changed_file": "src/main/java/Enrichment.java",
+  "clean": false,
+  "coverage": [],
+  "expected": [
+    {"label": "repository loads once per ID", "lens": "performance", "line": 9, "keywords": ["n+1", "loadmany", "per id"], "severity_at_least": "medium"},
+    {"label": "nested owner checks hide eligibility", "lens": "complexity", "line": 12, "keywords": ["nesting", "guard clause", "predicate"], "severity_at_least": "low"},
+    {"label": "single-use list factory is needless", "lens": "ponytail", "line": 1, "keywords": ["factory", "indirection", "arraylist"], "severity_at_least": "low"}
+  ],
+  "forbidden": []
+}

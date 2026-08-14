@@ -1,0 +1,14 @@
+{
+  "name": "rust-contract-evolution-v1",
+  "language": "rust",
+  "changed_file": "src/lib.rs",
+  "clean": false,
+  "commit_message": "refactor: keep fetch_user source compatible",
+  "coverage": [],
+  "expected": [
+    {"label": "public tuple return is undocumented", "lens": "documentation", "line": 1, "keywords": ["documentation", "return type", "tuple"], "severity_at_least": "medium"},
+    {"label": "mem::uninitialized is deprecated", "lens": "deprecation", "line": 2, "keywords": ["uninitialized", "deprecated", "maybeuninit"], "severity_at_least": "high"},
+    {"label": "required timeout and tuple break source compatibility", "lens": "intent", "line": 1, "keywords": ["source compatible", "option", "tuple"], "severity_at_least": "medium"}
+  ],
+  "forbidden": []
+}

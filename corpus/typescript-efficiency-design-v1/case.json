@@ -1,0 +1,31 @@
+{
+  "name": "typescript-efficiency-design-v1",
+  "language": "typescript",
+  "changed_file": "enrichment.ts",
+  "clean": false,
+  "coverage": [],
+  "expected": [
+    {
+      "label": "awaited repository lookup is serialized per ID",
+      "lens": "performance",
+      "line": 10,
+      "keywords": ["sequential", "loadmany", "n+1"],
+      "severity_at_least": "medium"
+    },
+    {
+      "label": "eligibility checks are deeply nested",
+      "lens": "complexity",
+      "line": 13,
+      "keywords": ["nested", "guard clause", "predicate"],
+      "severity_at_least": "low"
+    },
+    {
+      "label": "single-purpose array factory is unnecessary",
+      "lens": "ponytail",
+      "line": 1,
+      "keywords": ["factory", "indirection", "array literal"],
+      "severity_at_least": "low"
+    }
+  ],
+  "forbidden": []
+}

@@ -1,0 +1,10 @@
+{
+  "name": "javascript-clean-context-v1",
+  "language": "javascript",
+  "changed_file": "query.js",
+  "clean": true,
+  "clean_trap": "String input still reaches the database call, but the placeholder and bound values prevent SQL injection.",
+  "coverage": [],
+  "expected": [],
+  "forbidden": []
+}

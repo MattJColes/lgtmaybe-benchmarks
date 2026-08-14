@@ -1,0 +1,10 @@
+{
+  "name": "rust-clean-context-v1",
+  "language": "rust",
+  "changed_file": "src/lib.rs",
+  "clean": true,
+  "clean_trap": "An untrusted name is joined to a root, but both paths are canonicalized and strip_prefix enforces containment before opening.",
+  "coverage": [],
+  "expected": [],
+  "forbidden": []
+}

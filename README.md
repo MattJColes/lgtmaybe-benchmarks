@@ -5,8 +5,8 @@ Repeatable recall, precision, noise, token, truncation, and timing benchmarks fo
 ## Quick start
 
 ```powershell
-uv sync
-uv run bench run --provider ollama --model qwen3.5:4b --repeats 1
+uv sync --python 3.12
+uv run bench run --provider ollama --model qwen3.5:4b
 uv run bench report
 ```
 
@@ -16,10 +16,20 @@ Hosted providers use their usual environment credentials:
 
 ```powershell
 $env:OPENAI_API_KEY = "..."
-uv run bench run --provider openai --model gpt-5.5 --reasoning-effort medium
+uv run bench run --provider openai --model gpt-5.5
 ```
 
-The default is three repeats. Use repeatable `--case` flags for a focused run. The `spec-batched-export` case contains a deliberately large multi-file diff; `--max-input-tokens 500` forces it through the batching path on small-context models.
+The default `v2 / canonical-v1` comparison uses three repeats, the fast lgtmaybe preset, a 100,000-token input ceiling, and the same settings for Python, TypeScript, JavaScript, Rust, Dart, Java, and Go. It also covers GitHub Actions and Terraform. Keep language settings identical: per-language defaults would make the overall result a comparison of configurations rather than models.
+
+Use a named diagnostic profile for investigation, not ranking:
+
+```powershell
+uv run bench run --provider ollama --model qwen3.5:4b --profile diagnostic-full-v1
+uv run bench run --provider ollama --model qwen3.5:4b --profile diagnostic-4k-v1
+uv run bench run --provider ollama --model qwen3.5:4b --profile diagnostic-large-diff-v1
+```
+
+Repeatable `--case` flags create a focused run. Any command-line setting override creates a `diagnostic-custom-v1` profile so it cannot silently enter the canonical ranking.
 
 ## Results
 
@@ -62,19 +72,21 @@ Full-corpus runs only. Complete configuration and diagnostic evidence remain in 
 | 2026-08-14 | lgtmaybe 2.1.0 | openrouter | anthropic/claude-opus-4.8 | 0.0% | 0 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | max tokens 4096; repeats 1 |
 <!-- BENCH_RESULTS_END -->
 
-See [RESULTS.md](RESULTS.md) for the full historical results. Focused `--case` runs remain in raw data and do not appear in the public table.
+See [RESULTS.md](RESULTS.md) for every stored completed run and [dashboard/index.html](dashboard/index.html) for column sorting and filters by suite, profile, model, version, status, audit state, language, and lens. Focused and diagnostic runs remain visible there but do not enter the canonical README ranking.
 
 ## Metrics
 
-- Recall is the share of planted findings caught.
-- A false positive is any model finding that does not match an uncaught planted finding. This intentionally includes duplicates, forbidden traps, distant findings, and plausible real issues that are absent from the immutable ground truth.
-- Precision is `caught / (caught + false positives)` and remains diagnostic. Score starts from the harmonic mean of recall and 100% precision, deducts two percentage points per false positive, and cannot fall below 0%.
-- The results table shows full-corpus score, false positives, and per-lens recall. Repeated values are shown as median and min–max.
-- Settings lists only values changed from the benchmark defaults. Timing, tokens, precision, clean status, truncation, and failures remain in raw data.
+- V2 balanced recall gives equal weight to each of the 70 language/lens cells, including tests and spec alignment for every programming language. It is not inflated by languages or lenses with more planted findings.
+- V2 precision pools true and false positives across the suite. False positives are split into forbidden claims, clean-case findings, unexpected nearby findings, duplicates, and manually adjudicated findings.
+- V2 balanced F1 is the harmonic mean of balanced recall and pooled precision. A score is marked provisional while any otherwise-unclassified finding still needs adjudication.
+- Legacy-v1 tables retain their published score: harmonic recall with a fixed two-point deduction per false positive. Three-repeat results show the median and min–max range.
+- Compare only rows with the same `suite / profile / lgtmaybe version` key. Provider, model, clean pass, timing, tokens, truncations, and changed settings remain visible separately.
 
 ## Raw data and recovery
 
-Each configuration run writes an append-only JSON document under `results/raw/` before updating Markdown. `uv run bench report` rescans those files and regenerates `RESULTS.md` and the marked README section byte-identically. Raw data retains focused runs and complete diagnostic evidence. It contains the API base but never credentials.
+Each configuration run writes an append-only JSON document under `results/raw/` before updating reports. It retains every final model finding, including false-positive candidates, stable evidence IDs, token and truncation diagnostics, and resolved profile settings. Compatible lgtmaybe versions also produce immutable gzip audit traces under `results/audit/`, preserving guessed candidates and later filtering decisions for lens refinement.
+
+Human classifications are append-only events under `results/adjudications/`; later corrections supersede earlier events without changing raw model output. `uv run bench report` reconstructs current adjudications, recalculates scores, and regenerates `README.md`, `RESULTS.md`, and `dashboard/` deterministically. API endpoints are redacted and provider credentials are never stored.
 
 ## Contributing cases
 

@@ -21,11 +21,13 @@ def build_parser() -> argparse.ArgumentParser:
     run = subparsers.add_parser("run", help="run lgtmaybe against the benchmark corpus")
     run.add_argument("--provider", required=True)
     run.add_argument("--model", required=True)
+    run.add_argument("--suite", default="v2")
+    run.add_argument("--profile", default="canonical-v1")
     run.add_argument("--reasoning-effort")
     run.add_argument("--max-tokens", type=int)
     run.add_argument("--max-input-tokens", type=int)
-    run.add_argument("--preset", default="full", choices=("fast", "full"))
-    run.add_argument("--repeats", type=int, default=3)
+    run.add_argument("--preset", choices=("fast", "full"))
+    run.add_argument("--repeats", type=int)
     run.add_argument("--case", action="append")
     run.add_argument("--api-base")
     run.add_argument("--concurrency", type=int)
@@ -85,7 +87,10 @@ def main(argv: list[str] | None = None) -> None:
 
             regenerate_reports(root)
             return
-        _positive(parser, "--repeats", args.repeats)
+        from lgtmaybe_bench.runner import resolve_profile_args
+
+        profile = resolve_profile_args(args)
+        _positive(parser, "--repeats", profile.repeats)
         _positive(parser, "--timeout", args.timeout)
         if args.concurrency is not None:
             _positive(parser, "--concurrency", args.concurrency)

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import gzip
+import hashlib
 import json
 import re
 import shutil
@@ -19,6 +21,112 @@ from lgtmaybe_bench.scoring import Finding, parse_findings
 TRUNCATION_MARKERS = ("truncat", "output_limit", "length", "max_tokens")
 RAW_IN_PROGRESS = "in_progress"
 RAW_COMPLETE = "complete"
+CANONICAL_PROFILE_ID = "canonical-v1"
+
+
+@dataclass(frozen=True, slots=True)
+class ResolvedProfile:
+    id: str
+    base_profile_id: str
+    schema_version: int
+    canonical: bool
+    repeats: int
+    preset: str
+    reasoning_effort: str | None
+    max_tokens: int | None
+    max_input_tokens: int
+    reflect: bool
+    recursive: bool
+    spec_review: bool
+    static_analysis: bool
+    mid_review_retrieval: bool
+    diagnostic_overrides: tuple[str, ...] = ()
+
+
+def _profile(
+    profile_id: str,
+    *,
+    canonical: bool = False,
+    repeats: int = 1,
+    preset: str = "fast",
+    max_tokens: int | None = None,
+    max_input_tokens: int = 100_000,
+) -> ResolvedProfile:
+    return ResolvedProfile(
+        id=profile_id,
+        base_profile_id=profile_id,
+        schema_version=1,
+        canonical=canonical,
+        repeats=repeats,
+        preset=preset,
+        reasoning_effort=None,
+        max_tokens=max_tokens,
+        max_input_tokens=max_input_tokens,
+        reflect=True,
+        recursive=True,
+        spec_review=True,
+        static_analysis=False,
+        mid_review_retrieval=False,
+    )
+
+
+PROFILES = {
+    CANONICAL_PROFILE_ID: _profile(CANONICAL_PROFILE_ID, canonical=True, repeats=3),
+    "diagnostic-full-v1": _profile("diagnostic-full-v1", preset="full"),
+    "diagnostic-4k-v1": _profile("diagnostic-4k-v1", max_tokens=4096),
+    "diagnostic-large-diff-v1": _profile("diagnostic-large-diff-v1", max_input_tokens=20_000),
+}
+
+
+def get_profile(profile_id: str) -> ResolvedProfile:
+    try:
+        return PROFILES[profile_id]
+    except KeyError as exc:
+        raise ValueError(f"unknown profile: {profile_id}") from exc
+
+
+def resolve_profile(profile_id: str, overrides: dict[str, Any]) -> ResolvedProfile:
+    base = get_profile(profile_id)
+    allowed = {
+        "repeats",
+        "preset",
+        "reasoning_effort",
+        "max_tokens",
+        "max_input_tokens",
+        "reflect",
+        "recursive",
+        "spec_review",
+        "static_analysis",
+        "mid_review_retrieval",
+    }
+    unknown = sorted(overrides.keys() - allowed)
+    if unknown:
+        raise ValueError(f"unknown profile override(s): {', '.join(unknown)}")
+    changed = tuple(sorted(key for key, value in overrides.items() if getattr(base, key) != value))
+    if not changed:
+        return base
+    values = {key: overrides[key] for key in changed}
+    return replace(
+        base,
+        **values,
+        id="diagnostic-custom-v1",
+        canonical=False,
+        diagnostic_overrides=changed,
+    )
+
+
+def resolve_profile_args(args: Any) -> ResolvedProfile:
+    override_names = (
+        "repeats",
+        "preset",
+        "reasoning_effort",
+        "max_tokens",
+        "max_input_tokens",
+    )
+    overrides = {
+        name: value for name in override_names if (value := getattr(args, name, None)) is not None
+    }
+    return resolve_profile(getattr(args, "profile", CANONICAL_PROFILE_ID), overrides)
 
 
 @dataclass(frozen=True, slots=True)
@@ -32,6 +140,11 @@ class RunConfig:
     api_base: str | None
     concurrency: int
     timeout: int
+    reflect: bool = True
+    recursive: bool = True
+    spec_review: bool = True
+    static_analysis: bool = False
+    mid_review_retrieval: bool = False
 
 
 @dataclass(frozen=True, slots=True)
@@ -51,6 +164,13 @@ class ProfileCall:
 
 
 @dataclass(frozen=True, slots=True)
+class AuditCapture:
+    state: str
+    jsonl: str | None
+    schema_versions: tuple[int, ...] = ()
+
+
+@dataclass(frozen=True, slots=True)
 class Observation:
     findings: tuple[Finding, ...]
     stdout: str
@@ -66,6 +186,39 @@ class Observation:
     input_tokens: int
     output_tokens: int
     reasoning_tokens: int
+    audit: AuditCapture
+
+
+def read_audit_trace(target: Path | None) -> AuditCapture:
+    if target is None:
+        return AuditCapture("unsupported", None)
+    partial = target.with_name(f"{target.name}.partial")
+    source = target if target.is_file() else partial if partial.is_file() else None
+    if source is None:
+        return AuditCapture("unavailable", None)
+    serialized = source.read_text(encoding="utf-8")
+    try:
+        events = [json.loads(line) for line in serialized.splitlines()]
+    except json.JSONDecodeError:
+        return AuditCapture("malformed", serialized)
+    if not events or not all(isinstance(event, dict) for event in events):
+        return AuditCapture("malformed", serialized)
+    versions = tuple(
+        sorted(
+            {
+                version
+                for event in events
+                if isinstance((version := event.get("schema_version")), int)
+            }
+        )
+    )
+    terminal = events[-1]
+    state = (
+        str(terminal.get("status"))
+        if terminal.get("event") == "run_finished" and terminal.get("status")
+        else "partial"
+    )
+    return AuditCapture(state, serialized, versions)
 
 
 def _git(repo: Path, *args: str) -> None:
@@ -141,7 +294,7 @@ def parse_review_output(stdout: str) -> tuple[tuple[Finding, ...], str, tuple[Pr
     return parse_findings(raw_findings), profile, tuple(calls)
 
 
-def _command(config: RunConfig, executable: list[str]) -> list[str]:
+def _command(config: RunConfig, executable: list[str], audit_path: Path | None = None) -> list[str]:
     command = [
         *executable,
         "review",
@@ -158,6 +311,11 @@ def _command(config: RunConfig, executable: list[str]) -> list[str]:
         config.preset,
         "--max-concurrency",
         str(config.concurrency),
+        "--reflect" if config.reflect else "--no-reflect",
+        "--recursive" if config.recursive else "--no-recursive",
+        "--spec" if config.spec_review else "--no-spec",
+        "--static-analysis" if config.static_analysis else "--no-static-analysis",
+        ("--mid-review-retrieval" if config.mid_review_retrieval else "--no-mid-review-retrieval"),
     ]
     options = (
         ("--reasoning-effort", config.reasoning_effort),
@@ -168,15 +326,22 @@ def _command(config: RunConfig, executable: list[str]) -> list[str]:
     for flag, value in options:
         if value is not None:
             command.extend((flag, str(value)))
+    if audit_path is not None:
+        command.extend(("--audit-jsonl", str(audit_path)))
     return command
 
 
-def run_review(repo: Path, config: RunConfig, executable: list[str]) -> Observation:
+def run_review(
+    repo: Path,
+    config: RunConfig,
+    executable: list[str],
+    audit_path: Path | None = None,
+) -> Observation:
     started = time.perf_counter()
     timed_out = False
     try:
         completed = subprocess.run(
-            _command(config, executable),
+            _command(config, executable, audit_path),
             cwd=repo,
             capture_output=True,
             text=True,
@@ -219,6 +384,7 @@ def run_review(repo: Path, config: RunConfig, executable: list[str]) -> Observat
         input_tokens=sum(call.input_tokens for call in calls),
         output_tokens=sum(call.output_tokens for call in calls),
         reasoning_tokens=sum(call.reasoning_tokens for call in calls),
+        audit=read_audit_trace(audit_path),
     )
 
 
@@ -248,11 +414,54 @@ def save_raw_result(directory: Path, timestamp: str, slug: str, data: dict[str, 
     return write_raw_result(reserve_raw_result_path(directory, timestamp, slug), data)
 
 
-def _jsonable_observation(observation: Observation) -> dict[str, Any]:
+def _jsonable_observation(
+    observation: Observation, observation_id: str, audit: dict[str, Any]
+) -> dict[str, Any]:
     data = asdict(observation)
-    data["findings"] = [asdict(finding) for finding in observation.findings]
+    data.pop("audit")
+    data["observation_id"] = observation_id
+    data["findings"] = [
+        {**finding.raw, "finding_id": f"{observation_id}:finding:{index}"}
+        for index, finding in enumerate(observation.findings, start=1)
+    ]
     data["calls"] = [asdict(call) for call in observation.calls]
+    data["audit"] = audit
     return data
+
+
+def _audit_supported(executable: list[str]) -> bool:
+    try:
+        help_result = subprocess.run(
+            [*executable, "review", "--help"],
+            capture_output=True,
+            text=True,
+            timeout=30,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return False
+    return help_result.returncode == 0 and "--audit-jsonl" in help_result.stdout
+
+
+def _store_audit(root: Path, observation_id: str, capture: AuditCapture) -> dict[str, Any]:
+    metadata: dict[str, Any] = {
+        "state": capture.state,
+        "schema_versions": list(capture.schema_versions),
+        "path": None,
+        "sha256": None,
+    }
+    if capture.jsonl is None:
+        return metadata
+    directory = root / "results" / "audit"
+    directory.mkdir(parents=True, exist_ok=True)
+    name = re.sub(r"[^a-zA-Z0-9._-]+", "-", observation_id).strip("-")
+    artifact = directory / f"{name}.jsonl.gz"
+    compressed = gzip.compress(capture.jsonl.encode(), mtime=0)
+    with artifact.open("xb") as stream:
+        stream.write(compressed)
+    metadata["path"] = artifact.relative_to(root).as_posix()
+    metadata["sha256"] = hashlib.sha256(compressed).hexdigest()
+    return metadata
 
 
 def _redact_api_base(value: str | None) -> str | None:
@@ -288,55 +497,82 @@ def _lgtmaybe_version(executable: list[str]) -> str:
 def execute_benchmark(root: Path, args: Any, executable: str | list[str]) -> Path:
     """Execute a full configuration run, persist it, and regenerate reports."""
     from lgtmaybe_bench.cli import resolved_concurrency
-    from lgtmaybe_bench.corpus import discover_cases, select_cases
+    from lgtmaybe_bench.corpus import load_suite, select_cases, validate_v2_matrix
     from lgtmaybe_bench.reporting import regenerate_reports
 
-    cases = select_cases(discover_cases(root / "corpus", require_coverage=True), args.case)
+    suite = load_suite(root / "corpus", getattr(args, "suite", "legacy-v1"))
+    if suite.id == "v2":
+        validate_v2_matrix(suite)
+    cases = select_cases(list(suite.cases), args.case)
+    profile = resolve_profile_args(args)
     config = RunConfig(
         provider=args.provider,
         model=args.model,
-        reasoning_effort=args.reasoning_effort,
-        max_tokens=args.max_tokens,
-        max_input_tokens=args.max_input_tokens,
-        preset=args.preset,
+        reasoning_effort=profile.reasoning_effort,
+        max_tokens=profile.max_tokens,
+        max_input_tokens=profile.max_input_tokens,
+        preset=profile.preset,
         api_base=args.api_base,
         concurrency=resolved_concurrency(args.provider, args.concurrency),
         timeout=args.timeout,
+        reflect=profile.reflect,
+        recursive=profile.recursive,
+        spec_review=profile.spec_review,
+        static_analysis=profile.static_analysis,
+        mid_review_retrieval=profile.mid_review_retrieval,
     )
     executable_parts = [executable] if isinstance(executable, str) else executable
     version = _lgtmaybe_version(executable_parts)
+    audit_supported = _audit_supported(executable_parts)
     timestamp = datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
     observations: list[dict[str, Any]] = []
 
     def record(status: str) -> dict[str, Any]:
         return {
-            "schema_version": 1,
+            "schema_version": 2,
+            "run_id": run_id,
             "status": status,
             "timestamp": timestamp,
             "lgtmaybe_version": version,
             "configuration": {
                 **asdict(config),
                 "api_base": _redact_api_base(config.api_base),
-                "repeats": args.repeats,
+                "suite": suite.id,
+                "profile": profile.id,
+                "base_profile": profile.base_profile_id,
+                "profile_schema_version": profile.schema_version,
+                "profile_canonical": profile.canonical,
+                "diagnostic_overrides": list(profile.diagnostic_overrides),
+                "resolved_profile": asdict(profile),
+                "audit_available": audit_supported,
+                "repeats": profile.repeats,
                 "cases": [c.truth.name for c in cases],
-                "full_corpus": args.case is None,
+                "full_corpus": args.case is None and len(cases) == len(suite.cases),
             },
             "observations": observations,
         }
 
     slug = re.sub(r"[^a-z0-9]+", "-", f"{args.provider}-{args.model}".casefold()).strip("-")
     path = reserve_raw_result_path(root / "results" / "raw", timestamp, slug)
-    for repeat in range(1, args.repeats + 1):
+    run_id = path.stem
+    for repeat in range(1, profile.repeats + 1):
         for case in cases:
             with tempfile.TemporaryDirectory(prefix="lgtmaybe-bench-") as temporary:
-                repo = build_case_repo(case.path, Path(temporary) / "repo")
-                observation = run_review(repo, config, executable_parts)
+                temporary_path = Path(temporary)
+                repo = build_case_repo(case.path, temporary_path / "repo")
+                audit_path = temporary_path / "audit.jsonl" if audit_supported else None
+                observation = run_review(repo, config, executable_parts, audit_path)
+            observation_id = f"{run_id}:repeat:{repeat}:case:{case.truth.name}"
             observations.append(
                 {
                     "repeat": repeat,
                     "case": case.truth.name,
                     "ground_truth": case.raw,
-                    **_jsonable_observation(observation),
+                    **_jsonable_observation(
+                        observation,
+                        observation_id,
+                        _store_audit(root, observation_id, observation.audit),
+                    ),
                 }
             )
             write_raw_result(path, record(RAW_IN_PROGRESS))

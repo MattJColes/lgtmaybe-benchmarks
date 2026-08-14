@@ -1,0 +1,32 @@
+{
+  "name": "typescript-contract-evolution-v1",
+  "language": "typescript",
+  "changed_file": "client.ts",
+  "clean": false,
+  "commit_message": "refactor: retain fetchUser compatibility",
+  "coverage": [],
+  "expected": [
+    {
+      "label": "exported function changed its return contract without docs",
+      "lens": "documentation",
+      "line": 1,
+      "keywords": ["documentation", "return contract", "tuple"],
+      "severity_at_least": "medium"
+    },
+    {
+      "label": "toGMTString is deprecated",
+      "lens": "deprecation",
+      "line": 2,
+      "keywords": ["togmtstring", "deprecated", "toutcstring"],
+      "severity_at_least": "low"
+    },
+    {
+      "label": "required timeout and tuple break stated compatibility",
+      "lens": "intent",
+      "line": 1,
+      "keywords": ["compatibility", "required", "tuple"],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

@@ -1,0 +1,13 @@
+{
+  "name": "rust-efficiency-design-v1",
+  "language": "rust",
+  "changed_file": "src/lib.rs",
+  "clean": false,
+  "coverage": [],
+  "expected": [
+    {"label": "repository loads once per ID", "lens": "performance", "line": 10, "keywords": ["n+1", "load_many", "per id"], "severity_at_least": "medium"},
+    {"label": "nested option and state checks hide predicate", "lens": "complexity", "line": 13, "keywords": ["nesting", "filter", "predicate"], "severity_at_least": "low"},
+    {"label": "VecFactory wraps Vec::new once", "lens": "ponytail", "line": 1, "keywords": ["vecfactory", "indirection", "vec::new"], "severity_at_least": "low"}
+  ],
+  "forbidden": []
+}

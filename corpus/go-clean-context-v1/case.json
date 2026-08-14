@@ -1,0 +1,10 @@
+{
+  "name": "go-clean-context-v1",
+  "language": "go",
+  "changed_file": "query.go",
+  "clean": true,
+  "clean_trap": "User input is normalized and passed as a PostgreSQL placeholder argument, never concatenated into SQL.",
+  "coverage": [],
+  "expected": [],
+  "forbidden": []
+}

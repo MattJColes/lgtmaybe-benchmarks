@@ -1,0 +1,14 @@
+{
+  "name": "go-contract-evolution-v1",
+  "language": "go",
+  "changed_file": "client.go",
+  "clean": false,
+  "commit_message": "refactor: preserve FetchUser caller compatibility",
+  "coverage": [],
+  "expected": [
+    {"label": "exported tuple return is undocumented", "lens": "documentation", "line": 5, "keywords": ["documentation", "return values", "exported"], "severity_at_least": "medium"},
+    {"label": "io/ioutil is deprecated", "lens": "deprecation", "line": 3, "keywords": ["ioutil", "deprecated", "os.readfile"], "severity_at_least": "low"},
+    {"label": "required timeout and second return break compatibility", "lens": "intent", "line": 5, "keywords": ["compatibility", "pointer", "second return"], "severity_at_least": "medium"}
+  ],
+  "forbidden": []
+}
