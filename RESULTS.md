@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-15 | openrouter | deepseek/deepseek-v4-flash-0731 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 27.5% | 68.8% | 44.9% | 22.0 | 27.0 | — | — | no | [raw](results/raw/20260815-160227-openrouter-deepseek-deepseek-v4-flash-0731.json) | — | — |
 | 2026-08-15 | openrouter | minimax/minimax-m3 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 43.4% | 53.1% | 56.7% | 17.0 | 13.0 | — | — | no | [raw](results/raw/20260815-144254-openrouter-minimax-minimax-m3.json) | — | — |
 | 2026-08-15 | openrouter | z-ai/glm-5.2 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 31.7% | 78.1% | 47.2% | 25.0 | 28.0 | — | — | no | [raw](results/raw/20260815-141246-openrouter-z-ai-glm-5-2.json) | — | — |
 | 2026-08-15 | openrouter | qwen/qwen3.8-max | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 71.9% | 16.5% | 23.0 | 116.0 | — | — | no | [raw](results/raw/20260815-141246-openrouter-qwen-qwen3-8-max.json) | — | — |
@@ -28,6 +29,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-15 | openrouter | deepseek/deepseek-v4-flash-0731 | python-context-small-v1 | 62.5% | 35.7% | 14 | 76,752 | 127,720 | yes | 1530.8 |
+| 2026-08-15 | openrouter | deepseek/deepseek-v4-flash-0731 | python-context-medium-v1 | 75.0% | 75.0% | 8 | 190,087 | 361,922 | yes | 4069.0 |
+| 2026-08-15 | openrouter | deepseek/deepseek-v4-flash-0731 | python-context-large-v1 | 62.5% | 55.6% | 9 | 589,263 | 177,650 | yes | 1206.7 |
+| 2026-08-15 | openrouter | deepseek/deepseek-v4-flash-0731 | python-context-xlarge-v1 | 75.0% | 60.0% | 10 | 1,025,324 | 205,010 | yes | 2936.8 |
+| 2026-08-15 | openrouter | deepseek/deepseek-v4-flash-0731 | python-context-clean-large-v1 | — | 0.0% | 8 | 535,419 | 98,789 | no | 287.7 |
 | 2026-08-15 | openrouter | minimax/minimax-m3 | python-context-small-v1 | 75.0% | 60.0% | 10 | 83,168 | 143,255 | yes | 1235.4 |
 | 2026-08-15 | openrouter | minimax/minimax-m3 | python-context-medium-v1 | 50.0% | 57.1% | 7 | 222,676 | 38,515 | yes | 1966.3 |
 | 2026-08-15 | openrouter | minimax/minimax-m3 | python-context-large-v1 | 50.0% | 66.7% | 6 | 520,938 | 6,526 | no | 143.2 |
@@ -103,6 +109,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
+| deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 62.5% |
+| deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |
+| deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 75.0% |
+| deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
+| deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 50.0% |
+| deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
 | minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
 | minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 62.5% |
 | minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
