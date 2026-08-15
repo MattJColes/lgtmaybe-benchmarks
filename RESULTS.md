@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-15 | openrouter | moonshotai/kimi-k2.7-code | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 78.1% | 33.3% | 25.0 | 50.0 | — | — | no | [raw](results/raw/20260815-112613-openrouter-moonshotai-kimi-k2-7-code.json) | — | — |
 | 2026-08-15 | openrouter | moonshotai/kimi-k3 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 93.8% | 24.0% | 30.0 | 95.0 | — | — | no | [raw](results/raw/20260815-104956-openrouter-moonshotai-kimi-k3.json) | — | — |
 | 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 29.7% | 81.2% | 46.4% | 26.0 | 30.0 | — | — | no | [raw](results/raw/20260815-095319-openrouter-google-gemini-3-1-pro-preview.json) | — | — |
 | 2026-08-15 | openrouter | openai/gpt-5.6-sol | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 59.4% | 32.2% | 19.0 | 40.0 | — | — | no | [raw](results/raw/20260815-093123-openrouter-openai-gpt-5-6-sol.json) | — | — |
@@ -23,6 +24,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-15 | openrouter | moonshotai/kimi-k2.7-code | python-context-small-v1 | 75.0% | 40.0% | 15 | 74,105 | 148,608 | no | 578.6 |
+| 2026-08-15 | openrouter | moonshotai/kimi-k2.7-code | python-context-medium-v1 | 87.5% | 46.7% | 15 | 210,914 | 278,368 | yes | 1204.3 |
+| 2026-08-15 | openrouter | moonshotai/kimi-k2.7-code | python-context-large-v1 | 62.5% | 50.0% | 10 | 510,561 | 166,330 | no | 843.2 |
+| 2026-08-15 | openrouter | moonshotai/kimi-k2.7-code | python-context-xlarge-v1 | 87.5% | 36.8% | 19 | 975,329 | 218,855 | no | 670.7 |
+| 2026-08-15 | openrouter | moonshotai/kimi-k2.7-code | python-context-clean-large-v1 | — | 0.0% | 16 | 530,287 | 455,920 | no | 1705.2 |
 | 2026-08-15 | openrouter | moonshotai/kimi-k3 | python-context-small-v1 | 75.0% | 27.3% | 22 | 77,626 | 88,388 | no | 419.3 |
 | 2026-08-15 | openrouter | moonshotai/kimi-k3 | python-context-medium-v1 | 100.0% | 25.0% | 32 | 219,957 | 137,624 | no | 295.3 |
 | 2026-08-15 | openrouter | moonshotai/kimi-k3 | python-context-large-v1 | 100.0% | 36.4% | 22 | 519,655 | 116,784 | no | 557.7 |
@@ -78,6 +84,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 75.0% |
+| moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 100.0% |
+| moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
+| moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 75.0% |
+| moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
+| moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
+| moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
 | moonshotai/kimi-k3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 75.0% |
 | moonshotai/kimi-k3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 100.0% |
 | moonshotai/kimi-k3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |
