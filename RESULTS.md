@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-14 | ollama | qwen2.5-coder:3b | context-v1 | context-canonical-v1 | lgtmaybe 2.1.3 | complete | 0.0% | 0.0% | 0.0% | None | — | — | no | [raw](results/raw/20260814-104718-ollama-qwen2-5-coder-3b.json) | — | — |
 | 2026-08-14 | openrouter | qwen/qwen3.6-35b-a3b | legacy-v1 | legacy-v1 | lgtmaybe 2.1.0 | complete | 60.5% | 47.6% | 83.3% | None | — | — | no | [raw](results/raw/20260814-043524-openrouter-qwen-qwen3-6-35b-a3b.json) | — | max tokens 4096; repeats 1 |
 | 2026-08-14 | openrouter | anthropic/claude-sonnet-5 | legacy-v1 | legacy-v1 | lgtmaybe 2.1.0 | complete | 42.0% | 33.3% | 63.6% | None | — | — | no | [raw](results/raw/20260814-040141-openrouter-anthropic-claude-sonnet-5.json) | — | max tokens 8192; repeats 1 |
 | 2026-08-14 | openrouter | anthropic/claude-opus-5 | legacy-v1 | legacy-v1 | lgtmaybe 2.1.0 | complete | 9.1% | 4.8% | 100.0% | None | — | — | no | [raw](results/raw/20260814-035350-openrouter-anthropic-claude-opus-5.json) | — | max tokens 8192; repeats 1 |
@@ -45,6 +46,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| qwen2.5-coder:3b | context-v1 / context-canonical-v1 / lgtmaybe 2.1.3 | complexity | 0.0% |
+| qwen2.5-coder:3b | context-v1 / context-canonical-v1 / lgtmaybe 2.1.3 | correctness | 0.0% |
+| qwen2.5-coder:3b | context-v1 / context-canonical-v1 / lgtmaybe 2.1.3 | deprecation | 0.0% |
+| qwen2.5-coder:3b | context-v1 / context-canonical-v1 / lgtmaybe 2.1.3 | documentation | 0.0% |
+| qwen2.5-coder:3b | context-v1 / context-canonical-v1 / lgtmaybe 2.1.3 | intent | 0.0% |
+| qwen2.5-coder:3b | context-v1 / context-canonical-v1 / lgtmaybe 2.1.3 | performance | 0.0% |
+| qwen2.5-coder:3b | context-v1 / context-canonical-v1 / lgtmaybe 2.1.3 | security | 0.0% |
 | qwen/qwen3.6-35b-a3b | legacy-v1 / legacy-v1 / lgtmaybe 2.1.0 | complexity | 0.0% |
 | qwen/qwen3.6-35b-a3b | legacy-v1 / legacy-v1 / lgtmaybe 2.1.0 | correctness | 100.0% |
 | qwen/qwen3.6-35b-a3b | legacy-v1 / legacy-v1 / lgtmaybe 2.1.0 | deprecation | 100.0% |
