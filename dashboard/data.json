@@ -5,6 +5,26 @@
       "audit_paths": [],
       "canonical": false,
       "comparison_key": "context-v1 / context-canonical-v1 / lgtmaybe 2.1.4",
+      "context_cases": [],
+      "date": "2026-08-15",
+      "focused": false,
+      "lgtmaybe_version": "lgtmaybe 2.1.4",
+      "metrics": null,
+      "model": "z-ai/glm-4.7",
+      "profile": "context-canonical-v1",
+      "provider": "openrouter",
+      "raw_path": "results/raw/20260815-204224-openrouter-z-ai-glm-4-7.json",
+      "run_id": "20260815-204224-openrouter-z-ai-glm-4-7",
+      "settings": "—",
+      "status": "complete",
+      "suite": "context-v1",
+      "timestamp": "2026-08-15T20:42:24Z"
+    },
+    {
+      "audit": "no",
+      "audit_paths": [],
+      "canonical": false,
+      "comparison_key": "context-v1 / context-canonical-v1 / lgtmaybe 2.1.4",
       "context_cases": [
         {
           "case": "python-context-small-v1",
