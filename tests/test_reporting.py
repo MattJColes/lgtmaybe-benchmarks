@@ -672,6 +672,63 @@ def test_context_model_summary_ranks_by_score() -> None:
     assert summary.index("higher") < summary.index("lower")
 
 
+def _assert_top_ten(rendered: str) -> None:
+    rows = [line for line in rendered.splitlines() if line.startswith("| 2026-")]
+
+    assert len(rows) == 10
+    assert "high-10" in rows[0]
+    assert "high-0" not in rendered
+    assert "low" not in rendered
+
+
+def test_context_readme_ranking_shows_top_ten() -> None:
+    runs = [
+        context_raw(f"2026-01-{index + 1:02d}T00:00:00Z", f"high-{index}") for index in range(11)
+    ]
+    low = context_raw("2026-01-12T00:00:00Z", "low")
+    observations = low["observations"]
+    assert isinstance(observations, list)
+    observations[0]["findings"] = []
+
+    _assert_top_ten(render_results([*runs, low]))
+
+
+def test_v2_readme_ranking_shows_top_ten() -> None:
+    runs = [v2_raw(f"2026-01-{index + 1:02d}T00:00:00Z", f"high-{index}") for index in range(11)]
+    low = v2_raw("2026-01-12T00:00:00Z", "low")
+    observations = low["observations"]
+    assert isinstance(observations, list)
+    observations[0]["findings"] = []
+
+    _assert_top_ten(render_results([*runs, low]))
+
+
+def test_legacy_readme_ranking_shows_top_ten() -> None:
+    runs = [raw(f"2026-01-{index + 1:02d}T00:00:00Z", f"high-{index}", True) for index in range(11)]
+    low = raw("2026-01-12T00:00:00Z", "low", False)
+
+    _assert_top_ten(render_results([*runs, low]))
+
+
+def test_detailed_outputs_keep_rows_excluded_from_readme() -> None:
+    runs = [
+        context_raw(f"2026-01-{index + 1:02d}T00:00:00Z", f"high-{index}") for index in range(11)
+    ]
+    low = context_raw("2026-01-12T00:00:00Z", "low")
+    observations = low["observations"]
+    assert isinstance(observations, list)
+    observations[0]["findings"] = []
+
+    data = build_dashboard_data([*runs, low])
+
+    assert len(data["runs"]) == 12
+    assert "low" in render_detailed_results(data)
+    html = render_dashboard(data)
+    assert "low" in html
+    assert 'data-sort="true_positives"' in html
+    assert "metric(run, 'true_positives')" in html
+
+
 def test_context_scaling_section_excludes_ineligible_runs() -> None:
     focused = context_raw("2026-08-14T00:00:00Z", "focused", full_corpus=False)
     diagnostic = context_raw("2026-08-14T00:00:00Z", "diag", profile="diagnostic-custom-v1")
