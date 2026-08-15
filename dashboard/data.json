@@ -112,6 +112,114 @@
       "context_cases": [
         {
           "case": "python-context-small-v1",
+          "findings": 4.0,
+          "input_tokens": 72364,
+          "output_tokens": 213380,
+          "precision": 1.0,
+          "recall": 0.5,
+          "truncated": true,
+          "wall_seconds": 1523.267546834977
+        },
+        {
+          "case": "python-context-medium-v1",
+          "findings": 3.0,
+          "input_tokens": 251111,
+          "output_tokens": 422769,
+          "precision": 0.6666666666666666,
+          "recall": 0.25,
+          "truncated": true,
+          "wall_seconds": 3139.734439902997
+        },
+        {
+          "case": "python-context-large-v1",
+          "findings": 4.0,
+          "input_tokens": 530236,
+          "output_tokens": 290410,
+          "precision": 1.0,
+          "recall": 0.5,
+          "truncated": true,
+          "wall_seconds": 2004.6753849490196
+        },
+        {
+          "case": "python-context-xlarge-v1",
+          "findings": 3.0,
+          "input_tokens": 1016452,
+          "output_tokens": 164189,
+          "precision": 0.6666666666666666,
+          "recall": 0.25,
+          "truncated": false,
+          "wall_seconds": 1148.1681287840183
+        },
+        {
+          "case": "python-context-clean-large-v1",
+          "findings": 0.0,
+          "input_tokens": 570448,
+          "output_tokens": 221877,
+          "precision": 1.0,
+          "recall": null,
+          "truncated": true,
+          "wall_seconds": 1845.7694438839972
+        }
+      ],
+      "date": "2026-08-15",
+      "focused": false,
+      "lgtmaybe_version": "lgtmaybe 2.1.4",
+      "metrics": {
+        "adjudication_coverage": null,
+        "balanced_f1": 0.5054545454545454,
+        "balanced_recall": 0.375,
+        "clean_pass_rate": null,
+        "duplicates": null,
+        "failures": 0.0,
+        "false_positive_classes": {},
+        "false_positives": 2.0,
+        "input_tokens": 2440611.0,
+        "output_tokens": 1312625.0,
+        "per_language": {},
+        "per_lens": {
+          "complexity": 0.0,
+          "correctness": 0.75,
+          "deprecation": 0.0,
+          "documentation": 0.0,
+          "intent": 0.5,
+          "performance": 0.0,
+          "security": 1.0
+        },
+        "precision": 0.8571428571428571,
+        "provisional": false,
+        "reasoning_tokens": 1263364.0,
+        "score_kind": "legacy_f1",
+        "true_positives": 12.0,
+        "truncation_lenses": [
+          "complexity",
+          "correctness",
+          "documentation",
+          "intent",
+          "performance",
+          "tests"
+        ],
+        "truncations": 16.0,
+        "unadjudicated": null,
+        "wall_seconds": 9661.61494435501
+      },
+      "model": "deepseek/deepseek-v4-pro-0813",
+      "profile": "context-canonical-v1",
+      "provider": "openrouter",
+      "raw_path": "results/raw/20260815-162205-openrouter-deepseek-deepseek-v4-pro-0813.json",
+      "run_id": "20260815-162205-openrouter-deepseek-deepseek-v4-pro-0813",
+      "settings": "—",
+      "status": "complete",
+      "suite": "context-v1",
+      "timestamp": "2026-08-15T16:22:05Z"
+    },
+    {
+      "audit": "no",
+      "audit_paths": [],
+      "canonical": false,
+      "comparison_key": "context-v1 / context-canonical-v1 / lgtmaybe 2.1.4",
+      "context_cases": [
+        {
+          "case": "python-context-small-v1",
           "findings": 14.0,
           "input_tokens": 76752,
           "output_tokens": 127720,
