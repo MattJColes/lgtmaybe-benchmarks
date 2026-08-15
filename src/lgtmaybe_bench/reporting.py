@@ -12,6 +12,7 @@ from lgtmaybe_bench.cli import resolved_concurrency
 from lgtmaybe_bench.runner import RAW_COMPLETE as COMPLETE
 from lgtmaybe_bench.runner import get_profile
 from lgtmaybe_bench.scoring import (
+    AggregateMetrics,
     CaseScore,
     Range,
     RepeatMetrics,
@@ -378,8 +379,13 @@ CONTEXT_SUITE_ID = "context-v1"
 CONTEXT_PROFILE_ID = "context-canonical-v1"
 
 
+def _true_positive_range(repeats: list[RepeatMetrics]) -> Range:
+    values = [float(repeat.score.caught) for repeat in repeats]
+    return Range(float(median(values)), min(values), max(values))
+
+
 def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
-    """Render per-case metrics for complete canonical context-scaling runs."""
+    """Render model and per-case metrics for complete canonical context-scaling runs."""
     eligible = [
         raw
         for raw in raw_runs
@@ -391,20 +397,58 @@ def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
     ]
     if not eligible:
         return None
-    rows: list[str] = []
-    header = (
-        "| date | provider | model | case | recall | precision | findings | input tokens | "
-        "output tokens | truncated | wall (s) |\n"
-        "|---|---|---|---|---:|---:|---:|---:|---:|---|---:|\n"
-    )
-    for raw in sorted(
+    ordered = sorted(
         eligible,
         key=lambda item: (
             str(item["configuration"].get("model", "")),
             str(item["timestamp"]),
             str(item.get("run_id", "")),
         ),
+    )
+    summaries: list[tuple[dict[str, Any], ScoredRun, AggregateMetrics]] = []
+    for raw in ordered:
+        scored = _score_run(raw)
+        metrics = aggregate_repeats(scored.repeats)
+        summaries.append((raw, scored, metrics))
+    summary_rows: list[str] = []
+    for raw, scored, metrics in sorted(
+        summaries,
+        key=lambda item: (
+            item[2].score.median,
+            str(item[0]["timestamp"]),
+            str(item[0].get("run_id", "")),
+        ),
+        reverse=True,
     ):
+        config = raw["configuration"]
+        summary_rows.append(
+            "| "
+            + " | ".join(
+                (
+                    _iso_date(str(raw["timestamp"])),
+                    str(config.get("provider", "")),
+                    str(config.get("model", "")),
+                    _range(metrics.score, percent=True),
+                    _range(metrics.recall, percent=True),
+                    _range(metrics.precision, percent=True),
+                    _count_range(_true_positive_range(scored.repeats)),
+                    _count_range(metrics.false_positives),
+                )
+            )
+            + " |"
+        )
+    summary_header = (
+        "| date | provider | model | score | recall | precision | true positives | "
+        "false positives |\n"
+        "|---|---|---|---:|---:|---:|---:|---:|\n"
+    )
+    case_rows: list[str] = []
+    case_header = (
+        "| date | provider | model | case | recall | precision | findings | input tokens | "
+        "output tokens | truncated | wall (s) |\n"
+        "|---|---|---|---|---:|---:|---:|---:|---:|---|---:|\n"
+    )
+    for raw in ordered:
         config = raw["configuration"]
         case_order = []
         observations_by_case: dict[str, list[dict[str, Any]]] = {}
@@ -433,11 +477,9 @@ def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
             wall = median(float(obs["wall_seconds"]) for obs in repeats)
             truncated = bool(
                 any(obs.get("truncation_lenses") for obs in repeats)
-                or any(
-                    call.get("truncated") for obs in repeats for call in obs.get("calls", [])
-                )
+                or any(call.get("truncated") for obs in repeats for call in obs.get("calls", []))
             )
-            rows.append(
+            case_rows.append(
                 "| "
                 + " | ".join(
                     (
@@ -461,7 +503,14 @@ def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
         "Complete `context-v1` runs with profile `context-canonical-v1` only. "
         "Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting "
         "eight bugs at the same relative positions; the clean case plants none. Recall is "
-        "per-case over the eight planted findings.\n\n" + header + "\n".join(rows) + "\n"
+        "per-case over the eight planted findings.\n\n"
+        "### Model summary\n\n"
+        + summary_header
+        + "\n".join(summary_rows)
+        + "\n\n### Case detail\n\n"
+        + case_header
+        + "\n".join(case_rows)
+        + "\n"
     )
 
 
@@ -541,16 +590,23 @@ def build_dashboard_data(
             else:
                 scored_legacy = _score_run(raw)
                 aggregate_legacy = aggregate_repeats(scored_legacy.repeats)
+                context_metrics = suite == CONTEXT_SUITE_ID
                 metrics = {
                     "score_kind": "legacy_f1",
                     "balanced_f1": aggregate_legacy.score.median,
                     "balanced_recall": aggregate_legacy.recall.median,
                     "precision": aggregate_legacy.precision.median,
-                    "false_positives": None,
+                    "false_positives": (
+                        aggregate_legacy.false_positives.median if context_metrics else None
+                    ),
                     "false_positive_classes": {},
                     "clean_pass_rate": None,
                     "adjudication_coverage": None,
-                    "true_positives": None,
+                    "true_positives": (
+                        _true_positive_range(scored_legacy.repeats).median
+                        if context_metrics
+                        else None
+                    ),
                     "duplicates": None,
                     "unadjudicated": None,
                     "provisional": False,
@@ -834,6 +890,7 @@ def render_detailed_results(data: dict[str, Any]) -> str:
                     percentage(metrics.get("balanced_f1")),
                     percentage(metrics.get("balanced_recall")),
                     percentage(metrics.get("precision")),
+                    metrics.get("true_positives", "—"),
                     metrics.get("false_positives", "—"),
                     percentage(metrics.get("clean_pass_rate")),
                     percentage(metrics.get("adjudication_coverage")),
@@ -866,9 +923,9 @@ def render_detailed_results(data: dict[str, Any]) -> str:
         "Canonical, diagnostic, focused, and legacy completed runs are retained here. "
         "Only identical comparison keys are directly rankable.\n\n"
         "| date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | "
-        "balanced recall | precision | false positives | clean pass | adjudication | audit | "
-        "raw | traces | settings |\n"
-        "|---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---|---|---|---|\n"
+        "balanced recall | precision | true positives | false positives | clean pass | "
+        "adjudication | audit | raw | traces | settings |\n"
+        "|---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|\n"
         + "\n".join(rows)
         + "\n"
     ]

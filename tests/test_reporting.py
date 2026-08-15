@@ -7,6 +7,7 @@ from lgtmaybe_bench.reporting import (
     build_dashboard_data,
     regenerate_reports,
     render_dashboard,
+    render_detailed_results,
     render_results,
 )
 
@@ -579,6 +580,62 @@ def test_context_scaling_section_renders_per_case_metrics() -> None:
     )
 
 
+def test_context_scaling_section_renders_model_summary() -> None:
+    run = context_raw("2026-08-14T00:00:00Z", "scaler")
+    observations = run["observations"]
+    assert isinstance(observations, list)
+    findings = observations[0]["findings"]
+    assert isinstance(findings, list)
+    findings.append(
+        {
+            "file": "orders/pipeline.py",
+            "line": 200,
+            "severity": "medium",
+            "title": "Incorrect extra finding",
+            "body": "not a planted issue",
+        }
+    )
+
+    rendered = render_results([run])
+
+    assert (
+        "| date | provider | model | score | recall | precision | true positives | "
+        "false positives |" in rendered
+    )
+    assert "| 2026-08-14 | openrouter | scaler | 98.0% | 100.0% | 50.0% | 1 | 1 |" in rendered
+
+
+def test_context_dashboard_preserves_finding_totals() -> None:
+    run = context_raw("2026-08-14T00:00:00Z", "scaler")
+    observations = run["observations"]
+    assert isinstance(observations, list)
+    findings = observations[0]["findings"]
+    assert isinstance(findings, list)
+    findings.append(
+        {
+            "file": "orders/pipeline.py",
+            "line": 200,
+            "severity": "medium",
+            "title": "Incorrect extra finding",
+            "body": "not a planted issue",
+        }
+    )
+
+    metrics = build_dashboard_data([run])["runs"][0]["metrics"]
+
+    assert metrics["true_positives"] == 1.0
+    assert metrics["false_positives"] == 1.0
+
+
+def test_context_detailed_results_preserve_finding_totals() -> None:
+    run = context_raw("2026-08-14T00:00:00Z", "scaler")
+
+    rendered = render_detailed_results(build_dashboard_data([run]))
+
+    assert "| precision | true positives | false positives |" in rendered
+    assert "| 100.0% | 1.0 | 0.0 |" in rendered
+
+
 def test_context_scaling_section_rendering_is_deterministic() -> None:
     runs = [
         context_raw("2026-08-14T00:00:00Z", "scaler"),
@@ -586,6 +643,19 @@ def test_context_scaling_section_rendering_is_deterministic() -> None:
     ]
 
     assert render_results(runs) == render_results(runs)
+
+
+def test_context_model_summary_ranks_by_score() -> None:
+    higher = context_raw("2026-08-13T00:00:00Z", "higher")
+    lower = context_raw("2026-08-14T00:00:00Z", "lower")
+    observations = lower["observations"]
+    assert isinstance(observations, list)
+    observations[0]["findings"] = []
+
+    rendered = render_results([lower, higher])
+    summary = rendered.split("### Model summary\n\n", 1)[1].split("\n\n### Case detail", 1)[0]
+
+    assert summary.index("higher") < summary.index("lower")
 
 
 def test_context_scaling_section_excludes_ineligible_runs() -> None:
