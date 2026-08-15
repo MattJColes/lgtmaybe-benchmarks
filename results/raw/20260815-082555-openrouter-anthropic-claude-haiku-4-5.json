@@ -1,0 +1,1367 @@
+{
+  "configuration": {
+    "api_base": null,
+    "audit_available": false,
+    "base_profile": "context-canonical-v1",
+    "cases": [
+      "python-context-small-v1",
+      "python-context-medium-v1",
+      "python-context-large-v1",
+      "python-context-xlarge-v1",
+      "python-context-clean-large-v1"
+    ],
+    "concurrency": 6,
+    "diagnostic_overrides": [],
+    "full_corpus": true,
+    "max_input_tokens": 100000,
+    "max_tokens": null,
+    "mid_review_retrieval": false,
+    "model": "anthropic/claude-haiku-4.5",
+    "preset": "full",
+    "profile": "context-canonical-v1",
+    "profile_canonical": false,
+    "profile_schema_version": 1,
+    "provider": "openrouter",
+    "reasoning_effort": null,
+    "recursive": true,
+    "reflect": true,
+    "repeats": 1,
+    "resolved_profile": {
+      "base_profile_id": "context-canonical-v1",
+      "canonical": false,
+      "diagnostic_overrides": [],
+      "id": "context-canonical-v1",
+      "max_input_tokens": 100000,
+      "max_tokens": null,
+      "mid_review_retrieval": false,
+      "preset": "full",
+      "reasoning_effort": null,
+      "recursive": true,
+      "reflect": true,
+      "repeats": 1,
+      "schema_version": 1,
+      "spec_review": true,
+      "static_analysis": false
+    },
+    "spec_review": true,
+    "static_analysis": false,
+    "suite": "context-v1",
+    "timeout": 7200
+  },
+  "lgtmaybe_version": "lgtmaybe 2.1.4",
+  "observations": [
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 8014,
+          "elapsed_seconds": 20.13,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 8844,
+          "label": "intent",
+          "output_tokens": 2763,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 8014,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 16.08,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 9008,
+          "label": "security",
+          "output_tokens": 1343,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 8014,
+          "elapsed_seconds": 13.82,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 8433,
+          "label": "documentation",
+          "output_tokens": 1817,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 8014,
+          "elapsed_seconds": 13.23,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 8564,
+          "label": "ponytail",
+          "output_tokens": 1560,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 8014,
+          "elapsed_seconds": 13.04,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 8667,
+          "label": "performance",
+          "output_tokens": 1665,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 8014,
+          "elapsed_seconds": 11.9,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 8608,
+          "label": "tests",
+          "output_tokens": 1548,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 8014,
+          "elapsed_seconds": 10.86,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 8576,
+          "label": "complexity",
+          "output_tokens": 1240,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 8014,
+          "elapsed_seconds": 9.85,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 8812,
+          "label": "correctness",
+          "output_tokens": 1268,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 8014,
+          "elapsed_seconds": 9.71,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 8586,
+          "label": "deprecation",
+          "output_tokens": 1171,
+          "reasoning_tokens": 0,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-small-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [],
+      "ground_truth": {
+        "changed_file": "billing/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 2 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 13
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 58
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 90
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 10
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 36
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 88
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 118
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-small-v1"
+      },
+      "input_tokens": 78098,
+      "observation_id": "20260815-082555-openrouter-anthropic-claude-haiku-4-5:repeat:1:case:python-context-small-v1",
+      "output_tokens": 14375,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 48.1s\n\nstage              elapsed\nredact               0.00s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.04s\nbatch                0.00s\ndirectory_context     0.00s\nreview              45.93s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nintent               1     1    20.13s     8844     2763         0        -     8014        0        0  -\nsecurity             1     1    16.08s     9008     1343         0        -        0     8014        0  -\ndocumentation        1     1    13.82s     8433     1817         0        -     8014        0        0  -\nponytail             1     1    13.23s     8564     1560         0        -     8014        0        0  -\nperformance          1     1    13.04s     8667     1665         0        -     8014        0        0  -\ntests                1     1    11.90s     8608     1548         0        -     8014        0        0  -\ncomplexity           1     1    10.86s     8576     1240         0        -     8014        0        0  -\ncorrectness          1     1     9.85s     8812     1268         0        -     8014        0        0  -\ndeprecation          1     1     9.71s     8586     1171         0        -     8014        0        0  -\n\ncache: 64112 tokens read / 8014 created across 9 calls\nfindings: 0 parsed / 0 returned\nreasoning: 0 of 14,375 output tokens (0%)\ntokens: 92,473 billable (78,098 in / 14,375 out) across 9 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.4\", \"provider\": \"openrouter\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 6, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.002}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.04}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.003}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 2, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 0, \"cache_creation_tokens\": 8014}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 9008, \"output_tokens\": 1343, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 8014, \"findings\": 0, \"elapsed_s\": 16.075}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 8014, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 8586, \"output_tokens\": 1171, \"cache_read_tokens\": 8014, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 9.711}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 8014, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 8812, \"output_tokens\": 1268, \"cache_read_tokens\": 8014, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 9.847}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 8014, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 8576, \"output_tokens\": 1240, \"cache_read_tokens\": 8014, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 10.856}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 8014, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 8608, \"output_tokens\": 1548, \"cache_read_tokens\": 8014, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 11.903}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 8014, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 8667, \"output_tokens\": 1665, \"cache_read_tokens\": 8014, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 13.037}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 8014, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 8433, \"output_tokens\": 1817, \"cache_read_tokens\": 8014, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 13.821}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 8014, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 8564, \"output_tokens\": 1560, \"cache_read_tokens\": 8014, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 13.228}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 8014, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 8844, \"output_tokens\": 2763, \"cache_read_tokens\": 8014, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 20.128}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 45.928}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[]\n== lgtmaybe profile ==\ntotal wall time: 48.1s\n\nstage              elapsed\nredact               0.00s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.04s\nbatch                0.00s\ndirectory_context     0.00s\nreview              45.93s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nintent               1     1    20.13s     8844     2763         0        -     8014        0        0  -\nsecurity             1     1    16.08s     9008     1343         0        -        0     8014        0  -\ndocumentation        1     1    13.82s     8433     1817         0        -     8014        0        0  -\nponytail             1     1    13.23s     8564     1560         0        -     8014        0        0  -\nperformance          1     1    13.04s     8667     1665         0        -     8014        0        0  -\ntests                1     1    11.90s     8608     1548         0        -     8014        0        0  -\ncomplexity           1     1    10.86s     8576     1240         0        -     8014        0        0  -\ncorrectness          1     1     9.85s     8812     1268         0        -     8014        0        0  -\ndeprecation          1     1     9.71s     8586     1171         0        -     8014        0        0  -\n\ncache: 64112 tokens read / 8014 created across 9 calls\nfindings: 0 parsed / 0 returned\nreasoning: 0 of 14,375 output tokens (0%)\ntokens: 92,473 billable (78,098 in / 14,375 out) across 9 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 48.585245896014385,
+      "wall_seconds": 48.585245896014385
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 24059,
+          "elapsed_seconds": 13.76,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 24889,
+          "label": "intent",
+          "output_tokens": 1626,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 24059,
+          "elapsed_seconds": 10.39,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 24621,
+          "label": "complexity",
+          "output_tokens": 1158,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 24059,
+          "elapsed_seconds": 10.22,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 24653,
+          "label": "tests",
+          "output_tokens": 1118,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 24059,
+          "elapsed_seconds": 10.13,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 24857,
+          "label": "correctness",
+          "output_tokens": 1244,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 24059,
+          "elapsed_seconds": 9.49,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 24478,
+          "label": "documentation",
+          "output_tokens": 1049,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 24059,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 9.41,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 25053,
+          "label": "security",
+          "output_tokens": 1038,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 24059,
+          "elapsed_seconds": 9.04,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 24631,
+          "label": "deprecation",
+          "output_tokens": 1073,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 24059,
+          "elapsed_seconds": 8.93,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 24609,
+          "label": "ponytail",
+          "output_tokens": 1002,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 24059,
+          "elapsed_seconds": 7.92,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 24712,
+          "label": "performance",
+          "output_tokens": 846,
+          "reasoning_tokens": 0,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-medium-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [],
+      "ground_truth": {
+        "changed_file": "billing/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 8 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 143
+          },
+          {
+            "file": "inventory/pipeline.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 21
+          },
+          {
+            "file": "ledger/pipeline.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 86
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 145
+          },
+          {
+            "file": "routing/pipeline.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 23
+          },
+          {
+            "file": "routing/pipeline.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 234
+          },
+          {
+            "file": "shipping/pipeline.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 161
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-medium-v1"
+      },
+      "input_tokens": 222503,
+      "observation_id": "20260815-082555-openrouter-anthropic-claude-haiku-4-5:repeat:1:case:python-context-medium-v1",
+      "output_tokens": 10154,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 32.3s\n\nstage              elapsed\nredact               0.01s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.12s\nbatch                0.01s\ndirectory_context     0.00s\nreview              31.14s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nintent               1     1    13.76s    24889     1626         0        -    24059        0        0  -\ncomplexity           1     1    10.39s    24621     1158         0        -    24059        0        0  -\ntests                1     1    10.22s    24653     1118         0        -    24059        0        0  -\ncorrectness          1     1    10.13s    24857     1244         0        -    24059        0        0  -\ndocumentation        1     1     9.49s    24478     1049         0        -    24059        0        0  -\nsecurity             1     1     9.41s    25053     1038         0        -        0    24059        0  -\ndeprecation          1     1     9.04s    24631     1073         0        -    24059        0        0  -\nponytail             1     1     8.93s    24609     1002         0        -    24059        0        0  -\nperformance          1     1     7.92s    24712      846         0        -    24059        0        0  -\n\ncache: 192472 tokens read / 24059 created across 9 calls\nfindings: 0 parsed / 0 returned\nreasoning: 0 of 10,154 output tokens (0%)\ntokens: 232,657 billable (222,503 in / 10,154 out) across 9 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.4\", \"provider\": \"openrouter\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 6, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.008}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.125}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.013}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 8, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 0, \"cache_creation_tokens\": 24059}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 25053, \"output_tokens\": 1038, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 24059, \"findings\": 0, \"elapsed_s\": 9.409}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 24059, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 24712, \"output_tokens\": 846, \"cache_read_tokens\": 24059, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 7.916}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 24059, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 24631, \"output_tokens\": 1073, \"cache_read_tokens\": 24059, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 9.04}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 24059, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 24478, \"output_tokens\": 1049, \"cache_read_tokens\": 24059, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 9.495}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 24059, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 24857, \"output_tokens\": 1244, \"cache_read_tokens\": 24059, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 10.126}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 24059, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 24653, \"output_tokens\": 1118, \"cache_read_tokens\": 24059, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 10.22}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 24059, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 24621, \"output_tokens\": 1158, \"cache_read_tokens\": 24059, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 10.389}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 24059, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 24609, \"output_tokens\": 1002, \"cache_read_tokens\": 24059, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 8.931}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 24059, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 24889, \"output_tokens\": 1626, \"cache_read_tokens\": 24059, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 13.758}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 31.139}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.003}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[]\n== lgtmaybe profile ==\ntotal wall time: 32.3s\n\nstage              elapsed\nredact               0.01s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.12s\nbatch                0.01s\ndirectory_context     0.00s\nreview              31.14s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nintent               1     1    13.76s    24889     1626         0        -    24059        0        0  -\ncomplexity           1     1    10.39s    24621     1158         0        -    24059        0        0  -\ntests                1     1    10.22s    24653     1118         0        -    24059        0        0  -\ncorrectness          1     1    10.13s    24857     1244         0        -    24059        0        0  -\ndocumentation        1     1     9.49s    24478     1049         0        -    24059        0        0  -\nsecurity             1     1     9.41s    25053     1038         0        -        0    24059        0  -\ndeprecation          1     1     9.04s    24631     1073         0        -    24059        0        0  -\nponytail             1     1     8.93s    24609     1002         0        -    24059        0        0  -\nperformance          1     1     7.92s    24712      846         0        -    24059        0        0  -\n\ncache: 192472 tokens read / 24059 created across 9 calls\nfindings: 0 parsed / 0 returned\nreasoning: 0 of 10,154 output tokens (0%)\ntokens: 232,657 billable (222,503 in / 10,154 out) across 9 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 32.77707568797632,
+      "wall_seconds": 32.77707568797632
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 61185,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 82.88,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 62015,
+          "label": "intent",
+          "output_tokens": 1743,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 61185,
+          "elapsed_seconds": 13.12,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 61747,
+          "label": "complexity",
+          "output_tokens": 1531,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 61185,
+          "elapsed_seconds": 12.1,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 61838,
+          "label": "performance",
+          "output_tokens": 1424,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 61185,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 11.89,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 62179,
+          "label": "security",
+          "output_tokens": 1139,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 61185,
+          "elapsed_seconds": 11.47,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 61779,
+          "label": "tests",
+          "output_tokens": 1449,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 61185,
+          "elapsed_seconds": 11.07,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 61983,
+          "label": "correctness",
+          "output_tokens": 1358,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 61185,
+          "elapsed_seconds": 10.73,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 61735,
+          "label": "ponytail",
+          "output_tokens": 1097,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 61185,
+          "elapsed_seconds": 10.67,
+          "error": null,
+          "findings": 8,
+          "input_tokens": 61604,
+          "label": "documentation",
+          "output_tokens": 1619,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 61185,
+          "elapsed_seconds": 10.2,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 61757,
+          "label": "deprecation",
+          "output_tokens": 1217,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 0,
+          "cache_creation_tokens": 59744,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 5.12,
+          "error": null,
+          "findings": null,
+          "input_tokens": 73526,
+          "label": "reflect",
+          "output_tokens": 217,
+          "reasoning_tokens": 0,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-large-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [
+        {
+          "anchor": "        if float(row[\"total\"]) > 5000:",
+          "anchored": true,
+          "body": "The function accepts a threshold parameter but ignores it, always comparing against the hardcoded value 5000. This contradicts the function signature and will cause unexpected behavior when callers pass different thresholds.",
+          "broad": false,
+          "category": "documentation",
+          "confidence": 9,
+          "failure_scenario": "A caller passes threshold=3000 expecting rows with total > 3000 to be flagged, but the function still uses 5000, silently returning fewer rows than expected.",
+          "finding_id": "20260815-082555-openrouter-anthropic-claude-haiku-4-5:repeat:1:case:python-context-large-v1:finding:1",
+          "line": 156,
+          "path": "shipping/validation.py",
+          "severity": "medium",
+          "side": "RIGHT",
+          "suggestion": "def flag_large_backorder_totals(rows: list[dict[str, object]], threshold: float) -> list[dict[str, object]]:\n    \"\"\"Flag backorder rows whose total crosses the review threshold.\"\"\"\n    flagged: list[dict[str, object]] = []\n    for row in rows:\n        if float(row[\"total\"]) > threshold:\n            flagged.append(row)\n    return flagged",
+          "title": "Fix hardcoded threshold in flag_large_backorder_totals"
+        }
+      ],
+      "ground_truth": {
+        "changed_file": "audit/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 24 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "audit/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 121
+          },
+          {
+            "file": "catalog/summaries.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 99
+          },
+          {
+            "file": "inventory/summaries.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 83
+          },
+          {
+            "file": "ledger/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 30
+          },
+          {
+            "file": "orders/validation.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 4
+          },
+          {
+            "file": "routing/summaries.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 7
+          },
+          {
+            "file": "shipping/validation.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 156
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-large-v1"
+      },
+      "input_tokens": 630163,
+      "observation_id": "20260815-082555-openrouter-anthropic-claude-haiku-4-5:repeat:1:case:python-context-large-v1",
+      "output_tokens": 12794,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 111.5s\n\nstage              elapsed\nredact               0.02s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.35s\nbatch                0.02s\ndirectory_context     0.00s\nreview             104.98s\nsnap                 0.01s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect              5.15s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nintent               1     1    82.88s    62015     1743         0        -        0    61185        0  -\ncomplexity           1     1    13.12s    61747     1531         0        -    61185        0        0  -\nperformance          1     1    12.10s    61838     1424         0        -    61185        0        0  -\nsecurity             1     1    11.89s    62179     1139         0        -        0    61185        0  -\ntests                1     1    11.47s    61779     1449         0        -    61185        0        0  -\ncorrectness          1     1    11.07s    61983     1358         0        -    61185        0        0  -\nponytail             1     1    10.73s    61735     1097         0        -    61185        0        0  -\ndocumentation        1     1    10.67s    61604     1619         0        -    61185        0        8  -\ndeprecation          1     1    10.20s    61757     1217         0        -    61185        0        0  -\nreflect              0     1     5.12s    73526      217         0        -        0    59744        -  -\n\ncache: 428295 tokens read / 182114 created across 10 calls\nfindings: 8 parsed / 1 returned\nreasoning: 0 of 12,794 output tokens (0%)\ntokens: 642,957 billable (630,163 in / 12,794 out) across 10 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.4\", \"provider\": \"openrouter\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 6, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.02}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.348}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.02}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 24, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 0, \"cache_creation_tokens\": 61185}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 62179, \"output_tokens\": 1139, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 61185, \"findings\": 0, \"elapsed_s\": 11.887}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 61185, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 61757, \"output_tokens\": 1217, \"cache_read_tokens\": 61185, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 10.201}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 61185, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 61604, \"output_tokens\": 1619, \"cache_read_tokens\": 61185, \"cache_creation_tokens\": 0, \"findings\": 8, \"elapsed_s\": 10.666}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 8}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 61185, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 61983, \"output_tokens\": 1358, \"cache_read_tokens\": 61185, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 11.071}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 61185, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 61779, \"output_tokens\": 1449, \"cache_read_tokens\": 61185, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 11.47}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 61185, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 61838, \"output_tokens\": 1424, \"cache_read_tokens\": 61185, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 12.097}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 61185, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 61747, \"output_tokens\": 1531, \"cache_read_tokens\": 61185, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 13.12}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 61185, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 61735, \"output_tokens\": 1097, \"cache_read_tokens\": 61185, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 10.725}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 0, \"cache_creation_tokens\": 61185}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 62015, \"output_tokens\": 1743, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 61185, \"findings\": 0, \"elapsed_s\": 82.875}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 104.976}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 113, \"to\": 118}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/summaries.py\", \"from\": 74, \"to\": 77}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/pipeline.py\", \"from\": 25, \"to\": 24}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"shipping/validation.py\", \"from\": 152, \"to\": 156}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.006}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reflecting on findings\", \"findings\": 8}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 0, \"cache_creation_tokens\": 59744}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"reflect\", \"batch\": 0, \"attempts\": 1, \"input_tokens\": 73526, \"output_tokens\": 217, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 59744, \"elapsed_s\": 5.118}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"reflect\", \"elapsed_s\": 5.149}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[{\"path\": \"shipping/validation.py\", \"line\": 156, \"side\": \"RIGHT\", \"severity\": \"medium\", \"title\": \"Fix hardcoded threshold in flag_large_backorder_totals\", \"body\": \"The function accepts a threshold parameter but ignores it, always comparing against the hardcoded value 5000. This contradicts the function signature and will cause unexpected behavior when callers pass different thresholds.\", \"failure_scenario\": \"A caller passes threshold=3000 expecting rows with total > 3000 to be flagged, but the function still uses 5000, silently returning fewer rows than expected.\", \"suggestion\": \"def flag_large_backorder_totals(rows: list[dict[str, object]], threshold: float) -> list[dict[str, object]]:\\n    \\\"\\\"\\\"Flag backorder rows whose total crosses the review threshold.\\\"\\\"\\\"\\n    flagged: list[dict[str, object]] = []\\n    for row in rows:\\n        if float(row[\\\"total\\\"]) > threshold:\\n            flagged.append(row)\\n    return flagged\", \"anchor\": \"        if float(row[\\\"total\\\"]) > 5000:\", \"anchored\": true, \"broad\": false, \"confidence\": 9, \"category\": \"documentation\"}]\n== lgtmaybe profile ==\ntotal wall time: 111.5s\n\nstage              elapsed\nredact               0.02s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.35s\nbatch                0.02s\ndirectory_context     0.00s\nreview             104.98s\nsnap                 0.01s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect              5.15s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nintent               1     1    82.88s    62015     1743         0        -        0    61185        0  -\ncomplexity           1     1    13.12s    61747     1531         0        -    61185        0        0  -\nperformance          1     1    12.10s    61838     1424         0        -    61185        0        0  -\nsecurity             1     1    11.89s    62179     1139         0        -        0    61185        0  -\ntests                1     1    11.47s    61779     1449         0        -    61185        0        0  -\ncorrectness          1     1    11.07s    61983     1358         0        -    61185        0        0  -\nponytail             1     1    10.73s    61735     1097         0        -    61185        0        0  -\ndocumentation        1     1    10.67s    61604     1619         0        -    61185        0        8  -\ndeprecation          1     1    10.20s    61757     1217         0        -    61185        0        0  -\nreflect              0     1     5.12s    73526      217         0        -        0    59744        -  -\n\ncache: 428295 tokens read / 182114 created across 10 calls\nfindings: 8 parsed / 1 returned\nreasoning: 0 of 12,794 output tokens (0%)\ntokens: 642,957 billable (630,163 in / 12,794 out) across 10 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 112.00903538899729,
+      "wall_seconds": 112.00903538899729
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 119810,
+          "elapsed_seconds": 17.64,
+          "error": null,
+          "findings": 11,
+          "input_tokens": 120229,
+          "label": "documentation",
+          "output_tokens": 2843,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 119810,
+          "elapsed_seconds": 16.84,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 120360,
+          "label": "ponytail",
+          "output_tokens": 2201,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 119810,
+          "elapsed_seconds": 16.24,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 120382,
+          "label": "deprecation",
+          "output_tokens": 2083,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 119810,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 15.31,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 120804,
+          "label": "security",
+          "output_tokens": 1536,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 119810,
+          "elapsed_seconds": 14.53,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 120372,
+          "label": "complexity",
+          "output_tokens": 1849,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 119810,
+          "elapsed_seconds": 14.05,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 120404,
+          "label": "tests",
+          "output_tokens": 1730,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 119810,
+          "elapsed_seconds": 13.26,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 120640,
+          "label": "intent",
+          "output_tokens": 1840,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 119810,
+          "elapsed_seconds": 13.19,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 120608,
+          "label": "correctness",
+          "output_tokens": 1498,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 119810,
+          "elapsed_seconds": 12.88,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 120463,
+          "label": "performance",
+          "output_tokens": 1764,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 0,
+          "cache_creation_tokens": 118369,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 6.12,
+          "error": null,
+          "findings": null,
+          "input_tokens": 126411,
+          "label": "reflect",
+          "output_tokens": 243,
+          "reasoning_tokens": 0,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-xlarge-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [
+        {
+          "anchor": "    query = f\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\"",
+          "anchored": true,
+          "body": "The query string is constructed using f-string interpolation with an unsanitized owner_id parameter. This creates a SQL injection vulnerability where a malicious owner_id value can alter the query logic or exfiltrate data. Use parameterized queries instead.",
+          "broad": false,
+          "category": "documentation",
+          "confidence": 9,
+          "failure_scenario": "An attacker passes owner_id=\"' OR '1'='1\" which modifies the WHERE clause to return all orders regardless of customer, or passes owner_id=\"'; DROP TABLE orders; --\" to execute arbitrary SQL.",
+          "finding_id": "20260815-082555-openrouter-anthropic-claude-haiku-4-5:repeat:1:case:python-context-xlarge-v1:finding:1",
+          "line": 5,
+          "path": "audit/allocation.py",
+          "severity": "high",
+          "side": "RIGHT",
+          "suggestion": "query = \"SELECT id, status, total FROM orders WHERE customer_id = %s\"\ncursor.execute(query, (owner_id,))",
+          "title": "SQL injection vulnerability in load_order_rows"
+        },
+        {
+          "anchor": "def register_shipment_events(event_type: str, events: list[str] = []) -> dict[str, list[str]]:",
+          "anchored": true,
+          "body": "The function uses a mutable list as a default argument (events: list[str] = []). This is a Python anti-pattern: the same list object is reused across all function calls, causing unexpected state sharing between invocations. Each call will append to the same list, leading to accumulated events from previous calls.",
+          "broad": false,
+          "category": "documentation",
+          "confidence": 8,
+          "failure_scenario": "First call: register_shipment_events('ship') returns {'ship': ['ship']}. Second call: register_shipment_events('deliver') returns {'deliver': ['ship', 'deliver']} instead of {'deliver': ['deliver']}, because the default list persists.",
+          "finding_id": "20260815-082555-openrouter-anthropic-claude-haiku-4-5:repeat:1:case:python-context-xlarge-v1:finding:2",
+          "line": 21,
+          "path": "catalog/validation.py",
+          "severity": "medium",
+          "side": "RIGHT",
+          "suggestion": "def register_shipment_events(event_type: str, events: list[str] | None = None) -> dict[str, list[str]]:\n    \"\"\"Record shipment events of one type and return the events per type.\"\"\"\n    if events is None:\n        events = []\n    events.append(event_type)\n    return {event_type: list(events)}",
+          "title": "Mutable default argument in register_shipment_events"
+        },
+        {
+          "anchor": "def flag_large_backorder_totals(rows: list[dict[str, object]], threshold: float) -> list[dict[str, object]]:",
+          "anchored": true,
+          "body": "The function accepts a threshold parameter but does not use it; instead, it hardcodes the value 5000 in the comparison. This is misleading: callers expect the threshold argument to control the filtering logic, but it is ignored. Either use the parameter or remove it from the signature.",
+          "broad": false,
+          "category": "documentation",
+          "confidence": 8,
+          "failure_scenario": "A caller passes threshold=10000 expecting rows with total > 10000 to be flagged, but the function returns only rows with total > 5000, silently ignoring the caller's intent.",
+          "finding_id": "20260815-082555-openrouter-anthropic-claude-haiku-4-5:repeat:1:case:python-context-xlarge-v1:finding:3",
+          "line": 147,
+          "path": "shipping/validation.py",
+          "severity": "medium",
+          "side": "RIGHT",
+          "suggestion": "def flag_large_backorder_totals(rows: list[dict[str, object]], threshold: float) -> list[dict[str, object]]:\n    \"\"\"Flag backorder rows whose total crosses the review threshold.\"\"\"\n    flagged: list[dict[str, object]] = []\n    for row in rows:\n        if float(row[\"total\"]) > threshold:\n            flagged.append(row)\n    return flagged",
+          "title": "Unused threshold parameter in flag_large_backorder_totals"
+        }
+      ],
+      "ground_truth": {
+        "changed_file": "audit/allocation.py",
+        "clean": false,
+        "commit_message": "Refactor 48 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "audit/allocation.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 44
+          },
+          {
+            "file": "catalog/validation.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 21
+          },
+          {
+            "file": "inventory/summaries.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 9
+          },
+          {
+            "file": "orders/allocation.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 166
+          },
+          {
+            "file": "pricing/summaries.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 141
+          },
+          {
+            "file": "routing/reconciliation.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 807
+          },
+          {
+            "file": "shipping/validation.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 151
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-xlarge-v1"
+      },
+      "input_tokens": 1210673,
+      "observation_id": "20260815-082555-openrouter-anthropic-claude-haiku-4-5:repeat:1:case:python-context-xlarge-v1",
+      "output_tokens": 17587,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 53.4s\n\nstage              elapsed\nredact               0.04s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.65s\nbatch                0.04s\ndirectory_context     0.00s\nreview              45.34s\nsnap                 0.01s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect              6.18s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ndocumentation        1     1    17.64s   120229     2843         0        -   119810        0       11  -\nponytail             1     1    16.84s   120360     2201         0        -   119810        0        0  -\ndeprecation          1     1    16.24s   120382     2083         0        -   119810        0        0  -\nsecurity             1     1    15.31s   120804     1536         0        -        0   119810        0  -\ncomplexity           1     1    14.53s   120372     1849         0        -   119810        0        0  -\ntests                1     1    14.05s   120404     1730         0        -   119810        0        0  -\nintent               1     1    13.26s   120640     1840         0        -   119810        0        0  -\ncorrectness          1     1    13.19s   120608     1498         0        -   119810        0        0  -\nperformance          1     1    12.88s   120463     1764         0        -   119810        0        0  -\nreflect              0     1     6.12s   126411      243         0        -        0   118369        -  -\n\ncache: 958480 tokens read / 238179 created across 10 calls\nfindings: 11 parsed / 3 returned\nreasoning: 0 of 17,587 output tokens (0%)\ntokens: 1,228,260 billable (1,210,673 in / 17,587 out) across 10 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.4\", \"provider\": \"openrouter\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 6, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.04}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.648}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.036}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 48, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 0, \"cache_creation_tokens\": 119810}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 120804, \"output_tokens\": 1536, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 119810, \"findings\": 0, \"elapsed_s\": 15.31}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 119810, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 120463, \"output_tokens\": 1764, \"cache_read_tokens\": 119810, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 12.88}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 119810, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 120608, \"output_tokens\": 1498, \"cache_read_tokens\": 119810, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 13.187}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 119810, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 120404, \"output_tokens\": 1730, \"cache_read_tokens\": 119810, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 14.051}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 119810, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 120372, \"output_tokens\": 1849, \"cache_read_tokens\": 119810, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 14.529}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 119810, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 120382, \"output_tokens\": 2083, \"cache_read_tokens\": 119810, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 16.245}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 119810, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 120229, \"output_tokens\": 2843, \"cache_read_tokens\": 119810, \"cache_creation_tokens\": 0, \"findings\": 11, \"elapsed_s\": 17.644}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 11}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 119810, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 120640, \"output_tokens\": 1840, \"cache_read_tokens\": 119810, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 13.257}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 119810, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 120360, \"output_tokens\": 2201, \"cache_read_tokens\": 119810, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 16.836}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 45.343}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/allocation.py\", \"from\": 4, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 40, \"to\": 41}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"pricing/summaries.py\", \"from\": 76, \"to\": 140}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/reconciliation.py\", \"from\": 809, \"to\": 804}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"shipping/validation.py\", \"from\": 145, \"to\": 147}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"shipping/validation.py\", \"from\": 145, \"to\": 147}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.013}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reflecting on findings\", \"findings\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 0, \"cache_creation_tokens\": 118369}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"reflect\", \"batch\": 0, \"attempts\": 1, \"input_tokens\": 126411, \"output_tokens\": 243, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 118369, \"elapsed_s\": 6.117}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"reflect\", \"elapsed_s\": 6.175}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[{\"path\": \"audit/allocation.py\", \"line\": 5, \"side\": \"RIGHT\", \"severity\": \"high\", \"title\": \"SQL injection vulnerability in load_order_rows\", \"body\": \"The query string is constructed using f-string interpolation with an unsanitized owner_id parameter. This creates a SQL injection vulnerability where a malicious owner_id value can alter the query logic or exfiltrate data. Use parameterized queries instead.\", \"failure_scenario\": \"An attacker passes owner_id=\\\"' OR '1'='1\\\" which modifies the WHERE clause to return all orders regardless of customer, or passes owner_id=\\\"'; DROP TABLE orders; --\\\" to execute arbitrary SQL.\", \"suggestion\": \"query = \\\"SELECT id, status, total FROM orders WHERE customer_id = %s\\\"\\ncursor.execute(query, (owner_id,))\", \"anchor\": \"    query = f\\\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\\\"\", \"anchored\": true, \"broad\": false, \"confidence\": 9, \"category\": \"documentation\"}, {\"path\": \"catalog/validation.py\", \"line\": 21, \"side\": \"RIGHT\", \"severity\": \"medium\", \"title\": \"Mutable default argument in register_shipment_events\", \"body\": \"The function uses a mutable list as a default argument (events: list[str] = []). This is a Python anti-pattern: the same list object is reused across all function calls, causing unexpected state sharing between invocations. Each call will append to the same list, leading to accumulated events from previous calls.\", \"failure_scenario\": \"First call: register_shipment_events('ship') returns {'ship': ['ship']}. Second call: register_shipment_events('deliver') returns {'deliver': ['ship', 'deliver']} instead of {'deliver': ['deliver']}, because the default list persists.\", \"suggestion\": \"def register_shipment_events(event_type: str, events: list[str] | None = None) -> dict[str, list[str]]:\\n    \\\"\\\"\\\"Record shipment events of one type and return the events per type.\\\"\\\"\\\"\\n    if events is None:\\n        events = []\\n    events.append(event_type)\\n    return {event_type: list(events)}\", \"anchor\": \"def register_shipment_events(event_type: str, events: list[str] = []) -> dict[str, list[str]]:\", \"anchored\": true, \"broad\": false, \"confidence\": 8, \"category\": \"documentation\"}, {\"path\": \"shipping/validation.py\", \"line\": 147, \"side\": \"RIGHT\", \"severity\": \"medium\", \"title\": \"Unused threshold parameter in flag_large_backorder_totals\", \"body\": \"The function accepts a threshold parameter but does not use it; instead, it hardcodes the value 5000 in the comparison. This is misleading: callers expect the threshold argument to control the filtering logic, but it is ignored. Either use the parameter or remove it from the signature.\", \"failure_scenario\": \"A caller passes threshold=10000 expecting rows with total > 10000 to be flagged, but the function returns only rows with total > 5000, silently ignoring the caller's intent.\", \"suggestion\": \"def flag_large_backorder_totals(rows: list[dict[str, object]], threshold: float) -> list[dict[str, object]]:\\n    \\\"\\\"\\\"Flag backorder rows whose total crosses the review threshold.\\\"\\\"\\\"\\n    flagged: list[dict[str, object]] = []\\n    for row in rows:\\n        if float(row[\\\"total\\\"]) > threshold:\\n            flagged.append(row)\\n    return flagged\", \"anchor\": \"def flag_large_backorder_totals(rows: list[dict[str, object]], threshold: float) -> list[dict[str, object]]:\", \"anchored\": true, \"broad\": false, \"confidence\": 8, \"category\": \"documentation\"}]\n== lgtmaybe profile ==\ntotal wall time: 53.4s\n\nstage              elapsed\nredact               0.04s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.65s\nbatch                0.04s\ndirectory_context     0.00s\nreview              45.34s\nsnap                 0.01s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect              6.18s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ndocumentation        1     1    17.64s   120229     2843         0        -   119810        0       11  -\nponytail             1     1    16.84s   120360     2201         0        -   119810        0        0  -\ndeprecation          1     1    16.24s   120382     2083         0        -   119810        0        0  -\nsecurity             1     1    15.31s   120804     1536         0        -        0   119810        0  -\ncomplexity           1     1    14.53s   120372     1849         0        -   119810        0        0  -\ntests                1     1    14.05s   120404     1730         0        -   119810        0        0  -\nintent               1     1    13.26s   120640     1840         0        -   119810        0        0  -\ncorrectness          1     1    13.19s   120608     1498         0        -   119810        0        0  -\nperformance          1     1    12.88s   120463     1764         0        -   119810        0        0  -\nreflect              0     1     6.12s   126411      243         0        -        0   118369        -  -\n\ncache: 958480 tokens read / 238179 created across 10 calls\nfindings: 11 parsed / 3 returned\nreasoning: 0 of 17,587 output tokens (0%)\ntokens: 1,228,260 billable (1,210,673 in / 17,587 out) across 10 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 54.009318112017354,
+      "wall_seconds": 54.009318112017354
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 62236,
+          "elapsed_seconds": 4.23,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 62830,
+          "label": "tests",
+          "output_tokens": 12,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 62236,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 3.55,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 63230,
+          "label": "security",
+          "output_tokens": 12,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 62236,
+          "elapsed_seconds": 3.51,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 62655,
+          "label": "documentation",
+          "output_tokens": 12,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 62236,
+          "elapsed_seconds": 3.41,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 63034,
+          "label": "correctness",
+          "output_tokens": 12,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 62236,
+          "elapsed_seconds": 3.12,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 62786,
+          "label": "ponytail",
+          "output_tokens": 12,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 62236,
+          "elapsed_seconds": 2.55,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 62889,
+          "label": "performance",
+          "output_tokens": 12,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 62236,
+          "elapsed_seconds": 2.48,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 62798,
+          "label": "complexity",
+          "output_tokens": 12,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 62236,
+          "elapsed_seconds": 2.39,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 62808,
+          "label": "deprecation",
+          "output_tokens": 12,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 62236,
+          "elapsed_seconds": 2.23,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 63066,
+          "label": "intent",
+          "output_tokens": 12,
+          "reasoning_tokens": 0,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-clean-large-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [],
+      "ground_truth": {
+        "changed_file": "audit/pipeline.py",
+        "clean": true,
+        "clean_trap": "A broad mechanical refactor with renamed locals and retuned constants; reviewers may mistake the churn for behaviour changes.",
+        "commit_message": "Refactor 24 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-clean-large-v1"
+      },
+      "input_tokens": 566096,
+      "observation_id": "20260815-082555-openrouter-anthropic-claude-haiku-4-5:repeat:1:case:python-context-clean-large-v1",
+      "output_tokens": 108,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 10.6s\n\nstage              elapsed\nredact               0.02s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.22s\nbatch                0.01s\ndirectory_context     0.00s\nreview               9.24s\nsnap                 0.01s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ntests                1     1     4.23s    62830       12         0        -    62236        0        0  -\nsecurity             1     1     3.55s    63230       12         0        -        0    62236        0  -\ndocumentation        1     1     3.51s    62655       12         0        -    62236        0        0  -\ncorrectness          1     1     3.41s    63034       12         0        -    62236        0        0  -\nponytail             1     1     3.12s    62786       12         0        -    62236        0        0  -\nperformance          1     1     2.55s    62889       12         0        -    62236        0        0  -\ncomplexity           1     1     2.48s    62798       12         0        -    62236        0        0  -\ndeprecation          1     1     2.39s    62808       12         0        -    62236        0        0  -\nintent               1     1     2.23s    63066       12         0        -    62236        0        0  -\n\ncache: 497888 tokens read / 62236 created across 9 calls\nfindings: 0 parsed / 0 returned\nreasoning: 0 of 108 output tokens (0%)\ntokens: 566,204 billable (566,096 in / 108 out) across 9 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.4\", \"provider\": \"openrouter\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 6, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.02}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.22}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.013}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 24, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 0, \"cache_creation_tokens\": 62236}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 63230, \"output_tokens\": 12, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 62236, \"findings\": 0, \"elapsed_s\": 3.548}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 62236, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 62808, \"output_tokens\": 12, \"cache_read_tokens\": 62236, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 2.387}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 62236, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 62798, \"output_tokens\": 12, \"cache_read_tokens\": 62236, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 2.482}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 62236, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 62889, \"output_tokens\": 12, \"cache_read_tokens\": 62236, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 2.552}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 62236, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 63034, \"output_tokens\": 12, \"cache_read_tokens\": 62236, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 3.414}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 62236, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 62655, \"output_tokens\": 12, \"cache_read_tokens\": 62236, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 3.513}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 62236, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 62830, \"output_tokens\": 12, \"cache_read_tokens\": 62236, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 4.225}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 62236, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 63066, \"output_tokens\": 12, \"cache_read_tokens\": 62236, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 2.228}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-haiku-4.5\", \"cache_read_tokens\": 62236, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 62786, \"output_tokens\": 12, \"cache_read_tokens\": 62236, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 3.116}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 9.235}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.007}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[]\n== lgtmaybe profile ==\ntotal wall time: 10.6s\n\nstage              elapsed\nredact               0.02s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.22s\nbatch                0.01s\ndirectory_context     0.00s\nreview               9.24s\nsnap                 0.01s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ntests                1     1     4.23s    62830       12         0        -    62236        0        0  -\nsecurity             1     1     3.55s    63230       12         0        -        0    62236        0  -\ndocumentation        1     1     3.51s    62655       12         0        -    62236        0        0  -\ncorrectness          1     1     3.41s    63034       12         0        -    62236        0        0  -\nponytail             1     1     3.12s    62786       12         0        -    62236        0        0  -\nperformance          1     1     2.55s    62889       12         0        -    62236        0        0  -\ncomplexity           1     1     2.48s    62798       12         0        -    62236        0        0  -\ndeprecation          1     1     2.39s    62808       12         0        -    62236        0        0  -\nintent               1     1     2.23s    63066       12         0        -    62236        0        0  -\n\ncache: 497888 tokens read / 62236 created across 9 calls\nfindings: 0 parsed / 0 returned\nreasoning: 0 of 108 output tokens (0%)\ntokens: 566,204 billable (566,096 in / 108 out) across 9 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 11.051941893005278,
+      "wall_seconds": 11.051941893005278
+    }
+  ],
+  "run_id": "20260815-082555-openrouter-anthropic-claude-haiku-4-5",
+  "schema_version": 2,
+  "status": "complete",
+  "timestamp": "2026-08-15T08:25:55Z"
+}

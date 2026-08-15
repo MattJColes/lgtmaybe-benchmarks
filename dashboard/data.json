@@ -8,6 +8,107 @@
       "context_cases": [
         {
           "case": "python-context-small-v1",
+          "findings": 0.0,
+          "input_tokens": 78098,
+          "output_tokens": 14375,
+          "precision": 1.0,
+          "recall": 0.0,
+          "truncated": false,
+          "wall_seconds": 48.585245896014385
+        },
+        {
+          "case": "python-context-medium-v1",
+          "findings": 0.0,
+          "input_tokens": 222503,
+          "output_tokens": 10154,
+          "precision": 1.0,
+          "recall": 0.0,
+          "truncated": false,
+          "wall_seconds": 32.77707568797632
+        },
+        {
+          "case": "python-context-large-v1",
+          "findings": 1.0,
+          "input_tokens": 630163,
+          "output_tokens": 12794,
+          "precision": 1.0,
+          "recall": 0.125,
+          "truncated": false,
+          "wall_seconds": 112.00903538899729
+        },
+        {
+          "case": "python-context-xlarge-v1",
+          "findings": 3.0,
+          "input_tokens": 1210673,
+          "output_tokens": 17587,
+          "precision": 0.6666666666666666,
+          "recall": 0.25,
+          "truncated": false,
+          "wall_seconds": 54.009318112017354
+        },
+        {
+          "case": "python-context-clean-large-v1",
+          "findings": 0.0,
+          "input_tokens": 566096,
+          "output_tokens": 108,
+          "precision": 1.0,
+          "recall": null,
+          "truncated": false,
+          "wall_seconds": 11.051941893005278
+        }
+      ],
+      "date": "2026-08-15",
+      "focused": false,
+      "lgtmaybe_version": "lgtmaybe 2.1.4",
+      "metrics": {
+        "adjudication_coverage": null,
+        "balanced_f1": 0.15142857142857144,
+        "balanced_recall": 0.09375,
+        "clean_pass_rate": null,
+        "duplicates": null,
+        "failures": 0.0,
+        "false_positive_classes": {},
+        "false_positives": 1.0,
+        "input_tokens": 2707533.0,
+        "output_tokens": 55018.0,
+        "per_language": {},
+        "per_lens": {
+          "complexity": 0.0,
+          "correctness": 0.125,
+          "deprecation": 0.0,
+          "documentation": 0.0,
+          "intent": 0.25,
+          "performance": 0.0,
+          "security": 0.25
+        },
+        "precision": 0.75,
+        "provisional": false,
+        "reasoning_tokens": 0.0,
+        "score_kind": "legacy_f1",
+        "true_positives": 3.0,
+        "truncation_lenses": [],
+        "truncations": 0.0,
+        "unadjudicated": null,
+        "wall_seconds": 258.4326169780106
+      },
+      "model": "anthropic/claude-haiku-4.5",
+      "profile": "context-canonical-v1",
+      "provider": "openrouter",
+      "raw_path": "results/raw/20260815-082555-openrouter-anthropic-claude-haiku-4-5.json",
+      "run_id": "20260815-082555-openrouter-anthropic-claude-haiku-4-5",
+      "settings": "—",
+      "status": "complete",
+      "suite": "context-v1",
+      "timestamp": "2026-08-15T08:25:55Z"
+    },
+    {
+      "audit": "no",
+      "audit_paths": [],
+      "canonical": false,
+      "comparison_key": "context-v1 / context-canonical-v1 / lgtmaybe 2.1.4",
+      "context_cases": [
+        {
+          "case": "python-context-small-v1",
           "findings": 14.0,
           "input_tokens": 110368,
           "output_tokens": 134553,
