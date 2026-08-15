@@ -57,7 +57,17 @@ Legacy-v1 results use a separate historical formula: harmonic recall against per
 ## Results
 
 <!-- BENCH_RESULTS_START -->
-No benchmark runs recorded.
+## Context scaling
+
+Complete `context-v1` runs with profile `context-canonical-v1` only. Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting eight bugs at the same relative positions; the clean case plants none. Recall is per-case over the eight planted findings.
+
+| date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
+|---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | python-context-small-v1 | 37.5% | 50.0% | 6.0 | 113,613 | 52,204 | no | 204.1 |
+| 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | python-context-medium-v1 | 50.0% | 36.4% | 11.0 | 338,609 | 85,937 | no | 321.7 |
+| 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | python-context-large-v1 | 62.5% | 62.5% | 8.0 | 829,583 | 59,027 | no | 219.0 |
+| 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | python-context-xlarge-v1 | 37.5% | 42.9% | 7.0 | 1,587,375 | 83,157 | no | 298.6 |
+| 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | python-context-clean-large-v1 | — | 100.0% | 0.0 | 743,641 | 53,137 | no | 205.8 |
 <!-- BENCH_RESULTS_END -->
 
 See [RESULTS.md](RESULTS.md) for every stored completed run and [dashboard/index.html](dashboard/index.html) for column sorting and filters by suite, profile, model, version, status, audit state, language, and lens. Focused and diagnostic runs remain visible there but do not enter the canonical README ranking.
