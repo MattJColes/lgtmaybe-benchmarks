@@ -18,4 +18,4 @@
 
 - [x] 4.1 Run pytest, ruff, and mypy in the project environment.
 - [x] 4.2 Smoke run `python-context-small-v1` and `python-context-medium-v1` against a cheap provider, confirm findings parse and score.
-- [x] 4.3 Run the full ladder and regenerate reports with `~anthropic/claude-fable-latest`.
+- [x] 4.3 Run the full ladder and regenerate reports with `anthropic/claude-fable-5`.
