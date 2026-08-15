@@ -32,6 +32,7 @@ from lgtmaybe_bench.scoring import (
 
 START = "<!-- BENCH_RESULTS_START -->"
 END = "<!-- BENCH_RESULTS_END -->"
+README_RESULT_LIMIT = 10
 LENSES = (
     "security",
     "correctness",
@@ -328,9 +329,13 @@ def _render_v2_canonical(
     ]
     runs = sorted(
         (_score_suite_run(raw, adjudications) for raw in partition),
-        key=lambda run: (run.aggregate.balanced_f1.median, run.raw["timestamp"]),
+        key=lambda run: (
+            run.aggregate.balanced_f1.median,
+            str(run.raw["timestamp"]),
+            str(run.raw.get("run_id", "")),
+        ),
         reverse=True,
-    )
+    )[:README_RESULT_LIMIT]
     rows: list[str] = []
     for run in runs:
         score = _range(run.aggregate.balanced_f1, percent=True)
@@ -463,7 +468,7 @@ def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
             str(item[0].get("run_id", "")),
         ),
         reverse=True,
-    ):
+    )[:README_RESULT_LIMIT]:
         config = raw["configuration"]
         summary_rows.append(
             "| "
@@ -696,6 +701,7 @@ def render_dashboard(data: dict[str, Any]) -> str:
           <th aria-sort="none"><button type="button" data-sort="balanced_f1" data-type="number">Balanced F1</button></th>
           <th aria-sort="none"><button type="button" data-sort="balanced_recall" data-type="number">Recall</button></th>
           <th aria-sort="none"><button type="button" data-sort="precision" data-type="number">Precision</button></th>
+          <th aria-sort="none"><button type="button" data-sort="true_positives" data-type="number">True positives</button></th>
           <th aria-sort="none"><button type="button" data-sort="false_positives" data-type="number">False positives</button></th>
           <th aria-sort="none"><button type="button" data-sort="clean_pass_rate" data-type="number">Clean pass</button></th>
           <th aria-sort="none"><button type="button" data-sort="audit" data-type="text">Audit</button></th>
@@ -764,7 +770,8 @@ def render_dashboard(data: dict[str, Any]) -> str:
         <td>${escapeHtml(run.date)}</td><td>${escapeHtml(run.provider)}</td><td>${escapeHtml(run.model)}</td>
         <td>${escapeHtml(run.suite)}</td><td>${escapeHtml(run.profile)}</td><td>${escapeHtml(run.lgtmaybe_version)}</td>
         <td class="numeric">${percent(metric(run, 'balanced_f1'))}</td><td class="numeric">${percent(metric(run, 'balanced_recall'))}</td>
-        <td class="numeric">${percent(metric(run, 'precision'))}</td><td class="numeric">${escapeHtml(metric(run, 'false_positives'))}</td>
+        <td class="numeric">${percent(metric(run, 'precision'))}</td><td class="numeric">${escapeHtml(metric(run, 'true_positives'))}</td>
+        <td class="numeric">${escapeHtml(metric(run, 'false_positives'))}</td>
         <td class="numeric">${percent(metric(run, 'clean_pass_rate'))}</td><td>${escapeHtml(run.audit)}</td><td>${escapeHtml(run.status)}</td>
       </tr>`).join('');
       document.querySelector('#context-case-table tbody').innerHTML = filtered.flatMap(run =>
@@ -819,9 +826,13 @@ def render_results(
         return context
     runs = sorted(
         (_score_run(raw) for raw in full_runs),
-        key=lambda run: (aggregate_repeats(run.repeats).score.median, run.raw["timestamp"]),
+        key=lambda run: (
+            aggregate_repeats(run.repeats).score.median,
+            str(run.raw["timestamp"]),
+            str(run.raw.get("run_id", "")),
+        ),
         reverse=True,
-    )
+    )[:README_RESULT_LIMIT]
     header = (
         "| date | lgtmaybe version | provider | model | score | false positives | "
         + " | ".join(LENSES)
