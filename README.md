@@ -61,6 +61,16 @@ Legacy-v1 results use a separate historical formula: harmonic recall against per
 
 Complete `context-v1` runs with profile `context-canonical-v1` only. Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting eight bugs at the same relative positions; the clean case plants none. Recall is per-case over the eight planted findings.
 
+### Model summary
+
+| date | provider | model | score | recall | precision | true positives | false positives |
+|---|---|---|---:|---:|---:|---:|---:|
+| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | 46.0% | 56.2% | 58.1% | 18 | 13 |
+| 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | 29.8% | 46.9% | 46.9% | 15 | 17 |
+| 2026-08-15 | openrouter | anthropic/claude-opus-5 | 0.0% | 0.0% | 100.0% | 0 | 0 |
+
+### Case detail
+
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
 | 2026-08-15 | openrouter | anthropic/claude-opus-5 | python-context-small-v1 | 0.0% | 100.0% | 0.0 | 102,543 | 43,716 | no | 146.1 |
