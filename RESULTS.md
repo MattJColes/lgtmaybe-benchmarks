@@ -14,6 +14,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | 2026-08-15 | openrouter | openai/gpt-5.6-luna | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 19.7% | 78.1% | 42.4% | 25.0 | 34.0 | — | — | no | [raw](results/raw/20260815-085453-openrouter-openai-gpt-5-6-luna.json) | — | — |
 | 2026-08-15 | openrouter | anthropic/claude-haiku-4.5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 15.1% | 9.4% | 75.0% | 3.0 | 1.0 | — | — | no | [raw](results/raw/20260815-082555-openrouter-anthropic-claude-haiku-4-5.json) | — | — |
 | 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 46.0% | 56.2% | 58.1% | 18.0 | 13.0 | — | — | no | [raw](results/raw/20260815-072218-openrouter-anthropic-claude-sonnet-5.json) | — | — |
+| 2026-08-15 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 53.1% | 4.7% | 17.0 | 347.0 | — | — | no | [raw](results/raw/20260815-064602-openai-compatible-unsloth-qwen3-8-27b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1 |
 | 2026-08-15 | openrouter | anthropic/claude-opus-5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 0.0% | 100.0% | 0.0 | 0.0 | — | — | no | [raw](results/raw/20260815-063856-openrouter-anthropic-claude-opus-5.json) | — | — |
 | 2026-08-15 | openrouter | anthropic/claude-fable-5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 29.8% | 46.9% | 46.9% | 15.0 | 17.0 | — | — | no | [raw](results/raw/20260815-060621-openrouter-anthropic-claude-fable-5.json) | — | — |
 
@@ -51,6 +52,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | python-context-large-v1 | 50.0% | 100.0% | 4 | 823,046 | 205,428 | no | 449.0 |
 | 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | python-context-xlarge-v1 | 0.0% | 100.0% | 0 | 1,427,064 | 246,411 | no | 511.8 |
 | 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | python-context-clean-large-v1 | — | 100.0% | 0 | 746,214 | 52,869 | no | 134.5 |
+| 2026-08-15 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | python-context-small-v1 | 62.5% | 55.6% | 9 | 0 | 0 | no | 3739.7 |
+| 2026-08-15 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | python-context-medium-v1 | 50.0% | 57.1% | 7 | 0 | 0 | no | 3726.5 |
+| 2026-08-15 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | python-context-large-v1 | 50.0% | 25.0% | 16 | 0 | 0 | no | 350.9 |
+| 2026-08-15 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | python-context-xlarge-v1 | 50.0% | 44.4% | 9 | 0 | 0 | no | 3762.6 |
+| 2026-08-15 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | python-context-clean-large-v1 | — | 0.0% | 323 | 0 | 0 | no | 3782.0 |
 | 2026-08-15 | openrouter | anthropic/claude-opus-5 | python-context-small-v1 | 0.0% | 100.0% | 0 | 102,543 | 43,716 | no | 146.1 |
 | 2026-08-15 | openrouter | anthropic/claude-opus-5 | python-context-medium-v1 | 0.0% | 100.0% | 0 | 292,722 | 60,541 | no | 202.9 |
 | 2026-08-15 | openrouter | anthropic/claude-opus-5 | python-context-large-v1 | 0.0% | 100.0% | 0 | 733,686 | 53,930 | no | 177.0 |
@@ -108,6 +114,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 75.0% |
 | anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 25.0% |
 | anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 50.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 75.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 0.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
 | anthropic/claude-opus-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
 | anthropic/claude-opus-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 0.0% |
 | anthropic/claude-opus-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
