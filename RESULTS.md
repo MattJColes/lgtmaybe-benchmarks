@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 46.0% | 56.2% | 58.1% | None | — | — | no | [raw](results/raw/20260815-072218-openrouter-anthropic-claude-sonnet-5.json) | — | — |
 | 2026-08-15 | openrouter | anthropic/claude-opus-5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 0.0% | 100.0% | None | — | — | no | [raw](results/raw/20260815-063856-openrouter-anthropic-claude-opus-5.json) | — | — |
 | 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 29.8% | 46.9% | 46.9% | None | — | — | no | [raw](results/raw/20260815-060621-openrouter-anthropic-claude-fable-latest.json) | — | — |
 
@@ -15,6 +16,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 25.0% |
+| anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 75.0% |
+| anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 50.0% |
+| anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 75.0% |
+| anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 75.0% |
+| anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 25.0% |
+| anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 50.0% |
 | anthropic/claude-opus-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
 | anthropic/claude-opus-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 0.0% |
 | anthropic/claude-opus-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |

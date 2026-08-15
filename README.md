@@ -68,6 +68,11 @@ Complete `context-v1` runs with profile `context-canonical-v1` only. Cases grow 
 | 2026-08-15 | openrouter | anthropic/claude-opus-5 | python-context-large-v1 | 0.0% | 100.0% | 0.0 | 733,686 | 53,930 | no | 177.0 |
 | 2026-08-15 | openrouter | anthropic/claude-opus-5 | python-context-xlarge-v1 | 0.0% | 100.0% | 0.0 | 1,427,064 | 58,258 | no | 171.9 |
 | 2026-08-15 | openrouter | anthropic/claude-opus-5 | python-context-clean-large-v1 | — | 100.0% | 0.0 | 746,214 | 56,220 | no | 157.8 |
+| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | python-context-small-v1 | 87.5% | 50.0% | 14.0 | 110,368 | 134,553 | no | 381.6 |
+| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | python-context-medium-v1 | 87.5% | 53.8% | 13.0 | 332,754 | 141,458 | no | 394.1 |
+| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | python-context-large-v1 | 50.0% | 100.0% | 4.0 | 823,046 | 205,428 | no | 449.0 |
+| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | python-context-xlarge-v1 | 0.0% | 100.0% | 0.0 | 1,427,064 | 246,411 | no | 511.8 |
+| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | python-context-clean-large-v1 | — | 100.0% | 0.0 | 746,214 | 52,869 | no | 134.5 |
 | 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | python-context-small-v1 | 37.5% | 50.0% | 6.0 | 113,613 | 52,204 | no | 204.1 |
 | 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | python-context-medium-v1 | 50.0% | 36.4% | 11.0 | 338,609 | 85,937 | no | 321.7 |
 | 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | python-context-large-v1 | 62.5% | 62.5% | 8.0 | 829,583 | 59,027 | no | 219.0 |
