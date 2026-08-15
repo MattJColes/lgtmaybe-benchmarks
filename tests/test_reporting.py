@@ -559,25 +559,13 @@ def context_raw(
     }
 
 
-def test_context_scaling_section_renders_per_case_metrics() -> None:
+def test_context_readme_omits_case_detail() -> None:
     rendered = render_results([context_raw("2026-08-14T00:00:00Z", "scaler")])
 
     assert "## Context scaling" in rendered
-    lines = [line for line in rendered.splitlines() if line.startswith("|")]
-    assert any(
-        "scaler" in line
-        and "python-context-small-v1" in line
-        and "100.0%" in line
-        and "4,000" in line
-        for line in lines
-    )
-    assert any(
-        "scaler" in line
-        and "python-context-clean-large-v1" in line
-        and "—" in line
-        and "50,000" in line
-        for line in lines
-    )
+    assert "### Model summary" in rendered
+    assert "### Case detail" not in rendered
+    assert "python-context-small-v1" not in rendered
 
 
 def test_context_scaling_section_renders_model_summary() -> None:
@@ -627,6 +615,32 @@ def test_context_dashboard_preserves_finding_totals() -> None:
     assert metrics["false_positives"] == 1.0
 
 
+def test_detailed_outputs_retain_context_case_metrics() -> None:
+    data = build_dashboard_data([context_raw("2026-08-14T00:00:00Z", "scaler")])
+
+    cases = data["runs"][0]["context_cases"]
+    assert cases[0] == {
+        "case": "python-context-small-v1",
+        "recall": 1.0,
+        "precision": 1.0,
+        "findings": 1.0,
+        "input_tokens": 4000,
+        "output_tokens": 900,
+        "truncated": False,
+        "wall_seconds": 30.0,
+    }
+    markdown = render_detailed_results(data)
+    assert "## Context case detail" in markdown
+    assert (
+        "| 2026-08-14 | openrouter | scaler | python-context-small-v1 | 100.0% | 100.0% | "
+        "1 | 4,000 | 900 | no | 30.0 |" in markdown
+    )
+    html = render_dashboard(data)
+    assert 'id="context-case-table"' in html
+    assert "run.context_cases" in html
+    assert "python-context-small-v1" in html
+
+
 def test_context_detailed_results_preserve_finding_totals() -> None:
     run = context_raw("2026-08-14T00:00:00Z", "scaler")
 
@@ -666,6 +680,7 @@ def test_context_scaling_section_excludes_ineligible_runs() -> None:
     for run in (focused, diagnostic, incomplete):
         rendered = render_results([run])
         assert "## Context scaling" not in rendered
+        assert build_dashboard_data([run])["runs"][0]["context_cases"] == []
 
 
 def test_context_scaling_section_coexists_with_v2_leaderboard() -> None:

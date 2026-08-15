@@ -384,17 +384,61 @@ def _true_positive_range(repeats: list[RepeatMetrics]) -> Range:
     return Range(float(median(values)), min(values), max(values))
 
 
-def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
-    """Render model and per-case metrics for complete canonical context-scaling runs."""
-    eligible = [
-        raw
-        for raw in raw_runs
-        if raw.get("status", COMPLETE) == COMPLETE
+def _is_context_canonical(raw: dict[str, Any]) -> bool:
+    return (
+        raw.get("status", COMPLETE) == COMPLETE
         and raw.get("configuration", {}).get("suite") == CONTEXT_SUITE_ID
         and raw.get("configuration", {}).get("profile") == CONTEXT_PROFILE_ID
         and raw.get("configuration", {}).get("full_corpus", False)
         and not any(observation.get("failures", 0) for observation in raw.get("observations", []))
-    ]
+    )
+
+
+def _context_case_metrics(raw: dict[str, Any]) -> list[dict[str, Any]]:
+    case_order: list[str] = []
+    observations_by_case: dict[str, list[dict[str, Any]]] = {}
+    for observation in raw.get("observations", []):
+        case = str(observation.get("case", ""))
+        if case not in observations_by_case:
+            case_order.append(case)
+        observations_by_case.setdefault(case, []).append(observation)
+    rows: list[dict[str, Any]] = []
+    for case in case_order:
+        repeats = observations_by_case[case]
+        planted = len(parse_case(repeats[0]["ground_truth"]).expected)
+        if planted:
+            scores = [
+                score_case(parse_case(obs["ground_truth"]), parse_findings(obs["findings"]))
+                for obs in repeats
+            ]
+            recall: float | None = median(score.recall for score in scores)
+            precision = median(score.precision for score in scores)
+        else:
+            recall = None
+            precision = median(1.0 if not obs["findings"] else 0.0 for obs in repeats)
+        rows.append(
+            {
+                "case": case,
+                "recall": recall,
+                "precision": precision,
+                "findings": median(float(len(obs["findings"])) for obs in repeats),
+                "input_tokens": int(median(int(obs["input_tokens"]) for obs in repeats)),
+                "output_tokens": int(median(int(obs["output_tokens"]) for obs in repeats)),
+                "truncated": bool(
+                    any(obs.get("truncation_lenses") for obs in repeats)
+                    or any(
+                        call.get("truncated") for obs in repeats for call in obs.get("calls", [])
+                    )
+                ),
+                "wall_seconds": median(float(obs["wall_seconds"]) for obs in repeats),
+            }
+        )
+    return rows
+
+
+def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
+    """Render model metrics for complete canonical context-scaling runs."""
+    eligible = [raw for raw in raw_runs if _is_context_canonical(raw)]
     if not eligible:
         return None
     ordered = sorted(
@@ -442,75 +486,13 @@ def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
         "false positives |\n"
         "|---|---|---|---:|---:|---:|---:|---:|\n"
     )
-    case_rows: list[str] = []
-    case_header = (
-        "| date | provider | model | case | recall | precision | findings | input tokens | "
-        "output tokens | truncated | wall (s) |\n"
-        "|---|---|---|---|---:|---:|---:|---:|---:|---|---:|\n"
-    )
-    for raw in ordered:
-        config = raw["configuration"]
-        case_order = []
-        observations_by_case: dict[str, list[dict[str, Any]]] = {}
-        for observation in raw.get("observations", []):
-            case = str(observation.get("case", ""))
-            if case not in observations_by_case:
-                case_order.append(case)
-            observations_by_case.setdefault(case, []).append(observation)
-        for case in case_order:
-            repeats = observations_by_case[case]
-            planted = len(parse_case(repeats[0]["ground_truth"]).expected)
-            if planted:
-                scores = [
-                    score_case(parse_case(obs["ground_truth"]), parse_findings(obs["findings"]))
-                    for obs in repeats
-                ]
-                recall = median(score.recall for score in scores)
-                precision = median(score.precision for score in scores)
-                recall_cell = f"{recall * 100:.1f}%"
-            else:
-                precision = median(1.0 if not obs["findings"] else 0.0 for obs in repeats)
-                recall_cell = "—"
-            findings = median(float(len(obs["findings"])) for obs in repeats)
-            input_tokens = median(int(obs["input_tokens"]) for obs in repeats)
-            output_tokens = median(int(obs["output_tokens"]) for obs in repeats)
-            wall = median(float(obs["wall_seconds"]) for obs in repeats)
-            truncated = bool(
-                any(obs.get("truncation_lenses") for obs in repeats)
-                or any(call.get("truncated") for obs in repeats for call in obs.get("calls", []))
-            )
-            case_rows.append(
-                "| "
-                + " | ".join(
-                    (
-                        _iso_date(str(raw["timestamp"])),
-                        str(config.get("provider", "")),
-                        str(config.get("model", "")),
-                        case,
-                        recall_cell,
-                        f"{precision * 100:.1f}%",
-                        f"{findings:.1f}",
-                        f"{int(input_tokens):,}",
-                        f"{int(output_tokens):,}",
-                        "yes" if truncated else "no",
-                        f"{wall:.1f}",
-                    )
-                )
-                + " |"
-            )
     return (
         "## Context scaling\n\n"
         "Complete `context-v1` runs with profile `context-canonical-v1` only. "
         "Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting "
-        "eight bugs at the same relative positions; the clean case plants none. Recall is "
-        "per-case over the eight planted findings.\n\n"
-        "### Model summary\n\n"
-        + summary_header
-        + "\n".join(summary_rows)
-        + "\n\n### Case detail\n\n"
-        + case_header
-        + "\n".join(case_rows)
-        + "\n"
+        "eight bugs at the same relative positions; the clean case plants none. Model recall "
+        "covers the 32 planted findings across the four defect-bearing cases.\n\n"
+        "### Model summary\n\n" + summary_header + "\n".join(summary_rows) + "\n"
     )
 
 
@@ -656,6 +638,7 @@ def build_dashboard_data(
                 ),
                 "settings": _settings(config),
                 "metrics": metrics,
+                "context_cases": _context_case_metrics(raw) if _is_context_canonical(raw) else [],
             }
         )
     return {"schema_version": 1, "runs": rows}
@@ -721,6 +704,16 @@ def render_dashboard(data: dict[str, Any]) -> str:
         <tbody></tbody>
       </table>
     </div>
+    <h2>Context case detail</h2>
+    <div class="table-wrap">
+      <table id="context-case-table">
+        <thead><tr>
+          <th>Date</th><th>Provider</th><th>Model</th><th>Case</th><th>Recall</th><th>Precision</th><th>Findings</th>
+          <th>Input tokens</th><th>Output tokens</th><th>Truncated</th><th>Wall (s)</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
     <noscript><p>JavaScript is disabled. Use <a href="../RESULTS.md">RESULTS.md</a> for every stored result.</p></noscript>
   </main>
   <script id="benchmark-data" type="application/json">__DATA__</script>
@@ -774,6 +767,15 @@ def render_dashboard(data: dict[str, Any]) -> str:
         <td class="numeric">${percent(metric(run, 'precision'))}</td><td class="numeric">${escapeHtml(metric(run, 'false_positives'))}</td>
         <td class="numeric">${percent(metric(run, 'clean_pass_rate'))}</td><td>${escapeHtml(run.audit)}</td><td>${escapeHtml(run.status)}</td>
       </tr>`).join('');
+      document.querySelector('#context-case-table tbody').innerHTML = filtered.flatMap(run =>
+        (run.context_cases || []).map(caseMetric => `<tr>
+          <td>${escapeHtml(run.date)}</td><td>${escapeHtml(run.provider)}</td><td>${escapeHtml(run.model)}</td><td>${escapeHtml(caseMetric.case)}</td>
+          <td class="numeric">${percent(caseMetric.recall)}</td><td class="numeric">${percent(caseMetric.precision)}</td>
+          <td class="numeric">${escapeHtml(caseMetric.findings)}</td><td class="numeric">${escapeHtml(caseMetric.input_tokens)}</td>
+          <td class="numeric">${escapeHtml(caseMetric.output_tokens)}</td><td>${caseMetric.truncated ? 'yes' : 'no'}</td>
+          <td class="numeric">${escapeHtml(caseMetric.wall_seconds)}</td>
+        </tr>`)
+      ).join('');
     }
     Object.values(controls).forEach(control => control.addEventListener('input', render));
     document.querySelectorAll('[data-sort]').forEach(button => button.addEventListener('click', () => {
@@ -862,6 +864,7 @@ def render_detailed_results(data: dict[str, Any]) -> str:
         return "—" if value is None else f"{float(value) * 100:.1f}%"
 
     rows: list[str] = []
+    context_case_rows: list[str] = []
     language_rows: list[str] = []
     lens_rows: list[str] = []
     false_positive_rows: list[str] = []
@@ -902,6 +905,26 @@ def render_detailed_results(data: dict[str, Any]) -> str:
             )
             + " |"
         )
+        for case in run.get("context_cases", []):
+            context_case_rows.append(
+                "| "
+                + " | ".join(
+                    (
+                        escaped(run["date"]),
+                        escaped(run["provider"]),
+                        escaped(run["model"]),
+                        escaped(case["case"]),
+                        percentage(case["recall"]),
+                        percentage(case["precision"]),
+                        f"{float(case['findings']):g}",
+                        f"{int(case['input_tokens']):,}",
+                        f"{int(case['output_tokens']):,}",
+                        "yes" if case["truncated"] else "no",
+                        f"{float(case['wall_seconds']):.1f}",
+                    )
+                )
+                + " |"
+            )
         for language, recall in sorted(metrics.get("per_language", {}).items()):
             language_rows.append(
                 f"| {escaped(run['model'])} | {escaped(run['comparison_key'])} | "
@@ -929,6 +952,15 @@ def render_detailed_results(data: dict[str, Any]) -> str:
         + "\n".join(rows)
         + "\n"
     ]
+    if context_case_rows:
+        sections.append(
+            "\n## Context case detail\n\n"
+            "| date | provider | model | case | recall | precision | findings | input tokens | "
+            "output tokens | truncated | wall (s) |\n"
+            "|---|---|---|---|---:|---:|---:|---:|---:|---|---:|\n"
+            + "\n".join(context_case_rows)
+            + "\n"
+        )
     if language_rows:
         sections.append(
             "\n## Per-language recall\n\n"
