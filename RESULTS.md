@@ -10,6 +10,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
 | 2026-08-15 | openrouter | qwen/qwen3-coder-next | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 22.2% | 12.5% | 100.0% | 4.0 | 0.0 | — | — | no | [raw](results/raw/20260815-230244-openrouter-qwen-qwen3-coder-next.json) | — | — |
 | 2026-08-15 | openrouter | x-ai/grok-4.6 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 47.5% | 84.4% | 55.1% | 27.0 | 22.0 | — | — | no | [raw](results/raw/20260815-223454-openrouter-x-ai-grok-4-6.json) | — | — |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 63.5% | 68.8% | 71.0% | 22.0 | 9.0 | — | — | no | [raw](results/raw/20260815-222949-openrouter-kwaipilot-kat-coder-pro-v2-5.json) | — | — |
 | 2026-08-15 | openrouter | z-ai/glm-4.7-flash | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 34.9% | 43.8% | 51.9% | 14.0 | 13.0 | — | — | no | [raw](results/raw/20260815-204224-openrouter-z-ai-glm-4-7-flash.json) | — | — |
 | 2026-08-15 | openrouter | z-ai/glm-4.7 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-204224-openrouter-z-ai-glm-4-7.json) | — | — |
 | 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 52.9% | 62.5% | 62.5% | 20.0 | 12.0 | — | — | no | [raw](results/raw/20260815-204224-openrouter-kwaipilot-kat-coder-air-v2-5.json) | — | — |
@@ -48,6 +49,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | 2026-08-15 | openrouter | x-ai/grok-4.6 | python-context-large-v1 | 87.5% | 70.0% | 10 | 565,943 | 74,427 | no | 336.7 |
 | 2026-08-15 | openrouter | x-ai/grok-4.6 | python-context-xlarge-v1 | 87.5% | 53.8% | 13 | 1,079,611 | 74,312 | no | 306.3 |
 | 2026-08-15 | openrouter | x-ai/grok-4.6 | python-context-clean-large-v1 | — | 0.0% | 3 | 560,366 | 18,672 | no | 177.9 |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | python-context-small-v1 | 50.0% | 44.4% | 9 | 72,690 | 165,727 | no | 445.9 |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | python-context-medium-v1 | 75.0% | 100.0% | 6 | 222,506 | 184,436 | no | 658.7 |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | python-context-large-v1 | 75.0% | 75.0% | 8 | 555,580 | 195,555 | no | 670.5 |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | python-context-xlarge-v1 | 75.0% | 85.7% | 7 | 1,067,777 | 169,216 | no | 645.3 |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | python-context-clean-large-v1 | — | 0.0% | 1 | 613,933 | 288,879 | yes | 1355.1 |
 | 2026-08-15 | openrouter | z-ai/glm-4.7-flash | python-context-small-v1 | 37.5% | 75.0% | 4 | 66,104 | 480,382 | yes | 1550.5 |
 | 2026-08-15 | openrouter | z-ai/glm-4.7-flash | python-context-medium-v1 | 50.0% | 50.0% | 8 | 201,427 | 112,788 | yes | 556.8 |
 | 2026-08-15 | openrouter | z-ai/glm-4.7-flash | python-context-large-v1 | 75.0% | 42.9% | 14 | 611,420 | 235,327 | yes | 1410.9 |
@@ -167,6 +173,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | x-ai/grok-4.6 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
 | x-ai/grok-4.6 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 50.0% |
 | x-ai/grok-4.6 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
+| kwaipilot/kat-coder-pro-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
+| kwaipilot/kat-coder-pro-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 87.5% |
+| kwaipilot/kat-coder-pro-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
+| kwaipilot/kat-coder-pro-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 25.0% |
+| kwaipilot/kat-coder-pro-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
+| kwaipilot/kat-coder-pro-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 75.0% |
+| kwaipilot/kat-coder-pro-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
 | z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
 | z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 62.5% |
 | z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |

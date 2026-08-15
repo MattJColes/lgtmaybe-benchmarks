@@ -212,6 +212,109 @@
       "context_cases": [
         {
           "case": "python-context-small-v1",
+          "findings": 9.0,
+          "input_tokens": 72690,
+          "output_tokens": 165727,
+          "precision": 0.4444444444444444,
+          "recall": 0.5,
+          "truncated": false,
+          "wall_seconds": 445.9046537129907
+        },
+        {
+          "case": "python-context-medium-v1",
+          "findings": 6.0,
+          "input_tokens": 222506,
+          "output_tokens": 184436,
+          "precision": 1.0,
+          "recall": 0.75,
+          "truncated": false,
+          "wall_seconds": 658.7128501770203
+        },
+        {
+          "case": "python-context-large-v1",
+          "findings": 8.0,
+          "input_tokens": 555580,
+          "output_tokens": 195555,
+          "precision": 0.75,
+          "recall": 0.75,
+          "truncated": false,
+          "wall_seconds": 670.4633993690077
+        },
+        {
+          "case": "python-context-xlarge-v1",
+          "findings": 7.0,
+          "input_tokens": 1067777,
+          "output_tokens": 169216,
+          "precision": 0.8571428571428571,
+          "recall": 0.75,
+          "truncated": false,
+          "wall_seconds": 645.2722156459931
+        },
+        {
+          "case": "python-context-clean-large-v1",
+          "findings": 1.0,
+          "input_tokens": 613933,
+          "output_tokens": 288879,
+          "precision": 0.0,
+          "recall": null,
+          "truncated": true,
+          "wall_seconds": 1355.0845481819997
+        }
+      ],
+      "date": "2026-08-15",
+      "focused": false,
+      "lgtmaybe_version": "lgtmaybe 2.1.4",
+      "metrics": {
+        "adjudication_coverage": null,
+        "balanced_f1": 0.6348148148148147,
+        "balanced_recall": 0.6875,
+        "clean_pass_rate": null,
+        "duplicates": null,
+        "failures": 0.0,
+        "false_positive_classes": {},
+        "false_positives": 9.0,
+        "input_tokens": 2532486.0,
+        "output_tokens": 1003813.0,
+        "per_language": {},
+        "per_lens": {
+          "complexity": 0.0,
+          "correctness": 0.875,
+          "deprecation": 0.75,
+          "documentation": 0.25,
+          "intent": 1.0,
+          "performance": 0.75,
+          "security": 1.0
+        },
+        "precision": 0.7096774193548387,
+        "provisional": false,
+        "reasoning_tokens": 771495.0,
+        "score_kind": "legacy_f1",
+        "true_positives": 22.0,
+        "truncation_lenses": [
+          "performance"
+        ],
+        "truncations": 6.0,
+        "unadjudicated": null,
+        "wall_seconds": 3775.4376670870115
+      },
+      "model": "kwaipilot/kat-coder-pro-v2.5",
+      "profile": "context-canonical-v1",
+      "provider": "openrouter",
+      "raw_path": "results/raw/20260815-222949-openrouter-kwaipilot-kat-coder-pro-v2-5.json",
+      "run_id": "20260815-222949-openrouter-kwaipilot-kat-coder-pro-v2-5",
+      "settings": "—",
+      "status": "complete",
+      "suite": "context-v1",
+      "timestamp": "2026-08-15T22:29:49Z"
+    },
+    {
+      "audit": "no",
+      "audit_paths": [],
+      "canonical": false,
+      "comparison_key": "context-v1 / context-canonical-v1 / lgtmaybe 2.1.4",
+      "context_cases": [
+        {
+          "case": "python-context-small-v1",
           "findings": 4.0,
           "input_tokens": 66104,
           "output_tokens": 480382,
