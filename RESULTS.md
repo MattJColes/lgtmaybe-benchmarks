@@ -17,6 +17,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | 2026-08-15 | openrouter | qwen/qwen3.8-max | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 71.9% | 16.5% | 23.0 | 116.0 | — | — | no | [raw](results/raw/20260815-141246-openrouter-qwen-qwen3-8-max.json) | — | — |
 | 2026-08-15 | openrouter | z-ai/glm-4.7 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-125518-openrouter-z-ai-glm-4-7.json) | — | — |
 | 2026-08-15 | openrouter | moonshotai/kimi-k2.7-code | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 78.1% | 33.3% | 25.0 | 50.0 | — | — | no | [raw](results/raw/20260815-112613-openrouter-moonshotai-kimi-k2-7-code.json) | — | — |
+| 2026-08-15 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 46.5% | 37.5% | 75.0% | 12.0 | 4.0 | — | — | no | [raw](results/raw/20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1 |
 | 2026-08-15 | openrouter | moonshotai/kimi-k3 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 93.8% | 24.0% | 30.0 | 95.0 | — | — | no | [raw](results/raw/20260815-104956-openrouter-moonshotai-kimi-k3.json) | — | — |
 | 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 29.7% | 81.2% | 46.4% | 26.0 | 30.0 | — | — | no | [raw](results/raw/20260815-095319-openrouter-google-gemini-3-1-pro-preview.json) | — | — |
 | 2026-08-15 | openrouter | openai/gpt-5.6-sol | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 59.4% | 32.2% | 19.0 | 40.0 | — | — | no | [raw](results/raw/20260815-093123-openrouter-openai-gpt-5-6-sol.json) | — | — |
@@ -67,6 +68,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | 2026-08-15 | openrouter | moonshotai/kimi-k2.7-code | python-context-large-v1 | 62.5% | 50.0% | 10 | 510,561 | 166,330 | no | 843.2 |
 | 2026-08-15 | openrouter | moonshotai/kimi-k2.7-code | python-context-xlarge-v1 | 87.5% | 36.8% | 19 | 975,329 | 218,855 | no | 670.7 |
 | 2026-08-15 | openrouter | moonshotai/kimi-k2.7-code | python-context-clean-large-v1 | — | 0.0% | 16 | 530,287 | 455,920 | no | 1705.2 |
+| 2026-08-15 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | python-context-small-v1 | 25.0% | 100.0% | 2 | 0 | 0 | no | 5122.1 |
+| 2026-08-15 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | python-context-medium-v1 | 37.5% | 100.0% | 3 | 0 | 0 | no | 4948.2 |
+| 2026-08-15 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | python-context-large-v1 | 37.5% | 100.0% | 3 | 0 | 0 | no | 4561.6 |
+| 2026-08-15 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | python-context-xlarge-v1 | 50.0% | 50.0% | 8 | 0 | 0 | no | 3654.2 |
+| 2026-08-15 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | python-context-clean-large-v1 | — | 100.0% | 0 | 0 | 0 | no | 38.5 |
 | 2026-08-15 | openrouter | moonshotai/kimi-k3 | python-context-small-v1 | 75.0% | 27.3% | 22 | 77,626 | 88,388 | no | 419.3 |
 | 2026-08-15 | openrouter | moonshotai/kimi-k3 | python-context-medium-v1 | 100.0% | 25.0% | 32 | 219,957 | 137,624 | no | 295.3 |
 | 2026-08-15 | openrouter | moonshotai/kimi-k3 | python-context-large-v1 | 100.0% | 36.4% | 22 | 519,655 | 116,784 | no | 557.7 |
@@ -171,6 +177,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
 | moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
 | moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 50.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 0.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 0.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
 | moonshotai/kimi-k3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 75.0% |
 | moonshotai/kimi-k3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 100.0% |
 | moonshotai/kimi-k3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |
