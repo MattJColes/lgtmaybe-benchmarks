@@ -12,6 +12,26 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | 2026-08-15 | openrouter | anthropic/claude-opus-5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 0.0% | 100.0% | 0.0 | 0.0 | — | — | no | [raw](results/raw/20260815-063856-openrouter-anthropic-claude-opus-5.json) | — | — |
 | 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 29.8% | 46.9% | 46.9% | 15.0 | 17.0 | — | — | no | [raw](results/raw/20260815-060621-openrouter-anthropic-claude-fable-latest.json) | — | — |
 
+## Context case detail
+
+| date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
+|---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | python-context-small-v1 | 87.5% | 50.0% | 14 | 110,368 | 134,553 | no | 381.6 |
+| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | python-context-medium-v1 | 87.5% | 53.8% | 13 | 332,754 | 141,458 | no | 394.1 |
+| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | python-context-large-v1 | 50.0% | 100.0% | 4 | 823,046 | 205,428 | no | 449.0 |
+| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | python-context-xlarge-v1 | 0.0% | 100.0% | 0 | 1,427,064 | 246,411 | no | 511.8 |
+| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | python-context-clean-large-v1 | — | 100.0% | 0 | 746,214 | 52,869 | no | 134.5 |
+| 2026-08-15 | openrouter | anthropic/claude-opus-5 | python-context-small-v1 | 0.0% | 100.0% | 0 | 102,543 | 43,716 | no | 146.1 |
+| 2026-08-15 | openrouter | anthropic/claude-opus-5 | python-context-medium-v1 | 0.0% | 100.0% | 0 | 292,722 | 60,541 | no | 202.9 |
+| 2026-08-15 | openrouter | anthropic/claude-opus-5 | python-context-large-v1 | 0.0% | 100.0% | 0 | 733,686 | 53,930 | no | 177.0 |
+| 2026-08-15 | openrouter | anthropic/claude-opus-5 | python-context-xlarge-v1 | 0.0% | 100.0% | 0 | 1,427,064 | 58,258 | no | 171.9 |
+| 2026-08-15 | openrouter | anthropic/claude-opus-5 | python-context-clean-large-v1 | — | 100.0% | 0 | 746,214 | 56,220 | no | 157.8 |
+| 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | python-context-small-v1 | 37.5% | 50.0% | 6 | 113,613 | 52,204 | no | 204.1 |
+| 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | python-context-medium-v1 | 50.0% | 36.4% | 11 | 338,609 | 85,937 | no | 321.7 |
+| 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | python-context-large-v1 | 62.5% | 62.5% | 8 | 829,583 | 59,027 | no | 219.0 |
+| 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | python-context-xlarge-v1 | 37.5% | 42.9% | 7 | 1,587,375 | 83,157 | no | 298.6 |
+| 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | python-context-clean-large-v1 | — | 100.0% | 0 | 743,641 | 53,137 | no | 205.8 |
+
 ## Per-lens recall
 
 | model | comparison key | lens | recall |

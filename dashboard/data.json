@@ -5,6 +5,58 @@
       "audit_paths": [],
       "canonical": false,
       "comparison_key": "context-v1 / context-canonical-v1 / lgtmaybe 2.1.4",
+      "context_cases": [
+        {
+          "case": "python-context-small-v1",
+          "findings": 14.0,
+          "input_tokens": 110368,
+          "output_tokens": 134553,
+          "precision": 0.5,
+          "recall": 0.875,
+          "truncated": false,
+          "wall_seconds": 381.55428198800655
+        },
+        {
+          "case": "python-context-medium-v1",
+          "findings": 13.0,
+          "input_tokens": 332754,
+          "output_tokens": 141458,
+          "precision": 0.5384615384615384,
+          "recall": 0.875,
+          "truncated": false,
+          "wall_seconds": 394.1194077790133
+        },
+        {
+          "case": "python-context-large-v1",
+          "findings": 4.0,
+          "input_tokens": 823046,
+          "output_tokens": 205428,
+          "precision": 1.0,
+          "recall": 0.5,
+          "truncated": false,
+          "wall_seconds": 448.9737168200081
+        },
+        {
+          "case": "python-context-xlarge-v1",
+          "findings": 0.0,
+          "input_tokens": 1427064,
+          "output_tokens": 246411,
+          "precision": 1.0,
+          "recall": 0.0,
+          "truncated": false,
+          "wall_seconds": 511.7520925879944
+        },
+        {
+          "case": "python-context-clean-large-v1",
+          "findings": 0.0,
+          "input_tokens": 746214,
+          "output_tokens": 52869,
+          "precision": 1.0,
+          "recall": null,
+          "truncated": false,
+          "wall_seconds": 134.48006263701245
+        }
+      ],
       "date": "2026-08-15",
       "focused": false,
       "lgtmaybe_version": "lgtmaybe 2.1.4",
@@ -54,6 +106,58 @@
       "audit_paths": [],
       "canonical": false,
       "comparison_key": "context-v1 / context-canonical-v1 / lgtmaybe 2.1.4",
+      "context_cases": [
+        {
+          "case": "python-context-small-v1",
+          "findings": 0.0,
+          "input_tokens": 102543,
+          "output_tokens": 43716,
+          "precision": 1.0,
+          "recall": 0.0,
+          "truncated": false,
+          "wall_seconds": 146.07940252198023
+        },
+        {
+          "case": "python-context-medium-v1",
+          "findings": 0.0,
+          "input_tokens": 292722,
+          "output_tokens": 60541,
+          "precision": 1.0,
+          "recall": 0.0,
+          "truncated": false,
+          "wall_seconds": 202.90259677701397
+        },
+        {
+          "case": "python-context-large-v1",
+          "findings": 0.0,
+          "input_tokens": 733686,
+          "output_tokens": 53930,
+          "precision": 1.0,
+          "recall": 0.0,
+          "truncated": false,
+          "wall_seconds": 176.99999734800076
+        },
+        {
+          "case": "python-context-xlarge-v1",
+          "findings": 0.0,
+          "input_tokens": 1427064,
+          "output_tokens": 58258,
+          "precision": 1.0,
+          "recall": 0.0,
+          "truncated": false,
+          "wall_seconds": 171.92413440399105
+        },
+        {
+          "case": "python-context-clean-large-v1",
+          "findings": 0.0,
+          "input_tokens": 746214,
+          "output_tokens": 56220,
+          "precision": 1.0,
+          "recall": null,
+          "truncated": false,
+          "wall_seconds": 157.81294995601638
+        }
+      ],
       "date": "2026-08-15",
       "focused": false,
       "lgtmaybe_version": "lgtmaybe 2.1.4",
@@ -103,6 +207,58 @@
       "audit_paths": [],
       "canonical": false,
       "comparison_key": "context-v1 / context-canonical-v1 / lgtmaybe 2.1.4",
+      "context_cases": [
+        {
+          "case": "python-context-small-v1",
+          "findings": 6.0,
+          "input_tokens": 113613,
+          "output_tokens": 52204,
+          "precision": 0.5,
+          "recall": 0.375,
+          "truncated": false,
+          "wall_seconds": 204.06751326398808
+        },
+        {
+          "case": "python-context-medium-v1",
+          "findings": 11.0,
+          "input_tokens": 338609,
+          "output_tokens": 85937,
+          "precision": 0.36363636363636365,
+          "recall": 0.5,
+          "truncated": false,
+          "wall_seconds": 321.7170969690196
+        },
+        {
+          "case": "python-context-large-v1",
+          "findings": 8.0,
+          "input_tokens": 829583,
+          "output_tokens": 59027,
+          "precision": 0.625,
+          "recall": 0.625,
+          "truncated": false,
+          "wall_seconds": 219.0186075149977
+        },
+        {
+          "case": "python-context-xlarge-v1",
+          "findings": 7.0,
+          "input_tokens": 1587375,
+          "output_tokens": 83157,
+          "precision": 0.42857142857142855,
+          "recall": 0.375,
+          "truncated": false,
+          "wall_seconds": 298.60466171699227
+        },
+        {
+          "case": "python-context-clean-large-v1",
+          "findings": 0.0,
+          "input_tokens": 743641,
+          "output_tokens": 53137,
+          "precision": 1.0,
+          "recall": null,
+          "truncated": false,
+          "wall_seconds": 205.7872686549963
+        }
+      ],
       "date": "2026-08-15",
       "focused": false,
       "lgtmaybe_version": "lgtmaybe 2.1.4",
