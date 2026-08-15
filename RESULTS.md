@@ -9,6 +9,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
 | 2026-08-15 | openrouter | google/gemini-3.7-flash | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 71.7% | 81.2% | 74.3% | 26.0 | 9.0 | — | — | no | [raw](results/raw/20260815-185235-openrouter-google-gemini-3-7-flash.json) | — | — |
+| 2026-08-15 | openrouter | deepseek/deepseek-v4-pro-0813 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 50.5% | 37.5% | 85.7% | 12.0 | 2.0 | — | — | no | [raw](results/raw/20260815-162205-openrouter-deepseek-deepseek-v4-pro-0813.json) | — | — |
 | 2026-08-15 | openrouter | deepseek/deepseek-v4-flash-0731 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 27.5% | 68.8% | 44.9% | 22.0 | 27.0 | — | — | no | [raw](results/raw/20260815-160227-openrouter-deepseek-deepseek-v4-flash-0731.json) | — | — |
 | 2026-08-15 | openrouter | minimax/minimax-m3 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 43.4% | 53.1% | 56.7% | 17.0 | 13.0 | — | — | no | [raw](results/raw/20260815-144254-openrouter-minimax-minimax-m3.json) | — | — |
 | 2026-08-15 | openrouter | z-ai/glm-5.2 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 31.7% | 78.1% | 47.2% | 25.0 | 28.0 | — | — | no | [raw](results/raw/20260815-141246-openrouter-z-ai-glm-5-2.json) | — | — |
@@ -35,6 +36,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | 2026-08-15 | openrouter | google/gemini-3.7-flash | python-context-large-v1 | 75.0% | 75.0% | 8 | 489,277 | 26,876 | yes | 96.7 |
 | 2026-08-15 | openrouter | google/gemini-3.7-flash | python-context-xlarge-v1 | 75.0% | 66.7% | 9 | 939,192 | 26,614 | no | 106.4 |
 | 2026-08-15 | openrouter | google/gemini-3.7-flash | python-context-clean-large-v1 | — | 100.0% | 0 | 550,278 | 6,870 | no | 21.4 |
+| 2026-08-15 | openrouter | deepseek/deepseek-v4-pro-0813 | python-context-small-v1 | 50.0% | 100.0% | 4 | 72,364 | 213,380 | yes | 1523.3 |
+| 2026-08-15 | openrouter | deepseek/deepseek-v4-pro-0813 | python-context-medium-v1 | 25.0% | 66.7% | 3 | 251,111 | 422,769 | yes | 3139.7 |
+| 2026-08-15 | openrouter | deepseek/deepseek-v4-pro-0813 | python-context-large-v1 | 50.0% | 100.0% | 4 | 530,236 | 290,410 | yes | 2004.7 |
+| 2026-08-15 | openrouter | deepseek/deepseek-v4-pro-0813 | python-context-xlarge-v1 | 25.0% | 66.7% | 3 | 1,016,452 | 164,189 | no | 1148.2 |
+| 2026-08-15 | openrouter | deepseek/deepseek-v4-pro-0813 | python-context-clean-large-v1 | — | 100.0% | 0 | 570,448 | 221,877 | yes | 1845.8 |
 | 2026-08-15 | openrouter | deepseek/deepseek-v4-flash-0731 | python-context-small-v1 | 62.5% | 35.7% | 14 | 76,752 | 127,720 | yes | 1530.8 |
 | 2026-08-15 | openrouter | deepseek/deepseek-v4-flash-0731 | python-context-medium-v1 | 75.0% | 75.0% | 8 | 190,087 | 361,922 | yes | 4069.0 |
 | 2026-08-15 | openrouter | deepseek/deepseek-v4-flash-0731 | python-context-large-v1 | 62.5% | 55.6% | 9 | 589,263 | 177,650 | yes | 1206.7 |
@@ -122,6 +128,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | google/gemini-3.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 75.0% |
 | google/gemini-3.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 75.0% |
 | google/gemini-3.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
+| deepseek/deepseek-v4-pro-0813 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
+| deepseek/deepseek-v4-pro-0813 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 75.0% |
+| deepseek/deepseek-v4-pro-0813 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
+| deepseek/deepseek-v4-pro-0813 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 0.0% |
+| deepseek/deepseek-v4-pro-0813 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 50.0% |
+| deepseek/deepseek-v4-pro-0813 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
+| deepseek/deepseek-v4-pro-0813 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
 | deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
 | deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 62.5% |
 | deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |
