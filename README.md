@@ -19,7 +19,7 @@ $env:OPENAI_API_KEY = "..."
 uv run bench run --provider openai --model gpt-5.5
 ```
 
-The default `v2 / canonical-v1` comparison uses three repeats, the fast lgtmaybe preset, a 100,000-token input ceiling, and the same settings for Python, TypeScript, JavaScript, Rust, Dart, Java, and Go. It also covers GitHub Actions and Terraform. Keep language settings identical: per-language defaults would make the overall result a comparison of configurations rather than models.
+The default `v2 / canonical-v2` comparison uses three repeats, the fast lgtmaybe preset, a 100,000-token input ceiling, and a bounded 16,384-token output budget per provider call, with the same settings for Python, TypeScript, JavaScript, Rust, Dart, Java, and Go. It also covers GitHub Actions and Terraform. Keep language settings identical: per-language defaults would make the overall result a comparison of configurations rather than models. The output budget bounds runaway generations (issue #25): a call that hits the cap is retained as truncation evidence, not a finding. Results from the earlier provider-resolved `canonical-v1` generation remain stored and comparable within their own generation; the two generations are never ranked against each other.
 
 Use a named diagnostic profile for investigation, not ranking:
 

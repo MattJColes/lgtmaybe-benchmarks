@@ -87,7 +87,7 @@ def v2_raw(
         {
             "suite": "v2",
             "profile": profile,
-            "profile_canonical": profile == "canonical-v1",
+            "profile_canonical": profile in {"canonical-v1", "canonical-v2"},
             "full_corpus": full_corpus,
         }
     )
@@ -207,6 +207,39 @@ def test_v2_leaderboard_exposes_balanced_quality_false_positives_and_audit() -> 
     assert "100.0%" in row
     assert "| 0 |" in row
     assert "| yes |" in row
+
+
+def test_canonical_generations_never_mix_and_the_newest_generation_wins() -> None:
+    v1_run = v2_raw("2026-03-01T00:00:00Z", "v1-model", profile="canonical-v1")
+    v2_old = v2_raw("2026-03-15T00:00:00Z", "v2-old", profile="canonical-v2")
+    v2_new = v2_raw("2026-04-01T00:00:00Z", "v2-new", profile="canonical-v2")
+
+    rendered = render_results([v1_run, v2_old, v2_new])
+
+    assert "Comparison key: `v2 / canonical-v2 / lgtmaybe 2.0`" in rendered
+    assert "v2-old" in rendered
+    assert "v2-new" in rendered
+    assert "v1-model" not in rendered
+
+
+def test_canonical_v1_generation_keeps_ranking_until_v2_runs_exist() -> None:
+    v1_run = v2_raw("2026-03-01T00:00:00Z", "v1-model", profile="canonical-v1")
+
+    rendered = render_results([v1_run])
+
+    assert "Comparison key: `v2 / canonical-v1 / lgtmaybe 2.0`" in rendered
+    assert "v1-model" in rendered
+
+
+def test_dashboard_marks_both_canonical_generations() -> None:
+    v1_run = v2_raw("2026-03-01T00:00:00Z", "v1-model", profile="canonical-v1")
+    v2_run = v2_raw("2026-04-01T00:00:00Z", "v2-model", profile="canonical-v2")
+
+    data = build_dashboard_data([v1_run, v2_run])
+
+    by_model = {run["model"]: run for run in data["runs"]}
+    assert by_model["v1-model"]["canonical"] is True
+    assert by_model["v2-model"]["canonical"] is True
 
 
 def test_dashboard_data_is_deterministic_and_keeps_every_run_class() -> None:

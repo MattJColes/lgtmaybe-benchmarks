@@ -290,6 +290,9 @@ def _settings(config: dict[str, Any]) -> str:
     return "; ".join(values) or "—"
 
 
+CANONICAL_PROFILE_IDS = frozenset({"canonical-v1", "canonical-v2"})
+
+
 def _render_v2_canonical(
     raw_runs: list[dict[str, Any]],
     adjudications: dict[str, str] | None,
@@ -299,7 +302,7 @@ def _render_v2_canonical(
         for raw in raw_runs
         if raw.get("status", COMPLETE) == COMPLETE
         and raw.get("configuration", {}).get("suite") == "v2"
-        and raw.get("configuration", {}).get("profile") == "canonical-v1"
+        and raw.get("configuration", {}).get("profile") in CANONICAL_PROFILE_IDS
         and raw.get("configuration", {}).get("profile_canonical", True)
         and raw.get("configuration", {}).get("full_corpus", False)
         and not any(observation.get("failures", 0) for observation in raw.get("observations", []))
@@ -485,7 +488,7 @@ def build_dashboard_data(
         canonical = (
             status == COMPLETE
             and suite == "v2"
-            and profile == "canonical-v1"
+            and profile in CANONICAL_PROFILE_IDS
             and bool(config.get("profile_canonical", True))
             and not focused
             and not failed
