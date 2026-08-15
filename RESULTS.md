@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 52.9% | 62.5% | 62.5% | 20.0 | 12.0 | — | — | no | [raw](results/raw/20260815-204224-openrouter-kwaipilot-kat-coder-air-v2-5.json) | — | — |
 | 2026-08-15 | openrouter | google/gemini-3.7-flash | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 71.7% | 81.2% | 74.3% | 26.0 | 9.0 | — | — | no | [raw](results/raw/20260815-185235-openrouter-google-gemini-3-7-flash.json) | — | — |
 | 2026-08-15 | openrouter | z-ai/glm-4.7-flash | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-173749-openrouter-z-ai-glm-4-7-flash.json) | — | — |
 | 2026-08-15 | openrouter | deepseek/deepseek-v4-pro-0813 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 50.5% | 37.5% | 85.7% | 12.0 | 2.0 | — | — | no | [raw](results/raw/20260815-162205-openrouter-deepseek-deepseek-v4-pro-0813.json) | — | — |
@@ -33,6 +34,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | python-context-small-v1 | 50.0% | 66.7% | 6 | 82,932 | 126,766 | yes | 1053.4 |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | python-context-medium-v1 | 75.0% | 66.7% | 9 | 219,448 | 99,524 | no | 2170.4 |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | python-context-large-v1 | 75.0% | 85.7% | 7 | 559,800 | 160,972 | yes | 1178.7 |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | python-context-xlarge-v1 | 50.0% | 50.0% | 8 | 1,067,644 | 179,370 | yes | 820.2 |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | python-context-clean-large-v1 | — | 0.0% | 2 | 555,478 | 197,397 | yes | 1097.7 |
 | 2026-08-15 | openrouter | google/gemini-3.7-flash | python-context-small-v1 | 100.0% | 80.0% | 10 | 83,927 | 28,641 | no | 55.4 |
 | 2026-08-15 | openrouter | google/gemini-3.7-flash | python-context-medium-v1 | 75.0% | 75.0% | 8 | 225,607 | 30,506 | yes | 57.6 |
 | 2026-08-15 | openrouter | google/gemini-3.7-flash | python-context-large-v1 | 75.0% | 75.0% | 8 | 489,277 | 26,876 | yes | 96.7 |
@@ -128,6 +134,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
+| kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 100.0% |
+| kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
+| kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 50.0% |
+| kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 75.0% |
+| kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
+| kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
 | google/gemini-3.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 100.0% |
 | google/gemini-3.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 50.0% |
 | google/gemini-3.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |
