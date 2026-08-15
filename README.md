@@ -70,6 +70,7 @@ Complete `context-v1` runs with profile `context-canonical-v1` only. Cases grow 
 | 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | 29.8% | 46.9% | 46.9% | 15 | 17 |
 | 2026-08-15 | openrouter | openai/gpt-5.6-luna | 19.7% | 78.1% | 42.4% | 25 | 34 |
 | 2026-08-15 | openrouter | anthropic/claude-haiku-4.5 | 15.1% | 9.4% | 75.0% | 3 | 1 |
+| 2026-08-15 | openrouter | openai/gpt-5.6-sol | 0.0% | 59.4% | 32.2% | 19 | 40 |
 | 2026-08-15 | openrouter | anthropic/claude-opus-5 | 0.0% | 0.0% | 100.0% | 0 | 0 |
 <!-- BENCH_RESULTS_END -->
 
