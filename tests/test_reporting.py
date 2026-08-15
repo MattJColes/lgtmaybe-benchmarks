@@ -740,6 +740,31 @@ def test_context_scaling_section_excludes_ineligible_runs() -> None:
         assert build_dashboard_data([run])["runs"][0]["context_cases"] == []
 
 
+def test_fable_run_uses_exact_model_identity() -> None:
+    root = Path(__file__).parents[1]
+    raw_path = root / "results/raw/20260815-060621-openrouter-anthropic-claude-fable-5.json"
+    run = json.loads(raw_path.read_text(encoding="utf-8"))
+    run["_source_path"] = raw_path.relative_to(root).as_posix()
+    expected_model = "anthropic/claude-fable-5"
+    expected_run_id = "20260815-060621-openrouter-anthropic-claude-fable-5"
+
+    assert run["configuration"]["model"] == expected_model
+    assert run["run_id"] == expected_run_id == raw_path.stem
+    assert all(
+        observation["observation_id"].startswith(f"{expected_run_id}:")
+        for observation in run["observations"]
+    )
+    assert all(
+        finding["finding_id"].startswith(f"{expected_run_id}:")
+        for observation in run["observations"]
+        for finding in observation["findings"]
+    )
+    dashboard_run = build_dashboard_data([run])["runs"][0]
+    assert dashboard_run["model"] == expected_model
+    assert dashboard_run["run_id"] == expected_run_id
+    assert dashboard_run["raw_path"] == raw_path.relative_to(root).as_posix()
+
+
 def test_context_scaling_section_coexists_with_v2_leaderboard() -> None:
     runs = [v2_raw("2026-08-14T00:00:00Z", "ranked"), context_raw("2026-08-14T01:00:00Z", "scaler")]
 
