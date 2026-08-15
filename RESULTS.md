@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-15 | openrouter | z-ai/glm-4.7 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-204224-openrouter-z-ai-glm-4-7.json) | — | — |
 | 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 52.9% | 62.5% | 62.5% | 20.0 | 12.0 | — | — | no | [raw](results/raw/20260815-204224-openrouter-kwaipilot-kat-coder-air-v2-5.json) | — | — |
 | 2026-08-15 | openrouter | google/gemini-3.7-flash | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 71.7% | 81.2% | 74.3% | 26.0 | 9.0 | — | — | no | [raw](results/raw/20260815-185235-openrouter-google-gemini-3-7-flash.json) | — | — |
 | 2026-08-15 | openrouter | z-ai/glm-4.7-flash | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-173749-openrouter-z-ai-glm-4-7-flash.json) | — | — |
