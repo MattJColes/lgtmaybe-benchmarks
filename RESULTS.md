@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-15 | openrouter | qwen/qwen3-coder-next | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 22.2% | 12.5% | 100.0% | 4.0 | 0.0 | — | — | no | [raw](results/raw/20260815-230244-openrouter-qwen-qwen3-coder-next.json) | — | — |
 | 2026-08-15 | openrouter | x-ai/grok-4.6 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 47.5% | 84.4% | 55.1% | 27.0 | 22.0 | — | — | no | [raw](results/raw/20260815-223454-openrouter-x-ai-grok-4-6.json) | — | — |
 | 2026-08-15 | openrouter | z-ai/glm-4.7-flash | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 34.9% | 43.8% | 51.9% | 14.0 | 13.0 | — | — | no | [raw](results/raw/20260815-204224-openrouter-z-ai-glm-4-7-flash.json) | — | — |
 | 2026-08-15 | openrouter | z-ai/glm-4.7 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-204224-openrouter-z-ai-glm-4-7.json) | — | — |
@@ -37,6 +38,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-15 | openrouter | qwen/qwen3-coder-next | python-context-small-v1 | 12.5% | 100.0% | 1 | 65,080 | 2,286 | no | 13.6 |
+| 2026-08-15 | openrouter | qwen/qwen3-coder-next | python-context-medium-v1 | 12.5% | 100.0% | 1 | 196,423 | 2,268 | no | 15.2 |
+| 2026-08-15 | openrouter | qwen/qwen3-coder-next | python-context-large-v1 | 12.5% | 100.0% | 1 | 500,572 | 1,958 | no | 16.1 |
+| 2026-08-15 | openrouter | qwen/qwen3-coder-next | python-context-xlarge-v1 | 12.5% | 100.0% | 1 | 980,848 | 2,383 | no | 21.2 |
+| 2026-08-15 | openrouter | qwen/qwen3-coder-next | python-context-clean-large-v1 | — | 100.0% | 0 | 460,884 | 30,679 | yes | 304.3 |
 | 2026-08-15 | openrouter | x-ai/grok-4.6 | python-context-small-v1 | 75.0% | 60.0% | 10 | 82,596 | 70,371 | no | 313.1 |
 | 2026-08-15 | openrouter | x-ai/grok-4.6 | python-context-medium-v1 | 87.5% | 53.8% | 13 | 233,442 | 79,997 | no | 393.0 |
 | 2026-08-15 | openrouter | x-ai/grok-4.6 | python-context-large-v1 | 87.5% | 70.0% | 10 | 565,943 | 74,427 | no | 336.7 |
@@ -147,6 +153,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
+| qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 0.0% |
+| qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
+| qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 0.0% |
+| qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 0.0% |
+| qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
+| qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
 | x-ai/grok-4.6 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 75.0% |
 | x-ai/grok-4.6 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 75.0% |
 | x-ai/grok-4.6 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |

@@ -1,0 +1,1399 @@
+{
+  "configuration": {
+    "api_base": null,
+    "audit_available": false,
+    "base_profile": "context-canonical-v1",
+    "cases": [
+      "python-context-small-v1",
+      "python-context-medium-v1",
+      "python-context-large-v1",
+      "python-context-xlarge-v1",
+      "python-context-clean-large-v1"
+    ],
+    "concurrency": 6,
+    "diagnostic_overrides": [],
+    "full_corpus": true,
+    "max_input_tokens": 100000,
+    "max_tokens": null,
+    "mid_review_retrieval": false,
+    "model": "qwen/qwen3-coder-next",
+    "preset": "full",
+    "profile": "context-canonical-v1",
+    "profile_canonical": false,
+    "profile_schema_version": 1,
+    "provider": "openrouter",
+    "reasoning_effort": null,
+    "recursive": true,
+    "reflect": true,
+    "repeats": 1,
+    "resolved_profile": {
+      "base_profile_id": "context-canonical-v1",
+      "canonical": false,
+      "diagnostic_overrides": [],
+      "id": "context-canonical-v1",
+      "max_input_tokens": 100000,
+      "max_tokens": null,
+      "mid_review_retrieval": false,
+      "preset": "full",
+      "reasoning_effort": null,
+      "recursive": true,
+      "reflect": true,
+      "repeats": 1,
+      "schema_version": 1,
+      "spec_review": true,
+      "static_analysis": false
+    },
+    "spec_review": true,
+    "static_analysis": false,
+    "suite": "context-v1",
+    "timeout": 7200
+  },
+  "lgtmaybe_version": "lgtmaybe 2.1.4",
+  "observations": [
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 4.18,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 6612,
+          "label": "correctness",
+          "output_tokens": 252,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 5440,
+          "elapsed_seconds": 4.18,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 6474,
+          "label": "tests",
+          "output_tokens": 246,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 5440,
+          "elapsed_seconds": 4.15,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 6491,
+          "label": "performance",
+          "output_tokens": 252,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 5440,
+          "elapsed_seconds": 4.15,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 6422,
+          "label": "complexity",
+          "output_tokens": 248,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 5440,
+          "elapsed_seconds": 4.06,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 6430,
+          "label": "deprecation",
+          "output_tokens": 237,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 5440,
+          "elapsed_seconds": 3.83,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 6299,
+          "label": "documentation",
+          "output_tokens": 207,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 5440,
+          "elapsed_seconds": 3.45,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 6421,
+          "label": "ponytail",
+          "output_tokens": 254,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 5440,
+          "elapsed_seconds": 3.2,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 6694,
+          "label": "intent",
+          "output_tokens": 251,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 3.2,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 6774,
+          "label": "security",
+          "output_tokens": 254,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 0,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 1.39,
+          "error": null,
+          "findings": null,
+          "input_tokens": 6463,
+          "label": "reflect",
+          "output_tokens": 85,
+          "reasoning_tokens": 0,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-small-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [
+        {
+          "anchor": "    query = f\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\"",
+          "anchored": true,
+          "body": "The query string is constructed using string interpolation with owner_id, which allows SQL injection if owner_id contains malicious input. Use parameterized queries instead.",
+          "broad": false,
+          "category": "security",
+          "confidence": 10,
+          "failure_scenario": "An attacker providing a malicious owner_id like ' OR '1'='1' can manipulate the query to access unauthorized order data.",
+          "finding_id": "20260815-230244-openrouter-qwen-qwen3-coder-next:repeat:1:case:python-context-small-v1:finding:1",
+          "line": 5,
+          "path": "billing/pipeline.py",
+          "severity": "high",
+          "side": "RIGHT",
+          "suggestion": "    query = \"SELECT id, status, total FROM orders WHERE customer_id = %s\"\n    cursor.execute(query, (owner_id,))",
+          "title": "Prevent SQL injection by parameterizing queries"
+        }
+      ],
+      "ground_truth": {
+        "changed_file": "billing/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 2 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 13
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 58
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 90
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 10
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 36
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 88
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 118
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-small-v1"
+      },
+      "input_tokens": 65080,
+      "observation_id": "20260815-230244-openrouter-qwen-qwen3-coder-next:repeat:1:case:python-context-small-v1",
+      "output_tokens": 2286,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 13.1s\n\nstage              elapsed\nredact               0.00s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.03s\nbatch                0.00s\ndirectory_context     0.00s\nreview              10.71s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect              1.39s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ncorrectness          1     1     4.18s     6612      252         0        -        0        0        1  -\ntests                1     1     4.18s     6474      246         0        -     5440        0        1  -\nperformance          1     1     4.15s     6491      252         0        -     5440        0        1  -\ncomplexity           1     1     4.15s     6422      248         0        -     5440        0        1  -\ndeprecation          1     1     4.06s     6430      237         0        -     5440        0        1  -\ndocumentation        1     1     3.83s     6299      207         0        -     5440        0        1  -\nponytail             1     1     3.45s     6421      254         0        -     5440        0        1  -\nintent               1     1     3.20s     6694      251         0        -     5440        0        1  -\nsecurity             1     1     3.20s     6774      254         0        -        0        0        1  -\nreflect              0     1     1.39s     6463       85         0        -        0        0        -  -\n\ncache: 38080 tokens read / 0 created across 10 calls\nfindings: 9 parsed / 1 returned\nreasoning: 0 of 2,286 output tokens (0%)\ntokens: 67,366 billable (65,080 in / 2,286 out) across 10 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.4\", \"provider\": \"openrouter\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 6, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.002}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.027}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.003}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 2, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6774, \"output_tokens\": 254, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 3.197}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 5440, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6299, \"output_tokens\": 207, \"cache_read_tokens\": 5440, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 3.825}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 5440, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6430, \"output_tokens\": 237, \"cache_read_tokens\": 5440, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 4.058}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6612, \"output_tokens\": 252, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 4.179}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 5440, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6491, \"output_tokens\": 252, \"cache_read_tokens\": 5440, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 4.15}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 5440, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6474, \"output_tokens\": 246, \"cache_read_tokens\": 5440, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 4.177}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 5440, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6422, \"output_tokens\": 248, \"cache_read_tokens\": 5440, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 4.148}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 5440, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6694, \"output_tokens\": 251, \"cache_read_tokens\": 5440, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 3.201}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 5440, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6421, \"output_tokens\": 254, \"cache_read_tokens\": 5440, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 3.446}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 10.714}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 6, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 6, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 6, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 6, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 6, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 6, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 6, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reflecting on findings\", \"findings\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"reflect\", \"batch\": 0, \"attempts\": 1, \"input_tokens\": 6463, \"output_tokens\": 85, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"elapsed_s\": 1.387}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"reflect\", \"elapsed_s\": 1.393}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[{\"path\": \"billing/pipeline.py\", \"line\": 5, \"side\": \"RIGHT\", \"severity\": \"high\", \"title\": \"Prevent SQL injection by parameterizing queries\", \"body\": \"The query string is constructed using string interpolation with owner_id, which allows SQL injection if owner_id contains malicious input. Use parameterized queries instead.\", \"failure_scenario\": \"An attacker providing a malicious owner_id like ' OR '1'='1' can manipulate the query to access unauthorized order data.\", \"suggestion\": \"    query = \\\"SELECT id, status, total FROM orders WHERE customer_id = %s\\\"\\n    cursor.execute(query, (owner_id,))\", \"anchor\": \"    query = f\\\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\\\"\", \"anchored\": true, \"broad\": false, \"confidence\": 10, \"category\": \"security\"}]\n== lgtmaybe profile ==\ntotal wall time: 13.1s\n\nstage              elapsed\nredact               0.00s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.03s\nbatch                0.00s\ndirectory_context     0.00s\nreview              10.71s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect              1.39s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ncorrectness          1     1     4.18s     6612      252         0        -        0        0        1  -\ntests                1     1     4.18s     6474      246         0        -     5440        0        1  -\nperformance          1     1     4.15s     6491      252         0        -     5440        0        1  -\ncomplexity           1     1     4.15s     6422      248         0        -     5440        0        1  -\ndeprecation          1     1     4.06s     6430      237         0        -     5440        0        1  -\ndocumentation        1     1     3.83s     6299      207         0        -     5440        0        1  -\nponytail             1     1     3.45s     6421      254         0        -     5440        0        1  -\nintent               1     1     3.20s     6694      251         0        -     5440        0        1  -\nsecurity             1     1     3.20s     6774      254         0        -        0        0        1  -\nreflect              0     1     1.39s     6463       85         0        -        0        0        -  -\n\ncache: 38080 tokens read / 0 created across 10 calls\nfindings: 9 parsed / 1 returned\nreasoning: 0 of 2,286 output tokens (0%)\ntokens: 67,366 billable (65,080 in / 2,286 out) across 10 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 13.595300140004838,
+      "wall_seconds": 13.595300140004838
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 17952,
+          "elapsed_seconds": 4.17,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 19794,
+          "label": "intent",
+          "output_tokens": 229,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 4.0,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 19874,
+          "label": "security",
+          "output_tokens": 271,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 19040,
+          "elapsed_seconds": 3.98,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 19521,
+          "label": "ponytail",
+          "output_tokens": 243,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 19040,
+          "elapsed_seconds": 3.92,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 19712,
+          "label": "correctness",
+          "output_tokens": 244,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 19040,
+          "elapsed_seconds": 3.8,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 19530,
+          "label": "deprecation",
+          "output_tokens": 249,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 19040,
+          "elapsed_seconds": 3.78,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 19591,
+          "label": "performance",
+          "output_tokens": 251,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 19040,
+          "elapsed_seconds": 3.78,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 19522,
+          "label": "complexity",
+          "output_tokens": 241,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 17952,
+          "elapsed_seconds": 3.76,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 19574,
+          "label": "tests",
+          "output_tokens": 245,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 19040,
+          "elapsed_seconds": 3.46,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 19399,
+          "label": "documentation",
+          "output_tokens": 210,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 0,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 1.85,
+          "error": null,
+          "findings": null,
+          "input_tokens": 19906,
+          "label": "reflect",
+          "output_tokens": 85,
+          "reasoning_tokens": 0,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-medium-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [
+        {
+          "anchor": "    query = f\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\"",
+          "anchored": true,
+          "body": "The query string is constructed using f-string interpolation with user-provided owner_id, which allows SQL injection attacks. An attacker could inject malicious SQL through the owner_id parameter.",
+          "broad": false,
+          "category": "security",
+          "confidence": 10,
+          "failure_scenario": "An attacker provides a malicious owner_id like ' OR '1'='1' -- to access orders belonging to other customers or extract sensitive data.",
+          "finding_id": "20260815-230244-openrouter-qwen-qwen3-coder-next:repeat:1:case:python-context-medium-v1:finding:1",
+          "line": 5,
+          "path": "billing/pipeline.py",
+          "severity": "high",
+          "side": "RIGHT",
+          "suggestion": "    query = \"SELECT id, status, total FROM orders WHERE customer_id = %s\"\n    cursor.execute(query, (owner_id,))",
+          "title": "Prevent SQL injection by using parameterized queries"
+        }
+      ],
+      "ground_truth": {
+        "changed_file": "billing/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 8 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 143
+          },
+          {
+            "file": "inventory/pipeline.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 21
+          },
+          {
+            "file": "ledger/pipeline.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 86
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 145
+          },
+          {
+            "file": "routing/pipeline.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 23
+          },
+          {
+            "file": "routing/pipeline.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 234
+          },
+          {
+            "file": "shipping/pipeline.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 161
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-medium-v1"
+      },
+      "input_tokens": 196423,
+      "observation_id": "20260815-230244-openrouter-qwen-qwen3-coder-next:repeat:1:case:python-context-medium-v1",
+      "output_tokens": 2268,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 14.8s\n\nstage              elapsed\nredact               0.01s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.12s\nbatch                0.01s\ndirectory_context     0.00s\nreview              11.74s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect              1.88s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nintent               1     1     4.17s    19794      229         0        -    17952        0        1  -\nsecurity             1     1     4.00s    19874      271         0        -        0        0        1  -\nponytail             1     1     3.98s    19521      243         0        -    19040        0        1  -\ncorrectness          1     1     3.92s    19712      244         0        -    19040        0        1  -\ndeprecation          1     1     3.80s    19530      249         0        -    19040        0        1  -\nperformance          1     1     3.78s    19591      251         0        -    19040        0        1  -\ncomplexity           1     1     3.78s    19522      241         0        -    19040        0        1  -\ntests                1     1     3.76s    19574      245         0        -    17952        0        1  -\ndocumentation        1     1     3.46s    19399      210         0        -    19040        0        1  -\nreflect              0     1     1.85s    19906       85         0        -        0        0        -  -\n\ncache: 150144 tokens read / 0 created across 10 calls\nfindings: 9 parsed / 1 returned\nreasoning: 0 of 2,268 output tokens (0%)\ntokens: 198,691 billable (196,423 in / 2,268 out) across 10 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.4\", \"provider\": \"openrouter\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 6, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.01}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.124}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.009}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 8, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19874, \"output_tokens\": 271, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 3.996}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 19040, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19399, \"output_tokens\": 210, \"cache_read_tokens\": 19040, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 3.456}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 17952, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19574, \"output_tokens\": 245, \"cache_read_tokens\": 17952, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 3.757}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 19040, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19530, \"output_tokens\": 249, \"cache_read_tokens\": 19040, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 3.801}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 19040, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19591, \"output_tokens\": 251, \"cache_read_tokens\": 19040, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 3.782}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 19040, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19522, \"output_tokens\": 241, \"cache_read_tokens\": 19040, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 3.781}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 19040, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19712, \"output_tokens\": 244, \"cache_read_tokens\": 19040, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 3.923}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 17952, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19794, \"output_tokens\": 229, \"cache_read_tokens\": 17952, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 4.172}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 19040, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 19521, \"output_tokens\": 243, \"cache_read_tokens\": 19040, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 3.979}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 11.743}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 8, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 10, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 10, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 10, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 5, \"to\": 3}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 10, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 10, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 8, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 10, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.003}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reflecting on findings\", \"findings\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"reflect\", \"batch\": 0, \"attempts\": 1, \"input_tokens\": 19906, \"output_tokens\": 85, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"elapsed_s\": 1.85}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"reflect\", \"elapsed_s\": 1.877}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[{\"path\": \"billing/pipeline.py\", \"line\": 5, \"side\": \"RIGHT\", \"severity\": \"high\", \"title\": \"Prevent SQL injection by using parameterized queries\", \"body\": \"The query string is constructed using f-string interpolation with user-provided owner_id, which allows SQL injection attacks. An attacker could inject malicious SQL through the owner_id parameter.\", \"failure_scenario\": \"An attacker provides a malicious owner_id like ' OR '1'='1' -- to access orders belonging to other customers or extract sensitive data.\", \"suggestion\": \"    query = \\\"SELECT id, status, total FROM orders WHERE customer_id = %s\\\"\\n    cursor.execute(query, (owner_id,))\", \"anchor\": \"    query = f\\\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\\\"\", \"anchored\": true, \"broad\": false, \"confidence\": 10, \"category\": \"security\"}]\n== lgtmaybe profile ==\ntotal wall time: 14.8s\n\nstage              elapsed\nredact               0.01s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.12s\nbatch                0.01s\ndirectory_context     0.00s\nreview              11.74s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect              1.88s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nintent               1     1     4.17s    19794      229         0        -    17952        0        1  -\nsecurity             1     1     4.00s    19874      271         0        -        0        0        1  -\nponytail             1     1     3.98s    19521      243         0        -    19040        0        1  -\ncorrectness          1     1     3.92s    19712      244         0        -    19040        0        1  -\ndeprecation          1     1     3.80s    19530      249         0        -    19040        0        1  -\nperformance          1     1     3.78s    19591      251         0        -    19040        0        1  -\ncomplexity           1     1     3.78s    19522      241         0        -    19040        0        1  -\ntests                1     1     3.76s    19574      245         0        -    17952        0        1  -\ndocumentation        1     1     3.46s    19399      210         0        -    19040        0        1  -\nreflect              0     1     1.85s    19906       85         0        -        0        0        -  -\n\ncache: 150144 tokens read / 0 created across 10 calls\nfindings: 9 parsed / 1 returned\nreasoning: 0 of 2,268 output tokens (0%)\ntokens: 198,691 billable (196,423 in / 2,268 out) across 10 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 15.227597746998072,
+      "wall_seconds": 15.227597746998072
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 48960,
+          "elapsed_seconds": 4.83,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 50202,
+          "label": "intent",
+          "output_tokens": 345,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 1632,
+          "elapsed_seconds": 4.74,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 50281,
+          "label": "security",
+          "output_tokens": 264,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 48960,
+          "elapsed_seconds": 4.73,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 49981,
+          "label": "tests",
+          "output_tokens": 254,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 48960,
+          "elapsed_seconds": 4.72,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 50119,
+          "label": "correctness",
+          "output_tokens": 251,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 42432,
+          "elapsed_seconds": 4.42,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 49937,
+          "label": "deprecation",
+          "output_tokens": 236,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 48960,
+          "elapsed_seconds": 4.18,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 49806,
+          "label": "documentation",
+          "output_tokens": 210,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 48960,
+          "elapsed_seconds": 3.7,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 49928,
+          "label": "ponytail",
+          "output_tokens": 275,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 0,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 1088,
+          "elapsed_seconds": 2.36,
+          "error": null,
+          "findings": null,
+          "input_tokens": 50391,
+          "label": "reflect",
+          "output_tokens": 85,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 48960,
+          "elapsed_seconds": 2.26,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 49929,
+          "label": "complexity",
+          "output_tokens": 20,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 48960,
+          "elapsed_seconds": 2.21,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 49998,
+          "label": "performance",
+          "output_tokens": 18,
+          "reasoning_tokens": 0,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-large-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [
+        {
+          "anchor": "    query = f\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\"",
+          "anchored": true,
+          "body": "The function constructs a SQL query by directly interpolating the owner_id parameter into the query string using an f-string. This leaves the application vulnerable to SQL injection attacks where a maliciously crafted owner_id could execute arbitrary SQL commands.",
+          "broad": false,
+          "category": "ponytail",
+          "confidence": 10,
+          "failure_scenario": "A malicious user provides an owner_id like \"1' OR '1'='1\" which would alter the query to return all orders, or even execute destructive commands like \"1'; DROP TABLE orders; --\"",
+          "finding_id": "20260815-230244-openrouter-qwen-qwen3-coder-next:repeat:1:case:python-context-large-v1:finding:1",
+          "line": 5,
+          "path": "audit/pipeline.py",
+          "severity": "high",
+          "side": "RIGHT",
+          "suggestion": "    query = \"SELECT id, status, total FROM orders WHERE customer_id = %s\"\n    cursor.execute(query, (owner_id,))",
+          "title": "Fix SQL injection vulnerability in load_order_rows"
+        }
+      ],
+      "ground_truth": {
+        "changed_file": "audit/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 24 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "audit/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 121
+          },
+          {
+            "file": "catalog/summaries.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 99
+          },
+          {
+            "file": "inventory/summaries.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 83
+          },
+          {
+            "file": "ledger/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 30
+          },
+          {
+            "file": "orders/validation.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 4
+          },
+          {
+            "file": "routing/summaries.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 7
+          },
+          {
+            "file": "shipping/validation.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 156
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-large-v1"
+      },
+      "input_tokens": 500572,
+      "observation_id": "20260815-230244-openrouter-qwen-qwen3-coder-next:repeat:1:case:python-context-large-v1",
+      "output_tokens": 1958,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 15.6s\n\nstage              elapsed\nredact               0.02s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.36s\nbatch                0.04s\ndirectory_context     0.00s\nreview              11.84s\nsnap                 0.01s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect              2.38s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nintent               1     1     4.83s    50202      345         0        -    48960        0        1  -\nsecurity             1     1     4.74s    50281      264         0        -     1632        0        1  -\ntests                1     1     4.73s    49981      254         0        -    48960        0        1  -\ncorrectness          1     1     4.72s    50119      251         0        -    48960        0        1  -\ndeprecation          1     1     4.42s    49937      236         0        -    42432        0        1  -\ndocumentation        1     1     4.18s    49806      210         0        -    48960        0        1  -\nponytail             1     1     3.70s    49928      275         0        -    48960        0        1  -\nreflect              0     1     2.36s    50391       85         0        -     1088        0        -  -\ncomplexity           1     1     2.26s    49929       20         0        -    48960        0        0  -\nperformance          1     1     2.21s    49998       18         0        -    48960        0        0  -\n\ncache: 387872 tokens read / 0 created across 10 calls\nfindings: 7 parsed / 1 returned\nreasoning: 0 of 1,958 output tokens (0%)\ntokens: 502,530 billable (500,572 in / 1,958 out) across 10 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.4\", \"provider\": \"openrouter\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 6, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.018}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.358}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.035}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 24, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 1632, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 50281, \"output_tokens\": 264, \"cache_read_tokens\": 1632, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 4.74}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 48960, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 49998, \"output_tokens\": 18, \"cache_read_tokens\": 48960, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 2.21}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 48960, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 49929, \"output_tokens\": 20, \"cache_read_tokens\": 48960, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 2.26}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 48960, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 49806, \"output_tokens\": 210, \"cache_read_tokens\": 48960, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 4.176}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 42432, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 49937, \"output_tokens\": 236, \"cache_read_tokens\": 42432, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 4.421}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 48960, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 50119, \"output_tokens\": 251, \"cache_read_tokens\": 48960, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 4.716}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 48960, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 49981, \"output_tokens\": 254, \"cache_read_tokens\": 48960, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 4.727}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 48960, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 49928, \"output_tokens\": 275, \"cache_read_tokens\": 48960, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 3.696}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 48960, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 50202, \"output_tokens\": 345, \"cache_read_tokens\": 48960, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 4.826}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 11.839}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 8, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 10, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 8, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 8, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 4, \"to\": 3}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 8, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 8, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.007}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reflecting on findings\", \"findings\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 1088, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"reflect\", \"batch\": 0, \"attempts\": 1, \"input_tokens\": 50391, \"output_tokens\": 85, \"cache_read_tokens\": 1088, \"cache_creation_tokens\": 0, \"elapsed_s\": 2.359}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"reflect\", \"elapsed_s\": 2.384}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[{\"path\": \"audit/pipeline.py\", \"line\": 5, \"side\": \"RIGHT\", \"severity\": \"high\", \"title\": \"Fix SQL injection vulnerability in load_order_rows\", \"body\": \"The function constructs a SQL query by directly interpolating the owner_id parameter into the query string using an f-string. This leaves the application vulnerable to SQL injection attacks where a maliciously crafted owner_id could execute arbitrary SQL commands.\", \"failure_scenario\": \"A malicious user provides an owner_id like \\\"1' OR '1'='1\\\" which would alter the query to return all orders, or even execute destructive commands like \\\"1'; DROP TABLE orders; --\\\"\", \"suggestion\": \"    query = \\\"SELECT id, status, total FROM orders WHERE customer_id = %s\\\"\\n    cursor.execute(query, (owner_id,))\", \"anchor\": \"    query = f\\\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\\\"\", \"anchored\": true, \"broad\": false, \"confidence\": 10, \"category\": \"ponytail\"}]\n== lgtmaybe profile ==\ntotal wall time: 15.6s\n\nstage              elapsed\nredact               0.02s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.36s\nbatch                0.04s\ndirectory_context     0.00s\nreview              11.84s\nsnap                 0.01s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect              2.38s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nintent               1     1     4.83s    50202      345         0        -    48960        0        1  -\nsecurity             1     1     4.74s    50281      264         0        -     1632        0        1  -\ntests                1     1     4.73s    49981      254         0        -    48960        0        1  -\ncorrectness          1     1     4.72s    50119      251         0        -    48960        0        1  -\ndeprecation          1     1     4.42s    49937      236         0        -    42432        0        1  -\ndocumentation        1     1     4.18s    49806      210         0        -    48960        0        1  -\nponytail             1     1     3.70s    49928      275         0        -    48960        0        1  -\nreflect              0     1     2.36s    50391       85         0        -     1088        0        -  -\ncomplexity           1     1     2.26s    49929       20         0        -    48960        0        0  -\nperformance          1     1     2.21s    49998       18         0        -    48960        0        0  -\n\ncache: 387872 tokens read / 0 created across 10 calls\nfindings: 7 parsed / 1 returned\nreasoning: 0 of 1,958 output tokens (0%)\ntokens: 502,530 billable (500,572 in / 1,958 out) across 10 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 16.145939826004906,
+      "wall_seconds": 16.145939826004906
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 1632,
+          "elapsed_seconds": 6.02,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 98328,
+          "label": "security",
+          "output_tokens": 262,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 97376,
+          "elapsed_seconds": 5.24,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 98028,
+          "label": "tests",
+          "output_tokens": 291,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 91392,
+          "elapsed_seconds": 5.16,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 97853,
+          "label": "documentation",
+          "output_tokens": 310,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 97376,
+          "elapsed_seconds": 5.02,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 97984,
+          "label": "deprecation",
+          "output_tokens": 259,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 97376,
+          "elapsed_seconds": 4.8,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 97976,
+          "label": "complexity",
+          "output_tokens": 235,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 97376,
+          "elapsed_seconds": 4.78,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 98045,
+          "label": "performance",
+          "output_tokens": 232,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 97376,
+          "elapsed_seconds": 4.78,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 98166,
+          "label": "correctness",
+          "output_tokens": 236,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 97376,
+          "elapsed_seconds": 4.25,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 98249,
+          "label": "intent",
+          "output_tokens": 252,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 97376,
+          "elapsed_seconds": 3.8,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 97975,
+          "label": "ponytail",
+          "output_tokens": 257,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 0,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 1088,
+          "elapsed_seconds": 3.74,
+          "error": null,
+          "findings": null,
+          "input_tokens": 98244,
+          "label": "reflect",
+          "output_tokens": 49,
+          "reasoning_tokens": 0,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-xlarge-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [
+        {
+          "anchor": "    query = f\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\"",
+          "anchored": true,
+          "body": "The function constructs a SQL query by directly interpolating the owner_id parameter into the query string using an f-string. This leaves the application vulnerable to SQL injection attacks if owner_id contains malicious SQL code.",
+          "broad": false,
+          "category": "security",
+          "confidence": 10,
+          "failure_scenario": "If an attacker provides a malicious owner_id value such as '1' OR '1'='1', they could manipulate the query to return unauthorized data or execute arbitrary SQL commands.",
+          "finding_id": "20260815-230244-openrouter-qwen-qwen3-coder-next:repeat:1:case:python-context-xlarge-v1:finding:1",
+          "line": 5,
+          "path": "audit/allocation.py",
+          "severity": "high",
+          "side": "RIGHT",
+          "suggestion": "    query = \"SELECT id, status, total FROM orders WHERE customer_id = %s\"\n    cursor.execute(query, (owner_id,))",
+          "title": "Prevent SQL injection in dynamic query"
+        }
+      ],
+      "ground_truth": {
+        "changed_file": "audit/allocation.py",
+        "clean": false,
+        "commit_message": "Refactor 48 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "audit/allocation.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 44
+          },
+          {
+            "file": "catalog/validation.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 21
+          },
+          {
+            "file": "inventory/summaries.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 9
+          },
+          {
+            "file": "orders/allocation.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 166
+          },
+          {
+            "file": "pricing/summaries.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 141
+          },
+          {
+            "file": "routing/reconciliation.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 807
+          },
+          {
+            "file": "shipping/validation.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 151
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-xlarge-v1"
+      },
+      "input_tokens": 980848,
+      "observation_id": "20260815-230244-openrouter-qwen-qwen3-coder-next:repeat:1:case:python-context-xlarge-v1",
+      "output_tokens": 2383,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 20.7s\n\nstage              elapsed\nredact               0.04s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.72s\nbatch                0.04s\ndirectory_context     0.00s\nreview              15.05s\nsnap                 0.01s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect              3.79s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nsecurity             1     1     6.02s    98328      262         0        -     1632        0        1  -\ntests                1     1     5.24s    98028      291         0        -    97376        0        1  -\ndocumentation        1     1     5.16s    97853      310         0        -    91392        0        0  -\ndeprecation          1     1     5.02s    97984      259         0        -    97376        0        1  -\ncomplexity           1     1     4.80s    97976      235         0        -    97376        0        1  -\nperformance          1     1     4.78s    98045      232         0        -    97376        0        1  -\ncorrectness          1     1     4.78s    98166      236         0        -    97376        0        1  -\nintent               1     1     4.25s    98249      252         0        -    97376        0        1  -\nponytail             1     1     3.80s    97975      257         0        -    97376        0        1  -\nreflect              0     1     3.74s    98244       49         0        -     1088        0        -  -\n\ncache: 775744 tokens read / 0 created across 10 calls\nfindings: 8 parsed / 1 returned\nreasoning: 0 of 2,383 output tokens (0%)\ntokens: 983,231 billable (980,848 in / 2,383 out) across 10 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.4\", \"provider\": \"openrouter\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 6, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.041}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.722}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.038}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 48, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 1632, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 98328, \"output_tokens\": 262, \"cache_read_tokens\": 1632, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 6.017}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 97376, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 98166, \"output_tokens\": 236, \"cache_read_tokens\": 97376, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 4.781}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 97376, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 98045, \"output_tokens\": 232, \"cache_read_tokens\": 97376, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 4.784}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 97376, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 97976, \"output_tokens\": 235, \"cache_read_tokens\": 97376, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 4.804}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 97376, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 97984, \"output_tokens\": 259, \"cache_read_tokens\": 97376, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 5.021}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 91392, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 97853, \"output_tokens\": 310, \"cache_read_tokens\": 91392, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 5.162}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 97376, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 98028, \"output_tokens\": 291, \"cache_read_tokens\": 97376, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 5.239}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 97376, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 97975, \"output_tokens\": 257, \"cache_read_tokens\": 97376, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 3.798}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 97376, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 98249, \"output_tokens\": 252, \"cache_read_tokens\": 97376, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 4.251}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 15.054}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/allocation.py\", \"from\": 6, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/allocation.py\", \"from\": 6, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/allocation.py\", \"from\": 6, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/allocation.py\", \"from\": 6, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/allocation.py\", \"from\": 6, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/allocation.py\", \"from\": 6, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/allocation.py\", \"from\": 6, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.009}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reflecting on findings\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 1088, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"reflect\", \"batch\": 0, \"attempts\": 1, \"input_tokens\": 98244, \"output_tokens\": 49, \"cache_read_tokens\": 1088, \"cache_creation_tokens\": 0, \"elapsed_s\": 3.738}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"reflect\", \"elapsed_s\": 3.787}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[{\"path\": \"audit/allocation.py\", \"line\": 5, \"side\": \"RIGHT\", \"severity\": \"high\", \"title\": \"Prevent SQL injection in dynamic query\", \"body\": \"The function constructs a SQL query by directly interpolating the owner_id parameter into the query string using an f-string. This leaves the application vulnerable to SQL injection attacks if owner_id contains malicious SQL code.\", \"failure_scenario\": \"If an attacker provides a malicious owner_id value such as '1' OR '1'='1', they could manipulate the query to return unauthorized data or execute arbitrary SQL commands.\", \"suggestion\": \"    query = \\\"SELECT id, status, total FROM orders WHERE customer_id = %s\\\"\\n    cursor.execute(query, (owner_id,))\", \"anchor\": \"    query = f\\\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\\\"\", \"anchored\": true, \"broad\": false, \"confidence\": 10, \"category\": \"security\"}]\n== lgtmaybe profile ==\ntotal wall time: 20.7s\n\nstage              elapsed\nredact               0.04s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.72s\nbatch                0.04s\ndirectory_context     0.00s\nreview              15.05s\nsnap                 0.01s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect              3.79s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nsecurity             1     1     6.02s    98328      262         0        -     1632        0        1  -\ntests                1     1     5.24s    98028      291         0        -    97376        0        1  -\ndocumentation        1     1     5.16s    97853      310         0        -    91392        0        0  -\ndeprecation          1     1     5.02s    97984      259         0        -    97376        0        1  -\ncomplexity           1     1     4.80s    97976      235         0        -    97376        0        1  -\nperformance          1     1     4.78s    98045      232         0        -    97376        0        1  -\ncorrectness          1     1     4.78s    98166      236         0        -    97376        0        1  -\nintent               1     1     4.25s    98249      252         0        -    97376        0        1  -\nponytail             1     1     3.80s    97975      257         0        -    97376        0        1  -\nreflect              0     1     3.74s    98244       49         0        -     1088        0        -  -\n\ncache: 775744 tokens read / 0 created across 10 calls\nfindings: 8 parsed / 1 returned\nreasoning: 0 of 2,383 output tokens (0%)\ntokens: 983,231 billable (980,848 in / 2,383 out) across 10 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 21.16342299801181,
+      "wall_seconds": 21.16342299801181
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 300.48,
+          "error": "response truncated at the 30500-token `max_tokens` ceiling \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents; 221 findings completed before the cut are included",
+          "findings": 221,
+          "input_tokens": 53870,
+          "label": "correctness",
+          "output_tokens": 30500,
+          "reasoning_tokens": 0,
+          "truncated": true
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 50048,
+          "elapsed_seconds": 2.2,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 50806,
+          "label": "deprecation",
+          "output_tokens": 21,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 50048,
+          "elapsed_seconds": 1.99,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 50867,
+          "label": "performance",
+          "output_tokens": 18,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 50048,
+          "elapsed_seconds": 1.97,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 50798,
+          "label": "complexity",
+          "output_tokens": 23,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 1632,
+          "elapsed_seconds": 1.9,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 51150,
+          "label": "security",
+          "output_tokens": 11,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 50048,
+          "elapsed_seconds": 1.87,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 50675,
+          "label": "documentation",
+          "output_tokens": 18,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 42432,
+          "elapsed_seconds": 1.79,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 50850,
+          "label": "tests",
+          "output_tokens": 18,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 50048,
+          "elapsed_seconds": 1.48,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 50797,
+          "label": "ponytail",
+          "output_tokens": 49,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 50048,
+          "elapsed_seconds": 1.31,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 51071,
+          "label": "intent",
+          "output_tokens": 21,
+          "reasoning_tokens": 0,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-clean-large-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [],
+      "ground_truth": {
+        "changed_file": "audit/pipeline.py",
+        "clean": true,
+        "clean_trap": "A broad mechanical refactor with renamed locals and retuned constants; reviewers may mistake the churn for behaviour changes.",
+        "commit_message": "Refactor 24 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-clean-large-v1"
+      },
+      "input_tokens": 460884,
+      "observation_id": "20260815-230244-openrouter-qwen-qwen3-coder-next:repeat:1:case:python-context-clean-large-v1",
+      "output_tokens": 30679,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 303.9s\n\nstage              elapsed\nredact               0.02s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.37s\nbatch                0.03s\ndirectory_context     0.00s\nreview             302.43s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ncorrectness          1     1   300.48s    53870    30500         0        -        0        0      221  response truncated at the 30500-token `max_tokens` ceiling \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents; 221 findings completed before the cut are included\ndeprecation          1     1     2.20s    50806       21         0        -    50048        0        0  -\nperformance          1     1     1.99s    50867       18         0        -    50048        0        0  -\ncomplexity           1     1     1.97s    50798       23         0        -    50048        0        0  -\nsecurity             1     1     1.90s    51150       11         0        -     1632        0        0  -\ndocumentation        1     1     1.87s    50675       18         0        -    50048        0        0  -\ntests                1     1     1.79s    50850       18         0        -    42432        0        0  -\nponytail             1     1     1.48s    50797       49         0        -    50048        0        0  -\nintent               1     1     1.31s    51071       21         0        -    50048        0        0  -\n\ncache: 344352 tokens read / 0 created across 9 calls\nfindings: 221 parsed / 0 returned\nreasoning: 0 of 30,679 output tokens (0%)\ntokens: 491,563 billable (460,884 in / 30,679 out) across 9 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.4\", \"provider\": \"openrouter\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 6, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.02}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.371}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.027}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 24, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 1632, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 51150, \"output_tokens\": 11, \"cache_read_tokens\": 1632, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 1.904}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 42432, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 50850, \"output_tokens\": 18, \"cache_read_tokens\": 42432, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 1.788}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 50048, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 50675, \"output_tokens\": 18, \"cache_read_tokens\": 50048, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 1.869}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 50048, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 50867, \"output_tokens\": 18, \"cache_read_tokens\": 50048, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 1.985}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 50048, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 50798, \"output_tokens\": 23, \"cache_read_tokens\": 50048, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 1.972}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 50048, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 50806, \"output_tokens\": 21, \"cache_read_tokens\": 50048, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 2.197}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 50048, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 51071, \"output_tokens\": 21, \"cache_read_tokens\": 50048, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 1.31}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/qwen/qwen3-coder-next\", \"cache_read_tokens\": 50048, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 50797, \"output_tokens\": 49, \"cache_read_tokens\": 50048, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 1.478}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 0}\n\u001b[92m23:08:56 - LiteLLM:WARNING\u001b[0m: core_helpers.py:140 - Unmapped finish_reason 'error', defaulting to 'stop'\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"response truncated at the 30500-token `max_tokens` ceiling \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents; 221 findings completed before the cut are included\", \"lens\": \"correctness\", \"recovered\": 221}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 53870, \"output_tokens\": 30500, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"response truncated at the 30500-token `max_tokens` ceiling \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents; 221 findings completed before the cut are included\", \"findings\": 221, \"elapsed_s\": 300.477}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 302.429}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 27, \"to\": 33}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 29, \"to\": 36}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 46, \"to\": 56}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 63, \"to\": 92}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 78, \"to\": 110}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 103, \"to\": 131}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 105, \"to\": 133}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 122, \"to\": 151}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 139, \"to\": 169}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/summaries.py\", \"from\": 16, \"to\": 36}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"audit/summaries.py\", \"line\": 18, \"title\": \"Increase notes length limit from 500 to 500\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/summaries.py\", \"from\": 33, \"to\": 54}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/summaries.py\", \"from\": 36, \"to\": 57}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/summaries.py\", \"from\": 37, \"to\": 58}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/summaries.py\", \"from\": 54, \"to\": 77}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/summaries.py\", \"from\": 71, \"to\": 95}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"audit/summaries.py\", \"line\": 103, \"title\": \"Update minimum quantity from 5 to 6\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"audit/summaries.py\", \"line\": 105, \"title\": \"Reduce notes length limit from 500 to 240\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"audit/summaries.py\", \"line\": 120, \"title\": \"Reduce portion from 63 to 87\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/summaries.py\", \"from\": 123, \"to\": 57}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"audit/summaries.py\", \"line\": 124, \"title\": \"Update rate from 0.5 to 0.25\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"audit/summaries.py\", \"line\": 155, \"title\": \"Update minimum quantity from 9 to 4\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 10, \"to\": 13}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 13, \"to\": 16}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 14, \"to\": 17}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 29, \"to\": 31}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 32, \"to\": 164}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 33, \"to\": 35}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 48, \"to\": 51}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 63, \"to\": 69}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 66, \"to\": 16}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 67, \"to\": 73}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 82, \"to\": 89}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 99, \"to\": 107}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 116, \"to\": 125}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 133, \"to\": 146}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 135, \"to\": 148}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 150, \"to\": 161}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 153, \"to\": 164}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/summaries.py\", \"from\": 10, \"to\": 13}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/summaries.py\", \"from\": 13, \"to\": 16}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/summaries.py\", \"from\": 14, \"to\": 17}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/summaries.py\", \"from\": 31, \"to\": 34}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/summaries.py\", \"from\": 33, \"to\": 36}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/summaries.py\", \"from\": 50, \"to\": 51}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/summaries.py\", \"from\": 52, \"to\": 54}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/summaries.py\", \"from\": 67, \"to\": 69}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/summaries.py\", \"from\": 70, \"to\": 72}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/summaries.py\", \"from\": 71, \"to\": 73}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/summaries.py\", \"from\": 86, \"to\": 108}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/summaries.py\", \"from\": 89, \"to\": 72}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/summaries.py\", \"from\": 90, \"to\": 73}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/summaries.py\", \"from\": 105, \"to\": 126}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/summaries.py\", \"from\": 122, \"to\": 167}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/validation.py\", \"from\": 32, \"to\": 36}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/validation.py\", \"from\": 34, \"to\": 38}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/validation.py\", \"from\": 51, \"to\": 56}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/validation.py\", \"from\": 121, \"to\": 116}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/validation.py\", \"from\": 155, \"to\": 174}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/validation.py\", \"from\": 157, \"to\": 176}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/pipeline.py\", \"from\": 16, \"to\": 18}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/pipeline.py\", \"from\": 33, \"to\": 54}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/pipeline.py\", \"from\": 35, \"to\": 57}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/pipeline.py\", \"from\": 50, \"to\": 72}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/pipeline.py\", \"from\": 53, \"to\": 75}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"catalog/pipeline.py\", \"line\": 54, \"title\": \"Update rate from 0.4 to 0.4\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/pipeline.py\", \"from\": 71, \"to\": 93}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/pipeline.py\", \"from\": 73, \"to\": 95}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/pipeline.py\", \"from\": 90, \"to\": 110}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/pipeline.py\", \"from\": 92, \"to\": 113}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/pipeline.py\", \"from\": 107, \"to\": 128}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/pipeline.py\", \"from\": 124, \"to\": 170}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/pipeline.py\", \"from\": 126, \"to\": 172}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 6, \"to\": 13}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"catalog/summaries.py\", \"line\": 9, \"title\": \"Update remaining threshold from 0.05 to 0.05\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 10, \"to\": 17}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 27, \"to\": 34}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 29, \"to\": 36}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 44, \"to\": 49}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 47, \"to\": 52}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"catalog/summaries.py\", \"line\": 48, \"title\": \"Update rate from 0.5 to 0.5\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 63, \"to\": 67}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 66, \"to\": 70}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 67, \"to\": 71}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 84, \"to\": 88}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 86, \"to\": 90}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 103, \"to\": 108}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 120, \"to\": 126}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 137, \"to\": 141}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 154, \"to\": 162}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 156, \"to\": 164}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/pipeline.py\", \"from\": 16, \"to\": 39}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/pipeline.py\", \"from\": 33, \"to\": 57}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/pipeline.py\", \"from\": 50, \"to\": 72}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/pipeline.py\", \"from\": 67, \"to\": 95}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/pipeline.py\", \"from\": 84, \"to\": 108}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/pipeline.py\", \"from\": 87, \"to\": 111}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"fulfilment/pipeline.py\", \"line\": 88, \"title\": \"Update rate from 0.5 to 0.5\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/pipeline.py\", \"from\": 105, \"to\": 131}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/pipeline.py\", \"from\": 122, \"to\": 149}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/pipeline.py\", \"from\": 139, \"to\": 164}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/pipeline.py\", \"from\": 141, \"to\": 167}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/summaries.py\", \"from\": 6, \"to\": 15}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/summaries.py\", \"from\": 8, \"to\": 18}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/summaries.py\", \"from\": 25, \"to\": 35}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/summaries.py\", \"from\": 27, \"to\": 18}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/summaries.py\", \"from\": 44, \"to\": 55}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/summaries.py\", \"from\": 46, \"to\": 58}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"fulfilment/summaries.py\", \"line\": 63, \"title\": \"Update minimum quantity from 9 to 6\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"fulfilment/summaries.py\", \"line\": 65, \"title\": \"Reduce notes length limit from 240 to 120\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"fulfilment/summaries.py\", \"line\": 82, \"title\": \"Update minimum quantity from 7 to 9\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/summaries.py\", \"from\": 84, \"to\": 38}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/summaries.py\", \"from\": 101, \"to\": 151}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/summaries.py\", \"from\": 104, \"to\": 154}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/summaries.py\", \"from\": 105, \"to\": 155}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/summaries.py\", \"from\": 122, \"to\": 169}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"fulfilment/summaries.py\", \"line\": 125, \"title\": \"Update remaining threshold from 0.1 to 0.1\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"fulfilment/summaries.py\", \"from\": 126, \"to\": 155}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/pipeline.py\", \"from\": 16, \"to\": 18}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/pipeline.py\", \"from\": 33, \"to\": 36}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/pipeline.py\", \"from\": 50, \"to\": 93}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/pipeline.py\", \"from\": 52, \"to\": 96}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/pipeline.py\", \"from\": 69, \"to\": 131}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/pipeline.py\", \"from\": 71, \"to\": 96}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/pipeline.py\", \"from\": 88, \"to\": 154}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/pipeline.py\", \"from\": 105, \"to\": 167}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/pipeline.py\", \"from\": 108, \"to\": 170}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/pipeline.py\", \"from\": 109, \"to\": 171}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/summaries.py\", \"from\": 6, \"to\": 18}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/summaries.py\", \"from\": 23, \"to\": 36}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/summaries.py\", \"from\": 40, \"to\": 51}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/summaries.py\", \"from\": 42, \"to\": 54}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/summaries.py\", \"from\": 59, \"to\": 72}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/summaries.py\", \"from\": 61, \"to\": 74}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/summaries.py\", \"from\": 78, \"to\": 90}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/summaries.py\", \"from\": 80, \"to\": 92}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/summaries.py\", \"from\": 97, \"to\": 126}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/summaries.py\", \"from\": 100, \"to\": 129}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/summaries.py\", \"from\": 101, \"to\": 130}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/summaries.py\", \"from\": 118, \"to\": 165}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/summaries.py\", \"from\": 121, \"to\": 168}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/summaries.py\", \"from\": 122, \"to\": 130}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 10, \"to\": 13}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 13, \"to\": 16}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 14, \"to\": 17}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 31, \"to\": 54}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 33, \"to\": 56}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 50, \"to\": 74}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 67, \"to\": 92}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 84, \"to\": 108}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 86, \"to\": 110}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 103, \"to\": 128}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 120, \"to\": 144}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 122, \"to\": 146}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 139, \"to\": 164}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 156, \"to\": 180}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 158, \"to\": 146}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 175, \"to\": 195}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 178, \"to\": 198}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 179, \"to\": 199}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 196, \"to\": 213}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"inventory/validation.py\", \"line\": 199, \"title\": \"Update remaining threshold from 0.1 to 0.1\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 200, \"to\": 217}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 217, \"to\": 236}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 234, \"to\": 251}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 236, \"to\": 254}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 253, \"to\": 272}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 255, \"to\": 274}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 272, \"to\": 287}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 275, \"to\": 401}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 276, \"to\": 291}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 293, \"to\": 454}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 295, \"to\": 457}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 312, \"to\": 474}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 314, \"to\": 477}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 331, \"to\": 494}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 348, \"to\": 514}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 350, \"to\": 254}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 367, \"to\": 535}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 369, \"to\": 274}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 386, \"to\": 347}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 388, \"to\": 349}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 405, \"to\": 365}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 407, \"to\": 367}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 424, \"to\": 383}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 426, \"to\": 182}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 443, \"to\": 398}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 446, \"to\": 401}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 447, \"to\": 402}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 464, \"to\": 419}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 466, \"to\": 537}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 483, \"to\": 434}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 486, \"to\": 437}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 487, \"to\": 438}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 504, \"to\": 454}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/validation.py\", \"from\": 506, \"to\": 457}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/pipeline.py\", \"from\": 10, \"to\": 13}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/pipeline.py\", \"from\": 13, \"to\": 70}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/pipeline.py\", \"from\": 14, \"to\": 17}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/pipeline.py\", \"from\": 31, \"to\": 52}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/pipeline.py\", \"from\": 33, \"to\": 54}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/pipeline.py\", \"from\": 50, \"to\": 67}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/pipeline.py\", \"from\": 53, \"to\": 70}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/pipeline.py\", \"from\": 54, \"to\": 71}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/pipeline.py\", \"from\": 71, \"to\": 147}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/pipeline.py\", \"from\": 73, \"to\": 150}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/pipeline.py\", \"from\": 90, \"to\": 170}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/summaries.py\", \"from\": 16, \"to\": 52}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/summaries.py\", \"from\": 19, \"to\": 55}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/summaries.py\", \"from\": 20, \"to\": 56}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/summaries.py\", \"from\": 37, \"to\": 73}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"ledger/summaries.py\", \"line\": 39, \"title\": \"Increase ranked slice from 4 to 4\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/summaries.py\", \"from\": 56, \"to\": 93}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/summaries.py\", \"from\": 73, \"to\": 109}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/summaries.py\", \"from\": 75, \"to\": 111}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/summaries.py\", \"from\": 92, \"to\": 129}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"ledger/summaries.py\", \"from\": 109, \"to\": 145}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.005}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"findings missing a failure scenario dropped\", \"count\": 202}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[]\n== lgtmaybe profile ==\ntotal wall time: 303.9s\n\nstage              elapsed\nredact               0.02s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.37s\nbatch                0.03s\ndirectory_context     0.00s\nreview             302.43s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ncorrectness          1     1   300.48s    53870    30500         0        -        0        0      221  response truncated at the 30500-token `max_tokens` ceiling \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents; 221 findings completed before the cut are included\ndeprecation          1     1     2.20s    50806       21         0        -    50048        0        0  -\nperformance          1     1     1.99s    50867       18         0        -    50048        0        0  -\ncomplexity           1     1     1.97s    50798       23         0        -    50048        0        0  -\nsecurity             1     1     1.90s    51150       11         0        -     1632        0        0  -\ndocumentation        1     1     1.87s    50675       18         0        -    50048        0        0  -\ntests                1     1     1.79s    50850       18         0        -    42432        0        0  -\nponytail             1     1     1.48s    50797       49         0        -    50048        0        0  -\nintent               1     1     1.31s    51071       21         0        -    50048        0        0  -\n\ncache: 344352 tokens read / 0 created across 9 calls\nfindings: 221 parsed / 0 returned\nreasoning: 0 of 30,679 output tokens (0%)\ntokens: 491,563 billable (460,884 in / 30,679 out) across 9 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [
+        "correctness"
+      ],
+      "wall_excluding_truncation_seconds": 3.866483324014098,
+      "wall_seconds": 304.3464833240141
+    }
+  ],
+  "run_id": "20260815-230244-openrouter-qwen-qwen3-coder-next",
+  "schema_version": 2,
+  "status": "complete",
+  "timestamp": "2026-08-15T23:02:44Z"
+}
