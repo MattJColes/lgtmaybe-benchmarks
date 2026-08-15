@@ -1,0 +1,898 @@
+{
+  "configuration": {
+    "api_base": "http://127.0.0.1:8000/v1",
+    "audit_available": false,
+    "base_profile": "context-canonical-v1",
+    "cases": [
+      "python-context-small-v1",
+      "python-context-medium-v1",
+      "python-context-large-v1",
+      "python-context-xlarge-v1",
+      "python-context-clean-large-v1"
+    ],
+    "concurrency": 1,
+    "diagnostic_overrides": [],
+    "full_corpus": true,
+    "max_input_tokens": 100000,
+    "max_tokens": null,
+    "mid_review_retrieval": false,
+    "model": "nvidia/Qwen3.6-35B-A3B-NVFP4",
+    "preset": "full",
+    "profile": "context-canonical-v1",
+    "profile_canonical": false,
+    "profile_schema_version": 1,
+    "provider": "openai-compatible",
+    "reasoning_effort": null,
+    "recursive": true,
+    "reflect": true,
+    "repeats": 1,
+    "resolved_profile": {
+      "base_profile_id": "context-canonical-v1",
+      "canonical": false,
+      "diagnostic_overrides": [],
+      "id": "context-canonical-v1",
+      "max_input_tokens": 100000,
+      "max_tokens": null,
+      "mid_review_retrieval": false,
+      "preset": "full",
+      "reasoning_effort": null,
+      "recursive": true,
+      "reflect": true,
+      "repeats": 1,
+      "schema_version": 1,
+      "spec_review": true,
+      "static_analysis": false
+    },
+    "spec_review": true,
+    "static_analysis": false,
+    "suite": "context-v1",
+    "timeout": 7200
+  },
+  "lgtmaybe_version": "lgtmaybe 2.1.4",
+  "observations": [
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [],
+      "case": "python-context-small-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [
+        {
+          "anchor": "    query = f\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\"",
+          "anchored": true,
+          "body": "The query string is constructed using an f-string with the owner_id parameter directly interpolated. This allows SQL injection if owner_id contains malicious input. Use parameterized queries with placeholders instead.",
+          "broad": true,
+          "category": "correctness",
+          "confidence": 1,
+          "failure_scenario": "An attacker provides an owner_id like \"'; DROP TABLE orders; --\". The query becomes \"SELECT id, status, total FROM orders WHERE customer_id = ''; DROP TABLE orders; --'\". This could lead to data loss or unauthorized data access.",
+          "finding_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-small-v1:finding:1",
+          "line": 5,
+          "path": "billing/pipeline.py",
+          "severity": "critical",
+          "side": "RIGHT",
+          "suggestion": "    query = \"SELECT id, status, total FROM orders WHERE customer_id = ?\"\n    cursor.execute(query, (owner_id,))\n    return [dict(row) for row in cursor.fetchall()]",
+          "title": "Prevent SQL injection in order query"
+        },
+        {
+          "anchor": "    stamp = datetime.datetime.utcnow().isoformat()",
+          "anchored": false,
+          "body": "The code uses `datetime.datetime.utcnow()` which returns a naive datetime object. This is deprecated in Python 3.12+ and can cause issues with timezone-aware systems or comparisons.",
+          "broad": false,
+          "category": "security",
+          "confidence": 1,
+          "failure_scenario": "In a timezone-aware environment, naive datetimes can lead to incorrect sorting, comparison errors, or data corruption when timestamps are stored or compared across different timezones.",
+          "finding_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-small-v1:finding:2",
+          "line": 88,
+          "path": "orders/pipeline.py",
+          "severity": "high",
+          "side": "RIGHT",
+          "suggestion": "    stamp = datetime.datetime.now(datetime.timezone.utc).isoformat()",
+          "title": "Use timezone-aware datetime for stamps"
+        }
+      ],
+      "ground_truth": {
+        "changed_file": "billing/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 2 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 13
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 58
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 90
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 10
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 36
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 88
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 118
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-small-v1"
+      },
+      "input_tokens": 0,
+      "observation_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-small-v1",
+      "output_tokens": 0,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 5121.6s\n\nstage              elapsed\nredact               0.00s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.03s\nbatch                0.01s\ndirectory_context     0.00s\nreview            5120.37s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ndeprecation          1     1  1701.78s     4930   257214         -        -        0        0        -  ProviderTruncated: response hit the 257214-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ntests                1     1  1693.92s     6849   255295         -        -        0        0        -  ProviderTruncated: response hit the 255295-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ndeprecation          1     1  1693.32s     6804   255340         -        -        0        0        -  ProviderTruncated: response hit the 255340-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\nsecurity             1     1    28.31s     7164     1126         -        -        0        0        4  -\ncorrectness          1     1     1.68s     6999      314         -        -        0        0        1  -\ndeprecation          1     1     1.14s     4896      213         -        -        0        0        1  -\n\ncache: 0 tokens read / 0 created across 6 calls\nfindings: 6 parsed / 2 returned\ntokens: 807,144 billable (37,642 in / 769,502 out) across 6 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.4\", \"provider\": \"openai-compatible\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 1, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.002}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.027}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.006}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 2, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 7164, \"output_tokens\": 1126, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 4, \"elapsed_s\": 28.314}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 4}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6999, \"output_tokens\": 314, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 1.682}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6804, \"output_tokens\": 255340, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 255340-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 255340, \"elapsed_s\": 1693.32}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"deprecation\", \"reason\": \"ProviderTruncated: response hit the 255340-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1730, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 499, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 570, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 556, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 599, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 733, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 255340-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call was too big for one response \\u2014 retrying on smaller pieces\", \"lens\": \"deprecation\", \"batch\": 1, \"pieces\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 4930, \"output_tokens\": 257214, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 257214-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 257214, \"elapsed_s\": 1701.784}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"deprecation\", \"reason\": \"ProviderTruncated: response hit the 257214-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1730, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 499, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 570, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 556, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 599, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 733, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 257214-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 4896, \"output_tokens\": 213, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 1.143}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6849, \"output_tokens\": 255295, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 255295-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 255295, \"elapsed_s\": 1693.918}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"tests\", \"reason\": \"ProviderTruncated: response hit the 255295-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1730, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 499, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 570, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 556, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 599, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 733, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 255295-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call was too big for one response \\u2014 retrying on smaller pieces\", \"lens\": \"tests\", \"batch\": 1, \"pieces\": 2}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"tests\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"tests\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"documentation\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"performance\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"complexity\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"intent\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 5120.372}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 4, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 28, \"to\": 58}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"orders/pipeline.py\", \"from\": 100, \"to\": 88}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"orders/pipeline.py\", \"from\": 110, \"to\": 114}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 4, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"orders/pipeline.py\", \"from\": 121, \"to\": 88}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping reflection\", \"findings\": 4}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[{\"path\": \"billing/pipeline.py\", \"line\": 5, \"side\": \"RIGHT\", \"severity\": \"critical\", \"title\": \"Prevent SQL injection in order query\", \"body\": \"The query string is constructed using an f-string with the owner_id parameter directly interpolated. This allows SQL injection if owner_id contains malicious input. Use parameterized queries with placeholders instead.\", \"failure_scenario\": \"An attacker provides an owner_id like \\\"'; DROP TABLE orders; --\\\". The query becomes \\\"SELECT id, status, total FROM orders WHERE customer_id = ''; DROP TABLE orders; --'\\\". This could lead to data loss or unauthorized data access.\", \"suggestion\": \"    query = \\\"SELECT id, status, total FROM orders WHERE customer_id = ?\\\"\\n    cursor.execute(query, (owner_id,))\\n    return [dict(row) for row in cursor.fetchall()]\", \"anchor\": \"    query = f\\\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\\\"\", \"anchored\": true, \"broad\": true, \"confidence\": 1, \"category\": \"correctness\"}, {\"path\": \"orders/pipeline.py\", \"line\": 88, \"side\": \"RIGHT\", \"severity\": \"high\", \"title\": \"Use timezone-aware datetime for stamps\", \"body\": \"The code uses `datetime.datetime.utcnow()` which returns a naive datetime object. This is deprecated in Python 3.12+ and can cause issues with timezone-aware systems or comparisons.\", \"failure_scenario\": \"In a timezone-aware environment, naive datetimes can lead to incorrect sorting, comparison errors, or data corruption when timestamps are stored or compared across different timezones.\", \"suggestion\": \"    stamp = datetime.datetime.now(datetime.timezone.utc).isoformat()\", \"anchor\": \"    stamp = datetime.datetime.utcnow().isoformat()\", \"anchored\": false, \"broad\": false, \"confidence\": 1, \"category\": \"security\"}]\n== lgtmaybe profile ==\ntotal wall time: 5121.6s\n\nstage              elapsed\nredact               0.00s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.03s\nbatch                0.01s\ndirectory_context     0.00s\nreview            5120.37s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ndeprecation          1     1  1701.78s     4930   257214         -        -        0        0        -  ProviderTruncated: response hit the 257214-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ntests                1     1  1693.92s     6849   255295         -        -        0        0        -  ProviderTruncated: response hit the 255295-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ndeprecation          1     1  1693.32s     6804   255340         -        -        0        0        -  ProviderTruncated: response hit the 255340-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\nsecurity             1     1    28.31s     7164     1126         -        -        0        0        4  -\ncorrectness          1     1     1.68s     6999      314         -        -        0        0        1  -\ndeprecation          1     1     1.14s     4896      213         -        -        0        0        1  -\n\ncache: 0 tokens read / 0 created across 6 calls\nfindings: 6 parsed / 2 returned\ntokens: 807,144 billable (37,642 in / 769,502 out) across 6 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 5122.080435943997,
+      "wall_seconds": 5122.080435943997
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [],
+      "case": "python-context-medium-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [
+        {
+          "anchor": "    query = f\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\"",
+          "anchored": true,
+          "body": "The function `load_order_rows` constructs a SQL query by directly concatenating the `owner_id` parameter into the query string. This allows an attacker to inject arbitrary SQL commands if they control the `owner_id` value. Use parameterized queries instead of string formatting to safely pass user input to the database.",
+          "broad": true,
+          "category": "security",
+          "confidence": 1,
+          "failure_scenario": "An attacker provides an `owner_id` value like `' OR 1=1; --`. The database executes the injected SQL, potentially exposing all order data or allowing data modification/deletion.",
+          "finding_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-medium-v1:finding:1",
+          "line": 5,
+          "path": "billing/pipeline.py",
+          "severity": "critical",
+          "side": "RIGHT",
+          "suggestion": "    query = \"SELECT id, status, total FROM orders WHERE customer_id = ?\"\n    cursor.execute(query, (owner_id,))\n    return [dict(row) for row in cursor.fetchall()]",
+          "title": "Prevent SQL injection in order query"
+        },
+        {
+          "anchor": "    stamp = datetime.datetime.utcnow().isoformat()",
+          "anchored": true,
+          "body": "datetime.datetime.utcnow() returns a timezone-naive datetime object. Using it can lead to incorrect comparisons or serialization issues when mixed with timezone-aware datetimes. It is deprecated in Python 3.12+ and will be removed in Python 3.14. The recommended approach is to use datetime.now(datetime.timezone.utc) to get a timezone-aware UTC datetime.",
+          "broad": true,
+          "category": "correctness",
+          "confidence": 0,
+          "failure_scenario": "When stamp_manifest_checkpoint is called, the created_at field will be a naive datetime. If this value is later compared with a timezone-aware datetime (e.g., from a database or another service), it may raise a TypeError or produce incorrect ordering. Additionally, on Python 3.12+, a DeprecationWarning is raised, and on 3.14+, it will raise an AttributeError.",
+          "finding_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-medium-v1:finding:2",
+          "line": 234,
+          "path": "routing/pipeline.py",
+          "severity": "high",
+          "side": "RIGHT",
+          "suggestion": "    stamp = datetime.datetime.now(datetime.timezone.utc).isoformat()",
+          "title": "Use timezone-aware datetime to avoid naive datetime issues"
+        },
+        {
+          "anchor": "def register_shipment_events(event_type: str, events: list[str] = []) -> dict[str, list[str]]:",
+          "anchored": true,
+          "body": "The function register_shipment_events uses a mutable default argument (events: list[str] = []). This causes the same list object to be shared across all calls, leading to accumulated state and unexpected behavior.",
+          "broad": false,
+          "category": "deprecation",
+          "confidence": 0,
+          "failure_scenario": "When called multiple times, the events list accumulates values from previous calls, causing incorrect event counts and potential data corruption.",
+          "finding_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-medium-v1:finding:3",
+          "line": 21,
+          "path": "inventory/pipeline.py",
+          "severity": "high",
+          "side": "RIGHT",
+          "suggestion": "def register_shipment_events(event_type: str, events: list[str] | None = None) -> dict[str, list[str]]:\n    if events is None:\n        events = []\n    events.append(event_type)\n    return {event_type: list(events)}",
+          "title": "Mutable default argument causes state leakage"
+        }
+      ],
+      "ground_truth": {
+        "changed_file": "billing/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 8 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 143
+          },
+          {
+            "file": "inventory/pipeline.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 21
+          },
+          {
+            "file": "ledger/pipeline.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 86
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 145
+          },
+          {
+            "file": "routing/pipeline.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 23
+          },
+          {
+            "file": "routing/pipeline.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 234
+          },
+          {
+            "file": "shipping/pipeline.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 161
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-medium-v1"
+      },
+      "input_tokens": 0,
+      "observation_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-medium-v1",
+      "output_tokens": 0,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 4947.7s\n\nstage              elapsed\nredact               0.01s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.14s\nbatch                0.02s\ndirectory_context     0.00s\nreview            4946.36s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ncorrectness          1     1  1673.10s    11626   250518         -        -        0        0        -  ProviderTruncated: response hit the 250518-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ncorrectness          1     1  1631.95s    21191   240953         -        -        0        0        -  ProviderTruncated: response hit the 240953-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ntests                1     1  1631.87s    21041   241103         -        -        0        0        -  ProviderTruncated: response hit the 241103-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ndeprecation          1     1     4.09s    20996      645         -        -        0        0        4  -\nsecurity             1     1     2.83s    21356      326         -        -        0        0        1  -\ncorrectness          1     1     2.34s    12818      385         -        -        0        0        1  -\n\ncache: 0 tokens read / 0 created across 6 calls\nfindings: 6 parsed / 3 returned\ntokens: 842,958 billable (109,028 in / 733,930 out) across 6 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.4\", \"provider\": \"openai-compatible\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 1, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.007}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.144}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.018}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 8, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 21356, \"output_tokens\": 326, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 2.83}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 21191, \"output_tokens\": 240953, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 240953-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 240953, \"elapsed_s\": 1631.951}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"correctness\", \"reason\": \"ProviderTruncated: response hit the 240953-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1730, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 499, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 570, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 556, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 599, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 733, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 240953-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call was too big for one response \\u2014 retrying on smaller pieces\", \"lens\": \"correctness\", \"batch\": 1, \"pieces\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 11626, \"output_tokens\": 250518, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 250518-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 250518, \"elapsed_s\": 1673.098}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"correctness\", \"reason\": \"ProviderTruncated: response hit the 250518-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1730, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 499, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 570, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 556, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 599, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 733, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 250518-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 12818, \"output_tokens\": 385, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 2.345}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 20996, \"output_tokens\": 645, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 4, \"elapsed_s\": 4.086}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 4}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 21041, \"output_tokens\": 241103, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 241103-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 241103, \"elapsed_s\": 1631.866}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"tests\", \"reason\": \"ProviderTruncated: response hit the 241103-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1730, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 499, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 570, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 556, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 599, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 733, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 241103-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call was too big for one response \\u2014 retrying on smaller pieces\", \"lens\": \"tests\", \"batch\": 1, \"pieces\": 2}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"tests\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"tests\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"documentation\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"performance\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"complexity\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"intent\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 4946.36}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 4, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/pipeline.py\", \"from\": 160, \"to\": 234}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 4, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"inventory/pipeline.py\", \"from\": 20, \"to\": 21}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/pipeline.py\", \"from\": 168, \"to\": 234}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/pipeline.py\", \"from\": 167, \"to\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"findings missing a failure scenario dropped\", \"count\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping reflection\", \"findings\": 3}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[{\"path\": \"billing/pipeline.py\", \"line\": 5, \"side\": \"RIGHT\", \"severity\": \"critical\", \"title\": \"Prevent SQL injection in order query\", \"body\": \"The function `load_order_rows` constructs a SQL query by directly concatenating the `owner_id` parameter into the query string. This allows an attacker to inject arbitrary SQL commands if they control the `owner_id` value. Use parameterized queries instead of string formatting to safely pass user input to the database.\", \"failure_scenario\": \"An attacker provides an `owner_id` value like `' OR 1=1; --`. The database executes the injected SQL, potentially exposing all order data or allowing data modification/deletion.\", \"suggestion\": \"    query = \\\"SELECT id, status, total FROM orders WHERE customer_id = ?\\\"\\n    cursor.execute(query, (owner_id,))\\n    return [dict(row) for row in cursor.fetchall()]\", \"anchor\": \"    query = f\\\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\\\"\", \"anchored\": true, \"broad\": true, \"confidence\": 1, \"category\": \"security\"}, {\"path\": \"routing/pipeline.py\", \"line\": 234, \"side\": \"RIGHT\", \"severity\": \"high\", \"title\": \"Use timezone-aware datetime to avoid naive datetime issues\", \"body\": \"datetime.datetime.utcnow() returns a timezone-naive datetime object. Using it can lead to incorrect comparisons or serialization issues when mixed with timezone-aware datetimes. It is deprecated in Python 3.12+ and will be removed in Python 3.14. The recommended approach is to use datetime.now(datetime.timezone.utc) to get a timezone-aware UTC datetime.\", \"failure_scenario\": \"When stamp_manifest_checkpoint is called, the created_at field will be a naive datetime. If this value is later compared with a timezone-aware datetime (e.g., from a database or another service), it may raise a TypeError or produce incorrect ordering. Additionally, on Python 3.12+, a DeprecationWarning is raised, and on 3.14+, it will raise an AttributeError.\", \"suggestion\": \"    stamp = datetime.datetime.now(datetime.timezone.utc).isoformat()\", \"anchor\": \"    stamp = datetime.datetime.utcnow().isoformat()\", \"anchored\": true, \"broad\": true, \"confidence\": 0, \"category\": \"correctness\"}, {\"path\": \"inventory/pipeline.py\", \"line\": 21, \"side\": \"RIGHT\", \"severity\": \"high\", \"title\": \"Mutable default argument causes state leakage\", \"body\": \"The function register_shipment_events uses a mutable default argument (events: list[str] = []). This causes the same list object to be shared across all calls, leading to accumulated state and unexpected behavior.\", \"failure_scenario\": \"When called multiple times, the events list accumulates values from previous calls, causing incorrect event counts and potential data corruption.\", \"suggestion\": \"def register_shipment_events(event_type: str, events: list[str] | None = None) -> dict[str, list[str]]:\\n    if events is None:\\n        events = []\\n    events.append(event_type)\\n    return {event_type: list(events)}\", \"anchor\": \"def register_shipment_events(event_type: str, events: list[str] = []) -> dict[str, list[str]]:\", \"anchored\": true, \"broad\": false, \"confidence\": 0, \"category\": \"deprecation\"}]\n== lgtmaybe profile ==\ntotal wall time: 4947.7s\n\nstage              elapsed\nredact               0.01s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.14s\nbatch                0.02s\ndirectory_context     0.00s\nreview            4946.36s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ncorrectness          1     1  1673.10s    11626   250518         -        -        0        0        -  ProviderTruncated: response hit the 250518-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ncorrectness          1     1  1631.95s    21191   240953         -        -        0        0        -  ProviderTruncated: response hit the 240953-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ntests                1     1  1631.87s    21041   241103         -        -        0        0        -  ProviderTruncated: response hit the 241103-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ndeprecation          1     1     4.09s    20996      645         -        -        0        0        4  -\nsecurity             1     1     2.83s    21356      326         -        -        0        0        1  -\ncorrectness          1     1     2.34s    12818      385         -        -        0        0        1  -\n\ncache: 0 tokens read / 0 created across 6 calls\nfindings: 6 parsed / 3 returned\ntokens: 842,958 billable (109,028 in / 733,930 out) across 6 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 4948.215934407999,
+      "wall_seconds": 4948.215934407999
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [],
+      "case": "python-context-large-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [
+        {
+          "anchor": "    query = f\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\"",
+          "anchored": true,
+          "body": "The query string uses an f-string to embed owner_id directly, allowing SQL injection. Use parameterized queries with placeholders and pass owner_id as a parameter to cursor.execute.",
+          "broad": false,
+          "category": "correctness",
+          "confidence": 1,
+          "failure_scenario": "An attacker provides an owner_id containing SQL syntax (e.g., \"'; DROP TABLE orders; --\"). The query executes with the injected SQL, potentially corrupting or deleting data.",
+          "finding_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-large-v1:finding:1",
+          "line": 5,
+          "path": "audit/pipeline.py",
+          "severity": "critical",
+          "side": "RIGHT",
+          "suggestion": "    query = \"SELECT id, status, total FROM orders WHERE customer_id = ?\"\n    cursor.execute(query, (owner_id,))",
+          "title": "Prevent SQL injection in load_order_rows"
+        },
+        {
+          "anchor": "def register_shipment_events(event_type: str, events: list[str] = []) -> dict[str, list[str]]:",
+          "anchored": true,
+          "body": "The function register_shipment_events uses a mutable list as a default argument (events: list[str] = []). This is a known Python anti-pattern because the default list is created once at function definition time and shared across all calls that do not provide an explicit events argument. Subsequent calls will append to the same list, causing unexpected accumulation of data.",
+          "broad": false,
+          "category": "documentation",
+          "confidence": 0,
+          "failure_scenario": "A caller invokes register_shipment_events('shipment_created') without providing an events argument. The function appends to the default list. A second caller invokes the same function without providing an events argument. The function appends to the same list, and the returned dictionary now contains events from both calls, leading to incorrect state and potential data leakage between unrelated calls.",
+          "finding_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-large-v1:finding:2",
+          "line": 99,
+          "path": "catalog/summaries.py",
+          "severity": "medium",
+          "side": "RIGHT",
+          "suggestion": "def register_shipment_events(event_type: str, events: list[str] | None = None) -> dict[str, list[str]]:\n    if events is None:\n        events = []\n    events.append(event_type)\n    return {event_type: list(events)}",
+          "title": "Mutable default argument in register_shipment_events"
+        },
+        {
+          "anchor": "stamp = datetime.datetime.utcnow().isoformat()",
+          "anchored": true,
+          "body": "The function stamp_manifest_checkpoint uses datetime.datetime.utcnow() to generate a timestamp. This method is deprecated and returns a naive datetime object (no timezone information). Using naive datetimes can lead to incorrect time comparisons and serialization issues, especially in distributed systems or when storing data in databases that expect timezone-aware timestamps.",
+          "broad": false,
+          "category": "documentation",
+          "confidence": 0,
+          "failure_scenario": "A system component compares the created_at timestamp from stamp_manifest_checkpoint with a timezone-aware datetime from another source. The naive datetime comparison may raise an error or produce incorrect results. Additionally, when the timestamp is serialized to JSON or stored in a database, the lack of timezone information can cause ambiguity or data loss when deserializing.",
+          "finding_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-large-v1:finding:3",
+          "line": 7,
+          "path": "routing/summaries.py",
+          "severity": "medium",
+          "side": "RIGHT",
+          "suggestion": "stamp = datetime.datetime.now(datetime.timezone.utc).isoformat()",
+          "title": "Use timezone-aware datetime for creation stamp"
+        }
+      ],
+      "ground_truth": {
+        "changed_file": "audit/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 24 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "audit/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 121
+          },
+          {
+            "file": "catalog/summaries.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 99
+          },
+          {
+            "file": "inventory/summaries.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 83
+          },
+          {
+            "file": "ledger/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 30
+          },
+          {
+            "file": "orders/validation.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 4
+          },
+          {
+            "file": "routing/summaries.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 7
+          },
+          {
+            "file": "shipping/validation.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 156
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-large-v1"
+      },
+      "input_tokens": 0,
+      "observation_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-large-v1",
+      "output_tokens": 0,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 4561.1s\n\nstage              elapsed\nredact               0.02s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.44s\nbatch                0.02s\ndirectory_context     0.00s\nreview            4559.48s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ndocumentation        1     1  1589.53s    30161   231983         -        -        0        0        -  ProviderTruncated: response hit the 231983-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ndocumentation        1     1  1475.14s    53881   208263         -        -        0        0        -  ProviderTruncated: response hit the 208263-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ncorrectness          1     1  1474.46s    54209   207935         -        -        0        0        -  ProviderTruncated: response hit the 207935-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ntests                1     1     5.71s    54059      367         -        -        0        0        1  -\ndeprecation          1     1     5.17s    54014      260         -        -        0        0        1  -\nsecurity             1     1     4.35s    54374       67         -        -        0        0        0  -\ncorrectness          1     1     3.09s    30489      270         -        -        0        0        1  -\ncorrectness          1     1     1.87s    27067       67         -        -        0        0        0  -\n\ncache: 0 tokens read / 0 created across 8 calls\nfindings: 3 parsed / 3 returned\ntokens: 1,007,466 billable (358,254 in / 649,212 out) across 8 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.4\", \"provider\": \"openai-compatible\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 1, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.016}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.445}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.024}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 24, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 54374, \"output_tokens\": 67, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 4.349}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 54209, \"output_tokens\": 207935, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 207935-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 207935, \"elapsed_s\": 1474.461}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"correctness\", \"reason\": \"ProviderTruncated: response hit the 207935-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1730, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 499, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 570, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 556, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 599, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 733, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 207935-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call was too big for one response \\u2014 retrying on smaller pieces\", \"lens\": \"correctness\", \"batch\": 1, \"pieces\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 30489, \"output_tokens\": 270, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 3.087}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 27067, \"output_tokens\": 67, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 1.872}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 54014, \"output_tokens\": 260, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 5.165}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 54059, \"output_tokens\": 367, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 5.711}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 53881, \"output_tokens\": 208263, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 208263-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 208263, \"elapsed_s\": 1475.144}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"documentation\", \"reason\": \"ProviderTruncated: response hit the 208263-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1730, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 499, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 570, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 556, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 599, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 733, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 208263-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"salvaged findings from truncated response\", \"lens\": \"documentation\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call was too big for one response \\u2014 retrying on smaller pieces\", \"lens\": \"documentation\", \"batch\": 1, \"pieces\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 30161, \"output_tokens\": 231983, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 231983-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 231983, \"elapsed_s\": 1589.529}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"documentation\", \"reason\": \"ProviderTruncated: response hit the 231983-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1730, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 499, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 570, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 556, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 599, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 733, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 231983-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"documentation\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"performance\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"complexity\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"intent\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 4559.476}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 4, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 4, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 4, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 10, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 100, \"to\": 99}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/summaries.py\", \"from\": 10, \"to\": 7}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"orders/validation.py\", \"from\": 5, \"to\": 3}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 100, \"to\": 99}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/summaries.py\", \"from\": 10, \"to\": 4}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"orders/validation.py\", \"from\": 5, \"to\": 3}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/summaries.py\", \"from\": 100, \"to\": 99}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/summaries.py\", \"from\": 10, \"to\": 4}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.003}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping reflection\", \"findings\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[{\"path\": \"audit/pipeline.py\", \"line\": 5, \"side\": \"RIGHT\", \"severity\": \"critical\", \"title\": \"Prevent SQL injection in load_order_rows\", \"body\": \"The query string uses an f-string to embed owner_id directly, allowing SQL injection. Use parameterized queries with placeholders and pass owner_id as a parameter to cursor.execute.\", \"failure_scenario\": \"An attacker provides an owner_id containing SQL syntax (e.g., \\\"'; DROP TABLE orders; --\\\"). The query executes with the injected SQL, potentially corrupting or deleting data.\", \"suggestion\": \"    query = \\\"SELECT id, status, total FROM orders WHERE customer_id = ?\\\"\\n    cursor.execute(query, (owner_id,))\", \"anchor\": \"    query = f\\\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\\\"\", \"anchored\": true, \"broad\": false, \"confidence\": 1, \"category\": \"correctness\"}, {\"path\": \"catalog/summaries.py\", \"line\": 99, \"side\": \"RIGHT\", \"severity\": \"medium\", \"title\": \"Mutable default argument in register_shipment_events\", \"body\": \"The function register_shipment_events uses a mutable list as a default argument (events: list[str] = []). This is a known Python anti-pattern because the default list is created once at function definition time and shared across all calls that do not provide an explicit events argument. Subsequent calls will append to the same list, causing unexpected accumulation of data.\", \"failure_scenario\": \"A caller invokes register_shipment_events('shipment_created') without providing an events argument. The function appends to the default list. A second caller invokes the same function without providing an events argument. The function appends to the same list, and the returned dictionary now contains events from both calls, leading to incorrect state and potential data leakage between unrelated calls.\", \"suggestion\": \"def register_shipment_events(event_type: str, events: list[str] | None = None) -> dict[str, list[str]]:\\n    if events is None:\\n        events = []\\n    events.append(event_type)\\n    return {event_type: list(events)}\", \"anchor\": \"def register_shipment_events(event_type: str, events: list[str] = []) -> dict[str, list[str]]:\", \"anchored\": true, \"broad\": false, \"confidence\": 0, \"category\": \"documentation\"}, {\"path\": \"routing/summaries.py\", \"line\": 7, \"side\": \"RIGHT\", \"severity\": \"medium\", \"title\": \"Use timezone-aware datetime for creation stamp\", \"body\": \"The function stamp_manifest_checkpoint uses datetime.datetime.utcnow() to generate a timestamp. This method is deprecated and returns a naive datetime object (no timezone information). Using naive datetimes can lead to incorrect time comparisons and serialization issues, especially in distributed systems or when storing data in databases that expect timezone-aware timestamps.\", \"failure_scenario\": \"A system component compares the created_at timestamp from stamp_manifest_checkpoint with a timezone-aware datetime from another source. The naive datetime comparison may raise an error or produce incorrect results. Additionally, when the timestamp is serialized to JSON or stored in a database, the lack of timezone information can cause ambiguity or data loss when deserializing.\", \"suggestion\": \"stamp = datetime.datetime.now(datetime.timezone.utc).isoformat()\", \"anchor\": \"stamp = datetime.datetime.utcnow().isoformat()\", \"anchored\": true, \"broad\": false, \"confidence\": 0, \"category\": \"documentation\"}]\n== lgtmaybe profile ==\ntotal wall time: 4561.1s\n\nstage              elapsed\nredact               0.02s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.44s\nbatch                0.02s\ndirectory_context     0.00s\nreview            4559.48s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ndocumentation        1     1  1589.53s    30161   231983         -        -        0        0        -  ProviderTruncated: response hit the 231983-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ndocumentation        1     1  1475.14s    53881   208263         -        -        0        0        -  ProviderTruncated: response hit the 208263-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ncorrectness          1     1  1474.46s    54209   207935         -        -        0        0        -  ProviderTruncated: response hit the 207935-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ntests                1     1     5.71s    54059      367         -        -        0        0        1  -\ndeprecation          1     1     5.17s    54014      260         -        -        0        0        1  -\nsecurity             1     1     4.35s    54374       67         -        -        0        0        0  -\ncorrectness          1     1     3.09s    30489      270         -        -        0        0        1  -\ncorrectness          1     1     1.87s    27067       67         -        -        0        0        0  -\n\ncache: 0 tokens read / 0 created across 8 calls\nfindings: 3 parsed / 3 returned\ntokens: 1,007,466 billable (358,254 in / 649,212 out) across 8 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 4561.607321931002,
+      "wall_seconds": 4561.607321931002
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [],
+      "case": "python-context-xlarge-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [
+        {
+          "anchor": "query = f\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\" ",
+          "anchored": false,
+          "body": "The function `load_order_rows` constructs a SQL query by directly interpolating the `owner_id` parameter into the query string using an f-string. This allows an attacker to inject arbitrary SQL commands if they control the `owner_id` value.",
+          "broad": false,
+          "category": "security",
+          "confidence": 1,
+          "failure_scenario": "An attacker supplies an `owner_id` containing SQL syntax (e.g., `' OR 1=1 --`). The database executes the injected query, potentially exposing or modifying sensitive data.",
+          "finding_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-xlarge-v1:finding:1",
+          "line": 5,
+          "path": "audit/allocation.py",
+          "severity": "critical",
+          "side": "RIGHT",
+          "suggestion": "query = f\"SELECT id, status, total FROM orders WHERE customer_id = %s\"",
+          "title": "Prevent SQL injection in dynamic query"
+        },
+        {
+          "anchor": "def register_shipment_events(event_type: str, events: list[str] = []) -> dict[str, list[str]]:",
+          "anchored": false,
+          "body": "The function register_shipment_events uses a mutable default argument `events: list[str] = []`. In Python, default arguments are evaluated once at function definition time, so all calls to the function without an explicit `events` argument will share the same list object. This causes events to accumulate across calls, leading to incorrect results and data leakage between invocations.",
+          "broad": false,
+          "category": "correctness",
+          "confidence": 0,
+          "failure_scenario": "When register_shipment_events is called multiple times without passing an events list, the events list grows across calls, returning previously recorded events mixed with new ones.",
+          "finding_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-xlarge-v1:finding:2",
+          "line": 34,
+          "path": "audit/validation.py",
+          "severity": "high",
+          "side": "RIGHT",
+          "suggestion": "def register_shipment_events(event_type: str, events: list[str] | None = None) -> dict[str, list[str]]:\n    \"\"\"Record shipment events of one type and return the events per type.\"\"\"\n    if events is None:\n        events = []\n    events.append(event_type)\n    return {event_type: list(events)}",
+          "title": "Fix mutable default argument in register_shipment_events"
+        },
+        {
+          "anchor": "def load_order_rows(owner_id: str, cursor: object) -> list[dict[str, object]]:\n    \"\"\"Load queued order rows for one owner through an open cursor.\"\"\"\n    query = f\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\"\n    cursor.execute(query)\n    return [dict(row) for row in cursor.fetchall()]",
+          "anchored": false,
+          "body": "The function load_order_rows constructs a SQL query using string formatting with the owner_id parameter directly interpolated into the query string. This is a classic SQL injection vulnerability. An attacker could provide a malicious owner_id value to execute arbitrary SQL commands.",
+          "broad": false,
+          "category": "correctness",
+          "confidence": 0,
+          "failure_scenario": "When load_order_rows is called with a malicious owner_id containing SQL injection payloads (e.g., \"' OR '1'='1\"), the database executes unintended commands, potentially exposing or modifying data.",
+          "finding_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-xlarge-v1:finding:3",
+          "line": 4,
+          "path": "audit/allocation.py",
+          "severity": "high",
+          "side": "RIGHT",
+          "suggestion": "def load_order_rows(owner_id: str, cursor: object) -> list[dict[str, object]]:\n    \"\"\"Load queued order rows for one owner through an open cursor.\"\"\"\n    query = \"SELECT id, status, total FROM orders WHERE customer_id = %s\"\n    cursor.execute(query, (owner_id,))\n    return [dict(row) for row in cursor.fetchall()]",
+          "title": "SQL injection vulnerability in load_order_rows"
+        },
+        {
+          "anchor": "    stamp = datetime.datetime.utcnow().isoformat()},{",
+          "anchored": true,
+          "body": "`datetime.datetime.utcnow()` returns a naive datetime object. Using it for timestamps can cause issues when the application runs in different timezones or when comparing with timezone-aware datetimes. The correct approach is to use `datetime.datetime.now(datetime.timezone.utc)` or `datetime.datetime.now(tz=datetime.timezone.utc)` to create a timezone-aware UTC timestamp.",
+          "broad": true,
+          "category": "performance",
+          "confidence": 0,
+          "failure_scenario": "When the application processes timestamps across different timezones or compares with timezone-aware datetimes, the naive UTC timestamp may be misinterpreted, leading to incorrect ordering, filtering, or audit trail discrepancies.",
+          "finding_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-xlarge-v1:finding:4",
+          "line": 807,
+          "path": "routing/reconciliation.py",
+          "severity": "high",
+          "side": "RIGHT",
+          "suggestion": "    stamp = datetime.datetime.now(datetime.timezone.utc).isoformat()",
+          "title": "Use timezone-aware datetime for UTC timestamps"
+        },
+        {
+          "anchor": "import datetime",
+          "anchored": true,
+          "body": "The import datetime is added but not used in the file. This is dead code and should be removed to keep the codebase clean.",
+          "broad": false,
+          "category": "deprecation",
+          "confidence": 0,
+          "failure_scenario": "No functional impact, but it increases file size and may confuse readers about the file's dependencies.",
+          "finding_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-xlarge-v1:finding:5",
+          "line": 2,
+          "path": "routing/reconciliation.py",
+          "severity": "low",
+          "side": "RIGHT",
+          "suggestion": "# Remove the import datetime line",
+          "title": "Unused import datetime"
+        },
+        {
+          "anchor": "for position in range(1, len(entries)):",
+          "anchored": true,
+          "body": "The loop `for position in range(1, len(entries)):` starts at index 1, which skips the first entry in the `entries` list. This means the first invoice entry is never scored or included in the ranking.",
+          "broad": false,
+          "category": "complexity",
+          "confidence": 0,
+          "failure_scenario": "When `rank_invoice_entries` is called with a list of invoice entries, the first entry is silently ignored. The returned list will be missing the first entry, leading to incomplete or incorrect ranking results.",
+          "finding_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-xlarge-v1:finding:6",
+          "line": 44,
+          "path": "billing/pipeline.py",
+          "severity": "medium",
+          "side": "RIGHT",
+          "suggestion": "for position in range(len(entries)):\n    entry = entries[position]",
+          "title": "Off-by-one error in loop skips the first entry"
+        },
+        {
+          "anchor": "def register_shipment_events(event_type: str, events: list[str] = []) -> dict[str, list[str]]:\n    \"\"\"Record shipment events of one type and return the events per type.\"\"\"\n    events.append(event_type)\n    return {event_type: list(events)}",
+          "anchored": false,
+          "body": "The function `register_shipment_events` uses a mutable default argument `events: list[str] = []`. This list is created once at function definition time and shared across all calls. Appending to it in one call will persist the state for subsequent calls.",
+          "broad": false,
+          "category": "performance",
+          "confidence": 0,
+          "failure_scenario": "Calling `register_shipment_events(\"type_a\")` then `register_shipment_events(\"type_b\")` will result in the second call returning `{\"type_b\": [\"type_a\", \"type_b\"]}` instead of `{\"type_b\": [\"type_b\"]}`, causing unexpected accumulation of events across unrelated calls.",
+          "finding_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-xlarge-v1:finding:7",
+          "line": 20,
+          "path": "catalog/validation.py",
+          "severity": "high",
+          "side": "RIGHT",
+          "suggestion": "def register_shipment_events(event_type: str, events: list[str] = None) -> dict[str, list[str]]:\n    if events is None:\n        events = []\n    events.append(event_type)\n    return {event_type: list(events)}",
+          "title": "Mutable default argument causes state leakage"
+        },
+        {
+          "anchor": "def register_shipment_events(event_type: str, events: list[str] = []) -> dict[str, list[str]]:",
+          "anchored": true,
+          "body": "The function `register_shipment_events` uses a mutable default argument `events: list[str] = []`. In Python, default arguments are evaluated once at function definition time. This means all calls to the function without an explicit `events` argument will share the same list, causing events to accumulate across calls unexpectedly.",
+          "broad": false,
+          "category": "complexity",
+          "confidence": 0,
+          "failure_scenario": "A caller invokes `register_shipment_events('type_a')` and gets `{'type_a': ['type_a']}`. A subsequent caller invokes `register_shipment_events('type_b')` and gets `{'type_b': ['type_a', 'type_b']}` because the default list was mutated in the first call. This leads to data leakage and incorrect event tracking.",
+          "finding_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-xlarge-v1:finding:8",
+          "line": 21,
+          "path": "catalog/validation.py",
+          "severity": "medium",
+          "side": "RIGHT",
+          "suggestion": "def register_shipment_events(event_type: str, events: list[str] | None = None) -> dict[str, list[str]]:\n    if events is None:\n        events = []\n    events.append(event_type)\n    return {event_type: list(events)}",
+          "title": "Mutable default argument causes shared state across calls"
+        }
+      ],
+      "ground_truth": {
+        "changed_file": "audit/allocation.py",
+        "clean": false,
+        "commit_message": "Refactor 48 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "audit/allocation.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 44
+          },
+          {
+            "file": "catalog/validation.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 21
+          },
+          {
+            "file": "inventory/summaries.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 9
+          },
+          {
+            "file": "orders/allocation.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 166
+          },
+          {
+            "file": "pricing/summaries.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 141
+          },
+          {
+            "file": "routing/reconciliation.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 807
+          },
+          {
+            "file": "shipping/validation.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 151
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-xlarge-v1"
+      },
+      "input_tokens": 0,
+      "observation_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-xlarge-v1",
+      "output_tokens": 0,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 3653.7s\n\nstage              elapsed\nredact               0.04s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.92s\nbatch                0.03s\ndirectory_context     0.00s\nreview            3651.44s\nsnap                 0.08s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nperformance          1     1  1190.05s   106178   155966         -        -        0        0        -  ProviderTruncated: response hit the 155966-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ncomplexity           1     1  1190.04s   106110   156034         -        -        0        0        -  ProviderTruncated: response hit the 156034-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ncorrectness          1     1  1188.50s   106306   155838         -        -        0        0        -  ProviderTruncated: response hit the 155838-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ndeprecation          1     1    16.43s   106111     1004         -        -        0        0        5  -\ntests                1     1    12.55s   106156      366         -        -        0        0        1  -\ndocumentation        1     1    12.46s   105978      345         -        -        0        0        1  -\nsecurity             1     1    11.91s   106471      231         -        -        0        0        1  -\ncorrectness          1     1     8.36s    49880      967         -        -        0        0        3  -\nperformance          1     1     8.31s    59639      745         -        -        0        0        3  -\nperformance          1     1     6.80s    49752      665         -        -        0        0        3  -\ncorrectness          1     1     5.91s    59767      291         -        -        0        0        1  -\n\ncache: 0 tokens read / 0 created across 11 calls\nfindings: 18 parsed / 8 returned\ntokens: 1,434,800 billable (962,348 in / 472,452 out) across 11 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.4\", \"provider\": \"openai-compatible\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 1, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.036}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.002}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.918}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.031}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 48, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 106471, \"output_tokens\": 231, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 11.915}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 106306, \"output_tokens\": 155838, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 155838-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 155838, \"elapsed_s\": 1188.503}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"correctness\", \"reason\": \"ProviderTruncated: response hit the 155838-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1730, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 499, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 570, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 556, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 599, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 733, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 155838-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call was too big for one response \\u2014 retrying on smaller pieces\", \"lens\": \"correctness\", \"batch\": 1, \"pieces\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 49880, \"output_tokens\": 967, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 3, \"elapsed_s\": 8.358}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 3}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 59767, \"output_tokens\": 291, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 5.911}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 106111, \"output_tokens\": 1004, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 5, \"elapsed_s\": 16.431}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 106156, \"output_tokens\": 366, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 12.554}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 105978, \"output_tokens\": 345, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 12.457}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 106178, \"output_tokens\": 155966, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 155966-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 155966, \"elapsed_s\": 1190.046}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"performance\", \"reason\": \"ProviderTruncated: response hit the 155966-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1730, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 499, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 570, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 556, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 599, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 733, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 155966-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"salvaged findings from truncated response\", \"lens\": \"performance\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call was too big for one response \\u2014 retrying on smaller pieces\", \"lens\": \"performance\", \"batch\": 1, \"pieces\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 49752, \"output_tokens\": 665, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 3, \"elapsed_s\": 6.805}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 3}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 59639, \"output_tokens\": 745, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 3, \"elapsed_s\": 8.311}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 3}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 106110, \"output_tokens\": 156034, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 156034-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 156034, \"elapsed_s\": 1190.036}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"complexity\", \"reason\": \"ProviderTruncated: response hit the 156034-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1730, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 499, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 570, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 556, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 599, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/1LF2sHHxUmjnWGe1/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 733, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 156034-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"salvaged findings from truncated response\", \"lens\": \"complexity\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call was too big for one response \\u2014 retrying on smaller pieces\", \"lens\": \"complexity\", \"batch\": 1, \"pieces\": 2}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"complexity\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"complexity\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"intent\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 3651.444}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"audit/validation.py\", \"line\": 34, \"title\": \"Fix mutable default argument in register_shipment_events\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 30, \"title\": \"Off-by-one error in rank_invoice_entries loop\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"audit/allocation.py\", \"line\": 4, \"title\": \"SQL injection vulnerability in load_order_rows\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/reconciliation.py\", \"from\": 753, \"to\": 807}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/allocation.py\", \"from\": 4, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 30, \"title\": \"Off-by-one error in loop skips first entry\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"catalog/validation.py\", \"line\": 12, \"title\": \"Mutable default argument causes shared state\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"orders/allocation.py\", \"line\": 100, \"title\": \"Unnecessary nested loops in cross_check_tariff_routes\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/allocation.py\", \"from\": 4, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/allocation.py\", \"from\": 4, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"billing/pipeline.py\", \"line\": 30, \"title\": \"Off-by-one error in loop range\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"catalog/validation.py\", \"line\": 12, \"title\": \"Mutable default argument\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"orders/allocation.py\", \"line\": 100, \"title\": \"Inefficient nested loop for counting\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"pricing/summaries.py\", \"line\": 100, \"title\": \"Inefficient sorting for finding newest item\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/reconciliation.py\", \"from\": 3, \"to\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/reconciliation.py\", \"from\": 750, \"to\": 807}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 30, \"to\": 44}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"catalog/validation.py\", \"line\": 20, \"title\": \"Mutable default argument causes state leakage\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/reconciliation.py\", \"from\": 750, \"to\": 807}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"anchor unmatched \\u2014 demoting finding\", \"path\": \"orders/allocation.py\", \"line\": 170, \"title\": \"Replace inefficient nested loop with set operations\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/reconciliation.py\", \"from\": 750, \"to\": 807}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/allocation.py\", \"from\": 4, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 30, \"to\": 44}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/validation.py\", \"from\": 12, \"to\": 21}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/reconciliation.py\", \"from\": 750, \"to\": 807}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 30, \"to\": 44}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/validation.py\", \"from\": 12, \"to\": 21}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/reconciliation.py\", \"from\": 750, \"to\": 807}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.076}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping reflection\", \"findings\": 13}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[{\"path\": \"audit/allocation.py\", \"line\": 5, \"side\": \"RIGHT\", \"severity\": \"critical\", \"title\": \"Prevent SQL injection in dynamic query\", \"body\": \"The function `load_order_rows` constructs a SQL query by directly interpolating the `owner_id` parameter into the query string using an f-string. This allows an attacker to inject arbitrary SQL commands if they control the `owner_id` value.\", \"failure_scenario\": \"An attacker supplies an `owner_id` containing SQL syntax (e.g., `' OR 1=1 --`). The database executes the injected query, potentially exposing or modifying sensitive data.\", \"suggestion\": \"query = f\\\"SELECT id, status, total FROM orders WHERE customer_id = %s\\\"\", \"anchor\": \"query = f\\\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\\\" \", \"anchored\": false, \"broad\": false, \"confidence\": 1, \"category\": \"security\"}, {\"path\": \"audit/validation.py\", \"line\": 34, \"side\": \"RIGHT\", \"severity\": \"high\", \"title\": \"Fix mutable default argument in register_shipment_events\", \"body\": \"The function register_shipment_events uses a mutable default argument `events: list[str] = []`. In Python, default arguments are evaluated once at function definition time, so all calls to the function without an explicit `events` argument will share the same list object. This causes events to accumulate across calls, leading to incorrect results and data leakage between invocations.\", \"failure_scenario\": \"When register_shipment_events is called multiple times without passing an events list, the events list grows across calls, returning previously recorded events mixed with new ones.\", \"suggestion\": \"def register_shipment_events(event_type: str, events: list[str] | None = None) -> dict[str, list[str]]:\\n    \\\"\\\"\\\"Record shipment events of one type and return the events per type.\\\"\\\"\\\"\\n    if events is None:\\n        events = []\\n    events.append(event_type)\\n    return {event_type: list(events)}\", \"anchor\": \"def register_shipment_events(event_type: str, events: list[str] = []) -> dict[str, list[str]]:\", \"anchored\": false, \"broad\": false, \"confidence\": 0, \"category\": \"correctness\"}, {\"path\": \"audit/allocation.py\", \"line\": 4, \"side\": \"RIGHT\", \"severity\": \"high\", \"title\": \"SQL injection vulnerability in load_order_rows\", \"body\": \"The function load_order_rows constructs a SQL query using string formatting with the owner_id parameter directly interpolated into the query string. This is a classic SQL injection vulnerability. An attacker could provide a malicious owner_id value to execute arbitrary SQL commands.\", \"failure_scenario\": \"When load_order_rows is called with a malicious owner_id containing SQL injection payloads (e.g., \\\"' OR '1'='1\\\"), the database executes unintended commands, potentially exposing or modifying data.\", \"suggestion\": \"def load_order_rows(owner_id: str, cursor: object) -> list[dict[str, object]]:\\n    \\\"\\\"\\\"Load queued order rows for one owner through an open cursor.\\\"\\\"\\\"\\n    query = \\\"SELECT id, status, total FROM orders WHERE customer_id = %s\\\"\\n    cursor.execute(query, (owner_id,))\\n    return [dict(row) for row in cursor.fetchall()]\", \"anchor\": \"def load_order_rows(owner_id: str, cursor: object) -> list[dict[str, object]]:\\n    \\\"\\\"\\\"Load queued order rows for one owner through an open cursor.\\\"\\\"\\\"\\n    query = f\\\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\\\"\\n    cursor.execute(query)\\n    return [dict(row) for row in cursor.fetchall()]\", \"anchored\": false, \"broad\": false, \"confidence\": 0, \"category\": \"correctness\"}, {\"path\": \"routing/reconciliation.py\", \"line\": 807, \"side\": \"RIGHT\", \"severity\": \"high\", \"title\": \"Use timezone-aware datetime for UTC timestamps\", \"body\": \"`datetime.datetime.utcnow()` returns a naive datetime object. Using it for timestamps can cause issues when the application runs in different timezones or when comparing with timezone-aware datetimes. The correct approach is to use `datetime.datetime.now(datetime.timezone.utc)` or `datetime.datetime.now(tz=datetime.timezone.utc)` to create a timezone-aware UTC timestamp.\", \"failure_scenario\": \"When the application processes timestamps across different timezones or compares with timezone-aware datetimes, the naive UTC timestamp may be misinterpreted, leading to incorrect ordering, filtering, or audit trail discrepancies.\", \"suggestion\": \"    stamp = datetime.datetime.now(datetime.timezone.utc).isoformat()\", \"anchor\": \"    stamp = datetime.datetime.utcnow().isoformat()},{\", \"anchored\": true, \"broad\": true, \"confidence\": 0, \"category\": \"performance\"}, {\"path\": \"routing/reconciliation.py\", \"line\": 2, \"side\": \"RIGHT\", \"severity\": \"low\", \"title\": \"Unused import datetime\", \"body\": \"The import datetime is added but not used in the file. This is dead code and should be removed to keep the codebase clean.\", \"failure_scenario\": \"No functional impact, but it increases file size and may confuse readers about the file's dependencies.\", \"suggestion\": \"# Remove the import datetime line\", \"anchor\": \"import datetime\", \"anchored\": true, \"broad\": false, \"confidence\": 0, \"category\": \"deprecation\"}, {\"path\": \"billing/pipeline.py\", \"line\": 44, \"side\": \"RIGHT\", \"severity\": \"medium\", \"title\": \"Off-by-one error in loop skips the first entry\", \"body\": \"The loop `for position in range(1, len(entries)):` starts at index 1, which skips the first entry in the `entries` list. This means the first invoice entry is never scored or included in the ranking.\", \"failure_scenario\": \"When `rank_invoice_entries` is called with a list of invoice entries, the first entry is silently ignored. The returned list will be missing the first entry, leading to incomplete or incorrect ranking results.\", \"suggestion\": \"for position in range(len(entries)):\\n    entry = entries[position]\", \"anchor\": \"for position in range(1, len(entries)):\", \"anchored\": true, \"broad\": false, \"confidence\": 0, \"category\": \"complexity\"}, {\"path\": \"catalog/validation.py\", \"line\": 20, \"side\": \"RIGHT\", \"severity\": \"high\", \"title\": \"Mutable default argument causes state leakage\", \"body\": \"The function `register_shipment_events` uses a mutable default argument `events: list[str] = []`. This list is created once at function definition time and shared across all calls. Appending to it in one call will persist the state for subsequent calls.\", \"failure_scenario\": \"Calling `register_shipment_events(\\\"type_a\\\")` then `register_shipment_events(\\\"type_b\\\")` will result in the second call returning `{\\\"type_b\\\": [\\\"type_a\\\", \\\"type_b\\\"]}` instead of `{\\\"type_b\\\": [\\\"type_b\\\"]}`, causing unexpected accumulation of events across unrelated calls.\", \"suggestion\": \"def register_shipment_events(event_type: str, events: list[str] = None) -> dict[str, list[str]]:\\n    if events is None:\\n        events = []\\n    events.append(event_type)\\n    return {event_type: list(events)}\", \"anchor\": \"def register_shipment_events(event_type: str, events: list[str] = []) -> dict[str, list[str]]:\\n    \\\"\\\"\\\"Record shipment events of one type and return the events per type.\\\"\\\"\\\"\\n    events.append(event_type)\\n    return {event_type: list(events)}\", \"anchored\": false, \"broad\": false, \"confidence\": 0, \"category\": \"performance\"}, {\"path\": \"catalog/validation.py\", \"line\": 21, \"side\": \"RIGHT\", \"severity\": \"medium\", \"title\": \"Mutable default argument causes shared state across calls\", \"body\": \"The function `register_shipment_events` uses a mutable default argument `events: list[str] = []`. In Python, default arguments are evaluated once at function definition time. This means all calls to the function without an explicit `events` argument will share the same list, causing events to accumulate across calls unexpectedly.\", \"failure_scenario\": \"A caller invokes `register_shipment_events('type_a')` and gets `{'type_a': ['type_a']}`. A subsequent caller invokes `register_shipment_events('type_b')` and gets `{'type_b': ['type_a', 'type_b']}` because the default list was mutated in the first call. This leads to data leakage and incorrect event tracking.\", \"suggestion\": \"def register_shipment_events(event_type: str, events: list[str] | None = None) -> dict[str, list[str]]:\\n    if events is None:\\n        events = []\\n    events.append(event_type)\\n    return {event_type: list(events)}\", \"anchor\": \"def register_shipment_events(event_type: str, events: list[str] = []) -> dict[str, list[str]]:\", \"anchored\": true, \"broad\": false, \"confidence\": 0, \"category\": \"complexity\"}]\n== lgtmaybe profile ==\ntotal wall time: 3653.7s\n\nstage              elapsed\nredact               0.04s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.92s\nbatch                0.03s\ndirectory_context     0.00s\nreview            3651.44s\nsnap                 0.08s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nperformance          1     1  1190.05s   106178   155966         -        -        0        0        -  ProviderTruncated: response hit the 155966-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ncomplexity           1     1  1190.04s   106110   156034         -        -        0        0        -  ProviderTruncated: response hit the 156034-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ncorrectness          1     1  1188.50s   106306   155838         -        -        0        0        -  ProviderTruncated: response hit the 155838-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ndeprecation          1     1    16.43s   106111     1004         -        -        0        0        5  -\ntests                1     1    12.55s   106156      366         -        -        0        0        1  -\ndocumentation        1     1    12.46s   105978      345         -        -        0        0        1  -\nsecurity             1     1    11.91s   106471      231         -        -        0        0        1  -\ncorrectness          1     1     8.36s    49880      967         -        -        0        0        3  -\nperformance          1     1     8.31s    59639      745         -        -        0        0        3  -\nperformance          1     1     6.80s    49752      665         -        -        0        0        3  -\ncorrectness          1     1     5.91s    59767      291         -        -        0        0        1  -\n\ncache: 0 tokens read / 0 created across 11 calls\nfindings: 18 parsed / 8 returned\ntokens: 1,434,800 billable (962,348 in / 472,452 out) across 11 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 3654.200060041003,
+      "wall_seconds": 3654.200060041003
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [],
+      "case": "python-context-clean-large-v1",
+      "exit_code": 0,
+      "failures": 0,
+      "findings": [],
+      "ground_truth": {
+        "changed_file": "audit/pipeline.py",
+        "clean": true,
+        "clean_trap": "A broad mechanical refactor with renamed locals and retuned constants; reviewers may mistake the churn for behaviour changes.",
+        "commit_message": "Refactor 24 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-clean-large-v1"
+      },
+      "input_tokens": 0,
+      "observation_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-clean-large-v1",
+      "output_tokens": 0,
+      "profile": "== lgtmaybe profile ==\ntotal wall time: 38.0s\n\nstage              elapsed\nredact               0.01s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.45s\nbatch                0.03s\ndirectory_context     0.00s\nreview              36.36s\nsnap                 0.01s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nsecurity             1     1     4.20s    55363       18         -        -        0        0        0  -\nintent               1     1     4.03s    55275       18         -        -        0        0        0  -\ntests                1     1     4.03s    55048       18         -        -        0        0        0  -\ndeprecation          1     1     4.03s    55003       18         -        -        0        0        0  -\nperformance          1     1     4.02s    55070       18         -        -        0        0        0  -\nponytail             1     1     4.02s    55000       18         -        -        0        0        0  -\ncomplexity           1     1     4.01s    55002       18         -        -        0        0        0  -\ncorrectness          1     1     4.01s    55198       18         -        -        0        0        0  -\ndocumentation        1     1     4.00s    54870       18         -        -        0        0        0  -\n\ncache: 0 tokens read / 0 created across 9 calls\nfindings: 0 parsed / 0 returned\ntokens: 495,991 billable (495,829 in / 162 out) across 9 calls",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.1.4\", \"provider\": \"openai-compatible\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 1, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.014}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.452}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.026}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 24, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 55363, \"output_tokens\": 18, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 4.201}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 55198, \"output_tokens\": 18, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 4.011}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 55003, \"output_tokens\": 18, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 4.025}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 55048, \"output_tokens\": 18, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 4.031}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 54870, \"output_tokens\": 18, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 4.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 55070, \"output_tokens\": 18, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 4.023}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 55002, \"output_tokens\": 18, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 4.012}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 55275, \"output_tokens\": 18, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 4.033}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 55000, \"output_tokens\": 18, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 4.023}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 36.362}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.005}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n",
+      "stdout": "[]\n== lgtmaybe profile ==\ntotal wall time: 38.0s\n\nstage              elapsed\nredact               0.01s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.45s\nbatch                0.03s\ndirectory_context     0.00s\nreview              36.36s\nsnap                 0.01s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nsecurity             1     1     4.20s    55363       18         -        -        0        0        0  -\nintent               1     1     4.03s    55275       18         -        -        0        0        0  -\ntests                1     1     4.03s    55048       18         -        -        0        0        0  -\ndeprecation          1     1     4.03s    55003       18         -        -        0        0        0  -\nperformance          1     1     4.02s    55070       18         -        -        0        0        0  -\nponytail             1     1     4.02s    55000       18         -        -        0        0        0  -\ncomplexity           1     1     4.01s    55002       18         -        -        0        0        0  -\ncorrectness          1     1     4.01s    55198       18         -        -        0        0        0  -\ndocumentation        1     1     4.00s    54870       18         -        -        0        0        0  -\n\ncache: 0 tokens read / 0 created across 9 calls\nfindings: 0 parsed / 0 returned\ntokens: 495,991 billable (495,829 in / 162 out) across 9 calls\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 38.503078734000155,
+      "wall_seconds": 38.503078734000155
+    }
+  ],
+  "run_id": "20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4",
+  "schema_version": 2,
+  "status": "complete",
+  "timestamp": "2026-08-15T11:13:28Z"
+}
