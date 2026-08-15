@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 29.7% | 81.2% | 46.4% | 26.0 | 30.0 | — | — | no | [raw](results/raw/20260815-095319-openrouter-google-gemini-3-1-pro-preview.json) | — | — |
 | 2026-08-15 | openrouter | openai/gpt-5.6-sol | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 59.4% | 32.2% | 19.0 | 40.0 | — | — | no | [raw](results/raw/20260815-093123-openrouter-openai-gpt-5-6-sol.json) | — | — |
 | 2026-08-15 | openrouter | openai/gpt-5.6-terra | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 43.4% | 53.1% | 56.7% | 17.0 | 13.0 | — | — | no | [raw](results/raw/20260815-092014-openrouter-openai-gpt-5-6-terra.json) | — | — |
 | 2026-08-15 | openrouter | openai/gpt-5.6-luna | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 19.7% | 78.1% | 42.4% | 25.0 | 34.0 | — | — | no | [raw](results/raw/20260815-085453-openrouter-openai-gpt-5-6-luna.json) | — | — |
@@ -20,6 +21,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | python-context-small-v1 | 87.5% | 43.8% | 16 | 85,653 | 129,832 | no | 299.1 |
+| 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | python-context-medium-v1 | 75.0% | 54.5% | 11 | 249,747 | 127,754 | no | 284.0 |
+| 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | python-context-large-v1 | 87.5% | 50.0% | 14 | 616,422 | 138,810 | no | 336.4 |
+| 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | python-context-xlarge-v1 | 75.0% | 60.0% | 10 | 1,179,730 | 143,072 | no | 354.1 |
+| 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | python-context-clean-large-v1 | — | 0.0% | 5 | 667,807 | 155,061 | no | 837.7 |
 | 2026-08-15 | openrouter | openai/gpt-5.6-sol | python-context-small-v1 | 62.5% | 27.8% | 18 | 73,944 | 26,838 | no | 130.6 |
 | 2026-08-15 | openrouter | openai/gpt-5.6-sol | python-context-medium-v1 | 62.5% | 50.0% | 10 | 214,445 | 30,627 | no | 151.2 |
 | 2026-08-15 | openrouter | openai/gpt-5.6-sol | python-context-large-v1 | 62.5% | 29.4% | 17 | 522,060 | 25,696 | no | 164.1 |
@@ -60,6 +66,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| google/gemini-3.1-pro-preview | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 25.0% |
+| google/gemini-3.1-pro-preview | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 100.0% |
+| google/gemini-3.1-pro-preview | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |
+| google/gemini-3.1-pro-preview | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 25.0% |
+| google/gemini-3.1-pro-preview | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
+| google/gemini-3.1-pro-preview | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 100.0% |
+| google/gemini-3.1-pro-preview | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
 | openai/gpt-5.6-sol | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 75.0% |
 | openai/gpt-5.6-sol | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 62.5% |
 | openai/gpt-5.6-sol | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
