@@ -67,6 +67,7 @@ Complete `context-v1` runs with profile `context-canonical-v1` only. Cases grow 
 |---|---|---|---:|---:|---:|---:|---:|
 | 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | 46.0% | 56.2% | 58.1% | 18 | 13 |
 | 2026-08-15 | openrouter | openai/gpt-5.6-terra | 43.4% | 53.1% | 56.7% | 17 | 13 |
+| 2026-08-15 | openrouter | z-ai/glm-5.2 | 31.7% | 78.1% | 47.2% | 25 | 28 |
 | 2026-08-15 | openrouter | anthropic/claude-fable-5 | 29.8% | 46.9% | 46.9% | 15 | 17 |
 | 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | 29.7% | 81.2% | 46.4% | 26 | 30 |
 | 2026-08-15 | openrouter | openai/gpt-5.6-luna | 19.7% | 78.1% | 42.4% | 25 | 34 |
@@ -74,7 +75,6 @@ Complete `context-v1` runs with profile `context-canonical-v1` only. Cases grow 
 | 2026-08-15 | openrouter | moonshotai/kimi-k2.7-code | 0.0% | 78.1% | 33.3% | 25 | 50 |
 | 2026-08-15 | openrouter | moonshotai/kimi-k3 | 0.0% | 93.8% | 24.0% | 30 | 95 |
 | 2026-08-15 | openrouter | openai/gpt-5.6-sol | 0.0% | 59.4% | 32.2% | 19 | 40 |
-| 2026-08-15 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | 0.0% | 53.1% | 4.7% | 17 | 347 |
 <!-- BENCH_RESULTS_END -->
 
 See [RESULTS.md](RESULTS.md) for every stored completed run and [dashboard/index.html](dashboard/index.html) for column sorting and filters by suite, profile, model, version, status, audit state, language, and lens. Focused and diagnostic runs remain visible there but do not enter the canonical README ranking.
