@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-15 | openrouter | anthropic/claude-haiku-4.5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 15.1% | 9.4% | 75.0% | 3.0 | 1.0 | — | — | no | [raw](results/raw/20260815-082555-openrouter-anthropic-claude-haiku-4-5.json) | — | — |
 | 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 46.0% | 56.2% | 58.1% | 18.0 | 13.0 | — | — | no | [raw](results/raw/20260815-072218-openrouter-anthropic-claude-sonnet-5.json) | — | — |
 | 2026-08-15 | openrouter | anthropic/claude-opus-5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 0.0% | 100.0% | 0.0 | 0.0 | — | — | no | [raw](results/raw/20260815-063856-openrouter-anthropic-claude-opus-5.json) | — | — |
 | 2026-08-15 | openrouter | ~anthropic/claude-fable-latest | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 29.8% | 46.9% | 46.9% | 15.0 | 17.0 | — | — | no | [raw](results/raw/20260815-060621-openrouter-anthropic-claude-fable-latest.json) | — | — |
@@ -16,6 +17,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-15 | openrouter | anthropic/claude-haiku-4.5 | python-context-small-v1 | 0.0% | 100.0% | 0 | 78,098 | 14,375 | no | 48.6 |
+| 2026-08-15 | openrouter | anthropic/claude-haiku-4.5 | python-context-medium-v1 | 0.0% | 100.0% | 0 | 222,503 | 10,154 | no | 32.8 |
+| 2026-08-15 | openrouter | anthropic/claude-haiku-4.5 | python-context-large-v1 | 12.5% | 100.0% | 1 | 630,163 | 12,794 | no | 112.0 |
+| 2026-08-15 | openrouter | anthropic/claude-haiku-4.5 | python-context-xlarge-v1 | 25.0% | 66.7% | 3 | 1,210,673 | 17,587 | no | 54.0 |
+| 2026-08-15 | openrouter | anthropic/claude-haiku-4.5 | python-context-clean-large-v1 | — | 100.0% | 0 | 566,096 | 108 | no | 11.1 |
 | 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | python-context-small-v1 | 87.5% | 50.0% | 14 | 110,368 | 134,553 | no | 381.6 |
 | 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | python-context-medium-v1 | 87.5% | 53.8% | 13 | 332,754 | 141,458 | no | 394.1 |
 | 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | python-context-large-v1 | 50.0% | 100.0% | 4 | 823,046 | 205,428 | no | 449.0 |
@@ -36,6 +42,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
+| anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 12.5% |
+| anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
+| anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 0.0% |
+| anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 25.0% |
+| anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
+| anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 25.0% |
 | anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 25.0% |
 | anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 75.0% |
 | anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 50.0% |
