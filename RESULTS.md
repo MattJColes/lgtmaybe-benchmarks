@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-15 | openrouter | openai/gpt-5.6-luna | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 19.7% | 78.1% | 42.4% | 25.0 | 34.0 | — | — | no | [raw](results/raw/20260815-085453-openrouter-openai-gpt-5-6-luna.json) | — | — |
 | 2026-08-15 | openrouter | anthropic/claude-haiku-4.5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 15.1% | 9.4% | 75.0% | 3.0 | 1.0 | — | — | no | [raw](results/raw/20260815-082555-openrouter-anthropic-claude-haiku-4-5.json) | — | — |
 | 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 46.0% | 56.2% | 58.1% | 18.0 | 13.0 | — | — | no | [raw](results/raw/20260815-072218-openrouter-anthropic-claude-sonnet-5.json) | — | — |
 | 2026-08-15 | openrouter | anthropic/claude-opus-5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 0.0% | 100.0% | 0.0 | 0.0 | — | — | no | [raw](results/raw/20260815-063856-openrouter-anthropic-claude-opus-5.json) | — | — |
@@ -17,6 +18,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-15 | openrouter | openai/gpt-5.6-luna | python-context-small-v1 | 100.0% | 47.1% | 17 | 74,422 | 28,641 | no | 81.3 |
+| 2026-08-15 | openrouter | openai/gpt-5.6-luna | python-context-medium-v1 | 75.0% | 75.0% | 8 | 209,791 | 29,423 | no | 79.7 |
+| 2026-08-15 | openrouter | openai/gpt-5.6-luna | python-context-large-v1 | 37.5% | 37.5% | 8 | 509,473 | 23,373 | no | 69.3 |
+| 2026-08-15 | openrouter | openai/gpt-5.6-luna | python-context-xlarge-v1 | 100.0% | 57.1% | 14 | 978,208 | 28,464 | no | 78.6 |
+| 2026-08-15 | openrouter | openai/gpt-5.6-luna | python-context-clean-large-v1 | — | 0.0% | 12 | 605,128 | 84,215 | yes | 315.2 |
 | 2026-08-15 | openrouter | anthropic/claude-haiku-4.5 | python-context-small-v1 | 0.0% | 100.0% | 0 | 78,098 | 14,375 | no | 48.6 |
 | 2026-08-15 | openrouter | anthropic/claude-haiku-4.5 | python-context-medium-v1 | 0.0% | 100.0% | 0 | 222,503 | 10,154 | no | 32.8 |
 | 2026-08-15 | openrouter | anthropic/claude-haiku-4.5 | python-context-large-v1 | 12.5% | 100.0% | 1 | 630,163 | 12,794 | no | 112.0 |
@@ -42,6 +48,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| openai/gpt-5.6-luna | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 50.0% |
+| openai/gpt-5.6-luna | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 75.0% |
+| openai/gpt-5.6-luna | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |
+| openai/gpt-5.6-luna | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 75.0% |
+| openai/gpt-5.6-luna | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
+| openai/gpt-5.6-luna | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 50.0% |
+| openai/gpt-5.6-luna | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
 | anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
 | anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 12.5% |
 | anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
