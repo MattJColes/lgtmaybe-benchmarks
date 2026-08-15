@@ -8,6 +8,115 @@
       "context_cases": [
         {
           "case": "python-context-small-v1",
+          "findings": 10.0,
+          "input_tokens": 83168,
+          "output_tokens": 143255,
+          "precision": 0.6,
+          "recall": 0.75,
+          "truncated": true,
+          "wall_seconds": 1235.4073954839841
+        },
+        {
+          "case": "python-context-medium-v1",
+          "findings": 7.0,
+          "input_tokens": 222676,
+          "output_tokens": 38515,
+          "precision": 0.5714285714285714,
+          "recall": 0.5,
+          "truncated": true,
+          "wall_seconds": 1966.3082905229821
+        },
+        {
+          "case": "python-context-large-v1",
+          "findings": 6.0,
+          "input_tokens": 520938,
+          "output_tokens": 6526,
+          "precision": 0.6666666666666666,
+          "recall": 0.5,
+          "truncated": false,
+          "wall_seconds": 143.18960068302113
+        },
+        {
+          "case": "python-context-xlarge-v1",
+          "findings": 7.0,
+          "input_tokens": 1093268,
+          "output_tokens": 37183,
+          "precision": 0.42857142857142855,
+          "recall": 0.375,
+          "truncated": true,
+          "wall_seconds": 219.03266416001134
+        },
+        {
+          "case": "python-context-clean-large-v1",
+          "findings": 0.0,
+          "input_tokens": 680492,
+          "output_tokens": 360855,
+          "precision": 1.0,
+          "recall": null,
+          "truncated": true,
+          "wall_seconds": 1012.4162857219926
+        }
+      ],
+      "date": "2026-08-15",
+      "focused": false,
+      "lgtmaybe_version": "lgtmaybe 2.1.4",
+      "metrics": {
+        "adjudication_coverage": null,
+        "balanced_f1": 0.43387755102040815,
+        "balanced_recall": 0.53125,
+        "clean_pass_rate": null,
+        "duplicates": null,
+        "failures": 0.0,
+        "false_positive_classes": {},
+        "false_positives": 13.0,
+        "input_tokens": 2600542.0,
+        "output_tokens": 586334.0,
+        "per_language": {},
+        "per_lens": {
+          "complexity": 0.0,
+          "correctness": 0.625,
+          "deprecation": 0.75,
+          "documentation": 0.5,
+          "intent": 0.75,
+          "performance": 0.0,
+          "security": 1.0
+        },
+        "precision": 0.5666666666666667,
+        "provisional": false,
+        "reasoning_tokens": 0.0,
+        "score_kind": "legacy_f1",
+        "true_positives": 17.0,
+        "truncation_lenses": [
+          "complexity",
+          "correctness",
+          "deprecation",
+          "documentation",
+          "intent",
+          "performance",
+          "tests"
+        ],
+        "truncations": 24.0,
+        "unadjudicated": null,
+        "wall_seconds": 4576.354236571991
+      },
+      "model": "minimax/minimax-m3",
+      "profile": "context-canonical-v1",
+      "provider": "openrouter",
+      "raw_path": "results/raw/20260815-144254-openrouter-minimax-minimax-m3.json",
+      "run_id": "20260815-144254-openrouter-minimax-minimax-m3",
+      "settings": "—",
+      "status": "complete",
+      "suite": "context-v1",
+      "timestamp": "2026-08-15T14:42:54Z"
+    },
+    {
+      "audit": "no",
+      "audit_paths": [],
+      "canonical": false,
+      "comparison_key": "context-v1 / context-canonical-v1 / lgtmaybe 2.1.4",
+      "context_cases": [
+        {
+          "case": "python-context-small-v1",
           "findings": 12.0,
           "input_tokens": 68795,
           "output_tokens": 70645,
