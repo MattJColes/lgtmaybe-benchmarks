@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-15 | openrouter | minimax/minimax-m3 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 43.4% | 53.1% | 56.7% | 17.0 | 13.0 | — | — | no | [raw](results/raw/20260815-144254-openrouter-minimax-minimax-m3.json) | — | — |
 | 2026-08-15 | openrouter | z-ai/glm-5.2 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 31.7% | 78.1% | 47.2% | 25.0 | 28.0 | — | — | no | [raw](results/raw/20260815-141246-openrouter-z-ai-glm-5-2.json) | — | — |
 | 2026-08-15 | openrouter | moonshotai/kimi-k2.7-code | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 78.1% | 33.3% | 25.0 | 50.0 | — | — | no | [raw](results/raw/20260815-112613-openrouter-moonshotai-kimi-k2-7-code.json) | — | — |
 | 2026-08-15 | openrouter | moonshotai/kimi-k3 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 93.8% | 24.0% | 30.0 | 95.0 | — | — | no | [raw](results/raw/20260815-104956-openrouter-moonshotai-kimi-k3.json) | — | — |
@@ -25,6 +26,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-15 | openrouter | minimax/minimax-m3 | python-context-small-v1 | 75.0% | 60.0% | 10 | 83,168 | 143,255 | yes | 1235.4 |
+| 2026-08-15 | openrouter | minimax/minimax-m3 | python-context-medium-v1 | 50.0% | 57.1% | 7 | 222,676 | 38,515 | yes | 1966.3 |
+| 2026-08-15 | openrouter | minimax/minimax-m3 | python-context-large-v1 | 50.0% | 66.7% | 6 | 520,938 | 6,526 | no | 143.2 |
+| 2026-08-15 | openrouter | minimax/minimax-m3 | python-context-xlarge-v1 | 37.5% | 42.9% | 7 | 1,093,268 | 37,183 | yes | 219.0 |
+| 2026-08-15 | openrouter | minimax/minimax-m3 | python-context-clean-large-v1 | — | 100.0% | 0 | 680,492 | 360,855 | yes | 1012.4 |
 | 2026-08-15 | openrouter | z-ai/glm-5.2 | python-context-small-v1 | 100.0% | 66.7% | 12 | 68,795 | 70,645 | no | 228.3 |
 | 2026-08-15 | openrouter | z-ai/glm-5.2 | python-context-medium-v1 | 87.5% | 58.3% | 12 | 226,615 | 206,394 | yes | 439.2 |
 | 2026-08-15 | openrouter | z-ai/glm-5.2 | python-context-large-v1 | 75.0% | 54.5% | 11 | 556,411 | 151,763 | yes | 383.1 |
@@ -90,6 +96,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
+| minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 62.5% |
+| minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
+| minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 50.0% |
+| minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 75.0% |
+| minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
+| minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
 | z-ai/glm-5.2 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 50.0% |
 | z-ai/glm-5.2 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 87.5% |
 | z-ai/glm-5.2 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
