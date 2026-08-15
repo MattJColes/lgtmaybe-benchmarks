@@ -71,6 +71,7 @@ Complete `context-v1` runs with profile `context-canonical-v1` only. Cases grow 
 | 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | 29.7% | 81.2% | 46.4% | 26 | 30 |
 | 2026-08-15 | openrouter | openai/gpt-5.6-luna | 19.7% | 78.1% | 42.4% | 25 | 34 |
 | 2026-08-15 | openrouter | anthropic/claude-haiku-4.5 | 15.1% | 9.4% | 75.0% | 3 | 1 |
+| 2026-08-15 | openrouter | moonshotai/kimi-k3 | 0.0% | 93.8% | 24.0% | 30 | 95 |
 | 2026-08-15 | openrouter | openai/gpt-5.6-sol | 0.0% | 59.4% | 32.2% | 19 | 40 |
 | 2026-08-15 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | 0.0% | 53.1% | 4.7% | 17 | 347 |
 | 2026-08-15 | openrouter | anthropic/claude-opus-5 | 0.0% | 0.0% | 100.0% | 0 | 0 |
