@@ -22,7 +22,7 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--provider", required=True)
     run.add_argument("--model", required=True)
     run.add_argument("--suite", default="v2")
-    run.add_argument("--profile", default="canonical-v1")
+    run.add_argument("--profile", default="canonical-v2")
     run.add_argument("--reasoning-effort")
     run.add_argument("--max-tokens", type=int)
     run.add_argument("--max-input-tokens", type=int)

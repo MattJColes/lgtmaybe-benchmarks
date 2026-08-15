@@ -52,9 +52,24 @@ CURRENT_PROFILE = (
     "       0        0  ProviderTruncated\n"
 )
 
+RUNAWAY_PROFILE = (
+    "== lgtmaybe profile ==\n"
+    "total wall time: 3980.64s\n\n"
+    "call             batch tries   elapsed   in_tok  out_tok think_tok  think_% "
+    "cache_rd cache_wr findings  error\n"
+    "security             1     1   900.00s    63923    16384      2034      25% "
+    "       0        0        -  -\n"
+    "correctness          1     1   900.00s    63923    16384      2034      25% "
+    "       0        0        -  -\n"
+    "performance          1     1   900.00s    63923    16384      2034      25% "
+    "       0        0        -  -\n"
+    "tests                1     1   900.00s    63923    16384      2034      25% "
+    "       0        0        -  -\n"
+)
 
-def test_canonical_profile_freezes_product_defaults_and_three_repeats() -> None:
-    profile = get_profile(CANONICAL_PROFILE_ID)
+
+def test_canonical_v1_stays_frozen_as_the_provider_resolved_predecessor() -> None:
+    profile = get_profile("canonical-v1")
 
     assert profile.id == "canonical-v1"
     assert profile.schema_version == 1
@@ -62,6 +77,24 @@ def test_canonical_profile_freezes_product_defaults_and_three_repeats() -> None:
     assert profile.repeats == 3
     assert profile.preset == "fast"
     assert profile.max_tokens is None
+    assert profile.max_input_tokens == 100_000
+    assert profile.reasoning_effort is None
+    assert profile.reflect is True
+    assert profile.recursive is True
+    assert profile.spec_review is True
+    assert profile.static_analysis is False
+    assert profile.mid_review_retrieval is False
+
+
+def test_canonical_profile_bounds_provider_output_and_keeps_three_repeats() -> None:
+    profile = get_profile(CANONICAL_PROFILE_ID)
+
+    assert profile.id == "canonical-v2"
+    assert profile.schema_version == 1
+    assert profile.canonical is True
+    assert profile.repeats == 3
+    assert profile.preset == "fast"
+    assert profile.max_tokens == 16_384
     assert profile.max_input_tokens == 100_000
     assert profile.reasoning_effort is None
     assert profile.reflect is True
@@ -101,9 +134,21 @@ def test_override_of_canonical_profile_gets_diagnostic_identity() -> None:
     assert resolved.diagnostic_overrides == ("max_tokens", "repeats")
 
 
+def test_override_of_canonical_v2_gets_diagnostic_identity() -> None:
+    resolved = resolve_profile("canonical-v2", {"repeats": 1})
+
+    assert resolved.id == "diagnostic-custom-v1"
+    assert resolved.base_profile_id == "canonical-v2"
+    assert resolved.canonical is False
+    assert resolved.max_tokens == 16_384
+    assert resolved.repeats == 1
+    assert resolved.diagnostic_overrides == ("repeats",)
+
+
 def test_profiles_do_not_contain_language_specific_settings() -> None:
     for profile_id in (
         "canonical-v1",
+        "canonical-v2",
         "diagnostic-full-v1",
         "diagnostic-4k-v1",
         "diagnostic-large-diff-v1",
@@ -117,7 +162,7 @@ def test_cli_defaults_and_repeatable_cases() -> None:
     )
 
     assert args.suite == "v2"
-    assert args.profile == "canonical-v1"
+    assert args.profile == "canonical-v2"
     assert args.repeats is None
     assert args.preset is None
     assert args.timeout == 7200
@@ -170,6 +215,18 @@ def test_cli_override_changes_canonical_profile_to_diagnostic_identity() -> None
     assert profile.id == "diagnostic-custom-v1"
     assert profile.canonical is False
     assert profile.diagnostic_overrides == ("max_tokens", "repeats")
+
+
+def test_cli_budget_equal_to_canonical_v2_keeps_canonical_identity() -> None:
+    args = build_parser().parse_args(
+        ["run", "--provider", "openai", "--model", "gpt", "--max-tokens", "16384"]
+    )
+
+    profile = resolve_profile_args(args)
+
+    assert profile.id == "canonical-v2"
+    assert profile.canonical is True
+    assert profile.diagnostic_overrides == ()
 
 
 def test_v2_matrix_validation_runs_before_lgtmaybe(tmp_path: Path) -> None:
@@ -489,6 +546,43 @@ def test_run_review_marks_a_call_at_the_output_ceiling_as_truncated(tmp_path: Pa
 
     assert observation.truncation_lenses == ("security",)
     assert observation.calls[0].truncated is True
+
+
+def test_canonical_v2_bounds_repeated_ceiling_generations(tmp_path: Path) -> None:
+    executable = tmp_path / "fake-lgtmaybe.py"
+    recorded = tmp_path / "argv.json"
+    executable.write_text(
+        "import json, pathlib, sys\n"
+        f"pathlib.Path({str(recorded)!r}).write_text(json.dumps(sys.argv), encoding='utf-8')\n"
+        "print('[]')\n"
+        f"print({RUNAWAY_PROFILE!r})\n",
+        encoding="utf-8",
+    )
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    profile = get_profile(CANONICAL_PROFILE_ID)
+    config = RunConfig(
+        provider="openrouter",
+        model="fake",
+        reasoning_effort=profile.reasoning_effort,
+        max_tokens=profile.max_tokens,
+        max_input_tokens=profile.max_input_tokens,
+        preset=profile.preset,
+        api_base=None,
+        concurrency=1,
+        timeout=30,
+    )
+
+    observation = run_review(repo, config, [sys.executable, str(executable)])
+    argv = json.loads(recorded.read_text(encoding="utf-8"))
+
+    assert argv[argv.index("--max-tokens") + 1] == "16384"
+    assert len(observation.calls) == 4
+    assert all(call.output_tokens == 16_384 and call.truncated for call in observation.calls)
+    assert observation.truncation_lenses == ("security", "correctness", "performance", "tests")
+    assert observation.wall_excluding_truncation_seconds == 0.0
+    assert observation.failures == 0
+    assert observation.findings == ()
 
 
 def test_malformed_output_fails_loudly() -> None:

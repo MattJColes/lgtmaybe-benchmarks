@@ -21,7 +21,8 @@ from lgtmaybe_bench.scoring import Finding, parse_findings
 TRUNCATION_MARKERS = ("truncat", "output_limit", "length", "max_tokens")
 RAW_IN_PROGRESS = "in_progress"
 RAW_COMPLETE = "complete"
-CANONICAL_PROFILE_ID = "canonical-v1"
+CANONICAL_PROFILE_ID = "canonical-v2"
+CANONICAL_MAX_TOKENS = 16_384
 
 
 @dataclass(frozen=True, slots=True)
@@ -71,7 +72,10 @@ def _profile(
 
 
 PROFILES = {
-    CANONICAL_PROFILE_ID: _profile(CANONICAL_PROFILE_ID, canonical=True, repeats=3),
+    "canonical-v1": _profile("canonical-v1", canonical=True, repeats=3),
+    CANONICAL_PROFILE_ID: _profile(
+        CANONICAL_PROFILE_ID, canonical=True, repeats=3, max_tokens=CANONICAL_MAX_TOKENS
+    ),
     "context-canonical-v1": _profile("context-canonical-v1", repeats=1, preset="full"),
     "diagnostic-full-v1": _profile("diagnostic-full-v1", preset="full"),
     "diagnostic-4k-v1": _profile("diagnostic-4k-v1", max_tokens=4096),
