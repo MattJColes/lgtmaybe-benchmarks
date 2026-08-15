@@ -72,9 +72,9 @@ Complete `context-v1` runs with profile `context-canonical-v1` only. Cases grow 
 | 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | 46.0% | 56.2% | 58.1% | 18 | 13 |
 | 2026-08-15 | openrouter | minimax/minimax-m3 | 43.4% | 53.1% | 56.7% | 17 | 13 |
 | 2026-08-15 | openrouter | openai/gpt-5.6-terra | 43.4% | 53.1% | 56.7% | 17 | 13 |
+| 2026-08-15 | openrouter | z-ai/glm-4.7-flash | 34.9% | 43.8% | 51.9% | 14 | 13 |
 | 2026-08-15 | openrouter | z-ai/glm-5.2 | 31.7% | 78.1% | 47.2% | 25 | 28 |
 | 2026-08-15 | openrouter | anthropic/claude-fable-5 | 29.8% | 46.9% | 46.9% | 15 | 17 |
-| 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | 29.7% | 81.2% | 46.4% | 26 | 30 |
 <!-- BENCH_RESULTS_END -->
 
 See [RESULTS.md](RESULTS.md) for every stored completed run and [dashboard/index.html](dashboard/index.html) for column sorting and filters by suite, profile, model, version, status, audit state, language, and lens. Focused and diagnostic runs remain visible there but do not enter the canonical README ranking.

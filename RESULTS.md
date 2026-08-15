@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-15 | openrouter | z-ai/glm-4.7-flash | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 34.9% | 43.8% | 51.9% | 14.0 | 13.0 | — | — | no | [raw](results/raw/20260815-204224-openrouter-z-ai-glm-4-7-flash.json) | — | — |
 | 2026-08-15 | openrouter | z-ai/glm-4.7 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-204224-openrouter-z-ai-glm-4-7.json) | — | — |
 | 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 52.9% | 62.5% | 62.5% | 20.0 | 12.0 | — | — | no | [raw](results/raw/20260815-204224-openrouter-kwaipilot-kat-coder-air-v2-5.json) | — | — |
 | 2026-08-15 | openrouter | google/gemini-3.7-flash | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 71.7% | 81.2% | 74.3% | 26.0 | 9.0 | — | — | no | [raw](results/raw/20260815-185235-openrouter-google-gemini-3-7-flash.json) | — | — |
@@ -35,6 +36,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-15 | openrouter | z-ai/glm-4.7-flash | python-context-small-v1 | 37.5% | 75.0% | 4 | 66,104 | 480,382 | yes | 1550.5 |
+| 2026-08-15 | openrouter | z-ai/glm-4.7-flash | python-context-medium-v1 | 50.0% | 50.0% | 8 | 201,427 | 112,788 | yes | 556.8 |
+| 2026-08-15 | openrouter | z-ai/glm-4.7-flash | python-context-large-v1 | 75.0% | 42.9% | 14 | 611,420 | 235,327 | yes | 1410.9 |
+| 2026-08-15 | openrouter | z-ai/glm-4.7-flash | python-context-xlarge-v1 | 12.5% | 100.0% | 1 | 1,066,601 | 278,914 | yes | 2465.4 |
+| 2026-08-15 | openrouter | z-ai/glm-4.7-flash | python-context-clean-large-v1 | — | 100.0% | 0 | 609,217 | 362,384 | yes | 1515.8 |
 | 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | python-context-small-v1 | 50.0% | 66.7% | 6 | 82,932 | 126,766 | yes | 1053.4 |
 | 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | python-context-medium-v1 | 75.0% | 66.7% | 9 | 219,448 | 99,524 | no | 2170.4 |
 | 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | python-context-large-v1 | 75.0% | 85.7% | 7 | 559,800 | 160,972 | yes | 1178.7 |
@@ -135,6 +141,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
+| z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 62.5% |
+| z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
+| z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 50.0% |
+| z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 0.0% |
+| z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 25.0% |
+| z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 75.0% |
 | kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
 | kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 100.0% |
 | kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
