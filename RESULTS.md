@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-16 | openrouter | openai/gpt-oss-20b | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 31.2% | 8.0% | 10.0 | 115.0 | — | — | no | [raw](results/raw/20260816-003046-openrouter-openai-gpt-oss-20b.json) | — | — |
 | 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 31.2% | 7.8% | 10.0 | 118.0 | — | — | no | [raw](results/raw/20260816-002203-openrouter-openai-gpt-oss-120b-nitro.json) | — | — |
 | 2026-08-15 | openrouter | mistralai/mistral-small-2603 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 28.1% | 1.3% | 9.0 | 699.0 | — | — | no | [raw](results/raw/20260815-233521-openrouter-mistralai-mistral-small-2603.json) | — | — |
 | 2026-08-15 | openrouter | poolside/laguna-s-2.1 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-231043-openrouter-poolside-laguna-s-2-1.json) | — | — |
@@ -44,6 +45,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-16 | openrouter | openai/gpt-oss-20b | python-context-small-v1 | 75.0% | 33.3% | 18 | 98,727 | 408,049 | yes | 1776.2 |
+| 2026-08-16 | openrouter | openai/gpt-oss-20b | python-context-medium-v1 | 37.5% | 7.0% | 43 | 185,216 | 407,930 | yes | 3605.9 |
+| 2026-08-16 | openrouter | openai/gpt-oss-20b | python-context-large-v1 | 12.5% | 1.9% | 54 | 575,789 | 378,554 | yes | 2772.6 |
+| 2026-08-16 | openrouter | openai/gpt-oss-20b | python-context-xlarge-v1 | 0.0% | 0.0% | 2 | 1,273,020 | 570,621 | yes | 1696.5 |
+| 2026-08-16 | openrouter | openai/gpt-oss-20b | python-context-clean-large-v1 | — | 0.0% | 8 | 514,128 | 513,843 | yes | 4573.5 |
 | 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | python-context-small-v1 | 50.0% | 33.3% | 12 | 72,795 | 62,884 | yes | 55.4 |
 | 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | python-context-medium-v1 | 37.5% | 23.1% | 13 | 211,585 | 78,171 | yes | 86.8 |
 | 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | python-context-large-v1 | 25.0% | 2.5% | 79 | 588,526 | 65,534 | yes | 87.1 |
@@ -179,6 +185,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| openai/gpt-oss-20b | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| openai/gpt-oss-20b | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 50.0% |
+| openai/gpt-oss-20b | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 25.0% |
+| openai/gpt-oss-20b | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 25.0% |
+| openai/gpt-oss-20b | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 25.0% |
+| openai/gpt-oss-20b | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 0.0% |
+| openai/gpt-oss-20b | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 75.0% |
 | openai/gpt-oss-120b:nitro | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
 | openai/gpt-oss-120b:nitro | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 62.5% |
 | openai/gpt-oss-120b:nitro | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 0.0% |
