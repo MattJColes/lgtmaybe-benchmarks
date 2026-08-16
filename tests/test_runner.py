@@ -68,14 +68,18 @@ RUNAWAY_PROFILE = (
 )
 
 
-def test_canonical_v1_stays_frozen_as_the_provider_resolved_predecessor() -> None:
-    profile = get_profile("canonical-v1")
+def test_removed_canonical_v1_profile_is_rejected() -> None:
+    with pytest.raises(ValueError, match="unknown profile"):
+        get_profile("canonical-v1")
 
-    assert profile.id == "canonical-v1"
+
+def test_canonical_long_horizon_runs_the_full_preset_once_without_an_output_cap() -> None:
+    profile = get_profile("canonical-long-horizon")
+
+    assert profile.id == "canonical-long-horizon"
     assert profile.schema_version == 1
-    assert profile.canonical is True
-    assert profile.repeats == 3
-    assert profile.preset == "fast"
+    assert profile.repeats == 1
+    assert profile.preset == "full"
     assert profile.max_tokens is None
     assert profile.max_input_tokens == 100_000
     assert profile.reasoning_effort is None
@@ -89,7 +93,7 @@ def test_canonical_v1_stays_frozen_as_the_provider_resolved_predecessor() -> Non
 def test_canonical_profile_bounds_provider_output_and_keeps_three_repeats() -> None:
     profile = get_profile(CANONICAL_PROFILE_ID)
 
-    assert profile.id == "canonical-v2"
+    assert profile.id == "canonical-breadth"
     assert profile.schema_version == 1
     assert profile.canonical is True
     assert profile.repeats == 3
@@ -124,21 +128,21 @@ def test_diagnostic_profiles_have_versioned_noncanonical_overrides(
 
 
 def test_override_of_canonical_profile_gets_diagnostic_identity() -> None:
-    resolved = resolve_profile("canonical-v1", {"max_tokens": 4096, "repeats": 1})
+    resolved = resolve_profile("canonical-long-horizon", {"max_tokens": 4096, "repeats": 3})
 
     assert resolved.id == "diagnostic-custom-v1"
-    assert resolved.base_profile_id == "canonical-v1"
+    assert resolved.base_profile_id == "canonical-long-horizon"
     assert resolved.canonical is False
     assert resolved.max_tokens == 4096
-    assert resolved.repeats == 1
+    assert resolved.repeats == 3
     assert resolved.diagnostic_overrides == ("max_tokens", "repeats")
 
 
-def test_override_of_canonical_v2_gets_diagnostic_identity() -> None:
-    resolved = resolve_profile("canonical-v2", {"repeats": 1})
+def test_override_of_canonical_breadth_gets_diagnostic_identity() -> None:
+    resolved = resolve_profile("canonical-breadth", {"repeats": 1})
 
     assert resolved.id == "diagnostic-custom-v1"
-    assert resolved.base_profile_id == "canonical-v2"
+    assert resolved.base_profile_id == "canonical-breadth"
     assert resolved.canonical is False
     assert resolved.max_tokens == 16_384
     assert resolved.repeats == 1
@@ -147,8 +151,8 @@ def test_override_of_canonical_v2_gets_diagnostic_identity() -> None:
 
 def test_profiles_do_not_contain_language_specific_settings() -> None:
     for profile_id in (
-        "canonical-v1",
-        "canonical-v2",
+        "canonical-long-horizon",
+        "canonical-breadth",
         "diagnostic-full-v1",
         "diagnostic-4k-v1",
         "diagnostic-large-diff-v1",
@@ -161,8 +165,8 @@ def test_cli_defaults_and_repeatable_cases() -> None:
         ["run", "--provider", "ollama", "--model", "qwen", "--case", "a", "--case", "b"]
     )
 
-    assert args.suite == "v2"
-    assert args.profile == "canonical-v2"
+    assert args.suite == "breadth"
+    assert args.profile == "canonical-breadth"
     assert args.repeats is None
     assert args.preset is None
     assert args.timeout == 7200
@@ -181,7 +185,7 @@ def test_cli_accepts_named_suite_profile_and_focused_cases() -> None:
             "--model",
             "qwen",
             "--suite",
-            "v2",
+            "breadth",
             "--profile",
             "diagnostic-full-v1",
             "--case",
@@ -189,7 +193,7 @@ def test_cli_accepts_named_suite_profile_and_focused_cases() -> None:
         ]
     )
 
-    assert args.suite == "v2"
+    assert args.suite == "breadth"
     assert args.profile == "diagnostic-full-v1"
     assert args.case == ["python-runtime-safety-v1"]
     assert resolve_profile_args(args).id == "diagnostic-full-v1"
@@ -217,21 +221,21 @@ def test_cli_override_changes_canonical_profile_to_diagnostic_identity() -> None
     assert profile.diagnostic_overrides == ("max_tokens", "repeats")
 
 
-def test_cli_budget_equal_to_canonical_v2_keeps_canonical_identity() -> None:
+def test_cli_budget_equal_to_canonical_breadth_keeps_canonical_identity() -> None:
     args = build_parser().parse_args(
         ["run", "--provider", "openai", "--model", "gpt", "--max-tokens", "16384"]
     )
 
     profile = resolve_profile_args(args)
 
-    assert profile.id == "canonical-v2"
+    assert profile.id == "canonical-breadth"
     assert profile.canonical is True
     assert profile.diagnostic_overrides == ()
 
 
-def test_v2_matrix_validation_runs_before_lgtmaybe(tmp_path: Path) -> None:
+def test_breadth_matrix_validation_runs_before_lgtmaybe(tmp_path: Path) -> None:
     fake = _bench_workspace(tmp_path)
-    manifest = tmp_path / "corpus" / "suites" / "v2.json"
+    manifest = tmp_path / "corpus" / "suites" / "breadth.json"
     data = json.loads(manifest.read_text(encoding="utf-8"))
     data["cases"].pop()
     manifest.write_text(json.dumps(data), encoding="utf-8")
@@ -241,8 +245,8 @@ def test_v2_matrix_validation_runs_before_lgtmaybe(tmp_path: Path) -> None:
         encoding="utf-8",
     )
     args = _bench_args(
-        suite="v2",
-        profile="canonical-v1",
+        suite="breadth",
+        profile="canonical-breadth",
         case=None,
         repeats=None,
         preset=None,
@@ -251,7 +255,7 @@ def test_v2_matrix_validation_runs_before_lgtmaybe(tmp_path: Path) -> None:
         max_input_tokens=None,
     )
 
-    with pytest.raises(ValueError, match="v2 requires 32 cases"):
+    with pytest.raises(ValueError, match="breadth requires 32 cases"):
         execute_benchmark(tmp_path, args, [sys.executable, str(fake)])
 
     assert not called.exists()
@@ -427,7 +431,7 @@ def test_checkpoint_and_final_raw_keep_stable_evidence_ids_and_provenance(
     final = json.loads(raw_path.read_text(encoding="utf-8"))
 
     assert final["run_id"] == raw_path.stem
-    assert final["configuration"]["resolved_profile"]["base_profile_id"] == "canonical-v1"
+    assert final["configuration"]["resolved_profile"]["base_profile_id"] == "canonical-breadth"
     checkpoint_observation = snapshots[0]["observations"][0]
     final_observation = final["observations"][0]
     assert checkpoint_observation["observation_id"] == final_observation["observation_id"]
@@ -786,7 +790,7 @@ def _bench_args(**overrides: object) -> Namespace:
         "concurrency": 1,
         "timeout": 30,
         "suite": "legacy-v1",
-        "profile": "canonical-v1",
+        "profile": "canonical-breadth",
     }
     return Namespace(**{**defaults, **overrides})
 
@@ -832,8 +836,8 @@ def test_fake_cli_retains_completed_and_interrupted_audit_artifacts(tmp_path: Pa
 def test_canonical_fake_cli_connects_evidence_scoring_and_reports(tmp_path: Path) -> None:
     fake = _bench_workspace(tmp_path)
     args = _bench_args(
-        suite="v2",
-        profile="canonical-v1",
+        suite="breadth",
+        profile="canonical-breadth",
         case=None,
         repeats=None,
         preset=None,
@@ -848,7 +852,7 @@ def test_canonical_fake_cli_connects_evidence_scoring_and_reports(tmp_path: Path
     raw_path = execute_benchmark(tmp_path, args, [sys.executable, str(fake)])
 
     raw = json.loads(raw_path.read_text(encoding="utf-8"))
-    assert raw["configuration"]["profile"] == "canonical-v1"
+    assert raw["configuration"]["profile"] == "canonical-breadth"
     assert raw["configuration"]["profile_canonical"] is True
     assert raw["configuration"]["full_corpus"] is True
     assert len(raw["observations"]) == 32 * 3
@@ -858,7 +862,7 @@ def test_canonical_fake_cli_connects_evidence_scoring_and_reports(tmp_path: Path
         tmp_path / "results" / "adjudications" / "acceptance.jsonl",
         {
             "event_id": "acceptance-adjudication-1",
-            "suite": "v2",
+            "suite": "breadth",
             "run_id": raw["run_id"],
             "observation_id": observation["observation_id"],
             "repeat": observation["repeat"],
@@ -885,24 +889,24 @@ def test_canonical_fake_cli_connects_evidence_scoring_and_reports(tmp_path: Path
     assert "RESULTS.md" in (tmp_path / "dashboard" / "index.html").read_text()
 
 
-def test_invalid_v2_matrix_fails_before_invoking_lgtmaybe(
+def test_invalid_breadth_matrix_fails_before_invoking_lgtmaybe(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     fake = _bench_workspace(tmp_path)
-    manifest = tmp_path / "corpus" / "suites" / "v2.json"
+    manifest = tmp_path / "corpus" / "suites" / "breadth.json"
     suite = json.loads(manifest.read_text(encoding="utf-8"))
     suite["cases"].pop()
     manifest.write_text(json.dumps(suite), encoding="utf-8")
     monkeypatch.setattr(
         runner,
         "_lgtmaybe_version",
-        lambda _: pytest.fail("lgtmaybe was invoked before v2 validation"),
+        lambda _: pytest.fail("lgtmaybe was invoked before breadth validation"),
     )
 
-    with pytest.raises(ValueError, match="v2 requires 32 cases"):
+    with pytest.raises(ValueError, match="breadth requires 32 cases"):
         execute_benchmark(
             tmp_path,
-            _bench_args(suite="v2", case=None),
+            _bench_args(suite="breadth", case=None),
             [sys.executable, str(fake)],
         )
 

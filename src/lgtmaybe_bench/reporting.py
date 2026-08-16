@@ -292,10 +292,39 @@ def _settings(config: dict[str, Any]) -> str:
     return "; ".join(values) or "—"
 
 
-CANONICAL_PROFILE_IDS = frozenset({"canonical-v1", "canonical-v2"})
+LONG_HORIZON_SUITE_ID = "long-horizon"
+LONG_HORIZON_PROFILE_ID = "canonical-long-horizon"
+BREADTH_SUITE_ID = "breadth"
+CANONICAL_PROFILE_IDS = frozenset({"canonical-breadth"})
+
+#: Suite and profile IDs recorded by runs stored before a rename. Published raw results are
+#: immutable, so reporting resolves the stored value instead of rewriting it.
+SUITE_ALIASES = {"context-v1": LONG_HORIZON_SUITE_ID, "v2": BREADTH_SUITE_ID}
+PROFILE_ALIASES = {
+    "context-canonical-v1": LONG_HORIZON_PROFILE_ID,
+    "canonical-v2": "canonical-breadth",
+}
 
 
-def _render_v2_canonical(
+def resolve_suite_id(suite_id: str) -> str:
+    """Resolve a stored suite ID to its current name, leaving unknown IDs untouched."""
+    return SUITE_ALIASES.get(suite_id, suite_id)
+
+
+def resolve_profile_id(profile_id: str) -> str:
+    """Resolve a stored profile ID to its current name, leaving unknown IDs untouched."""
+    return PROFILE_ALIASES.get(profile_id, profile_id)
+
+
+def _stored_suite(raw: dict[str, Any]) -> str:
+    return resolve_suite_id(str(raw.get("configuration", {}).get("suite", "")))
+
+
+def _stored_profile(raw: dict[str, Any]) -> str:
+    return resolve_profile_id(str(raw.get("configuration", {}).get("profile", "")))
+
+
+def _render_breadth_canonical(
     raw_runs: list[dict[str, Any]],
     adjudications: dict[str, str] | None,
 ) -> str | None:
@@ -303,8 +332,8 @@ def _render_v2_canonical(
         raw
         for raw in raw_runs
         if raw.get("status", COMPLETE) == COMPLETE
-        and raw.get("configuration", {}).get("suite") == "v2"
-        and raw.get("configuration", {}).get("profile") in CANONICAL_PROFILE_IDS
+        and _stored_suite(raw) == BREADTH_SUITE_ID
+        and _stored_profile(raw) in CANONICAL_PROFILE_IDS
         and raw.get("configuration", {}).get("profile_canonical", True)
         and raw.get("configuration", {}).get("full_corpus", False)
         and not any(observation.get("failures", 0) for observation in raw.get("observations", []))
@@ -313,19 +342,14 @@ def _render_v2_canonical(
         return None
     newest = max(eligible, key=lambda raw: raw["timestamp"])
     key = (
-        newest["configuration"]["suite"],
-        newest["configuration"]["profile"],
+        _stored_suite(newest),
+        _stored_profile(newest),
         newest["lgtmaybe_version"],
     )
     partition = [
         raw
         for raw in eligible
-        if (
-            raw["configuration"]["suite"],
-            raw["configuration"]["profile"],
-            raw["lgtmaybe_version"],
-        )
-        == key
+        if (_stored_suite(raw), _stored_profile(raw), raw["lgtmaybe_version"]) == key
     ]
     runs = sorted(
         (_score_suite_run(raw, adjudications) for raw in partition),
@@ -380,20 +404,16 @@ def _audit_label(raw: dict[str, Any]) -> str:
     return "no"
 
 
-CONTEXT_SUITE_ID = "context-v1"
-CONTEXT_PROFILE_ID = "context-canonical-v1"
-
-
 def _true_positive_range(repeats: list[RepeatMetrics]) -> Range:
     values = [float(repeat.score.caught) for repeat in repeats]
     return Range(float(median(values)), min(values), max(values))
 
 
-def _is_context_canonical(raw: dict[str, Any]) -> bool:
+def _is_long_horizon_canonical(raw: dict[str, Any]) -> bool:
     return (
         raw.get("status", COMPLETE) == COMPLETE
-        and raw.get("configuration", {}).get("suite") == CONTEXT_SUITE_ID
-        and raw.get("configuration", {}).get("profile") == CONTEXT_PROFILE_ID
+        and _stored_suite(raw) == LONG_HORIZON_SUITE_ID
+        and _stored_profile(raw) == LONG_HORIZON_PROFILE_ID
         and raw.get("configuration", {}).get("full_corpus", False)
         and not any(observation.get("failures", 0) for observation in raw.get("observations", []))
     )
@@ -443,7 +463,7 @@ def _context_case_metrics(raw: dict[str, Any]) -> list[dict[str, Any]]:
 
 def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
     """Render model metrics for complete canonical context-scaling runs."""
-    eligible = [raw for raw in raw_runs if _is_context_canonical(raw)]
+    eligible = [raw for raw in raw_runs if _is_long_horizon_canonical(raw)]
     if not eligible:
         return None
     ordered = sorted(
@@ -493,7 +513,7 @@ def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
     )
     return (
         "## Context scaling\n\n"
-        "Complete `context-v1` runs with profile `context-canonical-v1` only. "
+        "Complete `long-horizon` runs with profile `canonical-long-horizon` only. "
         "Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting "
         "eight bugs at the same relative positions; the clean case plants none. Model recall "
         "covers the 32 planted findings across the four defect-bearing cases.\n\n"
@@ -516,14 +536,14 @@ def build_dashboard_data(
         reverse=True,
     ):
         config = raw.get("configuration", {})
-        suite = str(config.get("suite", "legacy-v1"))
-        profile = str(config.get("profile", "legacy-v1"))
+        suite = resolve_suite_id(str(config.get("suite", "legacy-v1")))
+        profile = resolve_profile_id(str(config.get("profile", "legacy-v1")))
         status = str(raw.get("status", COMPLETE))
         focused = not bool(config.get("full_corpus", True))
         failed = any(observation.get("failures", 0) for observation in raw.get("observations", []))
         canonical = (
             status == COMPLETE
-            and suite == "v2"
+            and suite == BREADTH_SUITE_ID
             and profile in CANONICAL_PROFILE_IDS
             and bool(config.get("profile_canonical", True))
             and not focused
@@ -531,7 +551,7 @@ def build_dashboard_data(
         )
         metrics: dict[str, Any] | None = None
         if status == COMPLETE and raw.get("observations") and not failed:
-            if suite == "v2":
+            if suite == BREADTH_SUITE_ID:
                 scored = _score_suite_run(raw, adjudications)
                 aggregate = scored.aggregate
                 classes = sorted(
@@ -577,7 +597,7 @@ def build_dashboard_data(
             else:
                 scored_legacy = _score_run(raw)
                 aggregate_legacy = aggregate_repeats(scored_legacy.repeats)
-                context_metrics = suite == CONTEXT_SUITE_ID
+                context_metrics = suite == LONG_HORIZON_SUITE_ID
                 metrics = {
                     "score_kind": "legacy_f1",
                     "balanced_f1": aggregate_legacy.score.median,
@@ -643,7 +663,9 @@ def build_dashboard_data(
                 ),
                 "settings": _settings(config),
                 "metrics": metrics,
-                "context_cases": _context_case_metrics(raw) if _is_context_canonical(raw) else [],
+                "context_cases": (
+                    _context_case_metrics(raw) if _is_long_horizon_canonical(raw) else []
+                ),
             }
         )
     return {"schema_version": 1, "runs": rows}
@@ -808,16 +830,16 @@ def render_results(
         return "No benchmark runs recorded.\n"
     complete = [raw for raw in raw_runs if raw.get("status", COMPLETE) == COMPLETE]
     context = _render_context_scaling(raw_runs)
-    v2 = _render_v2_canonical(raw_runs, adjudications)
-    if v2 is not None:
-        return v2 if context is None else v2 + "\n" + context
+    breadth = _render_breadth_canonical(raw_runs, adjudications)
+    if breadth is not None:
+        return breadth if context is None else breadth + "\n" + context
     if not complete:
         return "No benchmark runs recorded.\n"
     full_runs = [
         raw
         for raw in complete
         if raw.get("configuration", {}).get("full_corpus", True)
-        and raw.get("configuration", {}).get("suite") != CONTEXT_SUITE_ID
+        and _stored_suite(raw) != LONG_HORIZON_SUITE_ID
         and not any(observation.get("failures", 0) for observation in raw["observations"])
     ]
     if not full_runs:

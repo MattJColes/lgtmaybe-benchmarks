@@ -74,7 +74,7 @@ def v2_raw(
     model: str,
     *,
     version: str = "lgtmaybe 2.0",
-    profile: str = "canonical-v1",
+    profile: str = "canonical-v2",
     full_corpus: bool = True,
 ) -> dict[str, object]:
     result = raw(timestamp, model, True)
@@ -88,7 +88,7 @@ def v2_raw(
         {
             "suite": "v2",
             "profile": profile,
-            "profile_canonical": profile in {"canonical-v1", "canonical-v2"},
+            "profile_canonical": profile in {"canonical-v2", "canonical-breadth"},
             "full_corpus": full_corpus,
         }
     )
@@ -185,7 +185,7 @@ def test_readme_partition_uses_only_newest_complete_canonical_comparison_key() -
 
     rendered = render_results([older_key, newest_a, newest_b, diagnostic, focused, incomplete])
 
-    assert "Comparison key: `v2 / canonical-v1 / lgtmaybe 2.0`" in rendered
+    assert "Comparison key: `breadth / canonical-breadth / lgtmaybe 2.0`" in rendered
     assert "new-a" in rendered
     assert "new-b" in rendered
     assert "old-version" not in rendered
@@ -210,37 +210,28 @@ def test_v2_leaderboard_exposes_balanced_quality_false_positives_and_audit() -> 
     assert "| yes |" in row
 
 
-def test_canonical_generations_never_mix_and_the_newest_generation_wins() -> None:
-    v1_run = v2_raw("2026-03-01T00:00:00Z", "v1-model", profile="canonical-v1")
-    v2_old = v2_raw("2026-03-15T00:00:00Z", "v2-old", profile="canonical-v2")
-    v2_new = v2_raw("2026-04-01T00:00:00Z", "v2-new", profile="canonical-v2")
+def test_noncanonical_profiles_never_join_the_canonical_partition() -> None:
+    canonical = v2_raw("2026-03-15T00:00:00Z", "ranked")
+    diagnostic = v2_raw("2026-04-01T00:00:00Z", "diagnostic", profile="diagnostic-custom-v1")
 
-    rendered = render_results([v1_run, v2_old, v2_new])
+    rendered = render_results([canonical, diagnostic])
 
-    assert "Comparison key: `v2 / canonical-v2 / lgtmaybe 2.0`" in rendered
-    assert "v2-old" in rendered
-    assert "v2-new" in rendered
-    assert "v1-model" not in rendered
+    assert "Comparison key: `breadth / canonical-breadth / lgtmaybe 2.0`" in rendered
+    assert "ranked" in rendered
+    assert "diagnostic" not in rendered
 
 
-def test_canonical_v1_generation_keeps_ranking_until_v2_runs_exist() -> None:
-    v1_run = v2_raw("2026-03-01T00:00:00Z", "v1-model", profile="canonical-v1")
+def test_dashboard_marks_superseded_and_current_canonical_profiles() -> None:
+    stored = v2_raw("2026-03-01T00:00:00Z", "stored-model", profile="canonical-v2")
+    renamed = v2_raw("2026-04-01T00:00:00Z", "renamed-model", profile="canonical-breadth")
 
-    rendered = render_results([v1_run])
-
-    assert "Comparison key: `v2 / canonical-v1 / lgtmaybe 2.0`" in rendered
-    assert "v1-model" in rendered
-
-
-def test_dashboard_marks_both_canonical_generations() -> None:
-    v1_run = v2_raw("2026-03-01T00:00:00Z", "v1-model", profile="canonical-v1")
-    v2_run = v2_raw("2026-04-01T00:00:00Z", "v2-model", profile="canonical-v2")
-
-    data = build_dashboard_data([v1_run, v2_run])
+    data = build_dashboard_data([stored, renamed])
 
     by_model = {run["model"]: run for run in data["runs"]}
-    assert by_model["v1-model"]["canonical"] is True
-    assert by_model["v2-model"]["canonical"] is True
+    assert by_model["stored-model"]["canonical"] is True
+    assert by_model["renamed-model"]["canonical"] is True
+    assert {run["suite"] for run in data["runs"]} == {"breadth"}
+    assert {run["profile"] for run in data["runs"]} == {"canonical-breadth"}
 
 
 def test_dashboard_data_is_deterministic_and_keeps_every_run_class() -> None:
@@ -381,7 +372,7 @@ def test_custom_profile_reports_overrides_from_its_named_base() -> None:
     assert isinstance(config, dict)
     config.update(
         {
-            "base_profile": "canonical-v1",
+            "base_profile": "canonical-breadth",
             "max_tokens": 4096,
             "max_input_tokens": 100_000,
             "preset": "fast",
@@ -765,10 +756,69 @@ def test_fable_run_uses_exact_model_identity() -> None:
     assert dashboard_run["raw_path"] == raw_path.relative_to(root).as_posix()
 
 
-def test_context_scaling_section_coexists_with_v2_leaderboard() -> None:
+def test_context_scaling_section_coexists_with_breadth_leaderboard() -> None:
     runs = [v2_raw("2026-08-14T00:00:00Z", "ranked"), context_raw("2026-08-14T01:00:00Z", "scaler")]
 
     rendered = render_results(runs)
 
-    assert "Comparison key: `v2 / canonical-v1 / lgtmaybe 2.0`" in rendered
+    assert "Comparison key: `breadth / canonical-breadth / lgtmaybe 2.0`" in rendered
     assert "## Context scaling" in rendered
+
+
+def test_superseded_context_identifiers_score_identically() -> None:
+    stored = context_raw("2026-08-14T00:00:00Z", "scaler")
+    renamed = context_raw(
+        "2026-08-14T00:00:00Z",
+        "scaler",
+        suite="long-horizon",
+        profile="canonical-long-horizon",
+    )
+
+    assert render_results([stored]) == render_results([renamed])
+    assert "scaler" in render_results([stored])
+
+
+def test_superseded_and_current_identifiers_share_one_displayed_name() -> None:
+    data = build_dashboard_data(
+        [
+            context_raw("2026-08-14T00:00:00Z", "stored"),
+            context_raw(
+                "2026-08-15T00:00:00Z",
+                "renamed",
+                suite="long-horizon",
+                profile="canonical-long-horizon",
+            ),
+        ]
+    )
+
+    assert {run["suite"] for run in data["runs"]} == {"long-horizon"}
+    assert {run["profile"] for run in data["runs"]} == {"canonical-long-horizon"}
+
+
+def test_superseded_breadth_identifiers_rank_together() -> None:
+    rendered = render_results(
+        [
+            v2_raw("2026-03-01T00:00:00Z", "stored", profile="canonical-v2"),
+            v2_raw("2026-03-02T00:00:00Z", "renamed", profile="canonical-breadth"),
+        ]
+    )
+
+    assert "Comparison key: `breadth / canonical-breadth / lgtmaybe 2.0`" in rendered
+    assert "stored" in rendered
+    assert "renamed" in rendered
+
+
+def test_unrecognised_identifiers_are_preserved() -> None:
+    data = build_dashboard_data(
+        [
+            context_raw(
+                "2026-08-14T00:00:00Z",
+                "diagnostic",
+                suite="some-future-suite",
+                profile="diagnostic-custom-v1",
+            )
+        ]
+    )
+
+    assert data["runs"][0]["suite"] == "some-future-suite"
+    assert data["runs"][0]["profile"] == "diagnostic-custom-v1"

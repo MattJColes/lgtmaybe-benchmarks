@@ -1,4 +1,4 @@
-"""One-shot builder for the context-v1 corpus suite.
+"""One-shot builder for the long-horizon corpus suite.
 
 Run with `uv run python scripts/generate_context_cases.py`. Generated cases are
 immutable corpus artefacts; this script never runs as part of a benchmark.
