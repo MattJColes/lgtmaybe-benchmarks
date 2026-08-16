@@ -22,6 +22,8 @@ The two sections are scored differently. Breadth reports balanced F1 over 70 lan
 
 Both sections are titled by suite: `## Long horizon` and `## Breadth`. Titling one by suite and the other by phenomenon is what made the current output asymmetric, and the reader's question is which suite a table belongs to. Each section keeps its existing blurb, which already names the suite and profile in its first sentence, so the heading and body agree.
 
+Each suite heading also says `top 10`. The hand-authored results paragraph already states the limit, but repeating it in both generated headings keeps the scope visible beside either table and removes ambiguity when a reader follows a deep link directly to one section.
+
 This supersedes the earlier decision to leave `## Context scaling` untouched. That decision was taken when only one section could ever render, so asymmetry cost nothing; it costs a mislabelled table as soon as breadth runs.
 
 Each blurb carries one sentence stating that the other suite measures a different property and that scores are not comparable across suites. Placing it in generated text rather than hand-authored prose keeps it adjacent to the table it qualifies and regenerates with it.

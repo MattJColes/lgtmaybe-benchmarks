@@ -49,7 +49,7 @@ Named diagnostic profiles — `diagnostic-full-v1`, `diagnostic-4k-v1`, `diagnos
 Top 10 per suite. Each suite gets its own section — **Long horizon** and **Breadth** — headed by the suite it reports and naming its comparison key. Rows are comparable within a section and never across them: the two suites measure different properties and are scored by different formulas. A suite with no runs renders no section.
 
 <!-- BENCH_RESULTS_START -->
-## Breadth
+## Breadth — top 10
 
 Complete `breadth` runs with profile `canonical-breadth` only. Cases span seven programming languages plus GitHub Actions and Terraform, planting one finding per language and review lens, so the score measures coverage across kinds of issue rather than diff size. Scored as balanced F1, which is not comparable with the long-horizon overall score.
 
@@ -59,7 +59,7 @@ Comparison key: `breadth / canonical-breadth / lgtmaybe 2.1.4`.
 |---|---|---|---:|---:|---:|---:|---:|---:|---|---|
 | 2026-08-16 | openrouter | kwaipilot/kat-coder-air-v2.5 | 58.3% [57.2–58.8%] provisional | 52.9% [51.4–54.3%] | 62.9% [62.3–68.5%] | 23 [17–23] | 11.1% [11.1–22.2%] | 98.2% [96.8–98.4%] | no | — |
 
-## Long horizon
+## Long horizon — top 10
 
 Complete `long-horizon` runs with profile `canonical-long-horizon` only. Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting eight bugs at the same relative positions; the clean case plants none. Model recall covers the 32 planted findings across the four defect-bearing cases. Scored as the closed-world overall score, which is not comparable with the breadth balanced F1.
 

@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
 ### Requirement: Identified result sections
-Every generated result section SHALL open with a heading naming the suite it reports, followed by text naming that suite's ID, canonical profile ID, and the property it measures. When a document can contain more than one suite's results, each section SHALL state that suites measure different properties and that scores are not comparable between them. A section SHALL NOT rely on hand-authored prose to identify its suite.
+Every generated result section SHALL open with a heading naming the suite it reports and stating that the section shows its top 10 results, followed by text naming that suite's ID, canonical profile ID, and the property it measures. When a document can contain more than one suite's results, each section SHALL state that suites measure different properties and that scores are not comparable between them. A section SHALL NOT rely on hand-authored prose to identify its suite or result limit.
 
 #### Scenario: Identify the breadth section
 - **WHEN** complete canonical breadth runs are rendered
@@ -10,6 +10,10 @@ Every generated result section SHALL open with a heading naming the suite it rep
 #### Scenario: Identify the long-horizon section
 - **WHEN** complete canonical long-horizon runs are rendered
 - **THEN** their section opens with a heading naming the long-horizon suite
+
+#### Scenario: State the per-suite result limit
+- **WHEN** either canonical suite section is rendered
+- **THEN** its heading states that the section shows the top 10 results for that suite
 
 #### Scenario: Disclaim cross-suite ranking
 - **WHEN** both suites' sections are rendered in one document
