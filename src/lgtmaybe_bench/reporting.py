@@ -385,6 +385,12 @@ def _render_breadth_canonical(
             + " |"
         )
     return (
+        "## Breadth\n\n"
+        "Complete `breadth` runs with profile `canonical-breadth` only. Cases span seven "
+        "programming languages plus GitHub Actions and Terraform, planting one finding per "
+        "language and review lens, so the score measures coverage across kinds of issue rather "
+        "than diff size. Scored as balanced F1, which is not comparable with the long-horizon "
+        "overall score.\n\n"
         f"Comparison key: `{key[0]} / {key[1]} / {key[2]}`.\n\n"
         "| date | provider | model | balanced F1 | balanced recall | precision | "
         "false positives | clean pass | adjudication | audit | settings |\n"
@@ -512,11 +518,12 @@ def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
         "|---|---|---|---:|---:|---:|---:|---:|\n"
     )
     return (
-        "## Context scaling\n\n"
+        "## Long horizon\n\n"
         "Complete `long-horizon` runs with profile `canonical-long-horizon` only. "
         "Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting "
         "eight bugs at the same relative positions; the clean case plants none. Model recall "
-        "covers the 32 planted findings across the four defect-bearing cases.\n\n"
+        "covers the 32 planted findings across the four defect-bearing cases. Scored as the "
+        "closed-world overall score, which is not comparable with the breadth balanced F1.\n\n"
         "### Model summary\n\n" + summary_header + "\n".join(summary_rows) + "\n"
     )
 

@@ -553,7 +553,7 @@ def context_raw(
 def test_context_readme_omits_case_detail() -> None:
     rendered = render_results([context_raw("2026-08-14T00:00:00Z", "scaler")])
 
-    assert "## Context scaling" in rendered
+    assert "## Long horizon" in rendered
     assert "### Model summary" in rendered
     assert "### Case detail" not in rendered
     assert "python-context-small-v1" not in rendered
@@ -727,7 +727,7 @@ def test_context_scaling_section_excludes_ineligible_runs() -> None:
 
     for run in (focused, diagnostic, incomplete):
         rendered = render_results([run])
-        assert "## Context scaling" not in rendered
+        assert "## Long horizon" not in rendered
         assert build_dashboard_data([run])["runs"][0]["context_cases"] == []
 
 
@@ -762,7 +762,7 @@ def test_context_scaling_section_coexists_with_breadth_leaderboard() -> None:
     rendered = render_results(runs)
 
     assert "Comparison key: `breadth / canonical-breadth / lgtmaybe 2.0`" in rendered
-    assert "## Context scaling" in rendered
+    assert "## Long horizon" in rendered
 
 
 def test_superseded_context_identifiers_score_identically() -> None:
@@ -822,3 +822,31 @@ def test_unrecognised_identifiers_are_preserved() -> None:
 
     assert data["runs"][0]["suite"] == "some-future-suite"
     assert data["runs"][0]["profile"] == "diagnostic-custom-v1"
+
+
+def test_breadth_section_is_identified_by_suite() -> None:
+    rendered = render_results([v2_raw("2026-08-16T00:00:00Z", "ranked")])
+
+    assert "## Breadth" in rendered
+    assert "`breadth`" in rendered
+    assert "`canonical-breadth`" in rendered
+
+
+def test_long_horizon_section_is_identified_by_suite() -> None:
+    rendered = render_results([context_raw("2026-08-16T00:00:00Z", "scaler")])
+
+    assert "## Long horizon" in rendered
+    assert "## Context scaling" not in rendered
+
+
+def test_both_sections_disclaim_cross_suite_ranking() -> None:
+    rendered = render_results(
+        [
+            v2_raw("2026-08-16T00:00:00Z", "ranked"),
+            context_raw("2026-08-16T01:00:00Z", "scaler"),
+        ]
+    )
+
+    breadth, long_horizon = rendered.split("## Long horizon", 1)
+    assert "not comparable" in breadth
+    assert "not comparable" in long_horizon
