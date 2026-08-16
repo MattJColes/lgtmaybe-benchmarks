@@ -344,6 +344,116 @@
       "context_cases": [
         {
           "case": "python-context-small-v1",
+          "findings": 1.0,
+          "input_tokens": 78823,
+          "output_tokens": 365064,
+          "precision": 1.0,
+          "recall": 0.125,
+          "truncated": true,
+          "wall_seconds": 2106.3699918149796
+        },
+        {
+          "case": "python-context-medium-v1",
+          "findings": 1.0,
+          "input_tokens": 246971,
+          "output_tokens": 576604,
+          "precision": 0.0,
+          "recall": 0.0,
+          "truncated": true,
+          "wall_seconds": 4109.058930063999
+        },
+        {
+          "case": "python-context-large-v1",
+          "findings": 0.0,
+          "input_tokens": 646040,
+          "output_tokens": 250626,
+          "precision": 1.0,
+          "recall": 0.0,
+          "truncated": true,
+          "wall_seconds": 2191.0496741239913
+        },
+        {
+          "case": "python-context-xlarge-v1",
+          "findings": 0.0,
+          "input_tokens": 1311039,
+          "output_tokens": 419889,
+          "precision": 1.0,
+          "recall": 0.0,
+          "truncated": true,
+          "wall_seconds": 3279.484608754021
+        },
+        {
+          "case": "python-context-clean-large-v1",
+          "findings": 0.0,
+          "input_tokens": 597250,
+          "output_tokens": 190267,
+          "precision": 1.0,
+          "recall": null,
+          "truncated": true,
+          "wall_seconds": 898.9259546159883
+        }
+      ],
+      "date": "2026-08-15",
+      "focused": false,
+      "lgtmaybe_version": "lgtmaybe 2.1.4",
+      "metrics": {
+        "adjudication_coverage": null,
+        "balanced_f1": 0.040606060606060604,
+        "balanced_recall": 0.03125,
+        "clean_pass_rate": null,
+        "duplicates": null,
+        "failures": 0.0,
+        "false_positive_classes": {},
+        "false_positives": 1.0,
+        "input_tokens": 2880123.0,
+        "output_tokens": 1802450.0,
+        "per_language": {},
+        "per_lens": {
+          "complexity": 0.0,
+          "correctness": 0.0,
+          "deprecation": 0.0,
+          "documentation": 0.0,
+          "intent": 0.0,
+          "performance": 0.0,
+          "security": 0.25
+        },
+        "precision": 0.5,
+        "provisional": false,
+        "reasoning_tokens": 1093764.0,
+        "score_kind": "legacy_f1",
+        "true_positives": 1.0,
+        "truncation_lenses": [
+          "correctness",
+          "deprecation",
+          "documentation",
+          "intent",
+          "performance",
+          "ponytail",
+          "security",
+          "tests"
+        ],
+        "truncations": 48.0,
+        "unadjudicated": null,
+        "wall_seconds": 12584.889159372979
+      },
+      "model": "nvidia/nemotron-3.5-lightning",
+      "profile": "context-canonical-v1",
+      "provider": "openrouter",
+      "raw_path": "results/raw/20260815-224934-openrouter-nvidia-nemotron-3-5-lightning.json",
+      "run_id": "20260815-224934-openrouter-nvidia-nemotron-3-5-lightning",
+      "settings": "—",
+      "status": "complete",
+      "suite": "context-v1",
+      "timestamp": "2026-08-15T22:49:34Z"
+    },
+    {
+      "audit": "no",
+      "audit_paths": [],
+      "canonical": false,
+      "comparison_key": "context-v1 / context-canonical-v1 / lgtmaybe 2.1.4",
+      "context_cases": [
+        {
+          "case": "python-context-small-v1",
           "findings": 10.0,
           "input_tokens": 82596,
           "output_tokens": 70371,

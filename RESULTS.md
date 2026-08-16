@@ -12,6 +12,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | 2026-08-15 | openrouter | mistralai/mistral-small-2603 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 28.1% | 1.3% | 9.0 | 699.0 | — | — | no | [raw](results/raw/20260815-233521-openrouter-mistralai-mistral-small-2603.json) | — | — |
 | 2026-08-15 | openrouter | poolside/laguna-s-2.1 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-231043-openrouter-poolside-laguna-s-2-1.json) | — | — |
 | 2026-08-15 | openrouter | qwen/qwen3-coder-next | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 22.2% | 12.5% | 100.0% | 4.0 | 0.0 | — | — | no | [raw](results/raw/20260815-230244-openrouter-qwen-qwen3-coder-next.json) | — | — |
+| 2026-08-15 | openrouter | nvidia/nemotron-3.5-lightning | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 4.1% | 3.1% | 50.0% | 1.0 | 1.0 | — | — | no | [raw](results/raw/20260815-224934-openrouter-nvidia-nemotron-3-5-lightning.json) | — | — |
 | 2026-08-15 | openrouter | x-ai/grok-4.6 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 47.5% | 84.4% | 55.1% | 27.0 | 22.0 | — | — | no | [raw](results/raw/20260815-223454-openrouter-x-ai-grok-4-6.json) | — | — |
 | 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 63.5% | 68.8% | 71.0% | 22.0 | 9.0 | — | — | no | [raw](results/raw/20260815-222949-openrouter-kwaipilot-kat-coder-pro-v2-5.json) | — | — |
 | 2026-08-15 | openrouter | z-ai/glm-4.7-flash | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 34.9% | 43.8% | 51.9% | 14.0 | 13.0 | — | — | no | [raw](results/raw/20260815-204224-openrouter-z-ai-glm-4-7-flash.json) | — | — |
@@ -57,6 +58,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | 2026-08-15 | openrouter | qwen/qwen3-coder-next | python-context-large-v1 | 12.5% | 100.0% | 1 | 500,572 | 1,958 | no | 16.1 |
 | 2026-08-15 | openrouter | qwen/qwen3-coder-next | python-context-xlarge-v1 | 12.5% | 100.0% | 1 | 980,848 | 2,383 | no | 21.2 |
 | 2026-08-15 | openrouter | qwen/qwen3-coder-next | python-context-clean-large-v1 | — | 100.0% | 0 | 460,884 | 30,679 | yes | 304.3 |
+| 2026-08-15 | openrouter | nvidia/nemotron-3.5-lightning | python-context-small-v1 | 12.5% | 100.0% | 1 | 78,823 | 365,064 | yes | 2106.4 |
+| 2026-08-15 | openrouter | nvidia/nemotron-3.5-lightning | python-context-medium-v1 | 0.0% | 0.0% | 1 | 246,971 | 576,604 | yes | 4109.1 |
+| 2026-08-15 | openrouter | nvidia/nemotron-3.5-lightning | python-context-large-v1 | 0.0% | 100.0% | 0 | 646,040 | 250,626 | yes | 2191.0 |
+| 2026-08-15 | openrouter | nvidia/nemotron-3.5-lightning | python-context-xlarge-v1 | 0.0% | 100.0% | 0 | 1,311,039 | 419,889 | yes | 3279.5 |
+| 2026-08-15 | openrouter | nvidia/nemotron-3.5-lightning | python-context-clean-large-v1 | — | 100.0% | 0 | 597,250 | 190,267 | yes | 898.9 |
 | 2026-08-15 | openrouter | x-ai/grok-4.6 | python-context-small-v1 | 75.0% | 60.0% | 10 | 82,596 | 70,371 | no | 313.1 |
 | 2026-08-15 | openrouter | x-ai/grok-4.6 | python-context-medium-v1 | 87.5% | 53.8% | 13 | 233,442 | 79,997 | no | 393.0 |
 | 2026-08-15 | openrouter | x-ai/grok-4.6 | python-context-large-v1 | 87.5% | 70.0% | 10 | 565,943 | 74,427 | no | 336.7 |
@@ -193,6 +199,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 0.0% |
 | qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
 | qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
+| nvidia/nemotron-3.5-lightning | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
+| nvidia/nemotron-3.5-lightning | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 0.0% |
+| nvidia/nemotron-3.5-lightning | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
+| nvidia/nemotron-3.5-lightning | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 0.0% |
+| nvidia/nemotron-3.5-lightning | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 0.0% |
+| nvidia/nemotron-3.5-lightning | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
+| nvidia/nemotron-3.5-lightning | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 25.0% |
 | x-ai/grok-4.6 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 75.0% |
 | x-ai/grok-4.6 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 75.0% |
 | x-ai/grok-4.6 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |
