@@ -655,6 +655,26 @@
       "audit_paths": [],
       "canonical": false,
       "comparison_key": "long-horizon / canonical-long-horizon / lgtmaybe 2.1.4",
+      "context_cases": [],
+      "date": "2026-08-15",
+      "focused": false,
+      "lgtmaybe_version": "lgtmaybe 2.1.4",
+      "metrics": null,
+      "model": "RedHatAI/Muse-Glimmer-30B-NVFP4",
+      "profile": "canonical-long-horizon",
+      "provider": "openai-compatible",
+      "raw_path": "results/raw/20260815-214617-openai-compatible-redhatai-muse-glimmer-30b-nvfp4.json",
+      "run_id": "20260815-214617-openai-compatible-redhatai-muse-glimmer-30b-nvfp4",
+      "settings": "api base http://127.0.0.1:8000/v1",
+      "status": "complete",
+      "suite": "long-horizon",
+      "timestamp": "2026-08-15T21:46:17Z"
+    },
+    {
+      "audit": "no",
+      "audit_paths": [],
+      "canonical": false,
+      "comparison_key": "long-horizon / canonical-long-horizon / lgtmaybe 2.1.4",
       "context_cases": [
         {
           "case": "python-context-small-v1",
