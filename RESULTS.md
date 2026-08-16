@@ -17,6 +17,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | 2026-08-16 | openrouter | x-ai/grok-4.6 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 61.1% | 57.1% | 65.6% | 42.0 | 22.0 | 22.2% | 98.5% | no | [raw](results/raw/20260816-065849-openrouter-x-ai-grok-4-6.json) | — | — |
 | 2026-08-16 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 34.4% | 8.8% | 11.0 | 114.0 | — | — | no | [raw](results/raw/20260816-055119-openai-compatible-nvidia-gemma-4-26b-a4b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-16 | openrouter | kwaipilot/kat-coder-pro-v2.5 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 60.5% | 55.7% | 66.1% | 41.0 | 21.0 | 22.2% | 98.3% | no | [raw](results/raw/20260816-051605-openrouter-kwaipilot-kat-coder-pro-v2-5.json) | — | — |
+| 2026-08-16 | openrouter | z-ai/glm-4.7 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 56.8% | 52.9% | 61.3% | 38.0 | 25.0 | 44.4% | 98.4% | no | [raw](results/raw/20260816-025231-openrouter-z-ai-glm-4-7.json) | — | — |
 | 2026-08-16 | openrouter | kwaipilot/kat-coder-air-v2.5 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 58.3% | 52.9% | 62.9% | 38.0 | 23.0 | 11.1% | 98.2% | no | [raw](results/raw/20260816-025231-openrouter-kwaipilot-kat-coder-air-v2-5.json) | — | — |
 | 2026-08-16 | openrouter | openai/gpt-oss-20b | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 31.2% | 8.0% | 10.0 | 115.0 | — | — | no | [raw](results/raw/20260816-003046-openrouter-openai-gpt-oss-20b.json) | — | — |
 | 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 31.2% | 7.8% | 10.0 | 118.0 | — | — | no | [raw](results/raw/20260816-002203-openrouter-openai-gpt-oss-120b-nitro.json) | — | — |
@@ -256,6 +257,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | python | 50.0% |
 | kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | rust | 50.0% |
 | kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | typescript | 50.0% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 70.0% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 60.0% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 60.0% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | javascript | 50.0% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | python | 50.0% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | rust | 40.0% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | typescript | 50.0% |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 60.0% |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 50.0% |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 40.0% |
@@ -355,6 +363,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | security | 100.0% |
 | kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | spec | 14.3% |
 | kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | tests | 57.1% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 0.0% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 57.1% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 57.1% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | documentation | 71.4% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | intent | 57.1% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | performance | 85.7% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | ponytail | 42.9% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | security | 100.0% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | spec | 14.3% |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | tests | 42.9% |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 14.3% |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 85.7% |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 57.1% |
@@ -599,6 +617,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 6.0 |
 | kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | forbidden | 0.0 |
 | kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | unexpected_near | 4.0 |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 7.0 |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 5.0 |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | forbidden | 0.0 |
+| z-ai/glm-4.7 | breadth / canonical-breadth / lgtmaybe 2.1.4 | unexpected_near | 13.0 |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 11.0 |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 6.0 |
