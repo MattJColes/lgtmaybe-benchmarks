@@ -827,7 +827,7 @@ def test_unrecognised_identifiers_are_preserved() -> None:
 def test_breadth_section_is_identified_by_suite() -> None:
     rendered = render_results([v2_raw("2026-08-16T00:00:00Z", "ranked")])
 
-    assert "## Breadth" in rendered
+    assert "## Breadth — top 10" in rendered
     assert "`breadth`" in rendered
     assert "`canonical-breadth`" in rendered
 
@@ -835,7 +835,7 @@ def test_breadth_section_is_identified_by_suite() -> None:
 def test_long_horizon_section_is_identified_by_suite() -> None:
     rendered = render_results([context_raw("2026-08-16T00:00:00Z", "scaler")])
 
-    assert "## Long horizon" in rendered
+    assert "## Long horizon — top 10" in rendered
     assert "## Context scaling" not in rendered
 
 

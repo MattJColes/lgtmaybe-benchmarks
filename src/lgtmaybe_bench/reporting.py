@@ -385,7 +385,7 @@ def _render_breadth_canonical(
             + " |"
         )
     return (
-        "## Breadth\n\n"
+        "## Breadth — top 10\n\n"
         "Complete `breadth` runs with profile `canonical-breadth` only. Cases span seven "
         "programming languages plus GitHub Actions and Terraform, planting one finding per "
         "language and review lens, so the score measures coverage across kinds of issue rather "
@@ -518,7 +518,7 @@ def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
         "|---|---|---|---:|---:|---:|---:|---:|\n"
     )
     return (
-        "## Long horizon\n\n"
+        "## Long horizon — top 10\n\n"
         "Complete `long-horizon` runs with profile `canonical-long-horizon` only. "
         "Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting "
         "eight bugs at the same relative positions; the clean case plants none. Model recall "

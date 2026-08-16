@@ -18,3 +18,9 @@
 - [x] 4.1 Run pytest, ruff, and mypy with Python 3.12
 - [x] 4.2 Regenerate reports and confirm ranking order, rows, and metrics are unchanged
 - [x] 4.3 Simulate a stored breadth run and confirm both sections are identifiable and disclaimed
+
+## 5. Clarify the per-suite limit
+
+- [x] 5.1 Add behavioural assertions that each generated suite heading says `top 10`
+- [x] 5.2 Update both generated suite headings and regenerate the README
+- [x] 5.3 Run pytest, Ruff, mypy, and deterministic report generation with Python 3.12
