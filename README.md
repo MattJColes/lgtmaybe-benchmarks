@@ -57,6 +57,7 @@ Comparison key: `breadth / canonical-breadth / lgtmaybe 2.1.4`.
 
 | date | provider | model | balanced F1 | balanced recall | precision | false positives | clean pass | adjudication | audit | settings |
 |---|---|---|---:|---:|---:|---:|---:|---:|---|---|
+| 2026-08-16 | openrouter | kwaipilot/kat-coder-pro-v2.5 | 60.5% [55.8–64.8%] provisional | 55.7% [50.0–58.6%] | 66.1% [63.2–72.4%] | 21 [16–21] | 22.2% [11.1–44.4%] | 98.3% [98.3–98.4%] | no | — |
 | 2026-08-16 | openrouter | kwaipilot/kat-coder-air-v2.5 | 58.3% [57.2–58.8%] provisional | 52.9% [51.4–54.3%] | 62.9% [62.3–68.5%] | 23 [17–23] | 11.1% [11.1–22.2%] | 98.2% [96.8–98.4%] | no | — |
 
 ## Long horizon — top 10
