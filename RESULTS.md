@@ -8,36 +8,36 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
-| 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 31.2% | 7.8% | 10.0 | 118.0 | — | — | no | [raw](results/raw/20260816-002203-openrouter-openai-gpt-oss-120b-nitro.json) | — | — |
-| 2026-08-15 | openrouter | mistralai/mistral-small-2603 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 28.1% | 1.3% | 9.0 | 699.0 | — | — | no | [raw](results/raw/20260815-233521-openrouter-mistralai-mistral-small-2603.json) | — | — |
-| 2026-08-15 | openrouter | poolside/laguna-s-2.1 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-231043-openrouter-poolside-laguna-s-2-1.json) | — | — |
-| 2026-08-15 | openrouter | qwen/qwen3-coder-next | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 22.2% | 12.5% | 100.0% | 4.0 | 0.0 | — | — | no | [raw](results/raw/20260815-230244-openrouter-qwen-qwen3-coder-next.json) | — | — |
-| 2026-08-15 | openrouter | nvidia/nemotron-3.5-lightning | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 4.1% | 3.1% | 50.0% | 1.0 | 1.0 | — | — | no | [raw](results/raw/20260815-224934-openrouter-nvidia-nemotron-3-5-lightning.json) | — | — |
-| 2026-08-15 | openrouter | x-ai/grok-4.6 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 47.5% | 84.4% | 55.1% | 27.0 | 22.0 | — | — | no | [raw](results/raw/20260815-223454-openrouter-x-ai-grok-4-6.json) | — | — |
-| 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 63.5% | 68.8% | 71.0% | 22.0 | 9.0 | — | — | no | [raw](results/raw/20260815-222949-openrouter-kwaipilot-kat-coder-pro-v2-5.json) | — | — |
-| 2026-08-15 | openrouter | z-ai/glm-4.7-flash | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 34.9% | 43.8% | 51.9% | 14.0 | 13.0 | — | — | no | [raw](results/raw/20260815-204224-openrouter-z-ai-glm-4-7-flash.json) | — | — |
-| 2026-08-15 | openrouter | z-ai/glm-4.7 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-204224-openrouter-z-ai-glm-4-7.json) | — | — |
-| 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 52.9% | 62.5% | 62.5% | 20.0 | 12.0 | — | — | no | [raw](results/raw/20260815-204224-openrouter-kwaipilot-kat-coder-air-v2-5.json) | — | — |
-| 2026-08-15 | openrouter | google/gemini-3.7-flash | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 71.7% | 81.2% | 74.3% | 26.0 | 9.0 | — | — | no | [raw](results/raw/20260815-185235-openrouter-google-gemini-3-7-flash.json) | — | — |
-| 2026-08-15 | openrouter | z-ai/glm-4.7-flash | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-173749-openrouter-z-ai-glm-4-7-flash.json) | — | — |
-| 2026-08-15 | openrouter | deepseek/deepseek-v4-pro-0813 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 50.5% | 37.5% | 85.7% | 12.0 | 2.0 | — | — | no | [raw](results/raw/20260815-162205-openrouter-deepseek-deepseek-v4-pro-0813.json) | — | — |
-| 2026-08-15 | openrouter | deepseek/deepseek-v4-flash-0731 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 27.5% | 68.8% | 44.9% | 22.0 | 27.0 | — | — | no | [raw](results/raw/20260815-160227-openrouter-deepseek-deepseek-v4-flash-0731.json) | — | — |
-| 2026-08-15 | openrouter | minimax/minimax-m3 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 43.4% | 53.1% | 56.7% | 17.0 | 13.0 | — | — | no | [raw](results/raw/20260815-144254-openrouter-minimax-minimax-m3.json) | — | — |
-| 2026-08-15 | openrouter | z-ai/glm-5.2 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 31.7% | 78.1% | 47.2% | 25.0 | 28.0 | — | — | no | [raw](results/raw/20260815-141246-openrouter-z-ai-glm-5-2.json) | — | — |
-| 2026-08-15 | openrouter | qwen/qwen3.8-max | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 71.9% | 16.5% | 23.0 | 116.0 | — | — | no | [raw](results/raw/20260815-141246-openrouter-qwen-qwen3-8-max.json) | — | — |
-| 2026-08-15 | openrouter | z-ai/glm-4.7 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-125518-openrouter-z-ai-glm-4-7.json) | — | — |
-| 2026-08-15 | openrouter | moonshotai/kimi-k2.7-code | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 78.1% | 33.3% | 25.0 | 50.0 | — | — | no | [raw](results/raw/20260815-112613-openrouter-moonshotai-kimi-k2-7-code.json) | — | — |
-| 2026-08-15 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 46.5% | 37.5% | 75.0% | 12.0 | 4.0 | — | — | no | [raw](results/raw/20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1 |
-| 2026-08-15 | openrouter | moonshotai/kimi-k3 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 93.8% | 24.0% | 30.0 | 95.0 | — | — | no | [raw](results/raw/20260815-104956-openrouter-moonshotai-kimi-k3.json) | — | — |
-| 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 29.7% | 81.2% | 46.4% | 26.0 | 30.0 | — | — | no | [raw](results/raw/20260815-095319-openrouter-google-gemini-3-1-pro-preview.json) | — | — |
-| 2026-08-15 | openrouter | openai/gpt-5.6-sol | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 59.4% | 32.2% | 19.0 | 40.0 | — | — | no | [raw](results/raw/20260815-093123-openrouter-openai-gpt-5-6-sol.json) | — | — |
-| 2026-08-15 | openrouter | openai/gpt-5.6-terra | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 43.4% | 53.1% | 56.7% | 17.0 | 13.0 | — | — | no | [raw](results/raw/20260815-092014-openrouter-openai-gpt-5-6-terra.json) | — | — |
-| 2026-08-15 | openrouter | openai/gpt-5.6-luna | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 19.7% | 78.1% | 42.4% | 25.0 | 34.0 | — | — | no | [raw](results/raw/20260815-085453-openrouter-openai-gpt-5-6-luna.json) | — | — |
-| 2026-08-15 | openrouter | anthropic/claude-haiku-4.5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 15.1% | 9.4% | 75.0% | 3.0 | 1.0 | — | — | no | [raw](results/raw/20260815-082555-openrouter-anthropic-claude-haiku-4-5.json) | — | — |
-| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 46.0% | 56.2% | 58.1% | 18.0 | 13.0 | — | — | no | [raw](results/raw/20260815-072218-openrouter-anthropic-claude-sonnet-5.json) | — | — |
-| 2026-08-15 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 53.1% | 4.7% | 17.0 | 347.0 | — | — | no | [raw](results/raw/20260815-064602-openai-compatible-unsloth-qwen3-8-27b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1 |
-| 2026-08-15 | openrouter | anthropic/claude-opus-5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 0.0% | 100.0% | 0.0 | 0.0 | — | — | no | [raw](results/raw/20260815-063856-openrouter-anthropic-claude-opus-5.json) | — | — |
-| 2026-08-15 | openrouter | anthropic/claude-fable-5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 29.8% | 46.9% | 46.9% | 15.0 | 17.0 | — | — | no | [raw](results/raw/20260815-060621-openrouter-anthropic-claude-fable-5.json) | — | — |
+| 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 31.2% | 7.8% | 10.0 | 118.0 | — | — | no | [raw](results/raw/20260816-002203-openrouter-openai-gpt-oss-120b-nitro.json) | — | — |
+| 2026-08-15 | openrouter | mistralai/mistral-small-2603 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 28.1% | 1.3% | 9.0 | 699.0 | — | — | no | [raw](results/raw/20260815-233521-openrouter-mistralai-mistral-small-2603.json) | — | — |
+| 2026-08-15 | openrouter | poolside/laguna-s-2.1 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-231043-openrouter-poolside-laguna-s-2-1.json) | — | — |
+| 2026-08-15 | openrouter | qwen/qwen3-coder-next | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 22.2% | 12.5% | 100.0% | 4.0 | 0.0 | — | — | no | [raw](results/raw/20260815-230244-openrouter-qwen-qwen3-coder-next.json) | — | — |
+| 2026-08-15 | openrouter | nvidia/nemotron-3.5-lightning | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 4.1% | 3.1% | 50.0% | 1.0 | 1.0 | — | — | no | [raw](results/raw/20260815-224934-openrouter-nvidia-nemotron-3-5-lightning.json) | — | — |
+| 2026-08-15 | openrouter | x-ai/grok-4.6 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 47.5% | 84.4% | 55.1% | 27.0 | 22.0 | — | — | no | [raw](results/raw/20260815-223454-openrouter-x-ai-grok-4-6.json) | — | — |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 63.5% | 68.8% | 71.0% | 22.0 | 9.0 | — | — | no | [raw](results/raw/20260815-222949-openrouter-kwaipilot-kat-coder-pro-v2-5.json) | — | — |
+| 2026-08-15 | openrouter | z-ai/glm-4.7-flash | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 34.9% | 43.8% | 51.9% | 14.0 | 13.0 | — | — | no | [raw](results/raw/20260815-204224-openrouter-z-ai-glm-4-7-flash.json) | — | — |
+| 2026-08-15 | openrouter | z-ai/glm-4.7 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-204224-openrouter-z-ai-glm-4-7.json) | — | — |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 52.9% | 62.5% | 62.5% | 20.0 | 12.0 | — | — | no | [raw](results/raw/20260815-204224-openrouter-kwaipilot-kat-coder-air-v2-5.json) | — | — |
+| 2026-08-15 | openrouter | google/gemini-3.7-flash | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 71.7% | 81.2% | 74.3% | 26.0 | 9.0 | — | — | no | [raw](results/raw/20260815-185235-openrouter-google-gemini-3-7-flash.json) | — | — |
+| 2026-08-15 | openrouter | z-ai/glm-4.7-flash | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-173749-openrouter-z-ai-glm-4-7-flash.json) | — | — |
+| 2026-08-15 | openrouter | deepseek/deepseek-v4-pro-0813 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 50.5% | 37.5% | 85.7% | 12.0 | 2.0 | — | — | no | [raw](results/raw/20260815-162205-openrouter-deepseek-deepseek-v4-pro-0813.json) | — | — |
+| 2026-08-15 | openrouter | deepseek/deepseek-v4-flash-0731 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 27.5% | 68.8% | 44.9% | 22.0 | 27.0 | — | — | no | [raw](results/raw/20260815-160227-openrouter-deepseek-deepseek-v4-flash-0731.json) | — | — |
+| 2026-08-15 | openrouter | minimax/minimax-m3 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 43.4% | 53.1% | 56.7% | 17.0 | 13.0 | — | — | no | [raw](results/raw/20260815-144254-openrouter-minimax-minimax-m3.json) | — | — |
+| 2026-08-15 | openrouter | z-ai/glm-5.2 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 31.7% | 78.1% | 47.2% | 25.0 | 28.0 | — | — | no | [raw](results/raw/20260815-141246-openrouter-z-ai-glm-5-2.json) | — | — |
+| 2026-08-15 | openrouter | qwen/qwen3.8-max | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 71.9% | 16.5% | 23.0 | 116.0 | — | — | no | [raw](results/raw/20260815-141246-openrouter-qwen-qwen3-8-max.json) | — | — |
+| 2026-08-15 | openrouter | z-ai/glm-4.7 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | — | — | — | — | — | — | — | no | [raw](results/raw/20260815-125518-openrouter-z-ai-glm-4-7.json) | — | — |
+| 2026-08-15 | openrouter | moonshotai/kimi-k2.7-code | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 78.1% | 33.3% | 25.0 | 50.0 | — | — | no | [raw](results/raw/20260815-112613-openrouter-moonshotai-kimi-k2-7-code.json) | — | — |
+| 2026-08-15 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 46.5% | 37.5% | 75.0% | 12.0 | 4.0 | — | — | no | [raw](results/raw/20260815-111328-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1 |
+| 2026-08-15 | openrouter | moonshotai/kimi-k3 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 93.8% | 24.0% | 30.0 | 95.0 | — | — | no | [raw](results/raw/20260815-104956-openrouter-moonshotai-kimi-k3.json) | — | — |
+| 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 29.7% | 81.2% | 46.4% | 26.0 | 30.0 | — | — | no | [raw](results/raw/20260815-095319-openrouter-google-gemini-3-1-pro-preview.json) | — | — |
+| 2026-08-15 | openrouter | openai/gpt-5.6-sol | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 59.4% | 32.2% | 19.0 | 40.0 | — | — | no | [raw](results/raw/20260815-093123-openrouter-openai-gpt-5-6-sol.json) | — | — |
+| 2026-08-15 | openrouter | openai/gpt-5.6-terra | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 43.4% | 53.1% | 56.7% | 17.0 | 13.0 | — | — | no | [raw](results/raw/20260815-092014-openrouter-openai-gpt-5-6-terra.json) | — | — |
+| 2026-08-15 | openrouter | openai/gpt-5.6-luna | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 19.7% | 78.1% | 42.4% | 25.0 | 34.0 | — | — | no | [raw](results/raw/20260815-085453-openrouter-openai-gpt-5-6-luna.json) | — | — |
+| 2026-08-15 | openrouter | anthropic/claude-haiku-4.5 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 15.1% | 9.4% | 75.0% | 3.0 | 1.0 | — | — | no | [raw](results/raw/20260815-082555-openrouter-anthropic-claude-haiku-4-5.json) | — | — |
+| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 46.0% | 56.2% | 58.1% | 18.0 | 13.0 | — | — | no | [raw](results/raw/20260815-072218-openrouter-anthropic-claude-sonnet-5.json) | — | — |
+| 2026-08-15 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 53.1% | 4.7% | 17.0 | 347.0 | — | — | no | [raw](results/raw/20260815-064602-openai-compatible-unsloth-qwen3-8-27b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1 |
+| 2026-08-15 | openrouter | anthropic/claude-opus-5 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 0.0% | 100.0% | 0.0 | 0.0 | — | — | no | [raw](results/raw/20260815-063856-openrouter-anthropic-claude-opus-5.json) | — | — |
+| 2026-08-15 | openrouter | anthropic/claude-fable-5 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 29.8% | 46.9% | 46.9% | 15.0 | 17.0 | — | — | no | [raw](results/raw/20260815-060621-openrouter-anthropic-claude-fable-5.json) | — | — |
 
 ## Context case detail
 
@@ -178,185 +178,185 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
-| openai/gpt-oss-120b:nitro | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
-| openai/gpt-oss-120b:nitro | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 62.5% |
-| openai/gpt-oss-120b:nitro | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
-| openai/gpt-oss-120b:nitro | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 0.0% |
-| openai/gpt-oss-120b:nitro | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 0.0% |
-| openai/gpt-oss-120b:nitro | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 25.0% |
-| openai/gpt-oss-120b:nitro | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 25.0% |
-| mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 25.0% |
-| mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
-| mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 25.0% |
-| mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 25.0% |
-| mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
-| mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
-| qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 0.0% |
-| qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
-| qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 0.0% |
-| qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 0.0% |
-| qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
-| qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| nvidia/nemotron-3.5-lightning | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
-| nvidia/nemotron-3.5-lightning | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 0.0% |
-| nvidia/nemotron-3.5-lightning | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
-| nvidia/nemotron-3.5-lightning | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 0.0% |
-| nvidia/nemotron-3.5-lightning | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 0.0% |
-| nvidia/nemotron-3.5-lightning | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
-| nvidia/nemotron-3.5-lightning | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 25.0% |
-| x-ai/grok-4.6 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 75.0% |
-| x-ai/grok-4.6 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 75.0% |
-| x-ai/grok-4.6 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |
-| x-ai/grok-4.6 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 100.0% |
-| x-ai/grok-4.6 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
-| x-ai/grok-4.6 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 50.0% |
-| x-ai/grok-4.6 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| kwaipilot/kat-coder-pro-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
-| kwaipilot/kat-coder-pro-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 87.5% |
-| kwaipilot/kat-coder-pro-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
-| kwaipilot/kat-coder-pro-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 25.0% |
-| kwaipilot/kat-coder-pro-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
-| kwaipilot/kat-coder-pro-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 75.0% |
-| kwaipilot/kat-coder-pro-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
-| z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 62.5% |
-| z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
-| z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 50.0% |
-| z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 0.0% |
-| z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 25.0% |
-| z-ai/glm-4.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 75.0% |
-| kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
-| kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 100.0% |
-| kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
-| kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 50.0% |
-| kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 75.0% |
-| kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
-| kwaipilot/kat-coder-air-v2.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| google/gemini-3.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 100.0% |
-| google/gemini-3.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 50.0% |
-| google/gemini-3.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |
-| google/gemini-3.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 100.0% |
-| google/gemini-3.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 75.0% |
-| google/gemini-3.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 75.0% |
-| google/gemini-3.7-flash | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| deepseek/deepseek-v4-pro-0813 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
-| deepseek/deepseek-v4-pro-0813 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 75.0% |
-| deepseek/deepseek-v4-pro-0813 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
-| deepseek/deepseek-v4-pro-0813 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 0.0% |
-| deepseek/deepseek-v4-pro-0813 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 50.0% |
-| deepseek/deepseek-v4-pro-0813 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
-| deepseek/deepseek-v4-pro-0813 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
-| deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 62.5% |
-| deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |
-| deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 75.0% |
-| deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
-| deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 50.0% |
-| deepseek/deepseek-v4-flash-0731 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
-| minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 62.5% |
-| minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
-| minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 50.0% |
-| minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 75.0% |
-| minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
-| minimax/minimax-m3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| z-ai/glm-5.2 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 50.0% |
-| z-ai/glm-5.2 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 87.5% |
-| z-ai/glm-5.2 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
-| z-ai/glm-5.2 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 100.0% |
-| z-ai/glm-5.2 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
-| z-ai/glm-5.2 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 25.0% |
-| z-ai/glm-5.2 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| qwen/qwen3.8-max | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
-| qwen/qwen3.8-max | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 100.0% |
-| qwen/qwen3.8-max | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
-| qwen/qwen3.8-max | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 75.0% |
-| qwen/qwen3.8-max | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
-| qwen/qwen3.8-max | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 25.0% |
-| qwen/qwen3.8-max | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 75.0% |
-| moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 100.0% |
-| moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
-| moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 75.0% |
-| moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
-| moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
-| moonshotai/kimi-k2.7-code | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| nvidia/Qwen3.6-35B-A3B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
-| nvidia/Qwen3.6-35B-A3B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 50.0% |
-| nvidia/Qwen3.6-35B-A3B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |
-| nvidia/Qwen3.6-35B-A3B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 0.0% |
-| nvidia/Qwen3.6-35B-A3B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 0.0% |
-| nvidia/Qwen3.6-35B-A3B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
-| nvidia/Qwen3.6-35B-A3B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| moonshotai/kimi-k3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 75.0% |
-| moonshotai/kimi-k3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 100.0% |
-| moonshotai/kimi-k3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |
-| moonshotai/kimi-k3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 100.0% |
-| moonshotai/kimi-k3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
-| moonshotai/kimi-k3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 75.0% |
-| moonshotai/kimi-k3 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| google/gemini-3.1-pro-preview | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 25.0% |
-| google/gemini-3.1-pro-preview | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 100.0% |
-| google/gemini-3.1-pro-preview | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |
-| google/gemini-3.1-pro-preview | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 25.0% |
-| google/gemini-3.1-pro-preview | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
-| google/gemini-3.1-pro-preview | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 100.0% |
-| google/gemini-3.1-pro-preview | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| openai/gpt-5.6-sol | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 75.0% |
-| openai/gpt-5.6-sol | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 62.5% |
-| openai/gpt-5.6-sol | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
-| openai/gpt-5.6-sol | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 75.0% |
-| openai/gpt-5.6-sol | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
-| openai/gpt-5.6-sol | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
-| openai/gpt-5.6-sol | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| openai/gpt-5.6-terra | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 50.0% |
-| openai/gpt-5.6-terra | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 37.5% |
-| openai/gpt-5.6-terra | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 50.0% |
-| openai/gpt-5.6-terra | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 50.0% |
-| openai/gpt-5.6-terra | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
-| openai/gpt-5.6-terra | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
-| openai/gpt-5.6-terra | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| openai/gpt-5.6-luna | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 50.0% |
-| openai/gpt-5.6-luna | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 75.0% |
-| openai/gpt-5.6-luna | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 100.0% |
-| openai/gpt-5.6-luna | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 75.0% |
-| openai/gpt-5.6-luna | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
-| openai/gpt-5.6-luna | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 50.0% |
-| openai/gpt-5.6-luna | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
-| anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 12.5% |
-| anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
-| anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 0.0% |
-| anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 25.0% |
-| anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
-| anthropic/claude-haiku-4.5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 25.0% |
-| anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 25.0% |
-| anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 75.0% |
-| anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 50.0% |
-| anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 75.0% |
-| anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 75.0% |
-| anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 25.0% |
-| anthropic/claude-sonnet-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 50.0% |
-| unsloth/Qwen3.8-27B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
-| unsloth/Qwen3.8-27B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 75.0% |
-| unsloth/Qwen3.8-27B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 75.0% |
-| unsloth/Qwen3.8-27B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 0.0% |
-| unsloth/Qwen3.8-27B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 100.0% |
-| unsloth/Qwen3.8-27B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
-| unsloth/Qwen3.8-27B-NVFP4 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
-| anthropic/claude-opus-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
-| anthropic/claude-opus-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 0.0% |
-| anthropic/claude-opus-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
-| anthropic/claude-opus-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 0.0% |
-| anthropic/claude-opus-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 0.0% |
-| anthropic/claude-opus-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
-| anthropic/claude-opus-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 0.0% |
-| anthropic/claude-fable-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
-| anthropic/claude-fable-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 62.5% |
-| anthropic/claude-fable-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 50.0% |
-| anthropic/claude-fable-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 0.0% |
-| anthropic/claude-fable-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 75.0% |
-| anthropic/claude-fable-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 25.0% |
-| anthropic/claude-fable-5 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
+| openai/gpt-oss-120b:nitro | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| openai/gpt-oss-120b:nitro | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 62.5% |
+| openai/gpt-oss-120b:nitro | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 0.0% |
+| openai/gpt-oss-120b:nitro | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 0.0% |
+| openai/gpt-oss-120b:nitro | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 0.0% |
+| openai/gpt-oss-120b:nitro | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 25.0% |
+| openai/gpt-oss-120b:nitro | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| mistralai/mistral-small-2603 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 25.0% |
+| mistralai/mistral-small-2603 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 25.0% |
+| mistralai/mistral-small-2603 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 0.0% |
+| mistralai/mistral-small-2603 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 25.0% |
+| mistralai/mistral-small-2603 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 25.0% |
+| mistralai/mistral-small-2603 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 0.0% |
+| mistralai/mistral-small-2603 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| qwen/qwen3-coder-next | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| qwen/qwen3-coder-next | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 0.0% |
+| qwen/qwen3-coder-next | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 0.0% |
+| qwen/qwen3-coder-next | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 0.0% |
+| qwen/qwen3-coder-next | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 0.0% |
+| qwen/qwen3-coder-next | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 0.0% |
+| qwen/qwen3-coder-next | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| nvidia/nemotron-3.5-lightning | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| nvidia/nemotron-3.5-lightning | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 0.0% |
+| nvidia/nemotron-3.5-lightning | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 0.0% |
+| nvidia/nemotron-3.5-lightning | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 0.0% |
+| nvidia/nemotron-3.5-lightning | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 0.0% |
+| nvidia/nemotron-3.5-lightning | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 0.0% |
+| nvidia/nemotron-3.5-lightning | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 25.0% |
+| x-ai/grok-4.6 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 75.0% |
+| x-ai/grok-4.6 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 75.0% |
+| x-ai/grok-4.6 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 100.0% |
+| x-ai/grok-4.6 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 100.0% |
+| x-ai/grok-4.6 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 100.0% |
+| x-ai/grok-4.6 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 50.0% |
+| x-ai/grok-4.6 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| kwaipilot/kat-coder-pro-v2.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| kwaipilot/kat-coder-pro-v2.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 87.5% |
+| kwaipilot/kat-coder-pro-v2.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 75.0% |
+| kwaipilot/kat-coder-pro-v2.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 25.0% |
+| kwaipilot/kat-coder-pro-v2.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 100.0% |
+| kwaipilot/kat-coder-pro-v2.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 75.0% |
+| kwaipilot/kat-coder-pro-v2.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| z-ai/glm-4.7-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| z-ai/glm-4.7-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 62.5% |
+| z-ai/glm-4.7-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 75.0% |
+| z-ai/glm-4.7-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 50.0% |
+| z-ai/glm-4.7-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 0.0% |
+| z-ai/glm-4.7-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 25.0% |
+| z-ai/glm-4.7-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 75.0% |
+| kwaipilot/kat-coder-air-v2.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| kwaipilot/kat-coder-air-v2.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 100.0% |
+| kwaipilot/kat-coder-air-v2.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 75.0% |
+| kwaipilot/kat-coder-air-v2.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 50.0% |
+| kwaipilot/kat-coder-air-v2.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 75.0% |
+| kwaipilot/kat-coder-air-v2.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 0.0% |
+| kwaipilot/kat-coder-air-v2.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| google/gemini-3.7-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 100.0% |
+| google/gemini-3.7-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 50.0% |
+| google/gemini-3.7-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 100.0% |
+| google/gemini-3.7-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 100.0% |
+| google/gemini-3.7-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 75.0% |
+| google/gemini-3.7-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 75.0% |
+| google/gemini-3.7-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| deepseek/deepseek-v4-pro-0813 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| deepseek/deepseek-v4-pro-0813 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 75.0% |
+| deepseek/deepseek-v4-pro-0813 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 0.0% |
+| deepseek/deepseek-v4-pro-0813 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 0.0% |
+| deepseek/deepseek-v4-pro-0813 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 50.0% |
+| deepseek/deepseek-v4-pro-0813 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 0.0% |
+| deepseek/deepseek-v4-pro-0813 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| deepseek/deepseek-v4-flash-0731 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| deepseek/deepseek-v4-flash-0731 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 62.5% |
+| deepseek/deepseek-v4-flash-0731 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 100.0% |
+| deepseek/deepseek-v4-flash-0731 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 75.0% |
+| deepseek/deepseek-v4-flash-0731 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 100.0% |
+| deepseek/deepseek-v4-flash-0731 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 50.0% |
+| deepseek/deepseek-v4-flash-0731 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| minimax/minimax-m3 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| minimax/minimax-m3 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 62.5% |
+| minimax/minimax-m3 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 75.0% |
+| minimax/minimax-m3 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 50.0% |
+| minimax/minimax-m3 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 75.0% |
+| minimax/minimax-m3 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 0.0% |
+| minimax/minimax-m3 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| z-ai/glm-5.2 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 50.0% |
+| z-ai/glm-5.2 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 87.5% |
+| z-ai/glm-5.2 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 75.0% |
+| z-ai/glm-5.2 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 100.0% |
+| z-ai/glm-5.2 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 100.0% |
+| z-ai/glm-5.2 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 25.0% |
+| z-ai/glm-5.2 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| qwen/qwen3.8-max | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| qwen/qwen3.8-max | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 100.0% |
+| qwen/qwen3.8-max | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 75.0% |
+| qwen/qwen3.8-max | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 75.0% |
+| qwen/qwen3.8-max | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 100.0% |
+| qwen/qwen3.8-max | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 25.0% |
+| qwen/qwen3.8-max | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| moonshotai/kimi-k2.7-code | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 75.0% |
+| moonshotai/kimi-k2.7-code | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 100.0% |
+| moonshotai/kimi-k2.7-code | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 75.0% |
+| moonshotai/kimi-k2.7-code | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 75.0% |
+| moonshotai/kimi-k2.7-code | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 100.0% |
+| moonshotai/kimi-k2.7-code | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 0.0% |
+| moonshotai/kimi-k2.7-code | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 50.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 100.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 0.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 0.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 0.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| moonshotai/kimi-k3 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 75.0% |
+| moonshotai/kimi-k3 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 100.0% |
+| moonshotai/kimi-k3 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 100.0% |
+| moonshotai/kimi-k3 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 100.0% |
+| moonshotai/kimi-k3 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 100.0% |
+| moonshotai/kimi-k3 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 75.0% |
+| moonshotai/kimi-k3 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| google/gemini-3.1-pro-preview | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 25.0% |
+| google/gemini-3.1-pro-preview | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 100.0% |
+| google/gemini-3.1-pro-preview | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 100.0% |
+| google/gemini-3.1-pro-preview | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 25.0% |
+| google/gemini-3.1-pro-preview | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 100.0% |
+| google/gemini-3.1-pro-preview | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 100.0% |
+| google/gemini-3.1-pro-preview | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| openai/gpt-5.6-sol | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 75.0% |
+| openai/gpt-5.6-sol | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 62.5% |
+| openai/gpt-5.6-sol | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 0.0% |
+| openai/gpt-5.6-sol | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 75.0% |
+| openai/gpt-5.6-sol | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 100.0% |
+| openai/gpt-5.6-sol | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 0.0% |
+| openai/gpt-5.6-sol | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| openai/gpt-5.6-terra | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 50.0% |
+| openai/gpt-5.6-terra | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 37.5% |
+| openai/gpt-5.6-terra | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 50.0% |
+| openai/gpt-5.6-terra | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 50.0% |
+| openai/gpt-5.6-terra | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 100.0% |
+| openai/gpt-5.6-terra | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 0.0% |
+| openai/gpt-5.6-terra | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| openai/gpt-5.6-luna | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 50.0% |
+| openai/gpt-5.6-luna | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 75.0% |
+| openai/gpt-5.6-luna | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 100.0% |
+| openai/gpt-5.6-luna | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 75.0% |
+| openai/gpt-5.6-luna | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 100.0% |
+| openai/gpt-5.6-luna | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 50.0% |
+| openai/gpt-5.6-luna | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| anthropic/claude-haiku-4.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| anthropic/claude-haiku-4.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 12.5% |
+| anthropic/claude-haiku-4.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 0.0% |
+| anthropic/claude-haiku-4.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 0.0% |
+| anthropic/claude-haiku-4.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 25.0% |
+| anthropic/claude-haiku-4.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 0.0% |
+| anthropic/claude-haiku-4.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 25.0% |
+| anthropic/claude-sonnet-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 25.0% |
+| anthropic/claude-sonnet-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 75.0% |
+| anthropic/claude-sonnet-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 50.0% |
+| anthropic/claude-sonnet-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 75.0% |
+| anthropic/claude-sonnet-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 75.0% |
+| anthropic/claude-sonnet-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 25.0% |
+| anthropic/claude-sonnet-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 50.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 75.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 75.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 0.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 100.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 0.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+| anthropic/claude-opus-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| anthropic/claude-opus-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 0.0% |
+| anthropic/claude-opus-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 0.0% |
+| anthropic/claude-opus-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 0.0% |
+| anthropic/claude-opus-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 0.0% |
+| anthropic/claude-opus-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 0.0% |
+| anthropic/claude-opus-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 0.0% |
+| anthropic/claude-fable-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| anthropic/claude-fable-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 62.5% |
+| anthropic/claude-fable-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 50.0% |
+| anthropic/claude-fable-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 0.0% |
+| anthropic/claude-fable-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 75.0% |
+| anthropic/claude-fable-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 25.0% |
+| anthropic/claude-fable-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |

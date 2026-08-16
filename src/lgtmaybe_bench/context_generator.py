@@ -1,4 +1,4 @@
-"""Deterministic one-shot builder for the ``context-v1`` scaling suite.
+"""Deterministic one-shot builder for the ``long-horizon`` scaling suite.
 
 Emits five Python corpus cases whose changed diffs grow across four size bands
 plus one clean case, with eight planted bugs at controlled relative positions in
@@ -14,7 +14,7 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 
-SUITE_ID = "context-v1"
+SUITE_ID = "long-horizon"
 BUG_COUNT = 8
 TARGET_FRACTIONS = (0.10, 0.25, 0.40, 0.55, 0.70, 0.85)
 CANONICAL_INPUT_TOKEN_CAP = 100_000

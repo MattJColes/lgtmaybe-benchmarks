@@ -21,7 +21,7 @@ from lgtmaybe_bench.scoring import Finding, parse_findings
 TRUNCATION_MARKERS = ("truncat", "output_limit", "length", "max_tokens")
 RAW_IN_PROGRESS = "in_progress"
 RAW_COMPLETE = "complete"
-CANONICAL_PROFILE_ID = "canonical-v2"
+CANONICAL_PROFILE_ID = "canonical-breadth"
 CANONICAL_MAX_TOKENS = 16_384
 
 
@@ -72,11 +72,10 @@ def _profile(
 
 
 PROFILES = {
-    "canonical-v1": _profile("canonical-v1", canonical=True, repeats=3),
     CANONICAL_PROFILE_ID: _profile(
         CANONICAL_PROFILE_ID, canonical=True, repeats=3, max_tokens=CANONICAL_MAX_TOKENS
     ),
-    "context-canonical-v1": _profile("context-canonical-v1", repeats=1, preset="full"),
+    "canonical-long-horizon": _profile("canonical-long-horizon", repeats=1, preset="full"),
     "diagnostic-full-v1": _profile("diagnostic-full-v1", preset="full"),
     "diagnostic-4k-v1": _profile("diagnostic-4k-v1", max_tokens=4096),
     "diagnostic-large-diff-v1": _profile("diagnostic-large-diff-v1", max_input_tokens=20_000),
@@ -502,12 +501,12 @@ def _lgtmaybe_version(executable: list[str]) -> str:
 def execute_benchmark(root: Path, args: Any, executable: str | list[str]) -> Path:
     """Execute a full configuration run, persist it, and regenerate reports."""
     from lgtmaybe_bench.cli import resolved_concurrency
-    from lgtmaybe_bench.corpus import load_suite, select_cases, validate_v2_matrix
+    from lgtmaybe_bench.corpus import load_suite, select_cases, validate_breadth_matrix
     from lgtmaybe_bench.reporting import regenerate_reports
 
     suite = load_suite(root / "corpus", getattr(args, "suite", "legacy-v1"))
-    if suite.id == "v2":
-        validate_v2_matrix(suite)
+    if suite.id == "breadth":
+        validate_breadth_matrix(suite)
     cases = select_cases(list(suite.cases), args.case)
     profile = resolve_profile_args(args)
     config = RunConfig(

@@ -155,7 +155,7 @@ def test_base_and_changed_trees_differ_broadly(tmp_path: Path) -> None:
 
 
 def test_context_profile_uses_one_repeat_full_preset_and_canonical_token_cap() -> None:
-    profile = get_profile("context-canonical-v1")
+    profile = get_profile("canonical-long-horizon")
 
     assert profile.repeats == 1
     assert profile.preset == "full"

@@ -160,12 +160,12 @@ def infer_suite_id(raw_result: dict[str, Any]) -> str:
     return suite if isinstance(suite, str) and suite else "legacy-v1"
 
 
-def validate_v2_matrix(suite: CorpusSuite) -> MatrixCoverage:
-    """Reject accidental weighting or missing behavior classes in the frozen v2 suite."""
-    if suite.id != "v2":
-        raise ValueError("v2 matrix validation requires suite 'v2'")
+def validate_breadth_matrix(suite: CorpusSuite) -> MatrixCoverage:
+    """Reject accidental weighting or missing behavior classes in the frozen breadth suite."""
+    if suite.id != "breadth":
+        raise ValueError("breadth matrix validation requires suite 'breadth'")
     if len(suite.cases) != 32:
-        raise ValueError(f"v2 requires 32 cases, found {len(suite.cases)}")
+        raise ValueError(f"breadth requires 32 cases, found {len(suite.cases)}")
 
     cells: Counter[tuple[str, str]] = Counter()
     clean_by_language: Counter[str] = Counter()
@@ -197,15 +197,15 @@ def validate_v2_matrix(suite: CorpusSuite) -> MatrixCoverage:
     for language in sorted(CORE_LANGUAGES):
         if cases_by_language[language] != 4:
             raise ValueError(
-                f"v2 requires four {language} cases, found {cases_by_language[language]}"
+                f"breadth requires four {language} cases, found {cases_by_language[language]}"
             )
         if clean_by_language[language] != 1:
             raise ValueError(
-                f"v2 requires one clean {language} case, found {clean_by_language[language]}"
+                f"breadth requires one clean {language} case, found {clean_by_language[language]}"
             )
     for technology in sorted(CROSS_CUTTING):
         if cases_by_language[technology] != 2 or cross_clean[technology] != 1:
-            raise ValueError(f"v2 requires one defect and one clean {technology} case")
+            raise ValueError(f"breadth requires one defect and one clean {technology} case")
 
     for language in sorted(CORE_LANGUAGES):
         for lens in sorted(LENSES):
@@ -215,9 +215,9 @@ def validate_v2_matrix(suite: CorpusSuite) -> MatrixCoverage:
             if count == 0:
                 raise ValueError(f"missing language/lens cell: {language}/{lens}")
     if "multi-file" not in coverage_tags:
-        raise ValueError("v2 requires multi-file coverage")
+        raise ValueError("breadth requires multi-file coverage")
     if "large-diff" not in coverage_tags:
-        raise ValueError("v2 requires documented large-diff coverage")
+        raise ValueError("breadth requires documented large-diff coverage")
 
     return MatrixCoverage(
         language_lens_cells=sum(cells.values()),

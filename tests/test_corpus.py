@@ -14,7 +14,7 @@ from lgtmaybe_bench.corpus import (
     infer_suite_id,
     load_suite,
     select_cases,
-    validate_v2_matrix,
+    validate_breadth_matrix,
 )
 from lgtmaybe_bench.scoring import CaseTruth, CatalogEntry
 
@@ -99,14 +99,14 @@ def test_named_suite_loads_immutable_membership_in_manifest_order(tmp_path: Path
         metadata.write_text(json.dumps(raw), encoding="utf-8")
     suites = tmp_path / "suites"
     suites.mkdir()
-    (suites / "v2.json").write_text(
-        json.dumps({"id": "v2", "cases": ["two", "one"]}),
+    (suites / "breadth.json").write_text(
+        json.dumps({"id": "breadth", "cases": ["two", "one"]}),
         encoding="utf-8",
     )
 
-    suite = load_suite(tmp_path, "v2")
+    suite = load_suite(tmp_path, "breadth")
 
-    assert suite.id == "v2"
+    assert suite.id == "breadth"
     assert suite.case_ids == ("two", "one")
     assert [case.truth.name for case in suite.cases] == ["two", "one"]
     assert all(case.truth.language == "python" for case in suite.cases)
@@ -120,13 +120,13 @@ def test_suite_rejects_duplicate_membership(tmp_path: Path) -> None:
     metadata.write_text(json.dumps(raw), encoding="utf-8")
     suites = tmp_path / "suites"
     suites.mkdir()
-    (suites / "v2.json").write_text(
-        json.dumps({"id": "v2", "cases": ["one", "one"]}),
+    (suites / "breadth.json").write_text(
+        json.dumps({"id": "breadth", "cases": ["one", "one"]}),
         encoding="utf-8",
     )
 
     with pytest.raises(ValueError, match="duplicate case"):
-        load_suite(tmp_path, "v2")
+        load_suite(tmp_path, "breadth")
 
 
 def test_clean_case_accepts_empty_truth_and_rejects_contradiction(tmp_path: Path) -> None:
@@ -206,11 +206,11 @@ def _matrix_suite() -> CorpusSuite:
                 clean_trap="plausible but safe config" if clean else None,
             )
             cases.append(CorpusCase(Path(name), truth, {"coverage": []}))
-    return CorpusSuite("v2", tuple(case.truth.name for case in cases), tuple(cases))
+    return CorpusSuite("breadth", tuple(case.truth.name for case in cases), tuple(cases))
 
 
-def test_v2_matrix_has_balanced_cells_clean_cases_and_cross_cutting_coverage() -> None:
-    coverage = validate_v2_matrix(_matrix_suite())
+def test_breadth_matrix_has_balanced_cells_clean_cases_and_cross_cutting_coverage() -> None:
+    coverage = validate_breadth_matrix(_matrix_suite())
 
     assert coverage.language_lens_cells == 70
     assert coverage.clean_language_cases == 7
@@ -222,7 +222,7 @@ def test_v2_matrix_has_balanced_cells_clean_cases_and_cross_cutting_coverage() -
     assert coverage.has_large_diff is True
 
 
-def test_v2_matrix_rejects_duplicate_and_missing_language_lens_cells() -> None:
+def test_breadth_matrix_rejects_duplicate_and_missing_language_lens_cells() -> None:
     suite = _matrix_suite()
     first = suite.cases[0]
     duplicate = replace(
@@ -230,14 +230,14 @@ def test_v2_matrix_rejects_duplicate_and_missing_language_lens_cells() -> None:
         truth=replace(first.truth, expected=(*first.truth.expected, first.truth.expected[0])),
     )
     with pytest.raises(ValueError, match="duplicate language/lens cell: python/security"):
-        validate_v2_matrix(replace(suite, cases=(duplicate, *suite.cases[1:])))
+        validate_breadth_matrix(replace(suite, cases=(duplicate, *suite.cases[1:])))
 
     missing = replace(first, truth=replace(first.truth, expected=first.truth.expected[1:]))
     with pytest.raises(ValueError, match="missing language/lens cell: python/security"):
-        validate_v2_matrix(replace(suite, cases=(missing, *suite.cases[1:])))
+        validate_breadth_matrix(replace(suite, cases=(missing, *suite.cases[1:])))
 
 
-def test_v2_matrix_rejects_contradictory_clean_case_and_missing_size_class() -> None:
+def test_breadth_matrix_rejects_contradictory_clean_case_and_missing_size_class() -> None:
     suite = _matrix_suite()
     clean_index = next(index for index, case in enumerate(suite.cases) if case.truth.clean)
     clean_case = suite.cases[clean_index]
@@ -251,7 +251,7 @@ def test_v2_matrix_rejects_contradictory_clean_case_and_missing_size_class() -> 
     cases = list(suite.cases)
     cases[clean_index] = contradictory
     with pytest.raises(ValueError, match="clean case has expected findings"):
-        validate_v2_matrix(replace(suite, cases=tuple(cases)))
+        validate_breadth_matrix(replace(suite, cases=tuple(cases)))
 
     without_large = tuple(
         replace(
@@ -264,7 +264,7 @@ def test_v2_matrix_rejects_contradictory_clean_case_and_missing_size_class() -> 
         for case in suite.cases
     )
     with pytest.raises(ValueError, match="large-diff"):
-        validate_v2_matrix(replace(suite, cases=without_large))
+        validate_breadth_matrix(replace(suite, cases=without_large))
 
 
 def test_repository_corpus_has_complete_coverage() -> None:
