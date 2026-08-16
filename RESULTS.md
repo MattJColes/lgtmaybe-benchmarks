@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-16 | openrouter | anthropic/claude-opus-5 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 5.5% | 2.9% | 71.4% | 2.0 | 1.0 | 100.0% | 100.0% | no | [raw](results/raw/20260816-132540-openrouter-anthropic-claude-opus-5.json) | — | — |
 | 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 52.0% | 57.1% | 47.7% | 41.0 | 45.0 | 11.1% | 95.6% | no | [raw](results/raw/20260816-124949-openrouter-openai-gpt-oss-120b-nitro.json) | — | — |
 | 2026-08-16 | openrouter | mistralai/mistral-small-2603 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 57.8% | 62.9% | 51.1% | 45.0 | 46.0 | 33.3% | 96.9% | no | [raw](results/raw/20260816-113731-openrouter-mistralai-mistral-small-2603.json) | — | — |
 | 2026-08-16 | openrouter | qwen/qwen3-coder-next | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 43.2% | 34.3% | 56.8% | 25.0 | 19.0 | 22.2% | 97.8% | no | [raw](results/raw/20260816-103350-openrouter-qwen-qwen3-coder-next.json) | — | — |
@@ -197,6 +198,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | language | recall |
 |---|---|---|---:|
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 0.0% |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 0.0% |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 0.0% |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | javascript | 0.0% |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | python | 0.0% |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | rust | 0.0% |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | typescript | 0.0% |
 | openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 50.0% |
 | openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 60.0% |
 | openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 50.0% |
@@ -244,6 +252,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 0.0% |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 0.0% |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 0.0% |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | documentation | 0.0% |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | intent | 0.0% |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | performance | 14.3% |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | ponytail | 0.0% |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | security | 0.0% |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | spec | 0.0% |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | tests | 0.0% |
 | openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 28.6% |
 | openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 100.0% |
 | openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 57.1% |
@@ -505,6 +523,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | class | median count |
 |---|---|---|---:|
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 0.0 |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 0.0 |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | forbidden | 0.0 |
+| anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | unexpected_near | 1.0 |
 | openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
 | openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 11.0 |
 | openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 5.0 |
