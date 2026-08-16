@@ -12,6 +12,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | 2026-08-16 | openrouter | anthropic/claude-opus-5 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 5.5% | 2.9% | 71.4% | 2.0 | 1.0 | 100.0% | 100.0% | no | [raw](results/raw/20260816-132540-openrouter-anthropic-claude-opus-5.json) | — | — |
 | 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 52.0% | 57.1% | 47.7% | 41.0 | 45.0 | 11.1% | 95.6% | no | [raw](results/raw/20260816-124949-openrouter-openai-gpt-oss-120b-nitro.json) | — | — |
 | 2026-08-16 | openrouter | mistralai/mistral-small-2603 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 57.8% | 62.9% | 51.1% | 45.0 | 46.0 | 33.3% | 96.9% | no | [raw](results/raw/20260816-113731-openrouter-mistralai-mistral-small-2603.json) | — | — |
+| 2026-08-16 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 67.4% | 72.9% | 62.7% | 52.0 | 31.0 | 0.0% | 98.8% | no | [raw](results/raw/20260816-112049-openai-compatible-nvidia-gemma-4-26b-a4b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-16 | openrouter | qwen/qwen3-coder-next | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 43.2% | 34.3% | 56.8% | 25.0 | 19.0 | 22.2% | 97.8% | no | [raw](results/raw/20260816-103350-openrouter-qwen-qwen3-coder-next.json) | — | — |
 | 2026-08-16 | openrouter | x-ai/grok-4.6 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 61.1% | 57.1% | 65.6% | 42.0 | 22.0 | 22.2% | 98.5% | no | [raw](results/raw/20260816-065849-openrouter-x-ai-grok-4-6.json) | — | — |
 | 2026-08-16 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 34.4% | 8.8% | 11.0 | 114.0 | — | — | no | [raw](results/raw/20260816-055119-openai-compatible-nvidia-gemma-4-26b-a4b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
@@ -227,6 +228,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | python | 70.0% |
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | rust | 70.0% |
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | typescript | 70.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 80.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 70.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 80.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | javascript | 70.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | python | 60.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | rust | 80.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | typescript | 70.0% |
 | qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 50.0% |
 | qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 30.0% |
 | qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 40.0% |
@@ -300,6 +308,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | security | 100.0% |
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | spec | 0.0% |
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | tests | 85.7% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 57.1% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 71.4% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 57.1% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | documentation | 71.4% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | intent | 71.4% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | performance | 100.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | ponytail | 85.7% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | security | 100.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | spec | 42.9% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | tests | 85.7% |
 | qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 0.0% |
 | qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 57.1% |
 | qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 71.4% |
@@ -561,6 +579,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 13.0 |
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | forbidden | 0.0 |
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | unexpected_near | 22.0 |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 14.0 |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 11.0 |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | forbidden | 0.0 |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.1.4 | unexpected_near | 7.0 |
 | qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
 | qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 8.0 |
 | qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 1.0 |
