@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-16 | openrouter | openai/gpt-5.6-sol | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 64.5% | 58.6% | 72.1% | 43.0 | 17.0 | 33.3% | 98.4% | no | [raw](results/raw/20260816-183846-openrouter-openai-gpt-5-6-sol.json) | — | — |
 | 2026-08-16 | openrouter | openai/gpt-5.6-luna | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 62.1% | 58.6% | 66.2% | 43.0 | 22.0 | 22.2% | 100.0% | no | [raw](results/raw/20260816-181934-openrouter-openai-gpt-5-6-luna.json) | — | — |
 | 2026-08-16 | openrouter | anthropic/claude-sonnet-5 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 22.5% | 12.9% | 78.6% | 9.0 | 2.0 | 100.0% | 100.0% | no | [raw](results/raw/20260816-132540-openrouter-anthropic-claude-sonnet-5.json) | — | — |
 | 2026-08-16 | openrouter | anthropic/claude-opus-5 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 5.5% | 2.9% | 71.4% | 2.0 | 1.0 | 100.0% | 100.0% | no | [raw](results/raw/20260816-132540-openrouter-anthropic-claude-opus-5.json) | — | — |
@@ -202,6 +203,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | language | recall |
 |---|---|---|---:|
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 80.0% |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 70.0% |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 60.0% |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | javascript | 60.0% |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | python | 50.0% |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | rust | 70.0% |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | typescript | 40.0% |
 | openai/gpt-5.6-luna | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 60.0% |
 | openai/gpt-5.6-luna | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 60.0% |
 | openai/gpt-5.6-luna | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 60.0% |
@@ -284,6 +292,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 28.6% |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 100.0% |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 42.9% |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | documentation | 71.4% |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | intent | 57.1% |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | performance | 42.9% |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | ponytail | 85.7% |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | security | 100.0% |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | spec | 0.0% |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | tests | 57.1% |
 | openai/gpt-5.6-luna | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 28.6% |
 | openai/gpt-5.6-luna | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 100.0% |
 | openai/gpt-5.6-luna | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 57.1% |
@@ -595,6 +613,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | class | median count |
 |---|---|---|---:|
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 6.0 |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 2.0 |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | forbidden | 0.0 |
+| openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | unexpected_near | 7.0 |
 | openai/gpt-5.6-luna | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
 | openai/gpt-5.6-luna | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 9.0 |
 | openai/gpt-5.6-luna | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 3.0 |
