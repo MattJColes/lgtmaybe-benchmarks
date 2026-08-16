@@ -9,6 +9,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
 | 2026-08-16 | openrouter | x-ai/grok-4.6 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 61.1% | 57.1% | 65.6% | 42.0 | 22.0 | 22.2% | 98.5% | no | [raw](results/raw/20260816-065849-openrouter-x-ai-grok-4-6.json) | — | — |
+| 2026-08-16 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 34.4% | 8.8% | 11.0 | 114.0 | — | — | no | [raw](results/raw/20260816-055119-openai-compatible-nvidia-gemma-4-26b-a4b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-16 | openrouter | kwaipilot/kat-coder-pro-v2.5 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 60.5% | 55.7% | 66.1% | 41.0 | 21.0 | 22.2% | 98.3% | no | [raw](results/raw/20260816-051605-openrouter-kwaipilot-kat-coder-pro-v2-5.json) | — | — |
 | 2026-08-16 | openrouter | kwaipilot/kat-coder-air-v2.5 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 58.3% | 52.9% | 62.9% | 38.0 | 23.0 | 11.1% | 98.2% | no | [raw](results/raw/20260816-025231-openrouter-kwaipilot-kat-coder-air-v2-5.json) | — | — |
 | 2026-08-16 | openrouter | openai/gpt-oss-20b | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 31.2% | 8.0% | 10.0 | 115.0 | — | — | no | [raw](results/raw/20260816-003046-openrouter-openai-gpt-oss-20b.json) | — | — |
@@ -48,6 +49,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-16 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | python-context-small-v1 | 37.5% | 75.0% | 4 | 0 | 0 | no | 3768.4 |
+| 2026-08-16 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | python-context-medium-v1 | 37.5% | 33.3% | 9 | 0 | 0 | no | 4683.7 |
+| 2026-08-16 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | python-context-large-v1 | 25.0% | 5.3% | 38 | 0 | 0 | no | 3808.5 |
+| 2026-08-16 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | python-context-xlarge-v1 | 37.5% | 4.7% | 64 | 0 | 0 | no | 3800.5 |
+| 2026-08-16 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | python-context-clean-large-v1 | — | 0.0% | 10 | 0 | 0 | no | 2588.1 |
 | 2026-08-16 | openrouter | openai/gpt-oss-20b | python-context-small-v1 | 75.0% | 33.3% | 18 | 98,727 | 408,049 | yes | 1776.2 |
 | 2026-08-16 | openrouter | openai/gpt-oss-20b | python-context-medium-v1 | 37.5% | 7.0% | 43 | 185,216 | 407,930 | yes | 3605.9 |
 | 2026-08-16 | openrouter | openai/gpt-oss-20b | python-context-large-v1 | 12.5% | 1.9% | 54 | 575,789 | 378,554 | yes | 2772.6 |
@@ -224,6 +230,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | x-ai/grok-4.6 | breadth / canonical-breadth / lgtmaybe 2.1.4 | security | 100.0% |
 | x-ai/grok-4.6 | breadth / canonical-breadth / lgtmaybe 2.1.4 | spec | 28.6% |
 | x-ai/grok-4.6 | breadth / canonical-breadth / lgtmaybe 2.1.4 | tests | 42.9% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 37.5% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 75.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 0.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 25.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 0.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
 | kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 28.6% |
 | kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 100.0% |
 | kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 42.9% |
