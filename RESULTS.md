@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-15 | openrouter | mistralai/mistral-small-2603 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 28.1% | 1.3% | 9.0 | 699.0 | — | — | no | [raw](results/raw/20260815-233521-openrouter-mistralai-mistral-small-2603.json) | — | — |
 | 2026-08-15 | openrouter | qwen/qwen3-coder-next | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 22.2% | 12.5% | 100.0% | 4.0 | 0.0 | — | — | no | [raw](results/raw/20260815-230244-openrouter-qwen-qwen3-coder-next.json) | — | — |
 | 2026-08-15 | openrouter | x-ai/grok-4.6 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 47.5% | 84.4% | 55.1% | 27.0 | 22.0 | — | — | no | [raw](results/raw/20260815-223454-openrouter-x-ai-grok-4-6.json) | — | — |
 | 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 63.5% | 68.8% | 71.0% | 22.0 | 9.0 | — | — | no | [raw](results/raw/20260815-222949-openrouter-kwaipilot-kat-coder-pro-v2-5.json) | — | — |
@@ -39,6 +40,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-15 | openrouter | mistralai/mistral-small-2603 | python-context-small-v1 | 50.0% | 28.6% | 14 | 77,371 | 26,378 | no | 59.4 |
+| 2026-08-15 | openrouter | mistralai/mistral-small-2603 | python-context-medium-v1 | 12.5% | 100.0% | 1 | 253,182 | 143,132 | no | 231.8 |
+| 2026-08-15 | openrouter | mistralai/mistral-small-2603 | python-context-large-v1 | 25.0% | 1.2% | 166 | 591,704 | 77,848 | no | 405.5 |
+| 2026-08-15 | openrouter | mistralai/mistral-small-2603 | python-context-xlarge-v1 | 25.0% | 1.0% | 206 | 1,351,523 | 329,181 | yes | 998.3 |
+| 2026-08-15 | openrouter | mistralai/mistral-small-2603 | python-context-clean-large-v1 | — | 0.0% | 321 | 749,771 | 393,648 | yes | 989.1 |
 | 2026-08-15 | openrouter | qwen/qwen3-coder-next | python-context-small-v1 | 12.5% | 100.0% | 1 | 65,080 | 2,286 | no | 13.6 |
 | 2026-08-15 | openrouter | qwen/qwen3-coder-next | python-context-medium-v1 | 12.5% | 100.0% | 1 | 196,423 | 2,268 | no | 15.2 |
 | 2026-08-15 | openrouter | qwen/qwen3-coder-next | python-context-large-v1 | 12.5% | 100.0% | 1 | 500,572 | 1,958 | no | 16.1 |
@@ -159,6 +165,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 25.0% |
+| mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 25.0% |
+| mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
+| mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 25.0% |
+| mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 25.0% |
+| mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 0.0% |
+| mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
 | qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
 | qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 0.0% |
 | qwen/qwen3-coder-next | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
