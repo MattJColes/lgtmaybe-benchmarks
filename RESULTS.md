@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-16 | openrouter | kwaipilot/kat-coder-air-v2.5 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 58.3% | 52.9% | 62.9% | 38.0 | 23.0 | 11.1% | 98.2% | no | [raw](results/raw/20260816-025231-openrouter-kwaipilot-kat-coder-air-v2-5.json) | — | — |
 | 2026-08-16 | openrouter | openai/gpt-oss-20b | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 31.2% | 8.0% | 10.0 | 115.0 | — | — | no | [raw](results/raw/20260816-003046-openrouter-openai-gpt-oss-20b.json) | — | — |
 | 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 31.2% | 7.8% | 10.0 | 118.0 | — | — | no | [raw](results/raw/20260816-002203-openrouter-openai-gpt-oss-120b-nitro.json) | — | — |
 | 2026-08-15 | openrouter | mistralai/mistral-small-2603 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 28.1% | 1.3% | 9.0 | 699.0 | — | — | no | [raw](results/raw/20260815-233521-openrouter-mistralai-mistral-small-2603.json) | — | — |
@@ -181,10 +182,32 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | 2026-08-15 | openrouter | anthropic/claude-fable-5 | python-context-xlarge-v1 | 37.5% | 42.9% | 7 | 1,587,375 | 83,157 | no | 298.6 |
 | 2026-08-15 | openrouter | anthropic/claude-fable-5 | python-context-clean-large-v1 | — | 100.0% | 0 | 743,641 | 53,137 | no | 205.8 |
 
+## Per-language recall
+
+| model | comparison key | language | recall |
+|---|---|---|---:|
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 60.0% |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 50.0% |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 40.0% |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | javascript | 40.0% |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | python | 60.0% |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | rust | 50.0% |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | typescript | 50.0% |
+
 ## Per-lens recall
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 14.3% |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 85.7% |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 57.1% |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | documentation | 71.4% |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | intent | 28.6% |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | performance | 57.1% |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | ponytail | 28.6% |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | security | 100.0% |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | spec | 14.3% |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | tests | 57.1% |
 | openai/gpt-oss-20b | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
 | openai/gpt-oss-20b | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 50.0% |
 | openai/gpt-oss-20b | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 25.0% |
@@ -374,3 +397,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | anthropic/claude-fable-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 75.0% |
 | anthropic/claude-fable-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 25.0% |
 | anthropic/claude-fable-5 | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
+
+## False-positive classes
+
+| model | comparison key | class | median count |
+|---|---|---|---:|
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 11.0 |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 6.0 |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | forbidden | 0.0 |
+| kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | unexpected_near | 6.0 |
