@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-16 | openrouter | qwen/qwen3-coder-next | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 43.2% | 34.3% | 56.8% | 25.0 | 19.0 | 22.2% | 97.8% | no | [raw](results/raw/20260816-103350-openrouter-qwen-qwen3-coder-next.json) | — | — |
 | 2026-08-16 | openrouter | x-ai/grok-4.6 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 61.1% | 57.1% | 65.6% | 42.0 | 22.0 | 22.2% | 98.5% | no | [raw](results/raw/20260816-065849-openrouter-x-ai-grok-4-6.json) | — | — |
 | 2026-08-16 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 34.4% | 8.8% | 11.0 | 114.0 | — | — | no | [raw](results/raw/20260816-055119-openai-compatible-nvidia-gemma-4-26b-a4b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-16 | openrouter | kwaipilot/kat-coder-pro-v2.5 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 60.5% | 55.7% | 66.1% | 41.0 | 21.0 | 22.2% | 98.3% | no | [raw](results/raw/20260816-051605-openrouter-kwaipilot-kat-coder-pro-v2-5.json) | — | — |
@@ -194,6 +195,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | language | recall |
 |---|---|---|---:|
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 50.0% |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 30.0% |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 40.0% |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | javascript | 30.0% |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | python | 20.0% |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | rust | 40.0% |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | typescript | 30.0% |
 | x-ai/grok-4.6 | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 80.0% |
 | x-ai/grok-4.6 | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 60.0% |
 | x-ai/grok-4.6 | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 60.0% |
@@ -220,6 +228,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 0.0% |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 57.1% |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 71.4% |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | documentation | 42.9% |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | intent | 0.0% |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | performance | 0.0% |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | ponytail | 14.3% |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | security | 100.0% |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | spec | 42.9% |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | tests | 0.0% |
 | x-ai/grok-4.6 | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 0.0% |
 | x-ai/grok-4.6 | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 71.4% |
 | x-ai/grok-4.6 | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 71.4% |
@@ -451,6 +469,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | class | median count |
 |---|---|---|---:|
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 8.0 |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 1.0 |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | forbidden | 0.0 |
+| qwen/qwen3-coder-next | breadth / canonical-breadth / lgtmaybe 2.1.4 | unexpected_near | 9.0 |
 | x-ai/grok-4.6 | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
 | x-ai/grok-4.6 | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 11.0 |
 | x-ai/grok-4.6 | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 3.0 |
