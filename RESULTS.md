@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-16 | openrouter | kwaipilot/kat-coder-pro-v2.5 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 60.5% | 55.7% | 66.1% | 41.0 | 21.0 | 22.2% | 98.3% | no | [raw](results/raw/20260816-051605-openrouter-kwaipilot-kat-coder-pro-v2-5.json) | — | — |
 | 2026-08-16 | openrouter | kwaipilot/kat-coder-air-v2.5 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 58.3% | 52.9% | 62.9% | 38.0 | 23.0 | 11.1% | 98.2% | no | [raw](results/raw/20260816-025231-openrouter-kwaipilot-kat-coder-air-v2-5.json) | — | — |
 | 2026-08-16 | openrouter | openai/gpt-oss-20b | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 31.2% | 8.0% | 10.0 | 115.0 | — | — | no | [raw](results/raw/20260816-003046-openrouter-openai-gpt-oss-20b.json) | — | — |
 | 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 0.0% | 31.2% | 7.8% | 10.0 | 118.0 | — | — | no | [raw](results/raw/20260816-002203-openrouter-openai-gpt-oss-120b-nitro.json) | — | — |
@@ -186,6 +187,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | language | recall |
 |---|---|---|---:|
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 60.0% |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 50.0% |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 60.0% |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | javascript | 60.0% |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | python | 50.0% |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | rust | 50.0% |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | typescript | 50.0% |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 60.0% |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 50.0% |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 40.0% |
@@ -198,6 +206,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 28.6% |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 100.0% |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 42.9% |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | documentation | 57.1% |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | intent | 42.9% |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | performance | 100.0% |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | ponytail | 28.6% |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | security | 100.0% |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | spec | 14.3% |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | tests | 57.1% |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 14.3% |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 85.7% |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 57.1% |
@@ -402,6 +420,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | class | median count |
 |---|---|---|---:|
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 7.0 |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 6.0 |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | forbidden | 0.0 |
+| kwaipilot/kat-coder-pro-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | unexpected_near | 4.0 |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 11.0 |
 | kwaipilot/kat-coder-air-v2.5 | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 6.0 |
