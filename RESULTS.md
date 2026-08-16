@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-16 | openrouter | google/gemini-3.7-flash | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 59.8% | 48.6% | 77.8% | 35.0 | 10.0 | 55.6% | 100.0% | no | [raw](results/raw/20260816-194950-openrouter-google-gemini-3-7-flash.json) | — | — |
 | 2026-08-16 | openrouter | openai/gpt-5.6-sol | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 64.5% | 58.6% | 72.1% | 43.0 | 17.0 | 33.3% | 98.4% | no | [raw](results/raw/20260816-183846-openrouter-openai-gpt-5-6-sol.json) | — | — |
 | 2026-08-16 | openrouter | openai/gpt-5.6-luna | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 62.1% | 58.6% | 66.2% | 43.0 | 22.0 | 22.2% | 100.0% | no | [raw](results/raw/20260816-181934-openrouter-openai-gpt-5-6-luna.json) | — | — |
 | 2026-08-16 | openrouter | anthropic/claude-sonnet-5 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 22.5% | 12.9% | 78.6% | 9.0 | 2.0 | 100.0% | 100.0% | no | [raw](results/raw/20260816-132540-openrouter-anthropic-claude-sonnet-5.json) | — | — |
@@ -203,6 +204,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | language | recall |
 |---|---|---|---:|
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 50.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 50.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 60.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | javascript | 40.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | python | 40.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | rust | 50.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | typescript | 50.0% |
 | openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 80.0% |
 | openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 70.0% |
 | openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 60.0% |
@@ -292,6 +300,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 0.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 57.1% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 85.7% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | documentation | 14.3% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | intent | 0.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | performance | 100.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | ponytail | 100.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | security | 85.7% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | spec | 0.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | tests | 42.9% |
 | openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 28.6% |
 | openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 100.0% |
 | openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 42.9% |
@@ -613,6 +631,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | class | median count |
 |---|---|---|---:|
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 4.0 |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 1.0 |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | forbidden | 0.0 |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | unexpected_near | 5.0 |
 | openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
 | openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 6.0 |
 | openai/gpt-5.6-sol | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 2.0 |
