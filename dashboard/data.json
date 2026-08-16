@@ -218,6 +218,26 @@
       "audit_paths": [],
       "canonical": false,
       "comparison_key": "context-v1 / context-canonical-v1 / lgtmaybe 2.1.4",
+      "context_cases": [],
+      "date": "2026-08-15",
+      "focused": false,
+      "lgtmaybe_version": "lgtmaybe 2.1.4",
+      "metrics": null,
+      "model": "poolside/laguna-s-2.1",
+      "profile": "context-canonical-v1",
+      "provider": "openrouter",
+      "raw_path": "results/raw/20260815-231043-openrouter-poolside-laguna-s-2-1.json",
+      "run_id": "20260815-231043-openrouter-poolside-laguna-s-2-1",
+      "settings": "—",
+      "status": "complete",
+      "suite": "context-v1",
+      "timestamp": "2026-08-15T23:10:43Z"
+    },
+    {
+      "audit": "no",
+      "audit_paths": [],
+      "canonical": false,
+      "comparison_key": "context-v1 / context-canonical-v1 / lgtmaybe 2.1.4",
       "context_cases": [
         {
           "case": "python-context-small-v1",
