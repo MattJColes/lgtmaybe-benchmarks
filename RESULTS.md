@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 31.2% | 7.8% | 10.0 | 118.0 | — | — | no | [raw](results/raw/20260816-002203-openrouter-openai-gpt-oss-120b-nitro.json) | — | — |
 | 2026-08-15 | openrouter | mistralai/mistral-small-2603 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 0.0% | 28.1% | 1.3% | 9.0 | 699.0 | — | — | no | [raw](results/raw/20260815-233521-openrouter-mistralai-mistral-small-2603.json) | — | — |
 | 2026-08-15 | openrouter | qwen/qwen3-coder-next | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 22.2% | 12.5% | 100.0% | 4.0 | 0.0 | — | — | no | [raw](results/raw/20260815-230244-openrouter-qwen-qwen3-coder-next.json) | — | — |
 | 2026-08-15 | openrouter | x-ai/grok-4.6 | context-v1 | context-canonical-v1 | lgtmaybe 2.1.4 | complete | 47.5% | 84.4% | 55.1% | 27.0 | 22.0 | — | — | no | [raw](results/raw/20260815-223454-openrouter-x-ai-grok-4-6.json) | — | — |
@@ -40,6 +41,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | python-context-small-v1 | 50.0% | 33.3% | 12 | 72,795 | 62,884 | yes | 55.4 |
+| 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | python-context-medium-v1 | 37.5% | 23.1% | 13 | 211,585 | 78,171 | yes | 86.8 |
+| 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | python-context-large-v1 | 25.0% | 2.5% | 79 | 588,526 | 65,534 | yes | 87.1 |
+| 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | python-context-xlarge-v1 | 12.5% | 14.3% | 7 | 1,079,071 | 95,138 | yes | 166.4 |
+| 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | python-context-clean-large-v1 | — | 0.0% | 17 | 512,979 | 46,914 | yes | 32.5 |
 | 2026-08-15 | openrouter | mistralai/mistral-small-2603 | python-context-small-v1 | 50.0% | 28.6% | 14 | 77,371 | 26,378 | no | 59.4 |
 | 2026-08-15 | openrouter | mistralai/mistral-small-2603 | python-context-medium-v1 | 12.5% | 100.0% | 1 | 253,182 | 143,132 | no | 231.8 |
 | 2026-08-15 | openrouter | mistralai/mistral-small-2603 | python-context-large-v1 | 25.0% | 1.2% | 166 | 591,704 | 77,848 | no | 405.5 |
@@ -165,6 +171,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| openai/gpt-oss-120b:nitro | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 0.0% |
+| openai/gpt-oss-120b:nitro | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 62.5% |
+| openai/gpt-oss-120b:nitro | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
+| openai/gpt-oss-120b:nitro | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | documentation | 0.0% |
+| openai/gpt-oss-120b:nitro | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | intent | 0.0% |
+| openai/gpt-oss-120b:nitro | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | performance | 25.0% |
+| openai/gpt-oss-120b:nitro | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | security | 100.0% |
 | mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | complexity | 25.0% |
 | mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | correctness | 25.0% |
 | mistralai/mistral-small-2603 | context-v1 / context-canonical-v1 / lgtmaybe 2.1.4 | deprecation | 0.0% |
