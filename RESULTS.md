@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-16 | openrouter | openai/gpt-oss-120b:nitro | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 52.0% | 57.1% | 47.7% | 41.0 | 45.0 | 11.1% | 95.6% | no | [raw](results/raw/20260816-124949-openrouter-openai-gpt-oss-120b-nitro.json) | — | — |
 | 2026-08-16 | openrouter | mistralai/mistral-small-2603 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 57.8% | 62.9% | 51.1% | 45.0 | 46.0 | 33.3% | 96.9% | no | [raw](results/raw/20260816-113731-openrouter-mistralai-mistral-small-2603.json) | — | — |
 | 2026-08-16 | openrouter | qwen/qwen3-coder-next | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 43.2% | 34.3% | 56.8% | 25.0 | 19.0 | 22.2% | 97.8% | no | [raw](results/raw/20260816-103350-openrouter-qwen-qwen3-coder-next.json) | — | — |
 | 2026-08-16 | openrouter | x-ai/grok-4.6 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 61.1% | 57.1% | 65.6% | 42.0 | 22.0 | 22.2% | 98.5% | no | [raw](results/raw/20260816-065849-openrouter-x-ai-grok-4-6.json) | — | — |
@@ -196,6 +197,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | language | recall |
 |---|---|---|---:|
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 50.0% |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 60.0% |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 50.0% |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | javascript | 70.0% |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | python | 70.0% |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | rust | 50.0% |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | typescript | 50.0% |
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 60.0% |
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 80.0% |
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 60.0% |
@@ -236,6 +244,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 28.6% |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 100.0% |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 57.1% |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | documentation | 57.1% |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | intent | 42.9% |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | performance | 71.4% |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | ponytail | 57.1% |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | security | 100.0% |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | spec | 14.3% |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | tests | 42.9% |
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 28.6% |
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 100.0% |
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 71.4% |
@@ -487,6 +505,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | class | median count |
 |---|---|---|---:|
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 11.0 |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 5.0 |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | forbidden | 0.0 |
+| openai/gpt-oss-120b:nitro | breadth / canonical-breadth / lgtmaybe 2.1.4 | unexpected_near | 28.0 |
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 10.0 |
 | mistralai/mistral-small-2603 | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 13.0 |
