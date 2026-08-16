@@ -51,7 +51,7 @@ Top 10 per suite. Each suite gets its own section — **Long horizon** and **Bre
 <!-- BENCH_RESULTS_START -->
 ## Breadth — top 10
 
-Complete `breadth` runs with profile `canonical-breadth` only. Cases span seven programming languages plus GitHub Actions and Terraform, planting one finding per language and review lens, so the score measures coverage across kinds of issue rather than diff size. Scored as balanced F1, which is not comparable with the long-horizon overall score.
+Complete `breadth` runs with profile `canonical-breadth` only. Cases span seven programming languages plus GitHub Actions and Terraform, planting one finding per language and review lens, so the score measures coverage across kinds of issue rather than diff size. Scored as balanced F1, which is not comparable with the long-horizon overall score. Rows are ranked highest to lowest by median balanced F1. The first row is the current leader.
 
 Comparison key: `breadth / canonical-breadth / lgtmaybe 2.1.4`.
 

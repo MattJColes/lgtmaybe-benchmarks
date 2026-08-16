@@ -15,6 +15,10 @@ Every generated result section SHALL open with a heading naming the suite it rep
 - **WHEN** either canonical suite section is rendered
 - **THEN** its heading states that the section shows the top 10 results for that suite
 
+#### Scenario: Identify the breadth leader
+- **WHEN** complete canonical breadth runs are rendered
+- **THEN** the section states that rows are ranked highest to lowest by median balanced F1 and the first row is the current leader
+
 #### Scenario: Disclaim cross-suite ranking
 - **WHEN** both suites' sections are rendered in one document
 - **THEN** each section states that the suites measure different properties and that their scores are not comparable

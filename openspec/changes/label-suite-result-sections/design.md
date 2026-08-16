@@ -24,6 +24,8 @@ Both sections are titled by suite: `## Long horizon` and `## Breadth`. Titling o
 
 Each suite heading also says `top 10`. The hand-authored results paragraph already states the limit, but repeating it in both generated headings keeps the scope visible beside either table and removes ambiguity when a reader follows a deep link directly to one section.
 
+The breadth blurb states that rows are ranked highest to lowest by median balanced F1 and that the first row is the current leader. This describes the existing sort without adding a rank column or changing table data.
+
 This supersedes the earlier decision to leave `## Context scaling` untouched. That decision was taken when only one section could ever render, so asymmetry cost nothing; it costs a mislabelled table as soon as breadth runs.
 
 Each blurb carries one sentence stating that the other suite measures a different property and that scores are not comparable across suites. Placing it in generated text rather than hand-authored prose keeps it adjacent to the table it qualifies and regenerates with it.

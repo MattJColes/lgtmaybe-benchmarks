@@ -24,3 +24,9 @@
 - [x] 5.1 Add behavioural assertions that each generated suite heading says `top 10`
 - [x] 5.2 Update both generated suite headings and regenerate the README
 - [x] 5.3 Run pytest, Ruff, mypy, and deterministic report generation with Python 3.12
+
+## 6. Clarify breadth ranking order
+
+- [x] 6.1 Add a behavioural assertion that the breadth section explains its ranking order and leader row
+- [x] 6.2 Add the generated breadth ranking note and regenerate the README
+- [x] 6.3 Run pytest, Ruff, mypy, strict OpenSpec validation, and deterministic report generation with Python 3.12

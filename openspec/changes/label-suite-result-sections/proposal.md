@@ -12,6 +12,7 @@ The hand-authored README paragraph above the markers compounds this. It states t
 - Name the long-horizon section for its suite so both sections are identified the same way.
 - State in each section that the two suites measure different properties and that their scores are not comparable.
 - State in each suite heading that the README shows its top 10 results.
+- Explain in the breadth section that rows are ranked highest to lowest by median balanced F1 and the first row is the leader.
 - Rewrite the hand-authored README paragraph so it stays correct once breadth runs exist.
 
 ## Capabilities

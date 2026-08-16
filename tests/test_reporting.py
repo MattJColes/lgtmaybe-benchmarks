@@ -669,7 +669,7 @@ def _assert_top_ten(rendered: str) -> None:
     assert len(rows) == 10
     assert "high-10" in rows[0]
     assert "high-0" not in rendered
-    assert "low" not in rendered
+    assert not any("| low |" in row for row in rows)
 
 
 def test_context_readme_ranking_shows_top_ten() -> None:
@@ -830,6 +830,15 @@ def test_breadth_section_is_identified_by_suite() -> None:
     assert "## Breadth — top 10" in rendered
     assert "`breadth`" in rendered
     assert "`canonical-breadth`" in rendered
+
+
+def test_breadth_section_explains_ranking_order() -> None:
+    rendered = render_results([v2_raw("2026-08-16T00:00:00Z", "ranked")])
+
+    assert (
+        "Rows are ranked highest to lowest by median balanced F1. "
+        "The first row is the current leader."
+    ) in rendered
 
 
 def test_long_horizon_section_is_identified_by_suite() -> None:
