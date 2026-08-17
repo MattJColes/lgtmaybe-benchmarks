@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-17 | openrouter | google/gemini-3.7-flash | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 62.2% | 54.3% | 72.7% | 40.0 | 15.0 | 44.4% | 100.0% | no | [raw](results/raw/20260817-212703-openrouter-google-gemini-3-7-flash.json) | — | — |
 | 2026-08-17 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | long-horizon | diagnostic-custom-v1 | lgtmaybe 2.2.0 | complete | 0.0% | 75.0% | 29.6% | 24.0 | 57.0 | — | — | no | [raw](results/raw/20260817-125556-openai-compatible-unsloth-qwen3-8-27b-nvfp4.json) | — | effort low; api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-17 | openrouter | qwen/qwen3.8-max | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 71.4% | 61.4% | 84.9% | 45.0 | 8.0 | 77.8% | 98.1% | no | [raw](results/raw/20260817-113155-openrouter-qwen-qwen3-8-max.json) | — | — |
 | 2026-08-17 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 57.1% | 47.1% | 72.3% | 34.0 | 13.0 | 44.4% | 98.0% | no | [raw](results/raw/20260817-095325-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 3 |
@@ -219,6 +220,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | language | recall |
 |---|---|---|---:|
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | dart | 50.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | go | 50.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | java | 70.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | javascript | 40.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | python | 60.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | rust | 60.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | typescript | 50.0% |
 | qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | dart | 80.0% |
 | qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | go | 70.0% |
 | qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | java | 50.0% |
@@ -364,6 +372,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | complexity | 0.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | correctness | 71.4% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | deprecation | 85.7% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | documentation | 57.1% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | intent | 14.3% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | performance | 100.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | ponytail | 100.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | security | 100.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | spec | 0.0% |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | tests | 28.6% |
 | unsloth/Qwen3.8-27B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | complexity | 0.0% |
 | unsloth/Qwen3.8-27B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | correctness | 100.0% |
 | unsloth/Qwen3.8-27B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | deprecation | 100.0% |
@@ -786,6 +804,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | class | median count |
 |---|---|---|---:|
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | adjudicated | 0.0 |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | clean_case | 5.0 |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | duplicate | 0.0 |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | forbidden | 0.0 |
+| google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | unexpected_near | 10.0 |
 | qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | adjudicated | 0.0 |
 | qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | clean_case | 3.0 |
 | qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | duplicate | 2.0 |
