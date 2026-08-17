@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-17 | openrouter | qwen/qwen3.8-max | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 71.4% | 61.4% | 84.9% | 45.0 | 8.0 | 77.8% | 98.1% | no | [raw](results/raw/20260817-113155-openrouter-qwen-qwen3-8-max.json) | — | — |
 | 2026-08-17 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 57.1% | 47.1% | 72.3% | 34.0 | 13.0 | 44.4% | 98.0% | no | [raw](results/raw/20260817-095325-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 3 |
 | 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 43.5% | 30.0% | 76.7% | 23.0 | 7.0 | 77.8% | 91.7% | no | [raw](results/raw/20260817-022041-openai-compatible-qwen-qwen3-5-9b.json) | — | api base http://127.0.0.1:8000/v1; concurrency 3 |
 | 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 22.2% | 12.5% | 100.0% | 4.0 | 0.0 | — | — | no | [raw](results/raw/20260817-012313-openai-compatible-qwen-qwen3-5-9b.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
@@ -217,6 +218,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | language | recall |
 |---|---|---|---:|
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | dart | 80.0% |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | go | 70.0% |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | java | 50.0% |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | javascript | 70.0% |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | python | 50.0% |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | rust | 70.0% |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | typescript | 50.0% |
 | nvidia/Qwen3.6-35B-A3B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.2.0 | dart | 50.0% |
 | nvidia/Qwen3.6-35B-A3B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.2.0 | go | 40.0% |
 | nvidia/Qwen3.6-35B-A3B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.2.0 | java | 50.0% |
@@ -355,6 +363,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | complexity | 42.9% |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | correctness | 100.0% |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | deprecation | 85.7% |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | documentation | 71.4% |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | intent | 28.6% |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | performance | 71.4% |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | ponytail | 57.1% |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | security | 100.0% |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | spec | 0.0% |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | tests | 71.4% |
 | nvidia/Qwen3.6-35B-A3B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.2.0 | complexity | 14.3% |
 | nvidia/Qwen3.6-35B-A3B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.2.0 | correctness | 85.7% |
 | nvidia/Qwen3.6-35B-A3B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.2.0 | deprecation | 42.9% |
@@ -760,6 +778,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | class | median count |
 |---|---|---|---:|
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | adjudicated | 0.0 |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | clean_case | 3.0 |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | duplicate | 2.0 |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | forbidden | 0.0 |
+| qwen/qwen3.8-max | breadth / canonical-breadth / lgtmaybe 2.2.0 | unexpected_near | 3.0 |
 | nvidia/Qwen3.6-35B-A3B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.2.0 | adjudicated | 0.0 |
 | nvidia/Qwen3.6-35B-A3B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.2.0 | clean_case | 6.0 |
 | nvidia/Qwen3.6-35B-A3B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.2.0 | duplicate | 1.0 |

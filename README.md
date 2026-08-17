@@ -59,6 +59,7 @@ Comparison key: `breadth / canonical-breadth / lgtmaybe 2.2.0`.
 
 | date | provider | model | balanced F1 | balanced recall | precision | false positives | clean pass | adjudication | audit | settings |
 |---|---|---|---:|---:|---:|---:|---:|---:|---|---|
+| 2026-08-17 | openrouter | qwen/qwen3.8-max | 71.4% [71.3–72.6%] provisional | 61.4% [58.6–67.1%] | 84.9% [79.0–91.5%] | 8 [4–13] | 77.8% [66.7–100.0%] | 98.1% [97.9–98.4%] | no | — |
 | 2026-08-17 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | 57.1% [51.1–60.7%] provisional | 47.1% [42.9–51.4%] | 72.3% [63.3–74.0%] | 13 [13–18] | 44.4% [22.2–55.6%] | 98.0% [98.0–100.0%] | no | api base http://127.0.0.1:8000/v1; concurrency 3 |
 
 Comparison key: `breadth / canonical-breadth / lgtmaybe 2.1.4`.
