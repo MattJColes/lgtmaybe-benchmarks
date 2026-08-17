@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 43.5% | 30.0% | 76.7% | 23.0 | 7.0 | 77.8% | 91.7% | no | [raw](results/raw/20260817-022041-openai-compatible-qwen-qwen3-5-9b.json) | — | api base http://127.0.0.1:8000/v1; concurrency 3 |
 | 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 22.2% | 12.5% | 100.0% | 4.0 | 0.0 | — | — | no | [raw](results/raw/20260817-012313-openai-compatible-qwen-qwen3-5-9b.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-16 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | breadth | diagnostic-custom-v1 | lgtmaybe 2.1.4 | complete | 70.6% | 62.9% | 76.2% | 46.0 | 13.0 | 33.3% | 98.2% | no | [raw](results/raw/20260816-223520-openai-compatible-unsloth-qwen3-8-27b-nvfp4.json) | — | effort low; api base http://127.0.0.1:8000/v1; concurrency 3 |
 | 2026-08-16 | openrouter | moonshotai/kimi-k3 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 63.6% | 65.7% | 60.5% | 48.0 | 32.0 | 0.0% | 98.8% | no | [raw](results/raw/20260816-210239-openrouter-moonshotai-kimi-k3.json) | — | — |
@@ -215,6 +216,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | language | recall |
 |---|---|---|---:|
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 30.0% |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 20.0% |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 30.0% |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | javascript | 50.0% |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | python | 10.0% |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | rust | 30.0% |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | typescript | 40.0% |
 | unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | dart | 60.0% |
 | unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | go | 50.0% |
 | unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | java | 70.0% |
@@ -339,6 +347,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 0.0% |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 28.6% |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 28.6% |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | documentation | 57.1% |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | intent | 14.3% |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | performance | 42.9% |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | ponytail | 14.3% |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | security | 100.0% |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | spec | 0.0% |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | tests | 14.3% |
 | Qwen/Qwen3.5-9B | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
 | Qwen/Qwen3.5-9B | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 0.0% |
 | Qwen/Qwen3.5-9B | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 0.0% |
@@ -724,6 +742,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | class | median count |
 |---|---|---|---:|
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 2.0 |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 1.0 |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | forbidden | 0.0 |
+| Qwen/Qwen3.5-9B | breadth / canonical-breadth / lgtmaybe 2.1.4 | unexpected_near | 4.0 |
 | unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | adjudicated | 0.0 |
 | unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | clean_case | 8.0 |
 | unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | duplicate | 1.0 |
