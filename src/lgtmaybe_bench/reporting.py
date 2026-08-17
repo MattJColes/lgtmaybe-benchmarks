@@ -350,49 +350,56 @@ def _render_breadth_canonical(
     ]
     if not eligible:
         return None
-    newest = max(eligible, key=lambda raw: raw["timestamp"])
-    key = (
-        _stored_suite(newest),
-        _stored_profile(newest),
-        newest["lgtmaybe_version"],
-    )
-    partition = [
-        raw
-        for raw in eligible
-        if (_stored_suite(raw), _stored_profile(raw), raw["lgtmaybe_version"]) == key
-    ]
-    runs = sorted(
-        (_score_suite_run(raw, adjudications) for raw in partition),
-        key=lambda run: (
-            run.aggregate.balanced_f1.median,
-            str(run.raw["timestamp"]),
-            str(run.raw.get("run_id", "")),
-        ),
+    partitions: dict[tuple[str, str, str], list[dict[str, Any]]] = {}
+    for raw in eligible:
+        key = (_stored_suite(raw), _stored_profile(raw), raw["lgtmaybe_version"])
+        partitions.setdefault(key, []).append(raw)
+
+    blocks: list[str] = []
+    for key, partition in sorted(
+        partitions.items(),
+        key=lambda item: max(str(raw["timestamp"]) for raw in item[1]),
         reverse=True,
-    )[:README_RESULT_LIMIT]
-    rows: list[str] = []
-    for run in runs:
-        score = _range(run.aggregate.balanced_f1, percent=True)
-        if any(repeat.score.provisional for repeat in run.repeats):
-            score += " provisional"
-        rows.append(
-            "| "
-            + " | ".join(
-                (
-                    _iso_date(run.raw["timestamp"]),
-                    run.raw["configuration"]["provider"],
-                    run.raw["configuration"]["model"],
-                    score,
-                    _range(run.aggregate.balanced_recall, percent=True),
-                    _range(run.aggregate.precision, percent=True),
-                    _count_range(run.aggregate.false_positives),
-                    _range(run.aggregate.clean_pass_rate, percent=True),
-                    _range(run.aggregate.adjudication_coverage, percent=True),
-                    _audit_label(run.raw),
-                    _settings(run.raw["configuration"]),
+    ):
+        runs = sorted(
+            (_score_suite_run(raw, adjudications) for raw in partition),
+            key=lambda run: (
+                run.aggregate.balanced_f1.median,
+                str(run.raw["timestamp"]),
+                str(run.raw.get("run_id", "")),
+            ),
+            reverse=True,
+        )[:README_RESULT_LIMIT]
+        rows: list[str] = []
+        for run in runs:
+            score = _range(run.aggregate.balanced_f1, percent=True)
+            if any(repeat.score.provisional for repeat in run.repeats):
+                score += " provisional"
+            rows.append(
+                "| "
+                + " | ".join(
+                    (
+                        _iso_date(run.raw["timestamp"]),
+                        run.raw["configuration"]["provider"],
+                        run.raw["configuration"]["model"],
+                        score,
+                        _range(run.aggregate.balanced_recall, percent=True),
+                        _range(run.aggregate.precision, percent=True),
+                        _count_range(run.aggregate.false_positives),
+                        _range(run.aggregate.clean_pass_rate, percent=True),
+                        _range(run.aggregate.adjudication_coverage, percent=True),
+                        _audit_label(run.raw),
+                        _settings(run.raw["configuration"]),
+                    )
                 )
+                + " |"
             )
-            + " |"
+        blocks.append(
+            f"Comparison key: `{key[0]} / {key[1]} / {key[2]}`.\n\n"
+            "| date | provider | model | balanced F1 | balanced recall | precision | "
+            "false positives | clean pass | adjudication | audit | settings |\n"
+            "|---|---|---|---:|---:|---:|---:|---:|---:|---|---|\n"
+            + "\n".join(rows)
         )
     return (
         "## Breadth — top 10\n\n"
@@ -402,10 +409,8 @@ def _render_breadth_canonical(
         "than diff size. Scored as balanced F1, which is not comparable with the long-horizon "
         "overall score. Rows are ranked highest to lowest by median balanced F1. The first row "
         "is the current leader.\n\n"
-        f"Comparison key: `{key[0]} / {key[1]} / {key[2]}`.\n\n"
-        "| date | provider | model | balanced F1 | balanced recall | precision | "
-        "false positives | clean pass | adjudication | audit | settings |\n"
-        "|---|---|---|---:|---:|---:|---:|---:|---:|---|---|\n" + "\n".join(rows) + "\n"
+        + "\n\n".join(blocks)
+        + "\n"
     )
 
 

@@ -174,7 +174,7 @@ def test_render_orders_score_ties_newest_first() -> None:
     assert rendered.index("new") < rendered.index("old")
 
 
-def test_readme_partition_uses_only_newest_complete_canonical_comparison_key() -> None:
+def test_readme_retains_prior_complete_canonical_comparison_keys() -> None:
     older_key = v2_raw("2026-01-01T00:00:00Z", "old-version", version="lgtmaybe 1.9")
     newest_a = v2_raw("2026-02-02T00:00:00Z", "new-a")
     newest_b = v2_raw("2026-02-01T00:00:00Z", "new-b")
@@ -186,12 +186,33 @@ def test_readme_partition_uses_only_newest_complete_canonical_comparison_key() -
     rendered = render_results([older_key, newest_a, newest_b, diagnostic, focused, incomplete])
 
     assert "Comparison key: `breadth / canonical-breadth / lgtmaybe 2.0`" in rendered
+    assert "Comparison key: `breadth / canonical-breadth / lgtmaybe 1.9`" in rendered
     assert "new-a" in rendered
     assert "new-b" in rendered
-    assert "old-version" not in rendered
+    assert "old-version" in rendered
+    assert rendered.index("lgtmaybe 2.0") < rendered.index("lgtmaybe 1.9")
     assert "diagnostic" not in rendered
     assert "focused" not in rendered
     assert "incomplete" not in rendered.split("## Incomplete runs")[0]
+
+
+def test_readme_ranks_and_limits_each_comparison_key_independently() -> None:
+    older = [
+        v2_raw(f"2026-01-{day:02d}T00:00:00Z", f"old-{day}", version="lgtmaybe 1.9")
+        for day in range(1, 12)
+    ]
+    newer = [
+        v2_raw(f"2026-02-{day:02d}T00:00:00Z", f"new-{day}") for day in range(1, 12)
+    ]
+
+    rendered = render_results(older + newer)
+
+    assert "| old-1 |" not in rendered
+    assert "| new-1 |" not in rendered
+    assert "old-11" in rendered
+    assert "new-11" in rendered
+    assert rendered.index("new-11") < rendered.index("new-2")
+    assert rendered.index("old-11") < rendered.index("old-2")
 
 
 def test_v2_leaderboard_exposes_balanced_quality_false_positives_and_audit() -> None:
