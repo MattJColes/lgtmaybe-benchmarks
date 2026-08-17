@@ -13,6 +13,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | 2026-08-17 | openrouter | openai/gpt-5.4-mini | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 49.7% | 42.9% | 61.7% | 32.0 | 18.0 | 33.3% | 97.9% | no | [raw](results/raw/20260817-212703-openrouter-openai-gpt-5-4-mini.json) | — | — |
 | 2026-08-17 | openrouter | google/gemini-3.7-flash | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 62.2% | 54.3% | 72.7% | 40.0 | 15.0 | 44.4% | 100.0% | no | [raw](results/raw/20260817-212703-openrouter-google-gemini-3-7-flash.json) | — | — |
 | 2026-08-17 | openrouter | anthropic/claude-sonnet-5 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 28.3% | 17.1% | 81.2% | 13.0 | 3.0 | 88.9% | 100.0% | no | [raw](results/raw/20260817-212703-openrouter-anthropic-claude-sonnet-5.json) | — | — |
+| 2026-08-17 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | long-horizon | diagnostic-custom-v1 | lgtmaybe 2.2.0 | complete | 29.6% | 18.8% | 85.7% | 6.0 | 1.0 | — | — | no | [raw](results/raw/20260817-204402-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4.json) | — | effort low; api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-17 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | long-horizon | diagnostic-custom-v1 | lgtmaybe 2.2.0 | complete | 0.0% | 75.0% | 29.6% | 24.0 | 57.0 | — | — | no | [raw](results/raw/20260817-125556-openai-compatible-unsloth-qwen3-8-27b-nvfp4.json) | — | effort low; api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-17 | openrouter | qwen/qwen3.8-max | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 71.4% | 61.4% | 84.9% | 45.0 | 8.0 | 77.8% | 98.1% | no | [raw](results/raw/20260817-113155-openrouter-qwen-qwen3-8-max.json) | — | — |
 | 2026-08-17 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 57.1% | 47.1% | 72.3% | 34.0 | 13.0 | 44.4% | 98.0% | no | [raw](results/raw/20260817-095325-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 3 |
@@ -454,6 +455,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | anthropic/claude-sonnet-5 | breadth / canonical-breadth / lgtmaybe 2.2.0 | security | 14.3% |
 | anthropic/claude-sonnet-5 | breadth / canonical-breadth / lgtmaybe 2.2.0 | spec | 0.0% |
 | anthropic/claude-sonnet-5 | breadth / canonical-breadth / lgtmaybe 2.2.0 | tests | 14.3% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | complexity | 0.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | correctness | 25.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | deprecation | 0.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | documentation | 0.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | intent | 0.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | performance | 0.0% |
+| nvidia/Qwen3.6-35B-A3B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | security | 100.0% |
 | unsloth/Qwen3.8-27B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | complexity | 0.0% |
 | unsloth/Qwen3.8-27B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | correctness | 100.0% |
 | unsloth/Qwen3.8-27B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | deprecation | 100.0% |
