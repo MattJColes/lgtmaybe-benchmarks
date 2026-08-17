@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 22.2% | 12.5% | 100.0% | 4.0 | 0.0 | — | — | no | [raw](results/raw/20260817-012313-openai-compatible-qwen-qwen3-5-9b.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-16 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | breadth | diagnostic-custom-v1 | lgtmaybe 2.1.4 | complete | 70.6% | 62.9% | 76.2% | 46.0 | 13.0 | 33.3% | 98.2% | no | [raw](results/raw/20260816-223520-openai-compatible-unsloth-qwen3-8-27b-nvfp4.json) | — | effort low; api base http://127.0.0.1:8000/v1; concurrency 3 |
 | 2026-08-16 | openrouter | moonshotai/kimi-k3 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 63.6% | 65.7% | 60.5% | 48.0 | 32.0 | 0.0% | 98.8% | no | [raw](results/raw/20260816-210239-openrouter-moonshotai-kimi-k3.json) | — | — |
 | 2026-08-16 | openrouter | google/gemini-3.7-flash | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 59.8% | 48.6% | 77.8% | 35.0 | 10.0 | 55.6% | 100.0% | no | [raw](results/raw/20260816-194950-openrouter-google-gemini-3-7-flash.json) | — | — |
@@ -64,6 +65,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | python-context-small-v1 | 12.5% | 100.0% | 1 | 0 | 0 | no | 24.7 |
+| 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | python-context-medium-v1 | 12.5% | 100.0% | 1 | 0 | 0 | no | 39.4 |
+| 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | python-context-large-v1 | 12.5% | 100.0% | 1 | 0 | 0 | no | 88.4 |
+| 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | python-context-xlarge-v1 | 12.5% | 100.0% | 1 | 0 | 0 | no | 185.1 |
+| 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | python-context-clean-large-v1 | — | 100.0% | 0 | 0 | 0 | no | 1353.4 |
 | 2026-08-16 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | python-context-small-v1 | 37.5% | 75.0% | 4 | 0 | 0 | no | 3768.4 |
 | 2026-08-16 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | python-context-medium-v1 | 37.5% | 33.3% | 9 | 0 | 0 | no | 4683.7 |
 | 2026-08-16 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | python-context-large-v1 | 25.0% | 5.3% | 38 | 0 | 0 | no | 3808.5 |
@@ -333,6 +339,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| Qwen/Qwen3.5-9B | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | complexity | 0.0% |
+| Qwen/Qwen3.5-9B | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | correctness | 0.0% |
+| Qwen/Qwen3.5-9B | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | deprecation | 0.0% |
+| Qwen/Qwen3.5-9B | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | documentation | 0.0% |
+| Qwen/Qwen3.5-9B | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | intent | 0.0% |
+| Qwen/Qwen3.5-9B | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | performance | 0.0% |
+| Qwen/Qwen3.5-9B | long-horizon / canonical-long-horizon / lgtmaybe 2.1.4 | security | 100.0% |
 | unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | complexity | 28.6% |
 | unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | correctness | 100.0% |
 | unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | deprecation | 42.9% |
