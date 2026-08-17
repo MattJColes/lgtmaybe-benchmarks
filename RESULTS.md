@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-17 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | long-horizon | diagnostic-custom-v1 | lgtmaybe 2.2.0 | complete | 0.0% | 75.0% | 29.6% | 24.0 | 57.0 | — | — | no | [raw](results/raw/20260817-125556-openai-compatible-unsloth-qwen3-8-27b-nvfp4.json) | — | effort low; api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-17 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 57.1% | 47.1% | 72.3% | 34.0 | 13.0 | 44.4% | 98.0% | no | [raw](results/raw/20260817-095325-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 3 |
 | 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 43.5% | 30.0% | 76.7% | 23.0 | 7.0 | 77.8% | 91.7% | no | [raw](results/raw/20260817-022041-openai-compatible-qwen-qwen3-5-9b.json) | — | api base http://127.0.0.1:8000/v1; concurrency 3 |
 | 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | long-horizon | canonical-long-horizon | lgtmaybe 2.1.4 | complete | 22.2% | 12.5% | 100.0% | 4.0 | 0.0 | — | — | no | [raw](results/raw/20260817-012313-openai-compatible-qwen-qwen3-5-9b.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
@@ -355,6 +356,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| unsloth/Qwen3.8-27B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | complexity | 0.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | correctness | 100.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | deprecation | 100.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | documentation | 75.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | intent | 100.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | performance | 25.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.2.0 | security | 100.0% |
 | nvidia/Qwen3.6-35B-A3B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.2.0 | complexity | 14.3% |
 | nvidia/Qwen3.6-35B-A3B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.2.0 | correctness | 85.7% |
 | nvidia/Qwen3.6-35B-A3B-NVFP4 | breadth / canonical-breadth / lgtmaybe 2.2.0 | deprecation | 42.9% |
