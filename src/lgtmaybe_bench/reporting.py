@@ -240,7 +240,17 @@ def _settings(config: dict[str, Any]) -> str:
     profile_values: dict[str, Any] | None = None
     resolved = config.get("resolved_profile")
     base_profile = config.get("base_profile")
-    if config.get("profile") == "diagnostic-custom-v1" and isinstance(base_profile, str):
+    overrides = config.get("diagnostic_overrides")
+    if (
+        config.get("profile") == "diagnostic-custom-v1"
+        and isinstance(resolved, dict)
+        and isinstance(overrides, list)
+    ):
+        # Compare against the run's own resolved profile minus what it actually overrode, so a
+        # later edit to the base profile cannot rewrite a published run's settings summary.
+        overridden = set(overrides)
+        profile_values = {key: value for key, value in resolved.items() if key not in overridden}
+    elif config.get("profile") == "diagnostic-custom-v1" and isinstance(base_profile, str):
         try:
             profile_values = asdict(get_profile(base_profile))
         except ValueError:
