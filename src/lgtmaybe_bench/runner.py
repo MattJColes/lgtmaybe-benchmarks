@@ -258,6 +258,11 @@ def build_case_repo(case_dir: Path, destination: Path) -> Path:
     return destination
 
 
+def _reported(value: str) -> str:
+    """lgtmaybe renders `-` for a count it never received; that call still happened."""
+    return "0" if value == "-" else value
+
+
 def parse_review_output(stdout: str) -> tuple[tuple[Finding, ...], str, tuple[ProfileCall, ...]]:
     decoder = json.JSONDecoder()
     try:
@@ -285,14 +290,14 @@ def parse_review_output(stdout: str) -> tuple[tuple[Finding, ...], str, tuple[Pr
             calls.append(
                 ProfileCall(
                     label=values["call"],
-                    batch=int(values["batch"]),
-                    attempts=int(values["tries"]),
-                    elapsed_seconds=float(values["elapsed"].removesuffix("s")),
-                    input_tokens=int(values["in_tok"]),
-                    output_tokens=int(values["out_tok"]),
-                    reasoning_tokens=int(values["think_tok"]),
-                    cache_read_tokens=int(values["cache_rd"]),
-                    cache_creation_tokens=int(values["cache_wr"]),
+                    batch=int(_reported(values["batch"])),
+                    attempts=int(_reported(values["tries"])),
+                    elapsed_seconds=float(_reported(values["elapsed"].removesuffix("s"))),
+                    input_tokens=int(_reported(values["in_tok"])),
+                    output_tokens=int(_reported(values["out_tok"])),
+                    reasoning_tokens=int(_reported(values["think_tok"])),
+                    cache_read_tokens=int(_reported(values["cache_rd"])),
+                    cache_creation_tokens=int(_reported(values["cache_wr"])),
                     findings=(None if raw_finding_count in (None, "-") else int(raw_finding_count)),
                     error=error,
                     truncated=bool(

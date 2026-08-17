@@ -52,6 +52,18 @@ CURRENT_PROFILE = (
     "       0        0  ProviderTruncated\n"
 )
 
+UNREPORTED_PROFILE = (
+    "== lgtmaybe profile ==\n"
+    "total wall time: 1807.50s\n\n"
+    "call             batch tries   elapsed   in_tok  out_tok think_tok  think_% "
+    "cache_rd cache_wr findings  error\n"
+    "security             1     1     7.50s      100       20         -        - "
+    "       0        0        2  -\n"
+    "intent               1     1  1800.00s        0        0         -        - "
+    "       0        0        -  ProviderTruncated: reasoning budget exhausted\n"
+    "reasoning: 1,296 of 4,096 tokens spent across 2 calls over 1 batch retry\n"
+)
+
 RUNAWAY_PROFILE = (
     "== lgtmaybe profile ==\n"
     "total wall time: 3980.64s\n\n"
@@ -537,6 +549,30 @@ def test_run_review_parses_current_profile_usage_and_truncation(tmp_path: Path) 
     assert observation.reasoning_tokens == 2_034
     assert observation.truncation_lenses == ("security",)
     assert observation.calls[0].error == "ProviderTruncated"
+
+
+def test_run_review_retains_calls_whose_counts_were_never_reported(tmp_path: Path) -> None:
+    executable = tmp_path / "fake-lgtmaybe.py"
+    executable.write_text(f"print('[]')\nprint({UNREPORTED_PROFILE!r})\n", encoding="utf-8")
+    config = RunConfig("openai-compatible", "fake", None, None, None, "full", None, 1, 5)
+
+    observation = run_review(tmp_path, config, [sys.executable, str(executable)])
+
+    assert [call.label for call in observation.calls] == ["security", "intent"]
+    assert observation.input_tokens == 100
+    assert observation.output_tokens == 20
+    assert observation.reasoning_tokens == 0
+    assert observation.calls[0].findings == 2
+    assert observation.calls[1].findings is None
+    assert observation.calls[1].elapsed_seconds == 1800.0
+    assert observation.calls[1].error == "ProviderTruncated: reasoning budget exhausted"
+    assert observation.truncation_lenses == ("intent",)
+
+
+def test_profile_summary_lines_are_never_parsed_as_calls() -> None:
+    _, _, calls = parse_review_output("[]\n" + UNREPORTED_PROFILE)
+
+    assert [call.label for call in calls] == ["security", "intent"]
 
 
 def test_run_review_marks_a_call_at_the_output_ceiling_as_truncated(tmp_path: Path) -> None:
