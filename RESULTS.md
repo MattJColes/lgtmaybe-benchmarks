@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-16 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | breadth | diagnostic-custom-v1 | lgtmaybe 2.1.4 | complete | 70.6% | 62.9% | 76.2% | 46.0 | 13.0 | 33.3% | 98.2% | no | [raw](results/raw/20260816-223520-openai-compatible-unsloth-qwen3-8-27b-nvfp4.json) | — | effort low; api base http://127.0.0.1:8000/v1; concurrency 3 |
 | 2026-08-16 | openrouter | moonshotai/kimi-k3 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 63.6% | 65.7% | 60.5% | 48.0 | 32.0 | 0.0% | 98.8% | no | [raw](results/raw/20260816-210239-openrouter-moonshotai-kimi-k3.json) | — | — |
 | 2026-08-16 | openrouter | google/gemini-3.7-flash | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 59.8% | 48.6% | 77.8% | 35.0 | 10.0 | 55.6% | 100.0% | no | [raw](results/raw/20260816-194950-openrouter-google-gemini-3-7-flash.json) | — | — |
 | 2026-08-16 | openrouter | google/gemini-3.1-pro-preview | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 59.3% | 55.7% | 63.5% | 41.0 | 24.0 | 22.2% | 98.5% | no | [raw](results/raw/20260816-190627-openrouter-google-gemini-3-1-pro-preview.json) | — | — |
@@ -208,6 +209,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | language | recall |
 |---|---|---|---:|
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | dart | 60.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | go | 50.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | java | 70.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | javascript | 60.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | python | 50.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | rust | 80.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | typescript | 60.0% |
 | moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 60.0% |
 | moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 70.0% |
 | moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 70.0% |
@@ -325,6 +333,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | complexity | 28.6% |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | correctness | 100.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | deprecation | 42.9% |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | documentation | 57.1% |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | intent | 28.6% |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | performance | 85.7% |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | ponytail | 42.9% |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | security | 100.0% |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | spec | 14.3% |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | tests | 100.0% |
 | moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 28.6% |
 | moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 100.0% |
 | moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 57.1% |
@@ -693,6 +711,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | class | median count |
 |---|---|---|---:|
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | adjudicated | 0.0 |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | clean_case | 8.0 |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | duplicate | 1.0 |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | forbidden | 0.0 |
+| unsloth/Qwen3.8-27B-NVFP4 | breadth / diagnostic-custom-v1 / lgtmaybe 2.1.4 | unexpected_near | 4.0 |
 | moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
 | moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 15.0 |
 | moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 3.0 |
