@@ -413,6 +413,25 @@ def test_only_in_progress_runs_render_empty_state() -> None:
     assert rendered == "No benchmark runs recorded.\n"
 
 
+def test_ineligible_run_is_retained_but_never_scored_or_ranked() -> None:
+    ranked = v2_raw("2026-05-01T00:00:00Z", "ranked")
+    abandoned = v2_raw("2026-05-02T00:00:00Z", "abandoned")
+    abandoned["status"] = "ineligible"
+    abandoned["termination"] = {"case": "case", "classification": "timeout", "repeat": 1}
+    runs = [ranked, abandoned]
+
+    rendered = render_results(runs)
+    data = build_dashboard_data(runs)
+    by_model = {run["model"]: run for run in data["runs"]}
+
+    assert "ranked" in rendered
+    assert "abandoned" not in rendered
+    assert "abandoned" not in render_detailed_results(data)
+    assert by_model["abandoned"]["status"] == "ineligible"
+    assert by_model["abandoned"]["canonical"] is False
+    assert by_model["abandoned"]["metrics"] is None
+
+
 def test_status_free_and_complete_runs_render_identically() -> None:
     without_status = raw("2026-01-01T00:00:00Z", "one", True)
     with_status = raw("2026-01-01T00:00:00Z", "one", True)

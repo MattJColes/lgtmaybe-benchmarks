@@ -21,8 +21,14 @@ from lgtmaybe_bench.scoring import Finding, parse_findings
 TRUNCATION_MARKERS = ("truncat", "output_limit", "length", "max_tokens")
 RAW_IN_PROGRESS = "in_progress"
 RAW_COMPLETE = "complete"
+RAW_INELIGIBLE = "ineligible"
 CANONICAL_PROFILE_ID = "canonical-breadth"
+LONG_HORIZON_PROFILE_ID = "canonical-long-horizon"
 CANONICAL_MAX_TOKENS = 16_384
+
+# A full-corpus run under either of these profiles publishes a result only when every
+# observation is failure-free, so it has nothing left to earn after its first failure.
+FAIL_FAST_PROFILE_IDS = frozenset({CANONICAL_PROFILE_ID, LONG_HORIZON_PROFILE_ID})
 
 
 @dataclass(frozen=True, slots=True)
@@ -75,7 +81,7 @@ PROFILES = {
     CANONICAL_PROFILE_ID: _profile(
         CANONICAL_PROFILE_ID, canonical=True, repeats=3, max_tokens=CANONICAL_MAX_TOKENS
     ),
-    "canonical-long-horizon": _profile("canonical-long-horizon", repeats=1, preset="full"),
+    LONG_HORIZON_PROFILE_ID: _profile(LONG_HORIZON_PROFILE_ID, repeats=1, preset="full"),
     "diagnostic-full-v1": _profile("diagnostic-full-v1", preset="full"),
     "diagnostic-4k-v1": _profile("diagnostic-4k-v1", max_tokens=4096),
     "diagnostic-large-diff-v1": _profile("diagnostic-large-diff-v1", max_input_tokens=20_000),
@@ -186,6 +192,7 @@ class Observation:
     exit_code: int
     timed_out: bool
     failures: int
+    failure_class: str | None
     truncation_lenses: tuple[str, ...]
     input_tokens: int
     output_tokens: int
@@ -335,6 +342,22 @@ def _command(config: RunConfig, executable: list[str], audit_path: Path | None =
     return command
 
 
+def _failure_class(
+    timed_out: bool,
+    exit_code: int,
+    truncated_calls: tuple[ProfileCall, ...],
+    unparseable: bool,
+) -> str | None:
+    """Name why an observation failed; a truncated call that still exits zero has not."""
+    if not (timed_out or exit_code != 0):
+        return None
+    if timed_out:
+        return "timeout"
+    if truncated_calls:
+        return "truncated_output"
+    return "unparseable_output" if unparseable else "nonzero_exit"
+
+
 def run_review(
     repo: Path,
     config: RunConfig,
@@ -359,11 +382,13 @@ def run_review(
         stderr = exc.stderr.decode() if isinstance(exc.stderr, bytes) else (exc.stderr or "")
         exit_code = 124
     wall = time.perf_counter() - started
+    unparseable = False
     try:
         findings, profile, calls = parse_review_output(stdout) if stdout.strip() else ((), "", ())
     except ValueError:
         if exit_code == 0 and not timed_out:
             raise
+        unparseable = True
         findings, profile, calls = (), "", ()
     calls = tuple(
         replace(call, truncated=True)
@@ -384,6 +409,7 @@ def run_review(
         exit_code=exit_code,
         timed_out=timed_out,
         failures=int(exit_code != 0 or timed_out),
+        failure_class=_failure_class(timed_out, exit_code, truncated_calls, unparseable),
         truncation_lenses=tuple(call.label for call in truncated_calls),
         input_tokens=sum(call.input_tokens for call in calls),
         output_tokens=sum(call.output_tokens for call in calls),
@@ -530,12 +556,15 @@ def execute_benchmark(root: Path, args: Any, executable: str | list[str]) -> Pat
     audit_supported = _audit_supported(executable_parts)
     timestamp = datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
     observations: list[dict[str, Any]] = []
+    full_corpus = args.case is None and len(cases) == len(suite.cases)
+    fail_fast = profile.id in FAIL_FAST_PROFILE_IDS and full_corpus
 
-    def record(status: str) -> dict[str, Any]:
+    def record(status: str, termination: dict[str, Any] | None = None) -> dict[str, Any]:
         return {
             "schema_version": 2,
             "run_id": run_id,
             "status": status,
+            "termination": termination,
             "timestamp": timestamp,
             "lgtmaybe_version": version,
             "configuration": {
@@ -551,7 +580,7 @@ def execute_benchmark(root: Path, args: Any, executable: str | list[str]) -> Pat
                 "audit_available": audit_supported,
                 "repeats": profile.repeats,
                 "cases": [c.truth.name for c in cases],
-                "full_corpus": args.case is None and len(cases) == len(suite.cases),
+                "full_corpus": full_corpus,
             },
             "observations": observations,
         }
@@ -585,6 +614,21 @@ def execute_benchmark(root: Path, args: Any, executable: str | list[str]) -> Pat
                     ),
                 }
             )
+            if fail_fast and observation.failures:
+                termination = {
+                    "case": case.truth.name,
+                    "classification": observation.failure_class,
+                    "exit_code": observation.exit_code,
+                    "observation_id": observation_id,
+                    "repeat": repeat,
+                    "timed_out": observation.timed_out,
+                }
+                write_raw_result(path, record(RAW_INELIGIBLE, termination))
+                raise ValueError(
+                    "canonical run stopped: "
+                    f"{observation.failure_class} in repeat {repeat} case {case.truth.name} "
+                    f"(exit {observation.exit_code}); recorded {RAW_INELIGIBLE} in {path.name}"
+                )
             write_raw_result(path, record(RAW_IN_PROGRESS))
     write_raw_result(path, record(RAW_COMPLETE))
     regenerate_reports(root)

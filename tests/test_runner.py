@@ -518,6 +518,7 @@ def test_run_review_retains_failure_and_truncation(tmp_path: Path) -> None:
 
     assert observation.exit_code == 2
     assert observation.failures == 1
+    assert observation.failure_class == "truncated_output"
     assert observation.truncation_lenses == ("security",)
     assert observation.input_tokens == 210
     assert observation.wall_excluding_truncation_seconds <= observation.wall_seconds
@@ -586,6 +587,7 @@ def test_canonical_v2_bounds_repeated_ceiling_generations(tmp_path: Path) -> Non
     assert observation.truncation_lenses == ("security", "correctness", "performance", "tests")
     assert observation.wall_excluding_truncation_seconds == 0.0
     assert observation.failures == 0
+    assert observation.failure_class is None
     assert observation.findings == ()
 
 
@@ -604,6 +606,18 @@ def test_nonzero_command_retains_malformed_stdout(tmp_path: Path) -> None:
     assert observation.exit_code == 2
     assert observation.stdout.strip() == "provider failed"
     assert observation.findings == ()
+    assert observation.failure_class == "unparseable_output"
+
+
+def test_nonzero_command_with_parseable_output_is_classified_by_its_exit(tmp_path: Path) -> None:
+    executable = tmp_path / "failure.py"
+    executable.write_text("print('[]')\nraise SystemExit(3)\n", encoding="utf-8")
+    config = RunConfig("ollama", "fake", None, None, None, "full", None, 1, 5)
+
+    observation = run_review(tmp_path, config, [sys.executable, str(executable)])
+
+    assert observation.failures == 1
+    assert observation.failure_class == "nonzero_exit"
 
 
 def test_timeout_is_retained_as_failure(tmp_path: Path) -> None:
@@ -616,6 +630,7 @@ def test_timeout_is_retained_as_failure(tmp_path: Path) -> None:
     assert observation.timed_out is True
     assert observation.exit_code == 124
     assert observation.failures == 1
+    assert observation.failure_class == "timeout"
 
 
 def test_raw_result_is_atomic_and_does_not_add_secrets(tmp_path: Path) -> None:
@@ -968,6 +983,129 @@ def test_checkpoints_reuse_one_reserved_file(tmp_path: Path) -> None:
     raw = json.loads(raw_path.read_text(encoding="utf-8"))
     assert len(raw["observations"]) == 4
     assert raw["status"] == "complete"
+
+
+ALWAYS_FAILS = "    print('provider failed')\n    sys.exit(1)\n"
+FIRST_REVIEW_FAILS = (
+    "    if log.read_text(encoding='utf-8').count('review') == 1:\n"
+    "        print('provider failed')\n"
+    "        sys.exit(1)\n"
+    "    print(json.dumps([]))\n"
+    f"    print({PROFILE!r})\n"
+)
+
+
+def _failing_fake(tmp_path: Path, review_body: str) -> Path:
+    """Write a fake lgtmaybe that logs each review invocation so stopping is observable."""
+    fake = tmp_path / "failing_lgtmaybe.py"
+    fake.write_text(
+        "import json, pathlib, sys\n"
+        "if '--version' in sys.argv:\n"
+        "    print('lgtmaybe fake-1.0')\n"
+        "elif '--help' in sys.argv:\n"
+        "    print('--audit-jsonl FILE')\n"
+        "else:\n"
+        "    log = pathlib.Path(sys.argv[0]).with_name('invocations.log')\n"
+        "    with log.open('a', encoding='utf-8') as stream:\n"
+        "        stream.write('review\\n')\n" + review_body,
+        encoding="utf-8",
+    )
+    return fake
+
+
+def _full_corpus_args(suite: str, profile: str) -> Namespace:
+    return _bench_args(
+        suite=suite,
+        profile=profile,
+        case=None,
+        repeats=None,
+        preset=None,
+        reasoning_effort=None,
+        max_tokens=None,
+        max_input_tokens=None,
+        api_base=None,
+        concurrency=None,
+        timeout=7200,
+    )
+
+
+def _reviews(tmp_path: Path) -> int:
+    log = tmp_path / "invocations.log"
+    return log.read_text(encoding="utf-8").count("review") if log.exists() else 0
+
+
+def _abandoned_run(tmp_path: Path, suite: str, profile: str) -> dict[str, Any]:
+    _bench_workspace(tmp_path)
+    fake = _failing_fake(tmp_path, ALWAYS_FAILS)
+
+    with pytest.raises(ValueError, match="canonical run stopped"):
+        execute_benchmark(tmp_path, _full_corpus_args(suite, profile), [sys.executable, str(fake)])
+
+    raw_files = list((tmp_path / "results" / "raw").glob("*.json"))
+    assert len(raw_files) == 1
+    stored: dict[str, Any] = json.loads(raw_files[0].read_text(encoding="utf-8"))
+    return stored
+
+
+def test_canonical_breadth_run_stops_at_its_first_failed_observation(tmp_path: Path) -> None:
+    raw = _abandoned_run(tmp_path, "breadth", "canonical-breadth")
+
+    assert _reviews(tmp_path) == 1
+    assert raw["status"] == "ineligible"
+    assert len(raw["observations"]) == 1
+    assert raw["observations"][0]["failures"] == 1
+    assert not list((tmp_path / "results" / "raw").glob("*.tmp"))
+
+
+def test_canonical_long_horizon_run_stops_at_its_first_failed_observation(tmp_path: Path) -> None:
+    raw = _abandoned_run(tmp_path, "long-horizon", "canonical-long-horizon")
+
+    assert _reviews(tmp_path) == 1
+    assert raw["status"] == "ineligible"
+    assert len(raw["observations"]) == 1
+
+
+def test_ineligible_record_names_the_observation_that_stopped_the_run(tmp_path: Path) -> None:
+    raw = _abandoned_run(tmp_path, "breadth", "canonical-breadth")
+
+    observation = raw["observations"][0]
+    assert raw["termination"] == {
+        "case": observation["case"],
+        "classification": "unparseable_output",
+        "exit_code": 1,
+        "observation_id": observation["observation_id"],
+        "repeat": 1,
+        "timed_out": False,
+    }
+    assert observation["failure_class"] == "unparseable_output"
+
+
+def test_focused_run_keeps_collecting_failures(tmp_path: Path) -> None:
+    _bench_workspace(tmp_path)
+    fake = _failing_fake(tmp_path, FIRST_REVIEW_FAILS)
+    args = _bench_args(case=["sql-injection-basic", "off-by-one-page", "deep-nesting"])
+
+    raw_path = execute_benchmark(tmp_path, args, [sys.executable, str(fake)])
+
+    raw = json.loads(raw_path.read_text(encoding="utf-8"))
+    assert _reviews(tmp_path) == 3
+    assert raw["status"] == "complete"
+    assert raw["termination"] is None
+    assert [observation["failures"] for observation in raw["observations"]] == [1, 0, 0]
+
+
+def test_diagnostic_full_corpus_run_keeps_collecting_failures(tmp_path: Path) -> None:
+    _bench_workspace(tmp_path)
+    fake = _failing_fake(tmp_path, FIRST_REVIEW_FAILS)
+    args = _full_corpus_args("long-horizon", "diagnostic-full-v1")
+
+    raw_path = execute_benchmark(tmp_path, args, [sys.executable, str(fake)])
+
+    raw = json.loads(raw_path.read_text(encoding="utf-8"))
+    assert _reviews(tmp_path) == 5
+    assert raw["configuration"]["full_corpus"] is True
+    assert raw["status"] == "complete"
+    assert [observation["failures"] for observation in raw["observations"]] == [1, 0, 0, 0, 0]
 
 
 def test_full_fake_cli_run_records_full_corpus_scope(tmp_path: Path) -> None:
