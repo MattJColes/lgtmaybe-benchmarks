@@ -1,0 +1,1606 @@
+{
+  "configuration": {
+    "api_base": "http://127.0.0.1:8000/v1",
+    "audit_available": false,
+    "base_profile": "canonical-long-horizon",
+    "cases": [
+      "python-context-small-v1",
+      "python-context-medium-v1",
+      "python-context-large-v1",
+      "python-context-xlarge-v1",
+      "python-context-clean-large-v1"
+    ],
+    "concurrency": 2,
+    "diagnostic_overrides": [
+      "reasoning_effort"
+    ],
+    "full_corpus": true,
+    "max_input_tokens": 100000,
+    "max_tokens": null,
+    "mid_review_retrieval": false,
+    "model": "nvidia/Qwen3.6-35B-A3B-NVFP4",
+    "preset": "full",
+    "profile": "diagnostic-custom-v1",
+    "profile_canonical": false,
+    "profile_schema_version": 1,
+    "provider": "openai-compatible",
+    "reasoning_effort": "low",
+    "recursive": true,
+    "reflect": true,
+    "repeats": 1,
+    "resolved_profile": {
+      "base_profile_id": "canonical-long-horizon",
+      "canonical": false,
+      "diagnostic_overrides": [
+        "reasoning_effort"
+      ],
+      "id": "diagnostic-custom-v1",
+      "max_input_tokens": 100000,
+      "max_tokens": null,
+      "mid_review_retrieval": false,
+      "preset": "full",
+      "reasoning_effort": "low",
+      "recursive": true,
+      "reflect": true,
+      "repeats": 1,
+      "schema_version": 1,
+      "spec_review": true,
+      "static_analysis": false
+    },
+    "spec_review": true,
+    "static_analysis": false,
+    "suite": "long-horizon",
+    "timeout": 7200
+  },
+  "lgtmaybe_version": "lgtmaybe 2.2.0",
+  "observations": [
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 57.85811162999016,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 7164,
+          "label": "security",
+          "output_tokens": 16364,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 37.485246299998835,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 6999,
+          "label": "correctness",
+          "output_tokens": 9808,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 45.772686393989716,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 6849,
+          "label": "tests",
+          "output_tokens": 12994,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 44.44501413899707,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 6671,
+          "label": "documentation",
+          "output_tokens": 11975,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 45.0492384149984,
+          "error": null,
+          "findings": 2,
+          "input_tokens": 6871,
+          "label": "performance",
+          "output_tokens": 12887,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 39.15867622100632,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 6803,
+          "label": "complexity",
+          "output_tokens": 10940,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 1307.112222538999,
+          "error": "ProviderTruncated: response hit the 223596-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i",
+          "findings": null,
+          "input_tokens": 6804,
+          "label": "deprecation",
+          "output_tokens": 223596,
+          "reasoning_tokens": 0,
+          "truncated": true
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 217.57302101398818,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 4930,
+          "label": "deprecation",
+          "output_tokens": 13874,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 401.1552993579826,
+          "error": null,
+          "findings": 3,
+          "input_tokens": 4896,
+          "label": "deprecation",
+          "output_tokens": 10740,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 273.672354320006,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 6801,
+          "label": "ponytail",
+          "output_tokens": 14436,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 2189.8196356639965,
+          "error": "ProviderTruncated: response hit the 223325-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i",
+          "findings": null,
+          "input_tokens": 7075,
+          "label": "intent",
+          "output_tokens": 223325,
+          "reasoning_tokens": 0,
+          "truncated": true
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 41.898523384006694,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 5201,
+          "label": "intent",
+          "output_tokens": 9756,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 45.26542328498908,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 5167,
+          "label": "intent",
+          "output_tokens": 11439,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 0,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 14.090745220019016,
+          "error": null,
+          "findings": null,
+          "input_tokens": 8784,
+          "label": "reflect",
+          "output_tokens": 3844,
+          "reasoning_tokens": 0,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-small-v1",
+      "exit_code": 0,
+      "failure_class": null,
+      "failures": 0,
+      "findings": [
+        {
+          "anchor": "    query = f\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\"",
+          "anchored": false,
+          "body": "The query string is constructed using an f-string with direct user input `owner_id`. This allows an attacker to inject arbitrary SQL commands. Note that line 6 (`cursor.execute(query)`) must also be updated to pass parameters, e.g., `cursor.execute(query, (owner_id,))`.",
+          "broad": false,
+          "category": "deprecation",
+          "confidence": 10,
+          "failure_scenario": "An attacker supplies a malicious `owner_id` containing SQL syntax (e.g., `' OR '1'='1`). The database executes the injected command, potentially exposing or modifying sensitive order data.",
+          "finding_id": "20260817-204402-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-small-v1:finding:1",
+          "line": 5,
+          "path": "billing/pipeline.py",
+          "severity": "critical",
+          "side": "RIGHT",
+          "suggestion": "    query = \"SELECT id, status, total FROM orders WHERE customer_id = %s\"",
+          "title": "Use parameterized queries to prevent SQL injection"
+        }
+      ],
+      "ground_truth": {
+        "changed_file": "billing/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 2 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 13
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 58
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 90
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 10
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 36
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 88
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 118
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-small-v1"
+      },
+      "input_tokens": 91015,
+      "observation_id": "20260817-204402-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-small-v1",
+      "output_tokens": 585978,
+      "profile": "{\n  \"schema_version\": 1,\n  \"wall_seconds\": 2521.282100259996,\n  \"total_tokens\": 676993,\n  \"returned_findings\": 1,\n  \"stages\": [\n    {\n      \"name\": \"redact\",\n      \"elapsed\": 0.0013163380208425224\n    },\n    {\n      \"name\": \"spec_context\",\n      \"elapsed\": 9.623199002817273e-05\n    },\n    {\n      \"name\": \"split\",\n      \"elapsed\": 9.108500671572983e-05\n    },\n    {\n      \"name\": \"expand\",\n      \"elapsed\": 0.037693519989261404\n    },\n    {\n      \"name\": \"batch\",\n      \"elapsed\": 0.001556859991978854\n    },\n    {\n      \"name\": \"directory_context\",\n      \"elapsed\": 1.453998265787959e-06\n    },\n    {\n      \"name\": \"review\",\n      \"elapsed\": 2504.8652987800015\n    },\n    {\n      \"name\": \"snap\",\n      \"elapsed\": 0.0004776929854415357\n    },\n    {\n      \"name\": \"dedupe\",\n      \"elapsed\": 3.436999395489693e-05\n    },\n    {\n      \"name\": \"suppress\",\n      \"elapsed\": 3.805200685746968e-05\n    },\n    {\n      \"name\": \"failure_scenario\",\n      \"elapsed\": 2.5830231606960297e-06\n    },\n    {\n      \"name\": \"reflect\",\n      \"elapsed\": 14.094506953988457\n    },\n    {\n      \"name\": \"filter\",\n      \"elapsed\": 2.3962027626112103e-05\n    }\n  ],\n  \"calls\": [\n    {\n      \"label\": \"security\",\n      \"batch\": 1,\n      \"elapsed\": 57.85811162999016,\n      \"attempts\": 1,\n      \"input_tokens\": 7164,\n      \"output_tokens\": 16364,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"correctness\",\n      \"batch\": 1,\n      \"elapsed\": 37.485246299998835,\n      \"attempts\": 1,\n      \"input_tokens\": 6999,\n      \"output_tokens\": 9808,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"tests\",\n      \"batch\": 1,\n      \"elapsed\": 45.772686393989716,\n      \"attempts\": 1,\n      \"input_tokens\": 6849,\n      \"output_tokens\": 12994,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"documentation\",\n      \"batch\": 1,\n      \"elapsed\": 44.44501413899707,\n      \"attempts\": 1,\n      \"input_tokens\": 6671,\n      \"output_tokens\": 11975,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"performance\",\n      \"batch\": 1,\n      \"elapsed\": 45.0492384149984,\n      \"attempts\": 1,\n      \"input_tokens\": 6871,\n      \"output_tokens\": 12887,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 2,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"complexity\",\n      \"batch\": 1,\n      \"elapsed\": 39.15867622100632,\n      \"attempts\": 1,\n      \"input_tokens\": 6803,\n      \"output_tokens\": 10940,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"deprecation\",\n      \"batch\": 1,\n      \"elapsed\": 1307.112222538999,\n      \"attempts\": 1,\n      \"input_tokens\": 6804,\n      \"output_tokens\": 223596,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": \"ProviderTruncated: response hit the 223596-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\",\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": 223596,\n      \"findings\": null,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"deprecation\",\n      \"batch\": 1,\n      \"elapsed\": 217.57302101398818,\n      \"attempts\": 1,\n      \"input_tokens\": 4930,\n      \"output_tokens\": 13874,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"deprecation\",\n      \"batch\": 1,\n      \"elapsed\": 401.1552993579826,\n      \"attempts\": 1,\n      \"input_tokens\": 4896,\n      \"output_tokens\": 10740,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 3,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"ponytail\",\n      \"batch\": 1,\n      \"elapsed\": 273.672354320006,\n      \"attempts\": 1,\n      \"input_tokens\": 6801,\n      \"output_tokens\": 14436,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"intent\",\n      \"batch\": 1,\n      \"elapsed\": 2189.8196356639965,\n      \"attempts\": 1,\n      \"input_tokens\": 7075,\n      \"output_tokens\": 223325,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": \"ProviderTruncated: response hit the 223325-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\",\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": 223325,\n      \"findings\": null,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"intent\",\n      \"batch\": 1,\n      \"elapsed\": 41.898523384006694,\n      \"attempts\": 1,\n      \"input_tokens\": 5201,\n      \"output_tokens\": 9756,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"intent\",\n      \"batch\": 1,\n      \"elapsed\": 45.26542328498908,\n      \"attempts\": 1,\n      \"input_tokens\": 5167,\n      \"output_tokens\": 11439,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"reflect\",\n      \"batch\": 0,\n      \"elapsed\": 14.090745220019016,\n      \"attempts\": 1,\n      \"input_tokens\": 8784,\n      \"output_tokens\": 3844,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": null,\n      \"reasoning_share\": null\n    }\n  ]\n}",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.2.0\", \"provider\": \"openai-compatible\", \"timeout_s\": 3600, \"timeout_source\": \"provider default\", \"concurrency\": 2, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.providers.factory\", \"message\": \"configured params are not supported by this model and will be ignored\", \"provider\": \"openai-compatible\", \"model\": \"openai/nvidia/Qwen3.6-35B-A3B-NVFP4\", \"ignored_params\": [\"reasoning_effort\"]}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.038}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.002}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 2, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 7164, \"output_tokens\": 16364, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 57.858}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6999, \"output_tokens\": 9808, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 37.485}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6849, \"output_tokens\": 12994, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 45.773}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6671, \"output_tokens\": 11975, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 44.445}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6871, \"output_tokens\": 12887, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 2, \"elapsed_s\": 45.049}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6803, \"output_tokens\": 10940, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 39.159}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6804, \"output_tokens\": 223596, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 223596-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 223596, \"elapsed_s\": 1307.112}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"deprecation\", \"reason\": \"ProviderTruncated: response hit the 223596-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1897, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 608, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 679, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 665, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 708, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 842, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 223596-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call was too big for one response \\u2014 retrying on smaller pieces\", \"lens\": \"deprecation\", \"batch\": 1, \"pieces\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 4930, \"output_tokens\": 13874, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 217.573}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 4896, \"output_tokens\": 10740, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 3, \"elapsed_s\": 401.155}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 3}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 6801, \"output_tokens\": 14436, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 273.672}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 7075, \"output_tokens\": 223325, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 223325-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 223325, \"elapsed_s\": 2189.82}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"intent\", \"reason\": \"ProviderTruncated: response hit the 223325-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1897, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 608, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 679, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 665, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 708, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 842, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 223325-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call was too big for one response \\u2014 retrying on smaller pieces\", \"lens\": \"intent\", \"batch\": 1, \"pieces\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 5201, \"output_tokens\": 9756, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 41.899}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 5167, \"output_tokens\": 11439, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 45.265}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 2504.865}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 6, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"orders/pipeline.py\", \"from\": 108, \"to\": 88}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"orders/pipeline.py\", \"from\": 137, \"to\": 118}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"orders/pipeline.py\", \"from\": 39, \"to\": 36}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 3, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 75, \"to\": 90}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"orders/pipeline.py\", \"from\": 32, \"to\": 40}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"orders/pipeline.py\", \"from\": 164, \"to\": 118}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reflecting on findings\", \"findings\": 6}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"reflect\", \"batch\": 0, \"attempts\": 1, \"input_tokens\": 8784, \"output_tokens\": 3844, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"elapsed_s\": 14.091}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"reflect\", \"elapsed_s\": 14.095}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n== lgtmaybe profile ==\ntotal wall time: 2521.3s\n\nstage              elapsed\nredact               0.00s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.04s\nbatch                0.00s\ndirectory_context     0.00s\nreview            2504.87s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect             14.09s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nintent               1     1  2189.82s     7075   223325         -        -        0        0        -  ProviderTruncated: response hit the 223325-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ndeprecation          1     1  1307.11s     6804   223596         -        -        0        0        -  ProviderTruncated: response hit the 223596-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ndeprecation          1     1   401.16s     4896    10740         -        -        0        0        3  -\nponytail             1     1   273.67s     6801    14436         -        -        0        0        1  -\ndeprecation          1     1   217.57s     4930    13874         -        -        0        0        1  -\nsecurity             1     1    57.86s     7164    16364         -        -        0        0        1  -\ntests                1     1    45.77s     6849    12994         -        -        0        0        1  -\nintent               1     1    45.27s     5167    11439         -        -        0        0        1  -\nperformance          1     1    45.05s     6871    12887         -        -        0        0        2  -\ndocumentation        1     1    44.45s     6671    11975         -        -        0        0        1  -\nintent               1     1    41.90s     5201     9756         -        -        0        0        1  -\ncomplexity           1     1    39.16s     6803    10940         -        -        0        0        1  -\ncorrectness          1     1    37.49s     6999     9808         -        -        0        0        1  -\nreflect              0     1    14.09s     8784     3844         -        -        0        0        -  -\n\ncache: 0 tokens read / 0 created across 14 calls\nfindings: 14 parsed / 1 returned\ntokens: 676,993 billable (91,015 in / 585,978 out) across 14 calls\n",
+      "stdout": "[{\"path\": \"billing/pipeline.py\", \"line\": 5, \"side\": \"RIGHT\", \"severity\": \"critical\", \"title\": \"Use parameterized queries to prevent SQL injection\", \"body\": \"The query string is constructed using an f-string with direct user input `owner_id`. This allows an attacker to inject arbitrary SQL commands. Note that line 6 (`cursor.execute(query)`) must also be updated to pass parameters, e.g., `cursor.execute(query, (owner_id,))`.\", \"failure_scenario\": \"An attacker supplies a malicious `owner_id` containing SQL syntax (e.g., `' OR '1'='1`). The database executes the injected command, potentially exposing or modifying sensitive order data.\", \"suggestion\": \"    query = \\\"SELECT id, status, total FROM orders WHERE customer_id = %s\\\"\", \"anchor\": \"    query = f\\\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\\\"\", \"anchored\": false, \"broad\": false, \"confidence\": 10, \"category\": \"deprecation\"}]\n",
+      "timed_out": false,
+      "truncation_lenses": [
+        "deprecation",
+        "intent"
+      ],
+      "wall_excluding_truncation_seconds": 0.0,
+      "wall_seconds": 2521.883430793998
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 50.08228430399322,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 21356,
+          "label": "security",
+          "output_tokens": 12393,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 23.717646539997077,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 20996,
+          "label": "deprecation",
+          "output_tokens": 5756,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 46.82768994299113,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 21191,
+          "label": "correctness",
+          "output_tokens": 10803,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 63.30990399300936,
+          "error": null,
+          "findings": 3,
+          "input_tokens": 21041,
+          "label": "tests",
+          "output_tokens": 14285,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 52.48276580800302,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 20863,
+          "label": "documentation",
+          "output_tokens": 11637,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 45.759001341997646,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 21063,
+          "label": "performance",
+          "output_tokens": 10530,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 34.677879776019836,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 20995,
+          "label": "complexity",
+          "output_tokens": 7769,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 48.548676462,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 21267,
+          "label": "intent",
+          "output_tokens": 10210,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 52.88480926599004,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 20993,
+          "label": "ponytail",
+          "output_tokens": 12095,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 0,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 11.538426764018368,
+          "error": null,
+          "findings": null,
+          "input_tokens": 25976,
+          "label": "reflect",
+          "output_tokens": 2471,
+          "reasoning_tokens": 0,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-medium-v1",
+      "exit_code": 0,
+      "failure_class": null,
+      "failures": 0,
+      "findings": [
+        {
+          "anchor": "    query = f\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\"",
+          "anchored": false,
+          "body": "The query string is constructed using an f-string with direct user input (owner_id). This allows an attacker to inject arbitrary SQL commands, potentially leading to data exfiltration, modification, or deletion. Use cursor.execute with parameter placeholders instead of string formatting.",
+          "broad": false,
+          "category": "tests",
+          "confidence": 10,
+          "failure_scenario": "An attacker supplies a malicious owner_id such as \"' OR '1'='1' --\". The database executes the injected clause, bypassing the intended filter and returning or modifying unauthorized records.",
+          "finding_id": "20260817-204402-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-medium-v1:finding:1",
+          "line": 5,
+          "path": "billing/pipeline.py",
+          "severity": "critical",
+          "side": "RIGHT",
+          "suggestion": "    cursor.execute(\"SELECT id, status, total FROM orders WHERE customer_id = %s\", (owner_id,))\n    return [dict(row) for row in cursor.fetchall()]",
+          "title": "Use parameterized queries to prevent SQL injection"
+        }
+      ],
+      "ground_truth": {
+        "changed_file": "billing/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 8 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 143
+          },
+          {
+            "file": "inventory/pipeline.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 21
+          },
+          {
+            "file": "ledger/pipeline.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 86
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 145
+          },
+          {
+            "file": "routing/pipeline.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 23
+          },
+          {
+            "file": "routing/pipeline.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 234
+          },
+          {
+            "file": "shipping/pipeline.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 161
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-medium-v1"
+      },
+      "input_tokens": 215741,
+      "observation_id": "20260817-204402-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-medium-v1",
+      "output_tokens": 97949,
+      "profile": "{\n  \"schema_version\": 1,\n  \"wall_seconds\": 249.779075390019,\n  \"total_tokens\": 313690,\n  \"returned_findings\": 1,\n  \"stages\": [\n    {\n      \"name\": \"redact\",\n      \"elapsed\": 0.0075434680038597435\n    },\n    {\n      \"name\": \"spec_context\",\n      \"elapsed\": 0.00018607400124892592\n    },\n    {\n      \"name\": \"split\",\n      \"elapsed\": 0.0003639369970187545\n    },\n    {\n      \"name\": \"expand\",\n      \"elapsed\": 0.12977938397671096\n    },\n    {\n      \"name\": \"batch\",\n      \"elapsed\": 0.010268754995195195\n    },\n    {\n      \"name\": \"directory_context\",\n      \"elapsed\": 1.2959935702383518e-06\n    },\n    {\n      \"name\": \"review\",\n      \"elapsed\": 236.9585238849977\n    },\n    {\n      \"name\": \"snap\",\n      \"elapsed\": 0.0010144039988517761\n    },\n    {\n      \"name\": \"dedupe\",\n      \"elapsed\": 3.174098674207926e-05\n    },\n    {\n      \"name\": \"suppress\",\n      \"elapsed\": 4.993000766262412e-05\n    },\n    {\n      \"name\": \"failure_scenario\",\n      \"elapsed\": 1.6690173652023077e-06\n    },\n    {\n      \"name\": \"reflect\",\n      \"elapsed\": 11.549848699010909\n    },\n    {\n      \"name\": \"filter\",\n      \"elapsed\": 1.7829006537795067e-05\n    }\n  ],\n  \"calls\": [\n    {\n      \"label\": \"security\",\n      \"batch\": 1,\n      \"elapsed\": 50.08228430399322,\n      \"attempts\": 1,\n      \"input_tokens\": 21356,\n      \"output_tokens\": 12393,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"deprecation\",\n      \"batch\": 1,\n      \"elapsed\": 23.717646539997077,\n      \"attempts\": 1,\n      \"input_tokens\": 20996,\n      \"output_tokens\": 5756,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"correctness\",\n      \"batch\": 1,\n      \"elapsed\": 46.82768994299113,\n      \"attempts\": 1,\n      \"input_tokens\": 21191,\n      \"output_tokens\": 10803,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"tests\",\n      \"batch\": 1,\n      \"elapsed\": 63.30990399300936,\n      \"attempts\": 1,\n      \"input_tokens\": 21041,\n      \"output_tokens\": 14285,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 3,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"documentation\",\n      \"batch\": 1,\n      \"elapsed\": 52.48276580800302,\n      \"attempts\": 1,\n      \"input_tokens\": 20863,\n      \"output_tokens\": 11637,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"performance\",\n      \"batch\": 1,\n      \"elapsed\": 45.759001341997646,\n      \"attempts\": 1,\n      \"input_tokens\": 21063,\n      \"output_tokens\": 10530,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"complexity\",\n      \"batch\": 1,\n      \"elapsed\": 34.677879776019836,\n      \"attempts\": 1,\n      \"input_tokens\": 20995,\n      \"output_tokens\": 7769,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"intent\",\n      \"batch\": 1,\n      \"elapsed\": 48.548676462,\n      \"attempts\": 1,\n      \"input_tokens\": 21267,\n      \"output_tokens\": 10210,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"ponytail\",\n      \"batch\": 1,\n      \"elapsed\": 52.88480926599004,\n      \"attempts\": 1,\n      \"input_tokens\": 20993,\n      \"output_tokens\": 12095,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"reflect\",\n      \"batch\": 0,\n      \"elapsed\": 11.538426764018368,\n      \"attempts\": 1,\n      \"input_tokens\": 25976,\n      \"output_tokens\": 2471,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": null,\n      \"reasoning_share\": null\n    }\n  ]\n}",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.2.0\", \"provider\": \"openai-compatible\", \"timeout_s\": 3600, \"timeout_source\": \"provider default\", \"concurrency\": 2, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.providers.factory\", \"message\": \"configured params are not supported by this model and will be ignored\", \"provider\": \"openai-compatible\", \"model\": \"openai/nvidia/Qwen3.6-35B-A3B-NVFP4\", \"ignored_params\": [\"reasoning_effort\"]}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.008}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.13}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.01}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 8, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 21356, \"output_tokens\": 12393, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 50.082}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 20996, \"output_tokens\": 5756, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 23.718}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 21191, \"output_tokens\": 10803, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 46.828}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 21041, \"output_tokens\": 14285, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 3, \"elapsed_s\": 63.31}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 3}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 20863, \"output_tokens\": 11637, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 52.483}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 21063, \"output_tokens\": 10530, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 45.759}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 20995, \"output_tokens\": 7769, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 34.678}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 21267, \"output_tokens\": 10210, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 48.549}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 20993, \"output_tokens\": 12095, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 52.885}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 236.959}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 4, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/pipeline.py\", \"from\": 203, \"to\": 234}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reflecting on findings\", \"findings\": 3}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"reflect\", \"batch\": 0, \"attempts\": 1, \"input_tokens\": 25976, \"output_tokens\": 2471, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"elapsed_s\": 11.538}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"reflect\", \"elapsed_s\": 11.55}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n== lgtmaybe profile ==\ntotal wall time: 249.8s\n\nstage              elapsed\nredact               0.01s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.13s\nbatch                0.01s\ndirectory_context     0.00s\nreview             236.96s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect             11.55s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ntests                1     1    63.31s    21041    14285         -        -        0        0        3  -\nponytail             1     1    52.88s    20993    12095         -        -        0        0        1  -\ndocumentation        1     1    52.48s    20863    11637         -        -        0        0        1  -\nsecurity             1     1    50.08s    21356    12393         -        -        0        0        1  -\nintent               1     1    48.55s    21267    10210         -        -        0        0        1  -\ncorrectness          1     1    46.83s    21191    10803         -        -        0        0        1  -\nperformance          1     1    45.76s    21063    10530         -        -        0        0        1  -\ncomplexity           1     1    34.68s    20995     7769         -        -        0        0        1  -\ndeprecation          1     1    23.72s    20996     5756         -        -        0        0        1  -\nreflect              0     1    11.54s    25976     2471         -        -        0        0        -  -\n\ncache: 0 tokens read / 0 created across 10 calls\nfindings: 11 parsed / 1 returned\ntokens: 313,690 billable (215,741 in / 97,949 out) across 10 calls\n",
+      "stdout": "[{\"path\": \"billing/pipeline.py\", \"line\": 5, \"side\": \"RIGHT\", \"severity\": \"critical\", \"title\": \"Use parameterized queries to prevent SQL injection\", \"body\": \"The query string is constructed using an f-string with direct user input (owner_id). This allows an attacker to inject arbitrary SQL commands, potentially leading to data exfiltration, modification, or deletion. Use cursor.execute with parameter placeholders instead of string formatting.\", \"failure_scenario\": \"An attacker supplies a malicious owner_id such as \\\"' OR '1'='1' --\\\". The database executes the injected clause, bypassing the intended filter and returning or modifying unauthorized records.\", \"suggestion\": \"    cursor.execute(\\\"SELECT id, status, total FROM orders WHERE customer_id = %s\\\", (owner_id,))\\n    return [dict(row) for row in cursor.fetchall()]\", \"anchor\": \"    query = f\\\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\\\"\", \"anchored\": false, \"broad\": false, \"confidence\": 10, \"category\": \"tests\"}]\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 250.32100168801844,
+      "wall_seconds": 250.32100168801844
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 43.19212234899169,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 54374,
+          "label": "security",
+          "output_tokens": 10138,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 60.50537254399387,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 54209,
+          "label": "correctness",
+          "output_tokens": 10631,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 60.690447073982796,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 54014,
+          "label": "deprecation",
+          "output_tokens": 10986,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 54.51624333899235,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 54059,
+          "label": "tests",
+          "output_tokens": 9591,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 68.51537059398834,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 53881,
+          "label": "documentation",
+          "output_tokens": 12211,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 38.92019735201029,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 54081,
+          "label": "performance",
+          "output_tokens": 7058,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 44.366593988990644,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 54013,
+          "label": "complexity",
+          "output_tokens": 8640,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 35.98913971599541,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 54286,
+          "label": "intent",
+          "output_tokens": 6777,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 1533.1598240869935,
+          "error": "ProviderTruncated: response hit the 176389-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i",
+          "findings": null,
+          "input_tokens": 54011,
+          "label": "ponytail",
+          "output_tokens": 176389,
+          "reasoning_tokens": 0,
+          "truncated": true
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 43.2604112669942,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 26869,
+          "label": "ponytail",
+          "output_tokens": 9042,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 46.568677001981996,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 30291,
+          "label": "ponytail",
+          "output_tokens": 9682,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 0,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 14.131665144988801,
+          "error": null,
+          "findings": null,
+          "input_tokens": 56127,
+          "label": "reflect",
+          "output_tokens": 2461,
+          "reasoning_tokens": 0,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-large-v1",
+      "exit_code": 0,
+      "failure_class": null,
+      "failures": 0,
+      "findings": [
+        {
+          "anchor": "query = f\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\"",
+          "anchored": false,
+          "body": "The owner_id parameter is interpolated directly into the SQL string using an f-string. This allows an attacker to inject arbitrary SQL commands if they control the owner_id value. Use parameterized queries with cursor.execute(query, (owner_id,)) instead.",
+          "broad": false,
+          "category": "intent",
+          "confidence": 10,
+          "failure_scenario": "An attacker supplies a malicious owner_id value (e.g., \"' OR '1'='1\"). The database executes the injected SQL, potentially exposing or modifying order data outside the intended scope.",
+          "finding_id": "20260817-204402-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-large-v1:finding:1",
+          "line": 5,
+          "path": "audit/pipeline.py",
+          "severity": "critical",
+          "side": "RIGHT",
+          "suggestion": "query = \"SELECT id, status, total FROM orders WHERE customer_id = %s\"",
+          "title": "Use parameterized queries to prevent SQL injection"
+        },
+        {
+          "anchor": "    ordered = sorted(records, key=lambda record: str(record.get(\"created_at\", \"\")))",
+          "anchored": false,
+          "body": "The docstring claims constant time, but the implementation calls sorted(), which is O(n log n). This contradicts the contract and will cause unexpected performance degradation on large inputs.",
+          "broad": false,
+          "category": "ponytail",
+          "confidence": 9,
+          "failure_scenario": "When called with a large list of records, the function performs a full sort instead of returning the last element immediately, leading to high CPU usage and latency spikes.",
+          "finding_id": "20260817-204402-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-large-v1:finding:2",
+          "line": 8,
+          "path": "orders/validation.py",
+          "severity": "high",
+          "side": "RIGHT",
+          "suggestion": "    return str(records[-1].get(\"id\")) if records else None",
+          "title": "Replace O(n log n) sort with direct access for constant time"
+        }
+      ],
+      "ground_truth": {
+        "changed_file": "audit/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 24 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "audit/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 121
+          },
+          {
+            "file": "catalog/summaries.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 99
+          },
+          {
+            "file": "inventory/summaries.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 83
+          },
+          {
+            "file": "ledger/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 30
+          },
+          {
+            "file": "orders/validation.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 4
+          },
+          {
+            "file": "routing/summaries.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 7
+          },
+          {
+            "file": "shipping/validation.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 156
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-large-v1"
+      },
+      "input_tokens": 600215,
+      "observation_id": "20260817-204402-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-large-v1",
+      "output_tokens": 273606,
+      "profile": "{\n  \"schema_version\": 1,\n  \"wall_seconds\": 1812.2618389790005,\n  \"total_tokens\": 873821,\n  \"returned_findings\": 2,\n  \"stages\": [\n    {\n      \"name\": \"redact\",\n      \"elapsed\": 0.015921562007861212\n    },\n    {\n      \"name\": \"spec_context\",\n      \"elapsed\": 0.00021878801635466516\n    },\n    {\n      \"name\": \"split\",\n      \"elapsed\": 0.0008654400007799268\n    },\n    {\n      \"name\": \"expand\",\n      \"elapsed\": 0.4113799440092407\n    },\n    {\n      \"name\": \"batch\",\n      \"elapsed\": 0.022886585007654503\n    },\n    {\n      \"name\": \"directory_context\",\n      \"elapsed\": 2.5949848350137472e-06\n    },\n    {\n      \"name\": \"review\",\n      \"elapsed\": 1796.5090184180008\n    },\n    {\n      \"name\": \"snap\",\n      \"elapsed\": 0.00446995600941591\n    },\n    {\n      \"name\": \"dedupe\",\n      \"elapsed\": 5.846799467690289e-05\n    },\n    {\n      \"name\": \"suppress\",\n      \"elapsed\": 6.071198731660843e-05\n    },\n    {\n      \"name\": \"failure_scenario\",\n      \"elapsed\": 2.8980139177292585e-06\n    },\n    {\n      \"name\": \"reflect\",\n      \"elapsed\": 14.155964208999649\n    },\n    {\n      \"name\": \"filter\",\n      \"elapsed\": 1.5886005712673068e-05\n    }\n  ],\n  \"calls\": [\n    {\n      \"label\": \"security\",\n      \"batch\": 1,\n      \"elapsed\": 43.19212234899169,\n      \"attempts\": 1,\n      \"input_tokens\": 54374,\n      \"output_tokens\": 10138,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"correctness\",\n      \"batch\": 1,\n      \"elapsed\": 60.50537254399387,\n      \"attempts\": 1,\n      \"input_tokens\": 54209,\n      \"output_tokens\": 10631,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"deprecation\",\n      \"batch\": 1,\n      \"elapsed\": 60.690447073982796,\n      \"attempts\": 1,\n      \"input_tokens\": 54014,\n      \"output_tokens\": 10986,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"tests\",\n      \"batch\": 1,\n      \"elapsed\": 54.51624333899235,\n      \"attempts\": 1,\n      \"input_tokens\": 54059,\n      \"output_tokens\": 9591,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"documentation\",\n      \"batch\": 1,\n      \"elapsed\": 68.51537059398834,\n      \"attempts\": 1,\n      \"input_tokens\": 53881,\n      \"output_tokens\": 12211,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"performance\",\n      \"batch\": 1,\n      \"elapsed\": 38.92019735201029,\n      \"attempts\": 1,\n      \"input_tokens\": 54081,\n      \"output_tokens\": 7058,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"complexity\",\n      \"batch\": 1,\n      \"elapsed\": 44.366593988990644,\n      \"attempts\": 1,\n      \"input_tokens\": 54013,\n      \"output_tokens\": 8640,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"intent\",\n      \"batch\": 1,\n      \"elapsed\": 35.98913971599541,\n      \"attempts\": 1,\n      \"input_tokens\": 54286,\n      \"output_tokens\": 6777,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"ponytail\",\n      \"batch\": 1,\n      \"elapsed\": 1533.1598240869935,\n      \"attempts\": 1,\n      \"input_tokens\": 54011,\n      \"output_tokens\": 176389,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": \"ProviderTruncated: response hit the 176389-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\",\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": 176389,\n      \"findings\": null,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"ponytail\",\n      \"batch\": 1,\n      \"elapsed\": 43.2604112669942,\n      \"attempts\": 1,\n      \"input_tokens\": 26869,\n      \"output_tokens\": 9042,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"ponytail\",\n      \"batch\": 1,\n      \"elapsed\": 46.568677001981996,\n      \"attempts\": 1,\n      \"input_tokens\": 30291,\n      \"output_tokens\": 9682,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"reflect\",\n      \"batch\": 0,\n      \"elapsed\": 14.131665144988801,\n      \"attempts\": 1,\n      \"input_tokens\": 56127,\n      \"output_tokens\": 2461,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": null,\n      \"reasoning_share\": null\n    }\n  ]\n}",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.2.0\", \"provider\": \"openai-compatible\", \"timeout_s\": 3600, \"timeout_source\": \"provider default\", \"concurrency\": 2, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.providers.factory\", \"message\": \"configured params are not supported by this model and will be ignored\", \"provider\": \"openai-compatible\", \"model\": \"openai/nvidia/Qwen3.6-35B-A3B-NVFP4\", \"ignored_params\": [\"reasoning_effort\"]}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.016}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.411}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.023}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 24, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 54374, \"output_tokens\": 10138, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 43.192}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 54209, \"output_tokens\": 10631, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 60.505}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 54014, \"output_tokens\": 10986, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 60.69}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 54059, \"output_tokens\": 9591, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 54.516}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 53881, \"output_tokens\": 12211, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 68.515}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 54081, \"output_tokens\": 7058, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 38.92}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 54013, \"output_tokens\": 8640, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 44.367}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 54286, \"output_tokens\": 6777, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 35.989}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 54011, \"output_tokens\": 176389, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 176389-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 176389, \"elapsed_s\": 1533.16}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"ponytail\", \"reason\": \"ProviderTruncated: response hit the 176389-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1897, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 608, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 679, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 665, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 708, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 842, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 176389-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call was too big for one response \\u2014 retrying on smaller pieces\", \"lens\": \"ponytail\", \"batch\": 1, \"pieces\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 26869, \"output_tokens\": 9042, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 43.26}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 30291, \"output_tokens\": 9682, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 46.569}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 1796.509}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 22, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 6, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"orders/validation.py\", \"from\": 25, \"to\": 8}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.004}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reflecting on findings\", \"findings\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"reflect\", \"batch\": 0, \"attempts\": 1, \"input_tokens\": 56127, \"output_tokens\": 2461, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"elapsed_s\": 14.132}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"reflect\", \"elapsed_s\": 14.156}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n== lgtmaybe profile ==\ntotal wall time: 1812.3s\n\nstage              elapsed\nredact               0.02s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.41s\nbatch                0.02s\ndirectory_context     0.00s\nreview            1796.51s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect             14.16s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nponytail             1     1  1533.16s    54011   176389         -        -        0        0        -  ProviderTruncated: response hit the 176389-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ndocumentation        1     1    68.52s    53881    12211         -        -        0        0        1  -\ndeprecation          1     1    60.69s    54014    10986         -        -        0        0        1  -\ncorrectness          1     1    60.51s    54209    10631         -        -        0        0        1  -\ntests                1     1    54.52s    54059     9591         -        -        0        0        1  -\nponytail             1     1    46.57s    30291     9682         -        -        0        0        1  -\ncomplexity           1     1    44.37s    54013     8640         -        -        0        0        1  -\nponytail             1     1    43.26s    26869     9042         -        -        0        0        1  -\nsecurity             1     1    43.19s    54374    10138         -        -        0        0        1  -\nperformance          1     1    38.92s    54081     7058         -        -        0        0        1  -\nintent               1     1    35.99s    54286     6777         -        -        0        0        1  -\nreflect              0     1    14.13s    56127     2461         -        -        0        0        -  -\n\ncache: 0 tokens read / 0 created across 12 calls\nfindings: 10 parsed / 2 returned\ntokens: 873,821 billable (600,215 in / 273,606 out) across 12 calls\n",
+      "stdout": "[{\"path\": \"audit/pipeline.py\", \"line\": 5, \"side\": \"RIGHT\", \"severity\": \"critical\", \"title\": \"Use parameterized queries to prevent SQL injection\", \"body\": \"The owner_id parameter is interpolated directly into the SQL string using an f-string. This allows an attacker to inject arbitrary SQL commands if they control the owner_id value. Use parameterized queries with cursor.execute(query, (owner_id,)) instead.\", \"failure_scenario\": \"An attacker supplies a malicious owner_id value (e.g., \\\"' OR '1'='1\\\"). The database executes the injected SQL, potentially exposing or modifying order data outside the intended scope.\", \"suggestion\": \"query = \\\"SELECT id, status, total FROM orders WHERE customer_id = %s\\\"\", \"anchor\": \"query = f\\\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\\\"\", \"anchored\": false, \"broad\": false, \"confidence\": 10, \"category\": \"intent\"}, {\"path\": \"orders/validation.py\", \"line\": 8, \"side\": \"RIGHT\", \"severity\": \"high\", \"title\": \"Replace O(n log n) sort with direct access for constant time\", \"body\": \"The docstring claims constant time, but the implementation calls sorted(), which is O(n log n). This contradicts the contract and will cause unexpected performance degradation on large inputs.\", \"failure_scenario\": \"When called with a large list of records, the function performs a full sort instead of returning the last element immediately, leading to high CPU usage and latency spikes.\", \"suggestion\": \"    return str(records[-1].get(\\\"id\\\")) if records else None\", \"anchor\": \"    ordered = sorted(records, key=lambda record: str(record.get(\\\"created_at\\\", \\\"\\\")))\", \"anchored\": false, \"broad\": false, \"confidence\": 9, \"category\": \"ponytail\"}]\n",
+      "timed_out": false,
+      "truncation_lenses": [
+        "ponytail"
+      ],
+      "wall_excluding_truncation_seconds": 279.62129629799165,
+      "wall_seconds": 1812.7811203849851
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 49.96021192500484,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 106471,
+          "label": "security",
+          "output_tokens": 8436,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 54.87375532402075,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 106111,
+          "label": "deprecation",
+          "output_tokens": 7709,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 72.79766799599747,
+          "error": null,
+          "findings": 4,
+          "input_tokens": 106306,
+          "label": "correctness",
+          "output_tokens": 11118,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 51.6708206780022,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 106156,
+          "label": "tests",
+          "output_tokens": 8009,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 53.48322118198848,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 105978,
+          "label": "documentation",
+          "output_tokens": 7497,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 50.622871847997885,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 106178,
+          "label": "performance",
+          "output_tokens": 7753,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 52.91452241700608,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 106110,
+          "label": "complexity",
+          "output_tokens": 7866,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 54.59855419700034,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 106383,
+          "label": "intent",
+          "output_tokens": 7051,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 70.10852350501227,
+          "error": null,
+          "findings": 5,
+          "input_tokens": 106108,
+          "label": "ponytail",
+          "output_tokens": 12604,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 0,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 26.731242063979153,
+          "error": null,
+          "findings": null,
+          "input_tokens": 111875,
+          "label": "reflect",
+          "output_tokens": 3222,
+          "reasoning_tokens": 0,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-xlarge-v1",
+      "exit_code": 0,
+      "failure_class": null,
+      "failures": 0,
+      "findings": [
+        {
+          "anchor": "    query = f\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\"",
+          "anchored": false,
+          "body": "The owner_id variable is interpolated directly into the SQL string using an f-string. This allows an attacker to inject arbitrary SQL commands if they control the owner_id input. Use parameterized queries provided by the database driver instead of string formatting.",
+          "broad": false,
+          "category": "security",
+          "confidence": 10,
+          "failure_scenario": "An attacker supplies a malicious owner_id such as \"' OR '1'='1\"; the constructed query executes unintended SQL, potentially exposing or modifying database records.",
+          "finding_id": "20260817-204402-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-xlarge-v1:finding:1",
+          "line": 5,
+          "path": "audit/allocation.py",
+          "severity": "critical",
+          "side": "RIGHT",
+          "suggestion": "    query = \"SELECT id, status, total FROM orders WHERE customer_id = %s\"",
+          "title": "Parameterize SQL query to prevent injection"
+        },
+        {
+          "anchor": "    for position in range(1, len(entries)):",
+          "anchored": false,
+          "body": "The loop uses range(1, len(entries)), which starts at index 1 and skips the element at index 0. This means the first invoice entry is never scored or included in the ranking, causing incorrect results and potential data loss.",
+          "broad": false,
+          "category": "ponytail",
+          "confidence": 9,
+          "failure_scenario": "A caller passes a list of invoice entries. The entry at index 0 is ignored during scoring and sorting. The returned list is missing the first entry, leading to incomplete reports or downstream processing failures.",
+          "finding_id": "20260817-204402-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-xlarge-v1:finding:2",
+          "line": 44,
+          "path": "billing/pipeline.py",
+          "severity": "high",
+          "side": "RIGHT",
+          "suggestion": "    for position in range(len(entries)):",
+          "title": "Include the first element when iterating over entries"
+        },
+        {
+          "anchor": "def register_shipment_events(event_type: str, events: list[str] = []) -> dict[str, list[str]]:",
+          "anchored": false,
+          "body": "Using a mutable list [] as a default argument causes the list to be shared across all function calls that omit the events parameter. Subsequent calls will append to the same list, leading to unexpected state accumulation and data leakage between invocations.",
+          "broad": false,
+          "category": "ponytail",
+          "confidence": 10,
+          "failure_scenario": "A caller invokes register_shipment_events(\"type_a\") without providing events. The default list is created and populated. A second caller invokes register_shipment_events(\"type_b\") without events. The function appends to the same list, returning {\"type_b\": [\"type_a\", \"type_b\"]} instead of just [\"type_b\"].",
+          "finding_id": "20260817-204402-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-xlarge-v1:finding:3",
+          "line": 21,
+          "path": "catalog/validation.py",
+          "severity": "high",
+          "side": "RIGHT",
+          "suggestion": "def register_shipment_events(event_type: str, events: list[str] | None = None) -> dict[str, list[str]]:",
+          "title": "Replace mutable default argument with None"
+        }
+      ],
+      "ground_truth": {
+        "changed_file": "audit/allocation.py",
+        "clean": false,
+        "commit_message": "Refactor 48 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "audit/allocation.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 44
+          },
+          {
+            "file": "catalog/validation.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 21
+          },
+          {
+            "file": "inventory/summaries.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 9
+          },
+          {
+            "file": "orders/allocation.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 166
+          },
+          {
+            "file": "pricing/summaries.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 141
+          },
+          {
+            "file": "routing/reconciliation.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 807
+          },
+          {
+            "file": "shipping/validation.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 151
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-xlarge-v1"
+      },
+      "input_tokens": 1067676,
+      "observation_id": "20260817-204402-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-xlarge-v1",
+      "output_tokens": 81265,
+      "profile": "{\n  \"schema_version\": 1,\n  \"wall_seconds\": 328.1955786930048,\n  \"total_tokens\": 1148941,\n  \"returned_findings\": 3,\n  \"stages\": [\n    {\n      \"name\": \"redact\",\n      \"elapsed\": 0.045165460993302986\n    },\n    {\n      \"name\": \"spec_context\",\n      \"elapsed\": 0.0002963030128739774\n    },\n    {\n      \"name\": \"split\",\n      \"elapsed\": 0.0015504559851251543\n    },\n    {\n      \"name\": \"expand\",\n      \"elapsed\": 0.8987539200170431\n    },\n    {\n      \"name\": \"batch\",\n      \"elapsed\": 0.03490619998774491\n    },\n    {\n      \"name\": \"directory_context\",\n      \"elapsed\": 1.533015165477991e-06\n    },\n    {\n      \"name\": \"review\",\n      \"elapsed\": 299.26608174599824\n    },\n    {\n      \"name\": \"snap\",\n      \"elapsed\": 0.005222437990596518\n    },\n    {\n      \"name\": \"dedupe\",\n      \"elapsed\": 5.090798367746174e-05\n    },\n    {\n      \"name\": \"suppress\",\n      \"elapsed\": 0.00013125900295563042\n    },\n    {\n      \"name\": \"failure_scenario\",\n      \"elapsed\": 2.7799978852272034e-06\n    },\n    {\n      \"name\": \"reflect\",\n      \"elapsed\": 26.782881143008126\n    },\n    {\n      \"name\": \"filter\",\n      \"elapsed\": 2.2041989723220468e-05\n    }\n  ],\n  \"calls\": [\n    {\n      \"label\": \"security\",\n      \"batch\": 1,\n      \"elapsed\": 49.96021192500484,\n      \"attempts\": 1,\n      \"input_tokens\": 106471,\n      \"output_tokens\": 8436,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"deprecation\",\n      \"batch\": 1,\n      \"elapsed\": 54.87375532402075,\n      \"attempts\": 1,\n      \"input_tokens\": 106111,\n      \"output_tokens\": 7709,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"correctness\",\n      \"batch\": 1,\n      \"elapsed\": 72.79766799599747,\n      \"attempts\": 1,\n      \"input_tokens\": 106306,\n      \"output_tokens\": 11118,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 4,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"tests\",\n      \"batch\": 1,\n      \"elapsed\": 51.6708206780022,\n      \"attempts\": 1,\n      \"input_tokens\": 106156,\n      \"output_tokens\": 8009,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"documentation\",\n      \"batch\": 1,\n      \"elapsed\": 53.48322118198848,\n      \"attempts\": 1,\n      \"input_tokens\": 105978,\n      \"output_tokens\": 7497,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"performance\",\n      \"batch\": 1,\n      \"elapsed\": 50.622871847997885,\n      \"attempts\": 1,\n      \"input_tokens\": 106178,\n      \"output_tokens\": 7753,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"complexity\",\n      \"batch\": 1,\n      \"elapsed\": 52.91452241700608,\n      \"attempts\": 1,\n      \"input_tokens\": 106110,\n      \"output_tokens\": 7866,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"intent\",\n      \"batch\": 1,\n      \"elapsed\": 54.59855419700034,\n      \"attempts\": 1,\n      \"input_tokens\": 106383,\n      \"output_tokens\": 7051,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"ponytail\",\n      \"batch\": 1,\n      \"elapsed\": 70.10852350501227,\n      \"attempts\": 1,\n      \"input_tokens\": 106108,\n      \"output_tokens\": 12604,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 5,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"reflect\",\n      \"batch\": 0,\n      \"elapsed\": 26.731242063979153,\n      \"attempts\": 1,\n      \"input_tokens\": 111875,\n      \"output_tokens\": 3222,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": null,\n      \"reasoning_share\": null\n    }\n  ]\n}",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.2.0\", \"provider\": \"openai-compatible\", \"timeout_s\": 3600, \"timeout_source\": \"provider default\", \"concurrency\": 2, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.providers.factory\", \"message\": \"configured params are not supported by this model and will be ignored\", \"provider\": \"openai-compatible\", \"model\": \"openai/nvidia/Qwen3.6-35B-A3B-NVFP4\", \"ignored_params\": [\"reasoning_effort\"]}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.045}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.002}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.899}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.035}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 48, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 106471, \"output_tokens\": 8436, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 49.96}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 106111, \"output_tokens\": 7709, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 54.874}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 106306, \"output_tokens\": 11118, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 4, \"elapsed_s\": 72.798}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 4}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 106156, \"output_tokens\": 8009, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 51.671}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 105978, \"output_tokens\": 7497, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 53.483}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 106178, \"output_tokens\": 7753, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 50.623}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 106110, \"output_tokens\": 7866, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 52.915}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 106383, \"output_tokens\": 7051, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 54.599}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 106108, \"output_tokens\": 12604, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 5, \"elapsed_s\": 70.109}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 299.266}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 46, \"to\": 44}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/validation.py\", \"from\": 36, \"to\": 21}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/reconciliation.py\", \"from\": 404, \"to\": 807}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"pricing/summaries.py\", \"from\": 4, \"to\": 141}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/allocation.py\", \"from\": 3, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/allocation.py\", \"from\": 3, \"to\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"catalog/validation.py\", \"from\": 22, \"to\": 21}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"billing/pipeline.py\", \"from\": 64, \"to\": 44}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"pricing/summaries.py\", \"from\": 78, \"to\": 141}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"routing/reconciliation.py\", \"from\": 17, \"to\": 807}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.005}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reflecting on findings\", \"findings\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"reflect\", \"batch\": 0, \"attempts\": 1, \"input_tokens\": 111875, \"output_tokens\": 3222, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"elapsed_s\": 26.731}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"reflect\", \"elapsed_s\": 26.783}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n== lgtmaybe profile ==\ntotal wall time: 328.2s\n\nstage              elapsed\nredact               0.05s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.90s\nbatch                0.03s\ndirectory_context     0.00s\nreview             299.27s\nsnap                 0.01s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect             26.78s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ncorrectness          1     1    72.80s   106306    11118         -        -        0        0        4  -\nponytail             1     1    70.11s   106108    12604         -        -        0        0        5  -\ndeprecation          1     1    54.87s   106111     7709         -        -        0        0        1  -\nintent               1     1    54.60s   106383     7051         -        -        0        0        1  -\ndocumentation        1     1    53.48s   105978     7497         -        -        0        0        1  -\ncomplexity           1     1    52.91s   106110     7866         -        -        0        0        1  -\ntests                1     1    51.67s   106156     8009         -        -        0        0        1  -\nperformance          1     1    50.62s   106178     7753         -        -        0        0        1  -\nsecurity             1     1    49.96s   106471     8436         -        -        0        0        1  -\nreflect              0     1    26.73s   111875     3222         -        -        0        0        -  -\n\ncache: 0 tokens read / 0 created across 10 calls\nfindings: 16 parsed / 3 returned\ntokens: 1,148,941 billable (1,067,676 in / 81,265 out) across 10 calls\n",
+      "stdout": "[{\"path\": \"audit/allocation.py\", \"line\": 5, \"side\": \"RIGHT\", \"severity\": \"critical\", \"title\": \"Parameterize SQL query to prevent injection\", \"body\": \"The owner_id variable is interpolated directly into the SQL string using an f-string. This allows an attacker to inject arbitrary SQL commands if they control the owner_id input. Use parameterized queries provided by the database driver instead of string formatting.\", \"failure_scenario\": \"An attacker supplies a malicious owner_id such as \\\"' OR '1'='1\\\"; the constructed query executes unintended SQL, potentially exposing or modifying database records.\", \"suggestion\": \"    query = \\\"SELECT id, status, total FROM orders WHERE customer_id = %s\\\"\", \"anchor\": \"    query = f\\\"SELECT id, status, total FROM orders WHERE customer_id = '{owner_id}'\\\"\", \"anchored\": false, \"broad\": false, \"confidence\": 10, \"category\": \"security\"}, {\"path\": \"billing/pipeline.py\", \"line\": 44, \"side\": \"RIGHT\", \"severity\": \"high\", \"title\": \"Include the first element when iterating over entries\", \"body\": \"The loop uses range(1, len(entries)), which starts at index 1 and skips the element at index 0. This means the first invoice entry is never scored or included in the ranking, causing incorrect results and potential data loss.\", \"failure_scenario\": \"A caller passes a list of invoice entries. The entry at index 0 is ignored during scoring and sorting. The returned list is missing the first entry, leading to incomplete reports or downstream processing failures.\", \"suggestion\": \"    for position in range(len(entries)):\", \"anchor\": \"    for position in range(1, len(entries)):\", \"anchored\": false, \"broad\": false, \"confidence\": 9, \"category\": \"ponytail\"}, {\"path\": \"catalog/validation.py\", \"line\": 21, \"side\": \"RIGHT\", \"severity\": \"high\", \"title\": \"Replace mutable default argument with None\", \"body\": \"Using a mutable list [] as a default argument causes the list to be shared across all function calls that omit the events parameter. Subsequent calls will append to the same list, leading to unexpected state accumulation and data leakage between invocations.\", \"failure_scenario\": \"A caller invokes register_shipment_events(\\\"type_a\\\") without providing events. The default list is created and populated. A second caller invokes register_shipment_events(\\\"type_b\\\") without events. The function appends to the same list, returning {\\\"type_b\\\": [\\\"type_a\\\", \\\"type_b\\\"]} instead of just [\\\"type_b\\\"].\", \"suggestion\": \"def register_shipment_events(event_type: str, events: list[str] | None = None) -> dict[str, list[str]]:\", \"anchor\": \"def register_shipment_events(event_type: str, events: list[str] = []) -> dict[str, list[str]]:\", \"anchored\": false, \"broad\": false, \"confidence\": 10, \"category\": \"ponytail\"}]\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 328.76359015499474,
+      "wall_seconds": 328.76359015499474
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 18.62839647801593,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 55363,
+          "label": "security",
+          "output_tokens": 3485,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 51.00126133597223,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 55198,
+          "label": "correctness",
+          "output_tokens": 10778,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 87.46820246300194,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 55003,
+          "label": "deprecation",
+          "output_tokens": 18817,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 62.54966348299058,
+          "error": null,
+          "findings": 1,
+          "input_tokens": 54870,
+          "label": "documentation",
+          "output_tokens": 12857,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 45.26554387999931,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 55070,
+          "label": "performance",
+          "output_tokens": 12281,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 63.36002661997918,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 55002,
+          "label": "complexity",
+          "output_tokens": 16116,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 551.7036197519919,
+          "error": "ProviderTruncated: response hit the 175352-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i",
+          "findings": null,
+          "input_tokens": 55048,
+          "label": "tests",
+          "output_tokens": 175352,
+          "reasoning_tokens": 0,
+          "truncated": true
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 36.27897961100098,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 31269,
+          "label": "tests",
+          "output_tokens": 9726,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 561.6049253510137,
+          "error": "ProviderTruncated: response hit the 175125-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i",
+          "findings": null,
+          "input_tokens": 55275,
+          "label": "intent",
+          "output_tokens": 175125,
+          "reasoning_tokens": 0,
+          "truncated": true
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 2894.4089662469923,
+          "error": "ProviderTruncated: response hit the 203424-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i",
+          "findings": null,
+          "input_tokens": 26976,
+          "label": "tests",
+          "output_tokens": 203424,
+          "reasoning_tokens": 0,
+          "truncated": true
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 3295.0412646619952,
+          "error": "ProviderTruncated: response hit the 198904-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i",
+          "findings": null,
+          "input_tokens": 31496,
+          "label": "intent",
+          "output_tokens": 198904,
+          "reasoning_tokens": 0,
+          "truncated": true
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 3600.0013923819934,
+          "error": "ProviderWallTimeout: provider request exceeded 3600s (waited 3600.000s)",
+          "findings": null,
+          "input_tokens": 0,
+          "label": "intent",
+          "output_tokens": 0,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 1113.372218375007,
+          "error": "ProviderTruncated: response hit the 175400-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i",
+          "findings": null,
+          "input_tokens": 55000,
+          "label": "ponytail",
+          "output_tokens": 175400,
+          "reasoning_tokens": 0,
+          "truncated": true
+        }
+      ],
+      "case": "python-context-clean-large-v1",
+      "exit_code": 0,
+      "failure_class": null,
+      "failures": 0,
+      "findings": [],
+      "ground_truth": {
+        "changed_file": "audit/pipeline.py",
+        "clean": true,
+        "clean_trap": "A broad mechanical refactor with renamed locals and retuned constants; reviewers may mistake the churn for behaviour changes.",
+        "commit_message": "Refactor 24 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-clean-large-v1"
+      },
+      "input_tokens": 585570,
+      "observation_id": "20260817-204402-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4:repeat:1:case:python-context-clean-large-v1",
+      "output_tokens": 1012265,
+      "profile": "{\n  \"schema_version\": 1,\n  \"wall_seconds\": 4630.79665677101,\n  \"total_tokens\": 1597835,\n  \"returned_findings\": 0,\n  \"stages\": [\n    {\n      \"name\": \"redact\",\n      \"elapsed\": 0.018970239005284384\n    },\n    {\n      \"name\": \"spec_context\",\n      \"elapsed\": 0.00021502500749193132\n    },\n    {\n      \"name\": \"split\",\n      \"elapsed\": 0.0009000409918371588\n    },\n    {\n      \"name\": \"expand\",\n      \"elapsed\": 0.449881203006953\n    },\n    {\n      \"name\": \"batch\",\n      \"elapsed\": 0.021414034999907017\n    },\n    {\n      \"name\": \"directory_context\",\n      \"elapsed\": 1.414009602740407e-06\n    },\n    {\n      \"name\": \"review\",\n      \"elapsed\": 4629.1683096410125\n    },\n    {\n      \"name\": \"snap\",\n      \"elapsed\": 0.002918023004895076\n    },\n    {\n      \"name\": \"dedupe\",\n      \"elapsed\": 2.701999619603157e-06\n    },\n    {\n      \"name\": \"suppress\",\n      \"elapsed\": 2.7281988877803087e-05\n    },\n    {\n      \"name\": \"failure_scenario\",\n      \"elapsed\": 1.4709949027746916e-06\n    },\n    {\n      \"name\": \"filter\",\n      \"elapsed\": 1.1196010746061802e-05\n    }\n  ],\n  \"calls\": [\n    {\n      \"label\": \"security\",\n      \"batch\": 1,\n      \"elapsed\": 18.62839647801593,\n      \"attempts\": 1,\n      \"input_tokens\": 55363,\n      \"output_tokens\": 3485,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 0,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"correctness\",\n      \"batch\": 1,\n      \"elapsed\": 51.00126133597223,\n      \"attempts\": 1,\n      \"input_tokens\": 55198,\n      \"output_tokens\": 10778,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 0,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"deprecation\",\n      \"batch\": 1,\n      \"elapsed\": 87.46820246300194,\n      \"attempts\": 1,\n      \"input_tokens\": 55003,\n      \"output_tokens\": 18817,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 0,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"documentation\",\n      \"batch\": 1,\n      \"elapsed\": 62.54966348299058,\n      \"attempts\": 1,\n      \"input_tokens\": 54870,\n      \"output_tokens\": 12857,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 1,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"performance\",\n      \"batch\": 1,\n      \"elapsed\": 45.26554387999931,\n      \"attempts\": 1,\n      \"input_tokens\": 55070,\n      \"output_tokens\": 12281,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 0,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"complexity\",\n      \"batch\": 1,\n      \"elapsed\": 63.36002661997918,\n      \"attempts\": 1,\n      \"input_tokens\": 55002,\n      \"output_tokens\": 16116,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 0,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"tests\",\n      \"batch\": 1,\n      \"elapsed\": 551.7036197519919,\n      \"attempts\": 1,\n      \"input_tokens\": 55048,\n      \"output_tokens\": 175352,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": \"ProviderTruncated: response hit the 175352-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\",\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": 175352,\n      \"findings\": null,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"tests\",\n      \"batch\": 1,\n      \"elapsed\": 36.27897961100098,\n      \"attempts\": 1,\n      \"input_tokens\": 31269,\n      \"output_tokens\": 9726,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": 0,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"intent\",\n      \"batch\": 1,\n      \"elapsed\": 561.6049253510137,\n      \"attempts\": 1,\n      \"input_tokens\": 55275,\n      \"output_tokens\": 175125,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": \"ProviderTruncated: response hit the 175125-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\",\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": 175125,\n      \"findings\": null,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"tests\",\n      \"batch\": 1,\n      \"elapsed\": 2894.4089662469923,\n      \"attempts\": 1,\n      \"input_tokens\": 26976,\n      \"output_tokens\": 203424,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": \"ProviderTruncated: response hit the 203424-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\",\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": 203424,\n      \"findings\": null,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"intent\",\n      \"batch\": 1,\n      \"elapsed\": 3295.0412646619952,\n      \"attempts\": 1,\n      \"input_tokens\": 31496,\n      \"output_tokens\": 198904,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": \"ProviderTruncated: response hit the 198904-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\",\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": 198904,\n      \"findings\": null,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"intent\",\n      \"batch\": 1,\n      \"elapsed\": 3600.0013923819934,\n      \"attempts\": 1,\n      \"input_tokens\": 0,\n      \"output_tokens\": 0,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": \"ProviderWallTimeout: provider request exceeded 3600s (waited 3600.000s)\",\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": null,\n      \"findings\": null,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"ponytail\",\n      \"batch\": 1,\n      \"elapsed\": 1113.372218375007,\n      \"attempts\": 1,\n      \"input_tokens\": 55000,\n      \"output_tokens\": 175400,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 0,\n      \"error\": \"ProviderTruncated: response hit the 175400-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\",\n      \"reasoning_tokens\": null,\n      \"output_ceiling\": 175400,\n      \"findings\": null,\n      \"reasoning_share\": null\n    }\n  ]\n}",
+      "reasoning_tokens": 0,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.2.0\", \"provider\": \"openai-compatible\", \"timeout_s\": 3600, \"timeout_source\": \"provider default\", \"concurrency\": 2, \"max_tokens\": null, \"max_tokens_source\": \"uncapped\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.providers.factory\", \"message\": \"configured params are not supported by this model and will be ignored\", \"provider\": \"openai-compatible\", \"model\": \"openai/nvidia/Qwen3.6-35B-A3B-NVFP4\", \"ignored_params\": [\"reasoning_effort\"]}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.019}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.45}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.021}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 24, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 55363, \"output_tokens\": 3485, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 18.628}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 55198, \"output_tokens\": 10778, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 51.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 55003, \"output_tokens\": 18817, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 87.468}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 54870, \"output_tokens\": 12857, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 1, \"elapsed_s\": 62.55}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 55070, \"output_tokens\": 12281, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 45.266}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 55002, \"output_tokens\": 16116, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 63.36}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 55048, \"output_tokens\": 175352, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 175352-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 175352, \"elapsed_s\": 551.704}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"tests\", \"reason\": \"ProviderTruncated: response hit the 175352-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1897, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 608, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 679, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 665, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 708, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 842, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 175352-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call was too big for one response \\u2014 retrying on smaller pieces\", \"lens\": \"tests\", \"batch\": 1, \"pieces\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 31269, \"output_tokens\": 9726, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"findings\": 0, \"elapsed_s\": 36.279}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 55275, \"output_tokens\": 175125, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 175125-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 175125, \"elapsed_s\": 561.605}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"intent\", \"reason\": \"ProviderTruncated: response hit the 175125-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1897, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 608, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 679, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 665, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 708, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 842, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 175125-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call was too big for one response \\u2014 retrying on smaller pieces\", \"lens\": \"intent\", \"batch\": 1, \"pieces\": 2}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 26976, \"output_tokens\": 203424, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 203424-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 203424, \"elapsed_s\": 2894.409}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"tests\", \"reason\": \"ProviderTruncated: response hit the 203424-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1897, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 608, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 679, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 665, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 708, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 842, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 203424-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 31496, \"output_tokens\": 198904, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 198904-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 198904, \"elapsed_s\": 3295.041}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"intent\", \"reason\": \"ProviderTruncated: response hit the 198904-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1897, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 608, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 679, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 665, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 708, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 842, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 198904-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 0, \"output_tokens\": 0, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderWallTimeout: provider request exceeded 3600s (waited 3600.000s)\", \"elapsed_s\": 3600.001}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"intent\", \"reason\": \"ProviderWallTimeout: provider request exceeded 3600s (waited 3600.000s)\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1897, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 608, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 679, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 665, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 709, in _raw_completion\\n    _completion_with_wall_timeout(model, messages, kwargs),\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 1026, in _completion_with_wall_timeout\\n    raise ProviderWallTimeout(\\nlgtmaybe.core.ports.ProviderWallTimeout: provider request exceeded 3600s (waited 3600.000s)\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 55000, \"output_tokens\": 175400, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 0, \"error\": \"ProviderTruncated: response hit the 175400-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"output_ceiling\": 175400, \"elapsed_s\": 1113.372}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call failed\", \"lens\": \"ponytail\", \"reason\": \"ProviderTruncated: response hit the 175400-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\", \"exc_info\": \"Traceback (most recent call last):\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/engine/engine.py\\\", line 1897, in _complete_lens\\n    result = self._provider.complete(messages, model=model, **opts)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 608, in complete\\n    return self._complete_with_retry(messages, effective_model, **merged)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 679, in _complete_with_retry\\n    result = _call()\\n             ^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 331, in wrapped_f\\n    return copy(f, *args, **kw)\\n           ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 470, in __call__\\n    do = self.iter(retry_state=retry_state)\\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 371, in iter\\n    result = action(retry_state)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 393, in <lambda>\\n    self._add_action_func(lambda rs: rs.outcome.result())\\n                                     ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 449, in result\\n    return self.__get_result()\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py\\\", line 401, in __get_result\\n    raise self._exception\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/tenacity/__init__.py\\\", line 473, in __call__\\n    result = fn(*args, **kwargs)\\n             ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 665, in _call\\n    result = self._raw_completion(model, messages, kwargs, count_request)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 708, in _raw_completion\\n    return self._map_response(\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/mattcoles/.cache/uv/archive-v0/mFWuWF-gGvzUD4PJ/lib/python3.12/site-packages/lgtmaybe/providers/litellm_provider.py\\\", line 842, in _map_response\\n    raise ProviderTruncated(\\nlgtmaybe.core.ports.ProviderTruncated: response hit the 175400-token `max_tokens` ceiling before finishing \\u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation instability in the model, which a higher ceiling makes more expensive rather than prevents\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review call was too big for one response \\u2014 retrying on smaller pieces\", \"lens\": \"ponytail\", \"batch\": 1, \"pieces\": 2}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"ponytail\"}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping call\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 4629.168}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"re-anchored finding\", \"path\": \"audit/pipeline.py\", \"from\": 26, \"to\": 21}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.003}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"WARNING\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review deadline reached \\u2014 skipping reflection\", \"findings\": 1}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n== lgtmaybe profile ==\ntotal wall time: 4630.8s\n\nstage              elapsed\nredact               0.02s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.45s\nbatch                0.02s\ndirectory_context     0.00s\nreview            4629.17s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nintent               1     1  3600.00s        0        0         -        -        0        0        -  ProviderWallTimeout: provider request exceeded 3600s (waited 3600.000s)\nintent               1     1  3295.04s    31496   198904         -        -        0        0        -  ProviderTruncated: response hit the 198904-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ntests                1     1  2894.41s    26976   203424         -        -        0        0        -  ProviderTruncated: response hit the 203424-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\nponytail             1     1  1113.37s    55000   175400         -        -        0        0        -  ProviderTruncated: response hit the 175400-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\nintent               1     1   561.60s    55275   175125         -        -        0        0        -  ProviderTruncated: response hit the 175125-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ntests                1     1   551.70s    55048   175352         -        -        0        0        -  ProviderTruncated: response hit the 175352-token `max_tokens` ceiling before finishing \u2014 the batch is re-reviewed in smaller pieces automatically, so a lens that keeps doing it is usually generation i\ndeprecation          1     1    87.47s    55003    18817         -        -        0        0        0  -\ncomplexity           1     1    63.36s    55002    16116         -        -        0        0        0  -\ndocumentation        1     1    62.55s    54870    12857         -        -        0        0        1  -\ncorrectness          1     1    51.00s    55198    10778         -        -        0        0        0  -\nperformance          1     1    45.27s    55070    12281         -        -        0        0        0  -\ntests                1     1    36.28s    31269     9726         -        -        0        0        0  -\nsecurity             1     1    18.63s    55363     3485         -        -        0        0        0  -\n\ncache: 0 tokens read / 0 created across 13 calls\nfindings: 1 parsed / 0 returned\ntokens: 1,597,835 billable (585,570 in / 1,012,265 out) across 13 calls\n",
+      "stdout": "[]\n",
+      "timed_out": false,
+      "truncation_lenses": [
+        "tests",
+        "intent",
+        "tests",
+        "intent",
+        "ponytail"
+      ],
+      "wall_excluding_truncation_seconds": 0.0,
+      "wall_seconds": 4631.347355911013
+    }
+  ],
+  "run_id": "20260817-204402-openai-compatible-nvidia-qwen3-6-35b-a3b-nvfp4",
+  "schema_version": 2,
+  "status": "complete",
+  "termination": null,
+  "timestamp": "2026-08-17T20:44:02Z"
+}
