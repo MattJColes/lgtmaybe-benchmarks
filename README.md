@@ -65,6 +65,7 @@ Comparison key: `breadth / canonical-breadth / lgtmaybe 2.2.0`.
 | 2026-08-17 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | 57.1% [51.1–60.7%] provisional | 47.1% [42.9–51.4%] | 72.3% [63.3–74.0%] | 13 [13–18] | 44.4% [22.2–55.6%] | 98.0% [98.0–100.0%] | no | api base http://127.0.0.1:8000/v1; concurrency 3 |
 | 2026-08-17 | openrouter | openai/gpt-5.4-mini | 49.7% [47.5–51.8%] provisional | 42.9% [38.6–42.9%] | 61.7% [59.3–65.3%] | 18 [17–22] | 33.3% | 97.9% [96.4–98.0%] | no | — |
 | 2026-08-17 | openrouter | anthropic/claude-sonnet-5 | 28.3% [20.3–65.6%] provisional | 17.1% [11.4–61.4%] | 81.2% [70.3–88.9%] | 3 [1–19] | 88.9% [11.1–100.0%] | 100.0% [98.5–100.0%] | no | — |
+| 2026-08-17 | openrouter | anthropic/claude-opus-5 | 18.2% [15.2–55.0%] provisional | 11.4% [8.6–52.9%] | 57.4% [44.4–66.7%] | 10 [3–29] | 55.6% [11.1–88.9%] | 100.0% [98.6–100.0%] | no | — |
 
 Comparison key: `breadth / canonical-breadth / lgtmaybe 2.1.4`.
 
