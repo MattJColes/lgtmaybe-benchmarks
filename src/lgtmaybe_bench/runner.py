@@ -318,7 +318,77 @@ def parse_review_output(stdout: str) -> tuple[tuple[Finding, ...], str, tuple[Pr
     return parse_findings(raw_findings), profile, tuple(calls)
 
 
-def _command(config: RunConfig, executable: list[str], audit_path: Path | None = None) -> list[str]:
+def parse_profile_json(path: Path) -> tuple[str, tuple[ProfileCall, ...]]:
+    if not path.is_file():
+        raise ValueError("lgtmaybe profile JSON was not written")
+    profile = path.read_text(encoding="utf-8")
+    try:
+        raw = json.loads(profile)
+    except json.JSONDecodeError as exc:
+        raise ValueError("lgtmaybe profile JSON was not valid JSON") from exc
+    if not isinstance(raw, dict):
+        raise ValueError("lgtmaybe profile JSON must be an object")
+    if raw.get("schema_version") != 1:
+        version = raw.get("schema_version")
+        raise ValueError(f"unsupported lgtmaybe profile schema version: {version}")
+    raw_calls = raw.get("calls")
+    if not isinstance(raw_calls, list) or not raw_calls:
+        raise ValueError("lgtmaybe profile JSON contained no calls")
+
+    def integer(call: dict[str, Any], field: str, *, nullable: bool = False) -> int | None:
+        value = call.get(field)
+        if value is None and nullable:
+            return None
+        if type(value) is not int:
+            raise ValueError(f"lgtmaybe profile call field {field} must be an integer")
+        return value
+
+    calls: list[ProfileCall] = []
+    for raw_call in raw_calls:
+        if not isinstance(raw_call, dict):
+            raise ValueError("lgtmaybe profile call must be an object")
+        label = raw_call.get("label")
+        elapsed = raw_call.get("elapsed")
+        error = raw_call.get("error")
+        if not isinstance(label, str) or not label:
+            raise ValueError("lgtmaybe profile call field label must be a non-empty string")
+        if isinstance(elapsed, bool) or not isinstance(elapsed, int | float):
+            raise ValueError("lgtmaybe profile call field elapsed must be a number")
+        if error is not None and not isinstance(error, str):
+            raise ValueError("lgtmaybe profile call field error must be a string or null")
+        reasoning_tokens = integer(raw_call, "reasoning_tokens", nullable=True)
+        output_ceiling = integer(raw_call, "output_ceiling", nullable=True)
+        findings = integer(raw_call, "findings", nullable=True)
+        output_tokens = integer(raw_call, "output_tokens")
+        assert output_tokens is not None
+        calls.append(
+            ProfileCall(
+                label=label,
+                batch=integer(raw_call, "batch") or 0,
+                attempts=integer(raw_call, "attempts") or 0,
+                elapsed_seconds=float(elapsed),
+                input_tokens=integer(raw_call, "input_tokens") or 0,
+                output_tokens=output_tokens,
+                reasoning_tokens=reasoning_tokens or 0,
+                cache_read_tokens=integer(raw_call, "cache_read_tokens") or 0,
+                cache_creation_tokens=integer(raw_call, "cache_creation_tokens") or 0,
+                findings=findings,
+                error=error,
+                truncated=bool(
+                    (error and any(marker in error.casefold() for marker in TRUNCATION_MARKERS))
+                    or (output_ceiling is not None and output_tokens >= output_ceiling)
+                ),
+            )
+        )
+    return profile, tuple(calls)
+
+
+def _command(
+    config: RunConfig,
+    executable: list[str],
+    audit_path: Path | None = None,
+    profile_json_path: Path | None = None,
+) -> list[str]:
     command = [
         *executable,
         "review",
@@ -352,6 +422,8 @@ def _command(config: RunConfig, executable: list[str], audit_path: Path | None =
             command.extend((flag, str(value)))
     if audit_path is not None:
         command.extend(("--audit-jsonl", str(audit_path)))
+    if profile_json_path is not None:
+        command.extend(("--profile-json", str(profile_json_path)))
     return command
 
 
@@ -376,12 +448,13 @@ def run_review(
     config: RunConfig,
     executable: list[str],
     audit_path: Path | None = None,
+    profile_json_path: Path | None = None,
 ) -> Observation:
     started = time.perf_counter()
     timed_out = False
     try:
         completed = subprocess.run(
-            _command(config, executable, audit_path),
+            _command(config, executable, audit_path, profile_json_path),
             cwd=repo,
             capture_output=True,
             text=True,
@@ -397,12 +470,23 @@ def run_review(
     wall = time.perf_counter() - started
     unparseable = False
     try:
-        findings, profile, calls = parse_review_output(stdout) if stdout.strip() else ((), "", ())
+        findings, legacy_profile, legacy_calls = (
+            parse_review_output(stdout) if stdout.strip() else ((), "", ())
+        )
     except ValueError:
         if exit_code == 0 and not timed_out:
             raise
         unparseable = True
-        findings, profile, calls = (), "", ()
+        findings, legacy_profile, legacy_calls = (), "", ()
+    profile, calls = legacy_profile, legacy_calls
+    if profile_json_path is not None:
+        try:
+            profile, calls = parse_profile_json(profile_json_path)
+        except ValueError:
+            if exit_code == 0 and not timed_out:
+                raise
+    if exit_code == 0 and not timed_out and not calls:
+        raise ValueError("lgtmaybe review succeeded without usable profile call telemetry")
     calls = tuple(
         replace(call, truncated=True)
         if config.max_tokens is not None and call.output_tokens >= config.max_tokens
@@ -472,7 +556,7 @@ def _jsonable_observation(
     return data
 
 
-def _audit_supported(executable: list[str]) -> bool:
+def _review_option_supported(executable: list[str], option: str) -> bool:
     try:
         help_result = subprocess.run(
             [*executable, "review", "--help"],
@@ -483,7 +567,15 @@ def _audit_supported(executable: list[str]) -> bool:
         )
     except (OSError, subprocess.TimeoutExpired):
         return False
-    return help_result.returncode == 0 and "--audit-jsonl" in help_result.stdout
+    return help_result.returncode == 0 and option in help_result.stdout
+
+
+def _audit_supported(executable: list[str]) -> bool:
+    return _review_option_supported(executable, "--audit-jsonl")
+
+
+def _profile_json_supported(executable: list[str]) -> bool:
+    return _review_option_supported(executable, "--profile-json")
 
 
 def _store_audit(root: Path, observation_id: str, capture: AuditCapture) -> dict[str, Any]:
@@ -567,6 +659,7 @@ def execute_benchmark(root: Path, args: Any, executable: str | list[str]) -> Pat
     executable_parts = [executable] if isinstance(executable, str) else executable
     version = _lgtmaybe_version(executable_parts)
     audit_supported = _audit_supported(executable_parts)
+    profile_json_supported = _profile_json_supported(executable_parts)
     timestamp = datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
     observations: list[dict[str, Any]] = []
     full_corpus = args.case is None and len(cases) == len(suite.cases)
@@ -613,7 +706,16 @@ def execute_benchmark(root: Path, args: Any, executable: str | list[str]) -> Pat
                 temporary_path = Path(temporary)
                 repo = build_case_repo(case.path, temporary_path / "repo")
                 audit_path = temporary_path / "audit.jsonl" if audit_supported else None
-                observation = run_review(repo, config, executable_parts, audit_path)
+                profile_json_path = (
+                    temporary_path / "profile.json" if profile_json_supported else None
+                )
+                observation = run_review(
+                    repo,
+                    config,
+                    executable_parts,
+                    audit_path=audit_path,
+                    profile_json_path=profile_json_path,
+                )
             observation_id = f"{run_id}:repeat:{repeat}:case:{case.truth.name}"
             observations.append(
                 {

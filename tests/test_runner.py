@@ -79,6 +79,46 @@ RUNAWAY_PROFILE = (
     "       0        0        -  -\n"
 )
 
+STRUCTURED_PROFILE = {
+    "schema_version": 1,
+    "wall_seconds": 9.0,
+    "total_tokens": 240,
+    "returned_findings": 0,
+    "stages": [],
+    "calls": [
+        {
+            "label": "security",
+            "batch": 1,
+            "elapsed": 7.5,
+            "attempts": 1,
+            "input_tokens": 100,
+            "output_tokens": 20,
+            "cache_read_tokens": 0,
+            "cache_creation_tokens": 0,
+            "error": "output_limit",
+            "reasoning_tokens": 5,
+            "output_ceiling": 512,
+            "findings": 0,
+            "reasoning_share": 5 / 512,
+        },
+        {
+            "label": "reflect",
+            "batch": 0,
+            "elapsed": 1.0,
+            "attempts": 1,
+            "input_tokens": 110,
+            "output_tokens": 10,
+            "cache_read_tokens": 0,
+            "cache_creation_tokens": 0,
+            "error": None,
+            "reasoning_tokens": None,
+            "output_ceiling": None,
+            "findings": None,
+            "reasoning_share": None,
+        },
+    ],
+}
+
 
 def test_removed_canonical_v1_profile_is_rejected() -> None:
     with pytest.raises(ValueError, match="unknown profile"):
@@ -575,6 +615,73 @@ def test_run_review_parses_current_profile_usage_and_truncation(tmp_path: Path) 
     assert observation.calls[0].error == "ProviderTruncated"
 
 
+def test_run_review_parses_structured_profile_json_when_human_profile_is_on_stderr(
+    tmp_path: Path,
+) -> None:
+    executable = tmp_path / "fake-lgtmaybe.py"
+    executable.write_text(
+        "import json, pathlib, sys\n"
+        "profile = pathlib.Path(sys.argv[sys.argv.index('--profile-json') + 1])\n"
+        f"profile.write_text(json.dumps({STRUCTURED_PROFILE!r}), encoding='utf-8')\n"
+        "print('[]')\n"
+        f"print({PROFILE!r}, file=sys.stderr)\n",
+        encoding="utf-8",
+    )
+    profile_path = tmp_path / "profile.json"
+    config = RunConfig("openrouter", "fake", None, None, None, "full", None, 1, 5)
+
+    observation = run_review(
+        tmp_path,
+        config,
+        [sys.executable, str(executable)],
+        profile_json_path=profile_path,
+    )
+
+    assert json.loads(observation.profile)["schema_version"] == 1
+    assert [call.label for call in observation.calls] == ["security", "reflect"]
+    assert observation.calls[0].findings == 0
+    assert observation.calls[1].findings is None
+    assert observation.calls[1].reasoning_tokens == 0
+    assert observation.input_tokens == 210
+    assert observation.output_tokens == 30
+    assert observation.reasoning_tokens == 5
+    assert observation.truncation_lenses == ("security",)
+
+
+@pytest.mark.parametrize(
+    ("profile_source", "expected_error"),
+    [
+        (None, "profile JSON was not written"),
+        ("{", "profile JSON was not valid JSON"),
+        (json.dumps({**STRUCTURED_PROFILE, "schema_version": 2}), "profile schema version"),
+        (json.dumps({**STRUCTURED_PROFILE, "calls": []}), "contained no calls"),
+    ],
+)
+def test_run_review_rejects_unusable_structured_profile_json(
+    tmp_path: Path, profile_source: str | None, expected_error: str
+) -> None:
+    executable = tmp_path / "fake-lgtmaybe.py"
+    write_profile = (
+        "profile = pathlib.Path(sys.argv[sys.argv.index('--profile-json') + 1])\n"
+        f"profile.write_text({profile_source!r}, encoding='utf-8')\n"
+        if profile_source is not None
+        else ""
+    )
+    executable.write_text(
+        "import pathlib, sys\n" + write_profile + "print('[]')\n",
+        encoding="utf-8",
+    )
+    config = RunConfig("openrouter", "fake", None, None, None, "full", None, 1, 5)
+
+    with pytest.raises(ValueError, match=expected_error):
+        run_review(
+            tmp_path,
+            config,
+            [sys.executable, str(executable)],
+            profile_json_path=tmp_path / "profile.json",
+        )
+
+
 def test_run_review_retains_calls_whose_counts_were_never_reported(tmp_path: Path) -> None:
     executable = tmp_path / "fake-lgtmaybe.py"
     executable.write_text(f"print('[]')\nprint({UNREPORTED_PROFILE!r})\n", encoding="utf-8")
@@ -821,10 +928,12 @@ def _bench_workspace(tmp_path: Path) -> Path:
         "if '--version' in sys.argv:\n"
         "    print('lgtmaybe fake-1.0')\n"
         "elif '--help' in sys.argv:\n"
-        "    print('--audit-jsonl FILE')\n"
+        "    print('--audit-jsonl FILE\\n--profile-json PATH')\n"
         "else:\n"
         "    page_case = pathlib.Path('page.py').exists()\n"
         "    audit = pathlib.Path(sys.argv[sys.argv.index('--audit-jsonl') + 1])\n"
+        "    profile = pathlib.Path(sys.argv[sys.argv.index('--profile-json') + 1])\n"
+        f"    profile.write_text(json.dumps({STRUCTURED_PROFILE!r}), encoding='utf-8')\n"
         "    target = audit.with_name(audit.name + '.partial') if page_case else audit\n"
         "    status = 'interrupted' if page_case else 'completed'\n"
         "    events = [\n"
@@ -846,7 +955,7 @@ def _bench_workspace(tmp_path: Path) -> Path:
         "        'broad': False, 'anchored': True, 'anchor': 'range' if page_case else 'execute',\n"
         "    }\n"
         "    print(json.dumps([finding]))\n"
-        f"    print({PROFILE!r})\n",
+        f"    print({PROFILE!r}, file=sys.stderr)\n",
         encoding="utf-8",
     )
     return fake
@@ -880,6 +989,8 @@ def test_fake_cli_runs_end_to_end_with_visible_truncation(tmp_path: Path) -> Non
     assert raw["configuration"]["full_corpus"] is False
     assert raw["configuration"]["cases"] == ["sql-injection-basic"]
     assert raw["observations"][0]["truncation_lenses"] == ["security"]
+    assert raw["observations"][0]["input_tokens"] == 210
+    assert raw["observations"][0]["output_tokens"] == 30
     assert raw["observations"][0]["audit"]["state"] == "completed"
     assert raw["observations"][0]["findings"][0]["failure_scenario"]
     assert raw["status"] == "complete"
