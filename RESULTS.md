@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-17 | openrouter | openai/gpt-5.4-mini | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 49.7% | 42.9% | 61.7% | 32.0 | 18.0 | 33.3% | 97.9% | no | [raw](results/raw/20260817-212703-openrouter-openai-gpt-5-4-mini.json) | — | — |
 | 2026-08-17 | openrouter | google/gemini-3.7-flash | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 62.2% | 54.3% | 72.7% | 40.0 | 15.0 | 44.4% | 100.0% | no | [raw](results/raw/20260817-212703-openrouter-google-gemini-3-7-flash.json) | — | — |
 | 2026-08-17 | openrouter | anthropic/claude-sonnet-5 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 28.3% | 17.1% | 81.2% | 13.0 | 3.0 | 88.9% | 100.0% | no | [raw](results/raw/20260817-212703-openrouter-anthropic-claude-sonnet-5.json) | — | — |
 | 2026-08-17 | openai-compatible | unsloth/Qwen3.8-27B-NVFP4 | long-horizon | diagnostic-custom-v1 | lgtmaybe 2.2.0 | complete | 0.0% | 75.0% | 29.6% | 24.0 | 57.0 | — | — | no | [raw](results/raw/20260817-125556-openai-compatible-unsloth-qwen3-8-27b-nvfp4.json) | — | effort low; api base http://127.0.0.1:8000/v1; concurrency 2 |
@@ -221,6 +222,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | language | recall |
 |---|---|---|---:|
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | dart | 40.0% |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | go | 50.0% |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | java | 50.0% |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | javascript | 50.0% |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | python | 40.0% |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | rust | 30.0% |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | typescript | 50.0% |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | dart | 50.0% |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | go | 50.0% |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | java | 70.0% |
@@ -380,6 +388,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | complexity | 0.0% |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | correctness | 100.0% |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | deprecation | 28.6% |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | documentation | 57.1% |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | intent | 42.9% |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | performance | 71.4% |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | ponytail | 14.3% |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | security | 100.0% |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | spec | 0.0% |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | tests | 0.0% |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | complexity | 0.0% |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | correctness | 71.4% |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | deprecation | 85.7% |
@@ -822,6 +840,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | class | median count |
 |---|---|---|---:|
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | adjudicated | 0.0 |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | clean_case | 7.0 |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | duplicate | 5.0 |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | forbidden | 0.0 |
+| openai/gpt-5.4-mini | breadth / canonical-breadth / lgtmaybe 2.2.0 | unexpected_near | 5.0 |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | adjudicated | 0.0 |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | clean_case | 5.0 |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.2.0 | duplicate | 0.0 |
