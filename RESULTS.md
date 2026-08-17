@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-16 | openrouter | moonshotai/kimi-k3 | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 63.6% | 65.7% | 60.5% | 48.0 | 32.0 | 0.0% | 98.8% | no | [raw](results/raw/20260816-210239-openrouter-moonshotai-kimi-k3.json) | — | — |
 | 2026-08-16 | openrouter | google/gemini-3.7-flash | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 59.8% | 48.6% | 77.8% | 35.0 | 10.0 | 55.6% | 100.0% | no | [raw](results/raw/20260816-194950-openrouter-google-gemini-3-7-flash.json) | — | — |
 | 2026-08-16 | openrouter | google/gemini-3.1-pro-preview | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 59.3% | 55.7% | 63.5% | 41.0 | 24.0 | 22.2% | 98.5% | no | [raw](results/raw/20260816-190627-openrouter-google-gemini-3-1-pro-preview.json) | — | — |
 | 2026-08-16 | openrouter | openai/gpt-5.6-sol | breadth | canonical-breadth | lgtmaybe 2.1.4 | complete | 64.5% | 58.6% | 72.1% | 43.0 | 17.0 | 33.3% | 98.4% | no | [raw](results/raw/20260816-183846-openrouter-openai-gpt-5-6-sol.json) | — | — |
@@ -207,6 +208,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | language | recall |
 |---|---|---|---:|
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 60.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 70.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 70.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | javascript | 50.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | python | 60.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | rust | 70.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | typescript | 70.0% |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | dart | 50.0% |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | go | 50.0% |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | java | 60.0% |
@@ -317,6 +325,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 28.6% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 100.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 57.1% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | documentation | 85.7% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | intent | 57.1% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | performance | 100.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | ponytail | 42.9% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | security | 100.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | spec | 14.3% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | tests | 71.4% |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | complexity | 0.0% |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | correctness | 57.1% |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | deprecation | 85.7% |
@@ -675,6 +693,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | class | median count |
 |---|---|---|---:|
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 15.0 |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 3.0 |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | forbidden | 0.0 |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.1.4 | unexpected_near | 13.0 |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | adjudicated | 0.0 |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | clean_case | 4.0 |
 | google/gemini-3.7-flash | breadth / canonical-breadth / lgtmaybe 2.1.4 | duplicate | 1.0 |
