@@ -106,13 +106,13 @@ def test_canonical_profile_bounds_provider_output_and_keeps_three_repeats() -> N
     profile = get_profile(CANONICAL_PROFILE_ID)
 
     assert profile.id == "canonical-breadth"
-    assert profile.schema_version == 1
+    assert profile.schema_version == 2
     assert profile.canonical is True
     assert profile.repeats == 3
     assert profile.preset == "fast"
     assert profile.max_tokens == 16_384
     assert profile.max_input_tokens == 100_000
-    assert profile.reasoning_effort is None
+    assert profile.reasoning_effort == "low"
     assert profile.reflect is True
     assert profile.recursive is True
     assert profile.spec_review is True
@@ -243,6 +243,30 @@ def test_cli_budget_equal_to_canonical_breadth_keeps_canonical_identity() -> Non
     assert profile.id == "canonical-breadth"
     assert profile.canonical is True
     assert profile.diagnostic_overrides == ()
+
+
+def test_cli_reasoning_effort_equal_to_canonical_breadth_keeps_canonical_identity() -> None:
+    args = build_parser().parse_args(
+        ["run", "--provider", "openai", "--model", "gpt", "--reasoning-effort", "low"]
+    )
+
+    profile = resolve_profile_args(args)
+
+    assert profile.id == "canonical-breadth"
+    assert profile.canonical is True
+    assert profile.diagnostic_overrides == ()
+
+
+def test_cli_other_reasoning_effort_still_gets_diagnostic_identity() -> None:
+    args = build_parser().parse_args(
+        ["run", "--provider", "openai", "--model", "gpt", "--reasoning-effort", "high"]
+    )
+
+    profile = resolve_profile_args(args)
+
+    assert profile.id == "diagnostic-custom-v1"
+    assert profile.canonical is False
+    assert profile.diagnostic_overrides == ("reasoning_effort",)
 
 
 def test_breadth_matrix_validation_runs_before_lgtmaybe(tmp_path: Path) -> None:
@@ -618,6 +642,7 @@ def test_canonical_v2_bounds_repeated_ceiling_generations(tmp_path: Path) -> Non
     argv = json.loads(recorded.read_text(encoding="utf-8"))
 
     assert argv[argv.index("--max-tokens") + 1] == "16384"
+    assert argv[argv.index("--reasoning-effort") + 1] == "low"
     assert len(observation.calls) == 4
     assert all(call.output_tokens == 16_384 and call.truncated for call in observation.calls)
     assert observation.truncation_lenses == ("security", "correctness", "performance", "tests")
@@ -905,6 +930,9 @@ def test_canonical_fake_cli_connects_evidence_scoring_and_reports(tmp_path: Path
     raw = json.loads(raw_path.read_text(encoding="utf-8"))
     assert raw["configuration"]["profile"] == "canonical-breadth"
     assert raw["configuration"]["profile_canonical"] is True
+    assert raw["configuration"]["profile_schema_version"] == 2
+    assert raw["configuration"]["reasoning_effort"] == "low"
+    assert raw["configuration"]["resolved_profile"]["reasoning_effort"] == "low"
     assert raw["configuration"]["full_corpus"] is True
     assert len(raw["observations"]) == 32 * 3
     observation = raw["observations"][0]

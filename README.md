@@ -31,7 +31,9 @@ To run the breadth suite, which is what `bench run` does by default:
 uv run bench run --provider openrouter --model google/gemini-3.7-flash --suite breadth --profile canonical-breadth
 ```
 
-`canonical-breadth` uses the fast preset, three repeats, and a 16,384-token output budget per provider call. That budget bounds runaway generations: a call that hits the cap is retained as truncation evidence, not as a finding.
+`canonical-breadth` uses the fast preset, three repeats, a 16,384-token output budget per provider call, and `low` reasoning effort. Both budgets bound runaway generations: a call that hits either cap is retained as truncation evidence, not as a finding. The reasoning budget is set explicitly so every model reviews under the same one — left to the provider default, a model that spends its context on reasoning can exhaust it before emitting parseable output, which reads as a truncation failure rather than a low score. `low` is the cheapest explicit bound and the only rung this repository has stored evidence for.
+
+Runs published before that budget existed ran with provider-resolved reasoning, and their `profile_schema_version` is 1 where later runs record 2. The profile ID was deliberately kept stable rather than versioned, so those runs still rank under the same comparison key; until each model is re-run, the breadth ranking mixes the two reasoning budgets. Every run's own `reasoning_effort` is stored in its raw record.
 
 Each run uses `uv` to download and cache the latest stable `lgtmaybe` release before benchmarking, including in a fresh container. Provider credentials stay in the environment and are never written to raw results. Hosted providers use their usual environment credentials:
 

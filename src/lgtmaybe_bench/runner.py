@@ -25,6 +25,7 @@ RAW_INELIGIBLE = "ineligible"
 CANONICAL_PROFILE_ID = "canonical-breadth"
 LONG_HORIZON_PROFILE_ID = "canonical-long-horizon"
 CANONICAL_MAX_TOKENS = 16_384
+CANONICAL_REASONING_EFFORT = "low"
 
 # A full-corpus run under either of these profiles publishes a result only when every
 # observation is failure-free, so it has nothing left to earn after its first failure.
@@ -56,17 +57,19 @@ def _profile(
     canonical: bool = False,
     repeats: int = 1,
     preset: str = "fast",
+    reasoning_effort: str | None = None,
     max_tokens: int | None = None,
     max_input_tokens: int = 100_000,
+    schema_version: int = 1,
 ) -> ResolvedProfile:
     return ResolvedProfile(
         id=profile_id,
         base_profile_id=profile_id,
-        schema_version=1,
+        schema_version=schema_version,
         canonical=canonical,
         repeats=repeats,
         preset=preset,
-        reasoning_effort=None,
+        reasoning_effort=reasoning_effort,
         max_tokens=max_tokens,
         max_input_tokens=max_input_tokens,
         reflect=True,
@@ -79,7 +82,12 @@ def _profile(
 
 PROFILES = {
     CANONICAL_PROFILE_ID: _profile(
-        CANONICAL_PROFILE_ID, canonical=True, repeats=3, max_tokens=CANONICAL_MAX_TOKENS
+        CANONICAL_PROFILE_ID,
+        canonical=True,
+        repeats=3,
+        reasoning_effort=CANONICAL_REASONING_EFFORT,
+        max_tokens=CANONICAL_MAX_TOKENS,
+        schema_version=2,
     ),
     LONG_HORIZON_PROFILE_ID: _profile(LONG_HORIZON_PROFILE_ID, repeats=1, preset="full"),
     "diagnostic-full-v1": _profile("diagnostic-full-v1", preset="full"),

@@ -413,6 +413,30 @@ def test_only_in_progress_runs_render_empty_state() -> None:
     assert rendered == "No benchmark runs recorded.\n"
 
 
+def test_diagnostic_override_survives_a_later_change_to_its_base_profile() -> None:
+    run = v2_raw("2026-06-01T00:00:00Z", "diag", profile="diagnostic-custom-v1")
+    config = run["configuration"]
+    assert isinstance(config, dict)
+    config.update(
+        {
+            "base_profile": "canonical-breadth",
+            "diagnostic_overrides": ["reasoning_effort"],
+            "reasoning_effort": "low",
+            "resolved_profile": {
+                "reasoning_effort": "low",
+                "preset": "full",
+                "max_tokens": None,
+                "max_input_tokens": None,
+                "repeats": 3,
+            },
+        }
+    )
+
+    settings = build_dashboard_data([run])["runs"][0]["settings"]
+
+    assert settings == "effort low (thinking off)"
+
+
 def test_ineligible_run_is_retained_but_never_scored_or_ranked() -> None:
     ranked = v2_raw("2026-05-01T00:00:00Z", "ranked")
     abandoned = v2_raw("2026-05-02T00:00:00Z", "abandoned")
