@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-17 | openai-compatible | nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 | long-horizon | canonical-long-horizon | lgtmaybe 2.2.0 | complete | 0.0% | 15.6% | 17.9% | 5.0 | 23.0 | — | — | no | [raw](results/raw/20260817-235124-openai-compatible-nvidia-nvidia-nemotron-3-5-lightning-30b-a3b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-17 | openrouter | anthropic/claude-opus-5 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 18.2% | 11.4% | 57.4% | 8.0 | 10.0 | 55.6% | 100.0% | no | [raw](results/raw/20260817-213547-openrouter-anthropic-claude-opus-5.json) | — | — |
 | 2026-08-17 | openrouter | openai/gpt-5.4-nano | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 58.7% | 52.9% | 68.4% | 39.0 | 18.0 | 22.2% | 98.3% | no | [raw](results/raw/20260817-212703-openrouter-openai-gpt-5-4-nano.json) | — | — |
 | 2026-08-17 | openrouter | openai/gpt-5.4-mini | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 49.7% | 42.9% | 61.7% | 32.0 | 18.0 | 33.3% | 97.9% | no | [raw](results/raw/20260817-212703-openrouter-openai-gpt-5-4-mini.json) | — | — |
@@ -75,6 +76,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-17 | openai-compatible | nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 | python-context-small-v1 | 37.5% | 75.0% | 4 | 90,008 | 1,256,851 | yes | 2781.0 |
+| 2026-08-17 | openai-compatible | nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 | python-context-medium-v1 | 0.0% | 0.0% | 7 | 282,104 | 2,152,301 | yes | 3953.5 |
+| 2026-08-17 | openai-compatible | nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 | python-context-large-v1 | 0.0% | 0.0% | 1 | 785,311 | 1,550,247 | yes | 3069.2 |
+| 2026-08-17 | openai-compatible | nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 | python-context-xlarge-v1 | 25.0% | 18.2% | 11 | 1,367,022 | 938,844 | yes | 2277.1 |
+| 2026-08-17 | openai-compatible | nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 | python-context-clean-large-v1 | — | 0.0% | 5 | 666,442 | 1,040,790 | yes | 2346.1 |
 | 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | python-context-small-v1 | 12.5% | 100.0% | 1 | 0 | 0 | no | 24.7 |
 | 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | python-context-medium-v1 | 12.5% | 100.0% | 1 | 0 | 0 | no | 39.4 |
 | 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | python-context-large-v1 | 12.5% | 100.0% | 1 | 0 | 0 | no | 88.4 |
@@ -405,6 +411,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | complexity | 0.0% |
+| nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | correctness | 25.0% |
+| nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | deprecation | 0.0% |
+| nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | documentation | 0.0% |
+| nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | intent | 50.0% |
+| nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | performance | 0.0% |
+| nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | security | 25.0% |
 | anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.2.0 | complexity | 0.0% |
 | anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.2.0 | correctness | 14.3% |
 | anthropic/claude-opus-5 | breadth / canonical-breadth / lgtmaybe 2.2.0 | deprecation | 14.3% |
