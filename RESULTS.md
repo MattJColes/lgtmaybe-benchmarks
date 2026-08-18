@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-18 | openai-compatible | RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 48.5% | 44.3% | 51.6% | 32.0 | 31.0 | 11.1% | 98.5% | no | [raw](results/raw/20260818-185208-openai-compatible-redhatai-gemma-4-12b-it-fp8-dynamic.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-18 | openai-compatible | RedHatAI/gemma-4-12B-it-FP8-Dynamic | long-horizon | canonical-long-horizon | lgtmaybe 2.2.0 | complete | 40.5% | 37.5% | 63.2% | 12.0 | 7.0 | — | — | no | [raw](results/raw/20260818-125254-openai-compatible-redhatai-gemma-4-12b-it-fp8-dynamic.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-18 | openai-compatible | poolside/Laguna-XS-2.1-NVFP4 | long-horizon | canonical-long-horizon | lgtmaybe 2.2.0 | complete | 29.2% | 34.4% | 50.0% | 11.0 | 11.0 | — | — | no | [raw](results/raw/20260818-071529-openai-compatible-poolside-laguna-xs-2-1-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-18 | openrouter | qwen/qwen3.8-max | long-horizon | canonical-long-horizon | lgtmaybe 2.2.0 | complete | 71.7% | 75.0% | 77.4% | 24.0 | 7.0 | — | — | no | [raw](results/raw/20260818-001626-openrouter-qwen-qwen3-8-max.json) | — | — |
@@ -254,6 +255,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | language | recall |
 |---|---|---|---:|
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | dart | 40.0% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | go | 50.0% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | java | 30.0% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | javascript | 50.0% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | python | 30.0% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | rust | 40.0% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | typescript | 60.0% |
 | deepseek/deepseek-v4-pro-0813 | breadth / canonical-breadth / lgtmaybe 2.2.0 | dart | 50.0% |
 | deepseek/deepseek-v4-pro-0813 | breadth / canonical-breadth / lgtmaybe 2.2.0 | go | 30.0% |
 | deepseek/deepseek-v4-pro-0813 | breadth / canonical-breadth / lgtmaybe 2.2.0 | java | 40.0% |
@@ -469,6 +477,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | complexity | 0.0% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | correctness | 85.7% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | deprecation | 57.1% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | documentation | 57.1% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | intent | 42.9% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | performance | 71.4% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | ponytail | 0.0% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | security | 100.0% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | spec | 0.0% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | tests | 14.3% |
 | RedHatAI/gemma-4-12B-it-FP8-Dynamic | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | complexity | 0.0% |
 | RedHatAI/gemma-4-12B-it-FP8-Dynamic | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | correctness | 37.5% |
 | RedHatAI/gemma-4-12B-it-FP8-Dynamic | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | deprecation | 100.0% |
@@ -1026,6 +1044,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | class | median count |
 |---|---|---|---:|
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | adjudicated | 0.0 |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | clean_case | 8.0 |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | duplicate | 4.0 |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | forbidden | 0.0 |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | unexpected_near | 17.0 |
 | deepseek/deepseek-v4-pro-0813 | breadth / canonical-breadth / lgtmaybe 2.2.0 | adjudicated | 0.0 |
 | deepseek/deepseek-v4-pro-0813 | breadth / canonical-breadth / lgtmaybe 2.2.0 | clean_case | 5.0 |
 | deepseek/deepseek-v4-pro-0813 | breadth / canonical-breadth / lgtmaybe 2.2.0 | duplicate | 2.0 |

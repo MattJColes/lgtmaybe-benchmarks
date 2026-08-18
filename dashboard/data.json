@@ -3,6 +3,78 @@
     {
       "audit": "no",
       "audit_paths": [],
+      "canonical": true,
+      "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.2.0",
+      "context_cases": [],
+      "date": "2026-08-18",
+      "focused": false,
+      "lgtmaybe_version": "lgtmaybe 2.2.0",
+      "metrics": {
+        "adjudication_coverage": 0.9846153846153847,
+        "balanced_f1": 0.48462597521798995,
+        "balanced_recall": 0.44285714285714284,
+        "clean_pass_rate": 0.1111111111111111,
+        "duplicates": 4.0,
+        "failures": 0.0,
+        "false_positive_classes": {
+          "adjudicated": 0.0,
+          "clean_case": 8.0,
+          "duplicate": 4.0,
+          "forbidden": 0.0,
+          "unexpected_near": 17.0
+        },
+        "false_positives": 31.0,
+        "input_tokens": 542267.0,
+        "output_tokens": 159501.0,
+        "per_language": {
+          "dart": 0.4,
+          "go": 0.5,
+          "java": 0.3,
+          "javascript": 0.5,
+          "python": 0.3,
+          "rust": 0.4,
+          "typescript": 0.6
+        },
+        "per_lens": {
+          "complexity": 0.0,
+          "correctness": 0.8571428571428571,
+          "deprecation": 0.5714285714285714,
+          "documentation": 0.5714285714285714,
+          "intent": 0.42857142857142855,
+          "performance": 0.7142857142857143,
+          "ponytail": 0.0,
+          "security": 1.0,
+          "spec": 0.0,
+          "tests": 0.14285714285714285
+        },
+        "precision": 0.515625,
+        "provisional": true,
+        "reasoning_tokens": 0.0,
+        "score_kind": "balanced_f1",
+        "true_positives": 32.0,
+        "truncation_lenses": [
+          "artefacts",
+          "code-health",
+          "correctness",
+          "security"
+        ],
+        "truncations": 12.0,
+        "unadjudicated": 1.0,
+        "wall_seconds": 2058.213161758962
+      },
+      "model": "RedHatAI/gemma-4-12B-it-FP8-Dynamic",
+      "profile": "canonical-breadth",
+      "provider": "openai-compatible",
+      "raw_path": "results/raw/20260818-185208-openai-compatible-redhatai-gemma-4-12b-it-fp8-dynamic.json",
+      "run_id": "20260818-185208-openai-compatible-redhatai-gemma-4-12b-it-fp8-dynamic",
+      "settings": "api base http://127.0.0.1:8000/v1; concurrency 2",
+      "status": "complete",
+      "suite": "breadth",
+      "timestamp": "2026-08-18T18:52:08Z"
+    },
+    {
+      "audit": "no",
+      "audit_paths": [],
       "canonical": false,
       "comparison_key": "long-horizon / canonical-long-horizon / lgtmaybe 2.2.0",
       "context_cases": [
