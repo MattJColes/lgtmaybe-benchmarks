@@ -8,6 +8,118 @@
       "context_cases": [
         {
           "case": "python-context-small-v1",
+          "findings": 10.0,
+          "input_tokens": 135098,
+          "output_tokens": 565694,
+          "precision": 0.4,
+          "recall": 0.5,
+          "truncated": true,
+          "wall_seconds": 893.7736389450147
+        },
+        {
+          "case": "python-context-medium-v1",
+          "findings": 4.0,
+          "input_tokens": 466832,
+          "output_tokens": 863886,
+          "precision": 1.0,
+          "recall": 0.5,
+          "truncated": true,
+          "wall_seconds": 1344.659261709021
+        },
+        {
+          "case": "python-context-large-v1",
+          "findings": 5.0,
+          "input_tokens": 1065417,
+          "output_tokens": 661051,
+          "precision": 0.2,
+          "recall": 0.125,
+          "truncated": true,
+          "wall_seconds": 1023.3206427220139
+        },
+        {
+          "case": "python-context-xlarge-v1",
+          "findings": 2.0,
+          "input_tokens": 2158312,
+          "output_tokens": 637508,
+          "precision": 1.0,
+          "recall": 0.25,
+          "truncated": true,
+          "wall_seconds": 1282.3497547060251
+        },
+        {
+          "case": "python-context-clean-large-v1",
+          "findings": 1.0,
+          "input_tokens": 992601,
+          "output_tokens": 558322,
+          "precision": 0.0,
+          "recall": null,
+          "truncated": true,
+          "wall_seconds": 933.0897739290376
+        }
+      ],
+      "date": "2026-08-18",
+      "focused": false,
+      "lgtmaybe_version": "lgtmaybe 2.2.0",
+      "metrics": {
+        "adjudication_coverage": null,
+        "balanced_f1": 0.29162790697674423,
+        "balanced_recall": 0.34375,
+        "clean_pass_rate": null,
+        "duplicates": null,
+        "failures": 0.0,
+        "false_positive_classes": {},
+        "false_positives": 11.0,
+        "input_tokens": 4818260.0,
+        "output_tokens": 3286461.0,
+        "per_language": {},
+        "per_lens": {
+          "complexity": 0.0,
+          "correctness": 0.5,
+          "deprecation": 0.25,
+          "documentation": 0.0,
+          "intent": 0.5,
+          "performance": 0.0,
+          "security": 1.0
+        },
+        "precision": 0.5,
+        "provisional": false,
+        "reasoning_tokens": 0.0,
+        "score_kind": "legacy_f1",
+        "true_positives": 11.0,
+        "truncation_lenses": [
+          "complexity",
+          "correctness",
+          "deprecation",
+          "documentation",
+          "intent",
+          "performance",
+          "ponytail",
+          "reflect",
+          "security",
+          "tests"
+        ],
+        "truncations": 194.0,
+        "unadjudicated": null,
+        "wall_seconds": 5477.193072011112
+      },
+      "model": "poolside/Laguna-XS-2.1-NVFP4",
+      "profile": "canonical-long-horizon",
+      "provider": "openai-compatible",
+      "raw_path": "results/raw/20260818-071529-openai-compatible-poolside-laguna-xs-2-1-nvfp4.json",
+      "run_id": "20260818-071529-openai-compatible-poolside-laguna-xs-2-1-nvfp4",
+      "settings": "api base http://127.0.0.1:8000/v1; concurrency 2",
+      "status": "complete",
+      "suite": "long-horizon",
+      "timestamp": "2026-08-18T07:15:29Z"
+    },
+    {
+      "audit": "no",
+      "audit_paths": [],
+      "canonical": false,
+      "comparison_key": "long-horizon / canonical-long-horizon / lgtmaybe 2.2.0",
+      "context_cases": [
+        {
+          "case": "python-context-small-v1",
           "findings": 9.0,
           "input_tokens": 74627,
           "output_tokens": 205732,
