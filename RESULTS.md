@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-18 | openrouter | qwen/qwen3.8-max | long-horizon | canonical-long-horizon | lgtmaybe 2.2.0 | complete | 71.7% | 75.0% | 77.4% | 24.0 | 7.0 | — | — | no | [raw](results/raw/20260818-001626-openrouter-qwen-qwen3-8-max.json) | — | — |
 | 2026-08-18 | openrouter | minimax/minimax-m3 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 62.8% | 58.6% | 67.7% | 42.0 | 20.0 | 33.3% | 98.4% | no | [raw](results/raw/20260818-000004-openrouter-minimax-minimax-m3.json) | — | — |
 | 2026-08-17 | openrouter | anthropic/claude-opus-5 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 18.2% | 11.4% | 57.4% | 8.0 | 10.0 | 55.6% | 100.0% | no | [raw](results/raw/20260817-213547-openrouter-anthropic-claude-opus-5.json) | — | — |
 | 2026-08-17 | openrouter | openai/gpt-5.4-nano | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 58.7% | 52.9% | 68.4% | 39.0 | 18.0 | 22.2% | 98.3% | no | [raw](results/raw/20260817-212703-openrouter-openai-gpt-5-4-nano.json) | — | — |
@@ -76,6 +77,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-18 | openrouter | qwen/qwen3.8-max | python-context-small-v1 | 75.0% | 66.7% | 9 | 74,627 | 205,732 | no | 1354.5 |
+| 2026-08-18 | openrouter | qwen/qwen3.8-max | python-context-medium-v1 | 75.0% | 66.7% | 9 | 222,752 | 184,024 | no | 1132.0 |
+| 2026-08-18 | openrouter | qwen/qwen3.8-max | python-context-large-v1 | 75.0% | 100.0% | 6 | 551,635 | 159,760 | no | 1098.1 |
+| 2026-08-18 | openrouter | qwen/qwen3.8-max | python-context-xlarge-v1 | 75.0% | 85.7% | 7 | 1,006,423 | 169,007 | no | 1182.4 |
+| 2026-08-18 | openrouter | qwen/qwen3.8-max | python-context-clean-large-v1 | — | 100.0% | 0 | 493,147 | 98,132 | no | 615.6 |
 | 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | python-context-small-v1 | 12.5% | 100.0% | 1 | 0 | 0 | no | 24.7 |
 | 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | python-context-medium-v1 | 12.5% | 100.0% | 1 | 0 | 0 | no | 39.4 |
 | 2026-08-17 | openai-compatible | Qwen/Qwen3.5-9B | python-context-large-v1 | 12.5% | 100.0% | 1 | 0 | 0 | no | 88.4 |
@@ -413,6 +419,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| qwen/qwen3.8-max | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | complexity | 25.0% |
+| qwen/qwen3.8-max | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | correctness | 87.5% |
+| qwen/qwen3.8-max | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | deprecation | 100.0% |
+| qwen/qwen3.8-max | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | documentation | 75.0% |
+| qwen/qwen3.8-max | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | intent | 100.0% |
+| qwen/qwen3.8-max | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | performance | 25.0% |
+| qwen/qwen3.8-max | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | security | 100.0% |
 | minimax/minimax-m3 | breadth / canonical-breadth / lgtmaybe 2.2.0 | complexity | 0.0% |
 | minimax/minimax-m3 | breadth / canonical-breadth / lgtmaybe 2.2.0 | correctness | 100.0% |
 | minimax/minimax-m3 | breadth / canonical-breadth / lgtmaybe 2.2.0 | deprecation | 57.1% |

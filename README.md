@@ -91,6 +91,7 @@ Complete `long-horizon` runs with profile `canonical-long-horizon` only. Cases g
 
 | date | provider | model | score | recall | precision | true positives | false positives |
 |---|---|---|---:|---:|---:|---:|---:|
+| 2026-08-18 | openrouter | qwen/qwen3.8-max | 71.7% | 75.0% | 77.4% | 24 | 7 |
 | 2026-08-15 | openrouter | google/gemini-3.7-flash | 71.7% | 81.2% | 74.3% | 26 | 9 |
 | 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | 63.5% | 68.8% | 71.0% | 22 | 9 |
 | 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | 52.9% | 62.5% | 62.5% | 20 | 12 |
@@ -100,7 +101,6 @@ Complete `long-horizon` runs with profile `canonical-long-horizon` only. Cases g
 | 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | 46.0% | 56.2% | 58.1% | 18 | 13 |
 | 2026-08-15 | openrouter | minimax/minimax-m3 | 43.4% | 53.1% | 56.7% | 17 | 13 |
 | 2026-08-15 | openrouter | openai/gpt-5.6-terra | 43.4% | 53.1% | 56.7% | 17 | 13 |
-| 2026-08-15 | openrouter | z-ai/glm-4.7-flash | 34.9% | 43.8% | 51.9% | 14 | 13 |
 <!-- BENCH_RESULTS_END -->
 
 ## Further results
