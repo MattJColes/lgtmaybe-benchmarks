@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-18 | openai-compatible | RedHatAI/gemma-4-12B-it-FP8-Dynamic | long-horizon | canonical-long-horizon | lgtmaybe 2.2.0 | complete | 40.5% | 37.5% | 63.2% | 12.0 | 7.0 | — | — | no | [raw](results/raw/20260818-125254-openai-compatible-redhatai-gemma-4-12b-it-fp8-dynamic.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-18 | openai-compatible | poolside/Laguna-XS-2.1-NVFP4 | long-horizon | canonical-long-horizon | lgtmaybe 2.2.0 | complete | 29.2% | 34.4% | 50.0% | 11.0 | 11.0 | — | — | no | [raw](results/raw/20260818-071529-openai-compatible-poolside-laguna-xs-2-1-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-18 | openrouter | qwen/qwen3.8-max | long-horizon | canonical-long-horizon | lgtmaybe 2.2.0 | complete | 71.7% | 75.0% | 77.4% | 24.0 | 7.0 | — | — | no | [raw](results/raw/20260818-001626-openrouter-qwen-qwen3-8-max.json) | — | — |
 | 2026-08-18 | openrouter | deepseek/deepseek-v4-pro-0813 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 52.0% | 40.0% | 72.7% | 29.0 | 12.0 | 44.4% | 97.5% | no | [raw](results/raw/20260818-001626-openrouter-deepseek-deepseek-v4-pro-0813.json) | — | — |
@@ -83,6 +84,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-18 | openai-compatible | RedHatAI/gemma-4-12B-it-FP8-Dynamic | python-context-small-v1 | 62.5% | 83.3% | 6 | 97,095 | 255,000 | yes | 2483.8 |
+| 2026-08-18 | openai-compatible | RedHatAI/gemma-4-12B-it-FP8-Dynamic | python-context-medium-v1 | 37.5% | 37.5% | 8 | 233,591 | 327,681 | yes | 4301.1 |
+| 2026-08-18 | openai-compatible | RedHatAI/gemma-4-12B-it-FP8-Dynamic | python-context-large-v1 | 25.0% | 66.7% | 3 | 597,973 | 4,120 | no | 84.0 |
+| 2026-08-18 | openai-compatible | RedHatAI/gemma-4-12B-it-FP8-Dynamic | python-context-xlarge-v1 | 25.0% | 100.0% | 2 | 1,412,479 | 108,233 | yes | 2167.3 |
+| 2026-08-18 | openai-compatible | RedHatAI/gemma-4-12B-it-FP8-Dynamic | python-context-clean-large-v1 | — | 100.0% | 0 | 699,373 | 222,215 | yes | 4286.5 |
 | 2026-08-18 | openai-compatible | poolside/Laguna-XS-2.1-NVFP4 | python-context-small-v1 | 50.0% | 40.0% | 10 | 135,098 | 565,694 | yes | 893.8 |
 | 2026-08-18 | openai-compatible | poolside/Laguna-XS-2.1-NVFP4 | python-context-medium-v1 | 50.0% | 100.0% | 4 | 466,832 | 863,886 | yes | 1344.7 |
 | 2026-08-18 | openai-compatible | poolside/Laguna-XS-2.1-NVFP4 | python-context-large-v1 | 12.5% | 20.0% | 5 | 1,065,417 | 661,051 | yes | 1023.3 |
@@ -463,6 +469,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | complexity | 0.0% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | correctness | 37.5% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | deprecation | 100.0% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | documentation | 0.0% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | intent | 25.0% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | performance | 0.0% |
+| RedHatAI/gemma-4-12B-it-FP8-Dynamic | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | security | 100.0% |
 | poolside/Laguna-XS-2.1-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | complexity | 0.0% |
 | poolside/Laguna-XS-2.1-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | correctness | 50.0% |
 | poolside/Laguna-XS-2.1-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.2.0 | deprecation | 25.0% |
