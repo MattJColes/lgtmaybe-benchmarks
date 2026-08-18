@@ -10,6 +10,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
 | 2026-08-18 | openrouter | qwen/qwen3.8-max | long-horizon | canonical-long-horizon | lgtmaybe 2.2.0 | complete | 71.7% | 75.0% | 77.4% | 24.0 | 7.0 | — | — | no | [raw](results/raw/20260818-001626-openrouter-qwen-qwen3-8-max.json) | — | — |
 | 2026-08-18 | openrouter | z-ai/glm-5.2 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 72.2% | 72.9% | 69.6% | 53.0 | 24.0 | 11.1% | 98.8% | no | [raw](results/raw/20260818-000004-openrouter-z-ai-glm-5-2.json) | — | — |
+| 2026-08-18 | openrouter | moonshotai/kimi-k2.7-code | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 52.4% | 52.9% | 52.0% | 39.0 | 36.0 | 11.1% | 98.7% | no | [raw](results/raw/20260818-000004-openrouter-moonshotai-kimi-k2-7-code.json) | — | — |
 | 2026-08-18 | openrouter | minimax/minimax-m3 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 62.8% | 58.6% | 67.7% | 42.0 | 20.0 | 33.3% | 98.4% | no | [raw](results/raw/20260818-000004-openrouter-minimax-minimax-m3.json) | — | — |
 | 2026-08-17 | openai-compatible | nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4 | long-horizon | canonical-long-horizon | lgtmaybe 2.2.0 | complete | 0.0% | 15.6% | 17.9% | 5.0 | 23.0 | — | — | no | [raw](results/raw/20260817-235124-openai-compatible-nvidia-nvidia-nemotron-3-5-lightning-30b-a3b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-17 | openrouter | anthropic/claude-opus-5 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 18.2% | 11.4% | 57.4% | 8.0 | 10.0 | 55.6% | 100.0% | no | [raw](results/raw/20260817-213547-openrouter-anthropic-claude-opus-5.json) | — | — |
@@ -246,6 +247,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | python | 70.0% |
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | rust | 80.0% |
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | typescript | 70.0% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | dart | 50.0% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | go | 60.0% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | java | 40.0% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | javascript | 50.0% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | python | 40.0% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | rust | 50.0% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | typescript | 70.0% |
 | minimax/minimax-m3 | breadth / canonical-breadth / lgtmaybe 2.2.0 | dart | 60.0% |
 | minimax/minimax-m3 | breadth / canonical-breadth / lgtmaybe 2.2.0 | go | 60.0% |
 | minimax/minimax-m3 | breadth / canonical-breadth / lgtmaybe 2.2.0 | java | 60.0% |
@@ -450,6 +458,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | security | 100.0% |
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | spec | 28.6% |
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | tests | 100.0% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | complexity | 14.3% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | correctness | 85.7% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | deprecation | 71.4% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | documentation | 42.9% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | intent | 28.6% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | performance | 71.4% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | ponytail | 42.9% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | security | 100.0% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | spec | 14.3% |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | tests | 71.4% |
 | minimax/minimax-m3 | breadth / canonical-breadth / lgtmaybe 2.2.0 | complexity | 0.0% |
 | minimax/minimax-m3 | breadth / canonical-breadth / lgtmaybe 2.2.0 | correctness | 100.0% |
 | minimax/minimax-m3 | breadth / canonical-breadth / lgtmaybe 2.2.0 | deprecation | 57.1% |
@@ -951,6 +969,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | duplicate | 7.0 |
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | forbidden | 0.0 |
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | unexpected_near | 7.0 |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | adjudicated | 0.0 |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | clean_case | 14.0 |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | duplicate | 8.0 |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | forbidden | 0.0 |
+| moonshotai/kimi-k2.7-code | breadth / canonical-breadth / lgtmaybe 2.2.0 | unexpected_near | 15.0 |
 | minimax/minimax-m3 | breadth / canonical-breadth / lgtmaybe 2.2.0 | adjudicated | 0.0 |
 | minimax/minimax-m3 | breadth / canonical-breadth / lgtmaybe 2.2.0 | clean_case | 7.0 |
 | minimax/minimax-m3 | breadth / canonical-breadth / lgtmaybe 2.2.0 | duplicate | 6.0 |
