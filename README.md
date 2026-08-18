@@ -60,6 +60,7 @@ Comparison key: `breadth / canonical-breadth / lgtmaybe 2.2.0`.
 | date | provider | model | balanced F1 | balanced recall | precision | false positives | clean pass | adjudication | audit | settings |
 |---|---|---|---:|---:|---:|---:|---:|---:|---|---|
 | 2026-08-17 | openrouter | qwen/qwen3.8-max | 71.4% [71.3–72.6%] provisional | 61.4% [58.6–67.1%] | 84.9% [79.0–91.5%] | 8 [4–13] | 77.8% [66.7–100.0%] | 98.1% [97.9–98.4%] | no | — |
+| 2026-08-18 | openrouter | minimax/minimax-m3 | 62.8% [58.7–65.0%] provisional | 58.6% [54.3–60.0%] | 67.7% [63.9–71.0%] | 20 [18–22] | 33.3% [22.2–44.4%] | 98.4% [96.9–98.4%] | no | — |
 | 2026-08-17 | openrouter | google/gemini-3.7-flash | 62.2% [62.0–63.9%] | 54.3% [52.9–57.1%] | 72.7% [72.4–75.0%] | 15 [13–16] | 44.4% [33.3–44.4%] | 100.0% | no | — |
 | 2026-08-17 | openrouter | openai/gpt-5.4-nano | 58.7% [58.0–59.6%] provisional | 52.9% [48.6–52.9%] | 68.4% [66.1–72.0%] | 18 [14–20] | 22.2% [22.2–44.4%] | 98.3% [96.2–98.3%] | no | — |
 | 2026-08-17 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | 57.1% [51.1–60.7%] provisional | 47.1% [42.9–51.4%] | 72.3% [63.3–74.0%] | 13 [13–18] | 44.4% [22.2–55.6%] | 98.0% [98.0–100.0%] | no | api base http://127.0.0.1:8000/v1; concurrency 3 |
