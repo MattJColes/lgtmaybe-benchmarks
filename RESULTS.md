@@ -11,6 +11,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | 2026-08-18 | openai-compatible | poolside/Laguna-XS-2.1-NVFP4 | long-horizon | canonical-long-horizon | lgtmaybe 2.2.0 | complete | 29.2% | 34.4% | 50.0% | 11.0 | 11.0 | — | — | no | [raw](results/raw/20260818-071529-openai-compatible-poolside-laguna-xs-2-1-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-18 | openrouter | qwen/qwen3.8-max | long-horizon | canonical-long-horizon | lgtmaybe 2.2.0 | complete | 71.7% | 75.0% | 77.4% | 24.0 | 7.0 | — | — | no | [raw](results/raw/20260818-001626-openrouter-qwen-qwen3-8-max.json) | — | — |
 | 2026-08-18 | openrouter | deepseek/deepseek-v4-pro-0813 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 52.0% | 40.0% | 72.7% | 29.0 | 12.0 | 44.4% | 97.5% | no | [raw](results/raw/20260818-001626-openrouter-deepseek-deepseek-v4-pro-0813.json) | — | — |
+| 2026-08-18 | openrouter | deepseek/deepseek-v4-flash-0731 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 54.1% | 50.0% | 59.0% | 36.0 | 25.0 | 33.3% | 98.4% | no | [raw](results/raw/20260818-001626-openrouter-deepseek-deepseek-v4-flash-0731.json) | — | — |
 | 2026-08-18 | openrouter | z-ai/glm-5.2 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 72.2% | 72.9% | 69.6% | 53.0 | 24.0 | 11.1% | 98.8% | no | [raw](results/raw/20260818-000004-openrouter-z-ai-glm-5-2.json) | — | — |
 | 2026-08-18 | openrouter | moonshotai/kimi-k2.7-code | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 52.4% | 52.9% | 52.0% | 39.0 | 36.0 | 11.1% | 98.7% | no | [raw](results/raw/20260818-000004-openrouter-moonshotai-kimi-k2-7-code.json) | — | — |
 | 2026-08-18 | openrouter | minimax/minimax-m3 | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 62.8% | 58.6% | 67.7% | 42.0 | 20.0 | 33.3% | 98.4% | no | [raw](results/raw/20260818-000004-openrouter-minimax-minimax-m3.json) | — | — |
@@ -254,6 +255,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | deepseek/deepseek-v4-pro-0813 | breadth / canonical-breadth / lgtmaybe 2.2.0 | python | 40.0% |
 | deepseek/deepseek-v4-pro-0813 | breadth / canonical-breadth / lgtmaybe 2.2.0 | rust | 30.0% |
 | deepseek/deepseek-v4-pro-0813 | breadth / canonical-breadth / lgtmaybe 2.2.0 | typescript | 40.0% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | dart | 60.0% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | go | 50.0% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | java | 60.0% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | javascript | 30.0% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | python | 50.0% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | rust | 50.0% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | typescript | 60.0% |
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | dart | 90.0% |
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | go | 70.0% |
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | java | 80.0% |
@@ -479,6 +487,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | deepseek/deepseek-v4-pro-0813 | breadth / canonical-breadth / lgtmaybe 2.2.0 | security | 100.0% |
 | deepseek/deepseek-v4-pro-0813 | breadth / canonical-breadth / lgtmaybe 2.2.0 | spec | 14.3% |
 | deepseek/deepseek-v4-pro-0813 | breadth / canonical-breadth / lgtmaybe 2.2.0 | tests | 14.3% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | complexity | 0.0% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | correctness | 71.4% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | deprecation | 57.1% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | documentation | 28.6% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | intent | 42.9% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | performance | 71.4% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | ponytail | 42.9% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | security | 100.0% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | spec | 14.3% |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | tests | 28.6% |
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | complexity | 42.9% |
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | correctness | 100.0% |
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | deprecation | 71.4% |
@@ -1000,6 +1018,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 | deepseek/deepseek-v4-pro-0813 | breadth / canonical-breadth / lgtmaybe 2.2.0 | duplicate | 2.0 |
 | deepseek/deepseek-v4-pro-0813 | breadth / canonical-breadth / lgtmaybe 2.2.0 | forbidden | 0.0 |
 | deepseek/deepseek-v4-pro-0813 | breadth / canonical-breadth / lgtmaybe 2.2.0 | unexpected_near | 5.0 |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | adjudicated | 0.0 |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | clean_case | 7.0 |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | duplicate | 6.0 |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | forbidden | 0.0 |
+| deepseek/deepseek-v4-flash-0731 | breadth / canonical-breadth / lgtmaybe 2.2.0 | unexpected_near | 12.0 |
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | adjudicated | 0.0 |
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | clean_case | 12.0 |
 | z-ai/glm-5.2 | breadth / canonical-breadth / lgtmaybe 2.2.0 | duplicate | 7.0 |
