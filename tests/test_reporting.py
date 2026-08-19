@@ -645,7 +645,7 @@ def test_context_scaling_section_renders_model_summary() -> None:
         "| date | provider | model | score | recall | precision | true positives | "
         "false positives |" in rendered
     )
-    assert "| 2026-08-14 | openrouter | scaler | 98.0% | 100.0% | 50.0% | 1 | 1 |" in rendered
+    assert "| 2026-08-14 | openrouter | scaler | 99.0% | 100.0% | 50.0% | 1 | 1 |" in rendered
 
 
 def test_context_dashboard_preserves_finding_totals() -> None:

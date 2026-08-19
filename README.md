@@ -93,16 +93,16 @@ Complete `long-horizon` runs with profile `canonical-long-horizon` only. Cases g
 
 | date | provider | model | score | recall | precision | true positives | false positives |
 |---|---|---|---:|---:|---:|---:|---:|
-| 2026-08-18 | openrouter | qwen/qwen3.8-max | 71.7% | 75.0% | 77.4% | 24 | 7 |
-| 2026-08-15 | openrouter | google/gemini-3.7-flash | 71.7% | 81.2% | 74.3% | 26 | 9 |
-| 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | 63.5% | 68.8% | 71.0% | 22 | 9 |
-| 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | 52.9% | 62.5% | 62.5% | 20 | 12 |
-| 2026-08-15 | openrouter | deepseek/deepseek-v4-pro-0813 | 50.5% | 37.5% | 85.7% | 12 | 2 |
-| 2026-08-15 | openrouter | x-ai/grok-4.6 | 47.5% | 84.4% | 55.1% | 27 | 22 |
-| 2026-08-15 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | 46.5% | 37.5% | 75.0% | 12 | 4 |
-| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | 46.0% | 56.2% | 58.1% | 18 | 13 |
-| 2026-08-15 | openrouter | minimax/minimax-m3 | 43.4% | 53.1% | 56.7% | 17 | 13 |
-| 2026-08-15 | openrouter | openai/gpt-5.6-terra | 43.4% | 53.1% | 56.7% | 17 | 13 |
+| 2026-08-15 | openrouter | google/gemini-3.7-flash | 80.7% | 81.2% | 74.3% | 26 | 9 |
+| 2026-08-18 | openrouter | qwen/qwen3.8-max | 78.7% | 75.0% | 77.4% | 24 | 7 |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | 72.5% | 68.8% | 71.0% | 22 | 9 |
+| 2026-08-15 | openrouter | x-ai/grok-4.6 | 69.5% | 84.4% | 55.1% | 27 | 22 |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | 64.9% | 62.5% | 62.5% | 20 | 12 |
+| 2026-08-15 | openrouter | z-ai/glm-5.2 | 59.7% | 78.1% | 47.2% | 25 | 28 |
+| 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | 59.7% | 81.2% | 46.4% | 26 | 30 |
+| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | 59.0% | 56.2% | 58.1% | 18 | 13 |
+| 2026-08-15 | openrouter | minimax/minimax-m3 | 56.4% | 53.1% | 56.7% | 17 | 13 |
+| 2026-08-15 | openrouter | openai/gpt-5.6-terra | 56.4% | 53.1% | 56.7% | 17 | 13 |
 <!-- BENCH_RESULTS_END -->
 
 ## Further results
@@ -121,7 +121,7 @@ Each configuration run writes an append-only JSON document under `results/raw/` 
 1. **Setup.** Each case is a small Git repository with a clean base revision and a changed revision. The runner invokes lgtmaybe as an external command against the diff.
 2. **Matching.** A finding matches a planted entry only when the file agrees, the line is within three lines, an expected keyword appears in its title or body, and any minimum severity is met. Each planted entry can be caught once.
 3. **Closed-world precision.** Every finding that does not match an uncaught planted entry is a false positive, even if it may identify a real uncatalogued issue. `precision = true positives / (true positives + false positives)`.
-4. **Score.** `score = 2 × recall / (recall + 1) − 0.02 × false positives`, floored at 0%. That is the harmonic mean of recall against 100% precision, less two percentage points per false positive. This is the `score` column in the Long horizon table.
+4. **Score.** `score = 2 × recall / (recall + 1) − 0.01 × false positives`, floored at 0%. That is the harmonic mean of recall against 100% precision, less one percentage point per false positive. This is the `score` column in the Long horizon table.
 5. **Aggregation.** Each repeat is scored independently, and every reported metric is the median across repeats with the full minimum–maximum range. Published runs use one repeat, so no range is shown.
 
 Recall in the Long horizon table is measured over the 32 planted findings in the four defect-bearing cases. The fifth case is clean and plants none; findings raised against it count as false positives.
