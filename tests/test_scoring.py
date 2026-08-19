@@ -16,6 +16,7 @@ from lgtmaybe_bench.scoring import (
     aggregate_repeats,
     aggregate_suite_repeats,
     append_adjudication,
+    call_completeness,
     effort_label,
     load_adjudications,
     parse_case,
@@ -301,9 +302,9 @@ def test_aggregate_reports_median_min_max_and_tokens() -> None:
         ),
     ]
     repeats = [
-        RepeatMetrics(scores[0], 30.0, 30.0, (), 100, 10, 0, 0),
-        RepeatMetrics(scores[1], 90.0, 40.0, ("correctness",), 200, 20, 5, 0),
-        RepeatMetrics(scores[2], 60.0, 60.0, (), 300, 30, 10, 1),
+        RepeatMetrics(scores[0], 1.0, 30.0, 30.0, (), 100, 10, 0, 0),
+        RepeatMetrics(scores[1], 1.0, 90.0, 40.0, ("correctness",), 200, 20, 5, 0),
+        RepeatMetrics(scores[2], 1.0, 60.0, 60.0, (), 300, 30, 10, 1),
     ]
 
     result = aggregate_repeats(repeats)
@@ -328,7 +329,7 @@ def test_aggregate_reports_median_min_max_and_tokens() -> None:
 def test_single_repeat_uses_same_aggregate_shape() -> None:
     score = score_case(parse_case(truth()), parse_findings([]))
 
-    result = aggregate_repeats([RepeatMetrics(score, 3.0, 3.0, (), 1, 2, 0, 0)])
+    result = aggregate_repeats([RepeatMetrics(score, 1.0, 3.0, 3.0, (), 1, 2, 0, 0)])
 
     assert result.wall_seconds.median == result.wall_seconds.minimum == result.wall_seconds.maximum
 
@@ -528,3 +529,67 @@ def test_single_diagnostic_suite_repeat_uses_the_same_aggregate_shape() -> None:
 
     assert result.balanced_f1.median == result.balanced_f1.minimum == result.balanced_f1.maximum
     assert result.input_tokens.median == result.input_tokens.minimum == result.input_tokens.maximum
+
+
+class TestCallCompleteness:
+    """A lens call that returned nothing is invisible to precision.
+
+    Precision is computed only over findings that exist, so a run whose calls
+    mostly failed is scored on the handful that survived. Recall does see the
+    loss, but F0.5 weights recall at half, so the failure is under-counted.
+    Measured on the stored corpus: `z-ai/glm-4.7-flash` failed to parse 73.8% of
+    its lens calls and still scored 50.0%, above a run that found 24 planted
+    bugs to its 14.
+    """
+
+    def test_a_failed_call_is_one_that_returned_no_parseable_findings(self) -> None:
+        observations = [
+            {"calls": [{"findings": 3}, {"findings": 0}, {"findings": None}, {"findings": 1}]}
+        ]
+        assert call_completeness(observations) == pytest.approx(3 / 4)
+
+    def test_zero_findings_is_an_answer_not_a_failure(self) -> None:
+        """A lens is entitled to find nothing; that is `[]`, not a failure."""
+        assert call_completeness([{"calls": [{"findings": 0}, {"findings": 0}]}]) == 1.0
+
+    def test_it_falls_back_to_the_provider_call_log(self) -> None:
+        """Nine stored runs predate the structured `calls` array. Their stderr
+        still carries one `provider call` line per call, so the factor is
+        derived rather than assumed."""
+        stderr = "\n".join(
+            [
+                '{"message": "provider call", "label": "security", "findings": 2}',
+                '{"message": "provider call", "label": "tests", "findings": null}',
+                '{"message": "stage completed", "stage": "dedupe"}',
+            ]
+        )
+        assert call_completeness([{"calls": [], "stderr": stderr}]) == pytest.approx(1 / 2)
+
+    def test_completeness_is_unknown_when_nothing_reports_calls(self) -> None:
+        """None, not 1.0: an unmeasured run must not be scored as a complete one."""
+        assert call_completeness([{"calls": [], "stderr": ""}]) is None
+
+    def test_the_score_is_scaled_by_completeness(self) -> None:
+        observations = [
+            SuiteObservation(
+                _suite_case("python", "security"),
+                (_scored_finding("tp", 10, "python-security"),),
+            )
+        ]
+        whole = score_suite(observations)
+        half = score_suite(observations, completeness=0.5)
+        assert half.balanced_f1 == pytest.approx(whole.balanced_f1 * 0.5)
+        assert half.completeness == pytest.approx(0.5)
+
+    def test_unknown_completeness_leaves_the_score_alone(self) -> None:
+        """A run that cannot report its calls keeps its score and says so, so a
+        reader can tell an unmeasured run from a complete one."""
+        observations = [
+            SuiteObservation(
+                _suite_case("python", "security"),
+                (_scored_finding("tp", 10, "python-security"),),
+            )
+        ]
+        unknown = score_suite(observations, completeness=None)
+        assert unknown.balanced_f1 == pytest.approx(score_suite(observations).balanced_f1)
+        assert unknown.completeness is None

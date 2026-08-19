@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import gzip
 import json
+from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
 from statistics import median
@@ -89,6 +90,10 @@ class SuiteScore:
     precision: float
     clean_pass_rate: float
     balanced_f1: float
+    # Fraction of lens calls that returned parseable findings, or None when the
+    # run does not report its calls. Carried beside the score it scaled so a
+    # reader can separate "scored low" from "barely ran".
+    completeness: float | None
     provisional: bool
     per_language: dict[str, float]
     per_lens: dict[str, float]
@@ -98,6 +103,8 @@ class SuiteScore:
 @dataclass(frozen=True, slots=True)
 class RepeatMetrics:
     score: CaseScore
+    # Run-level, not per-case: see :func:`call_completeness`.
+    completeness: float | None
     wall_seconds: float
     wall_excluding_truncation_seconds: float
     truncation_lenses: tuple[str, ...]
@@ -129,6 +136,7 @@ class Range:
 @dataclass(frozen=True, slots=True)
 class AggregateMetrics:
     recall: Range
+    completeness: float | None
     precision: Range
     score: Range
     false_positives: Range
@@ -145,6 +153,7 @@ class AggregateMetrics:
 @dataclass(frozen=True, slots=True)
 class SuiteAggregateMetrics:
     balanced_recall: Range
+    completeness: float | None
     precision: Range
     balanced_f1: Range
     clean_pass_rate: Range
@@ -426,6 +435,48 @@ def _matches(finding: Finding, entry: CatalogEntry) -> bool:
     )
 
 
+def call_completeness(observations: Iterable[dict[str, Any]]) -> float | None:
+    """Fraction of lens calls that returned parseable findings, or None if unknown.
+
+    Precision counts only findings that exist, so it cannot see a call that
+    returned nothing; recall can, but F0.5 weights it at half. Without this
+    factor a run whose calls mostly failed is scored on the few that survived —
+    measured on the stored corpus, one run failed to parse 73.8% of its calls
+    and still out-scored a run that found 24 planted bugs to its 14.
+
+    A failed call is one whose findings count is null: the model was asked and
+    produced nothing usable. `0` is an answer, not a failure — a lens is
+    entitled to find nothing.
+
+    Nine stored runs predate the structured `calls` array, so their stderr
+    `provider call` lines are read instead. When neither is available the answer
+    is None rather than 1.0, because an unmeasured run must not be scored as a
+    complete one.
+    """
+    total = failed = 0
+    for observation in observations:
+        calls = observation.get("calls") or []
+        if calls:
+            for call in calls:
+                total += 1
+                failed += call.get("findings") is None
+            continue
+        for line in (observation.get("stderr") or "").splitlines():
+            if '"provider call"' not in line:
+                continue
+            try:
+                record = json.loads(line)
+            except ValueError:
+                continue
+            if record.get("message") != "provider call":
+                continue
+            total += 1
+            failed += record.get("findings") is None
+    if total == 0:
+        return None
+    return (total - failed) / total
+
+
 def overall_score(recall: float, precision: float) -> float:
     """F0.5: PRECISION_WEIGHT is beta squared, weighting precision twice as heavily as recall."""
     denominator = PRECISION_WEIGHT * precision + recall
@@ -490,8 +541,15 @@ def score_case(case: CaseTruth, findings: tuple[Finding, ...]) -> CaseScore:
 def score_suite(
     observations: list[SuiteObservation],
     adjudications: dict[str, str] | None = None,
+    completeness: float | None = None,
 ) -> SuiteScore:
-    """Score one repeat with balanced core recall and explicit finding classifications."""
+    """Score one repeat with balanced core recall and explicit finding classifications.
+
+    ``completeness`` scales the result by the share of lens calls that returned
+    parseable findings (see :func:`call_completeness`). It is applied here rather
+    than by the caller so one place decides what the score is. ``None`` means the
+    run does not report its calls, and leaves the score unscaled.
+    """
     overrides = adjudications or {}
     cell_totals: dict[tuple[str, str], int] = {}
     cell_caught: dict[tuple[str, str], int] = {}
@@ -592,6 +650,8 @@ def score_suite(
     coverage_denominator = classified + unadjudicated
     adjudication_coverage = 1.0 if coverage_denominator == 0 else classified / coverage_denominator
     balanced_f1 = overall_score(balanced_recall, precision)
+    if completeness is not None:
+        balanced_f1 *= completeness
     return SuiteScore(
         language_lens_cells=len(per_cell_values),
         caught=caught,
@@ -606,6 +666,7 @@ def score_suite(
         precision=precision,
         clean_pass_rate=1.0 if clean_cases == 0 else clean_passes / clean_cases,
         balanced_f1=balanced_f1,
+        completeness=completeness,
         provisional=unadjudicated > 0,
         per_language=per_language,
         per_lens=per_lens,
@@ -619,12 +680,18 @@ def _range(values: list[int | float]) -> Range:
     return Range(float(median(values)), float(min(values)), float(max(values)))
 
 
+def _median_completeness(values: Iterable[float | None]) -> float | None:
+    known = [value for value in values if value is not None]
+    return median(known) if known else None
+
+
 def aggregate_repeats(repeats: list[RepeatMetrics]) -> AggregateMetrics:
     """Summarise repeated configuration runs without hiding their range."""
     if not repeats:
         raise ValueError("at least one repeat is required")
     return AggregateMetrics(
         recall=_range([repeat.score.recall for repeat in repeats]),
+        completeness=_median_completeness(repeat.completeness for repeat in repeats),
         precision=_range([repeat.score.precision for repeat in repeats]),
         score=_range([repeat.score.score for repeat in repeats]),
         false_positives=_range([repeat.score.false_positives for repeat in repeats]),
@@ -648,6 +715,7 @@ def aggregate_suite_repeats(repeats: list[SuiteRepeatMetrics]) -> SuiteAggregate
     lenses = sorted({lens for repeat in repeats for lens in repeat.score.per_lens})
     return SuiteAggregateMetrics(
         balanced_recall=_range([repeat.score.balanced_recall for repeat in repeats]),
+        completeness=_median_completeness(repeat.score.completeness for repeat in repeats),
         precision=_range([repeat.score.precision for repeat in repeats]),
         balanced_f1=_range([repeat.score.balanced_f1 for repeat in repeats]),
         clean_pass_rate=_range([repeat.score.clean_pass_rate for repeat in repeats]),
