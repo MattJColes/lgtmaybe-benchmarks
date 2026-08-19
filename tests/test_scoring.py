@@ -168,7 +168,7 @@ def test_expected_finding_matches_at_line_window_boundary() -> None:
     assert result.caught == 1
     assert result.recall == pytest.approx(0.5)
     assert result.precision == 1.0
-    assert result.score == pytest.approx(2 / 3)
+    assert result.score == pytest.approx(1.25 * 0.5 / (0.25 + 0.5))
 
 
 def test_finding_outside_line_window_is_a_false_positive() -> None:
@@ -222,18 +222,39 @@ def test_duplicate_expected_finding_counts_as_noise() -> None:
     assert result.precision == 0.5
 
 
-def test_each_false_positive_deducts_one_percentage_point() -> None:
+def test_score_is_f_half_of_precision_and_recall() -> None:
     case = parse_case(truth())
-    clean = score_case(case, parse_findings([finding(10, "Off-by-one")]))
-    noisy = score_case(
+
+    result = score_case(
         case,
         parse_findings([finding(10, "Off-by-one"), finding(100, "Plausible issue")]),
     )
 
-    assert noisy.score == pytest.approx(clean.score - 0.01)
+    assert result.recall == pytest.approx(0.5)
+    assert result.precision == pytest.approx(0.5)
+    assert result.score == pytest.approx(1.25 * 0.5 * 0.5 / (0.25 * 0.5 + 0.5))
 
 
-def test_false_positive_penalty_cannot_reduce_score_below_zero() -> None:
+def test_score_weights_precision_more_than_recall() -> None:
+    case = parse_case(truth())
+    precise_but_partial = score_case(case, parse_findings([finding(10, "Off-by-one")]))
+    complete_but_noisy = score_case(
+        case,
+        parse_findings(
+            [
+                finding(10, "Off-by-one"),
+                finding(20, "Missing test"),
+                finding(100, "Noise a"),
+                finding(200, "Noise b"),
+            ]
+        ),
+    )
+
+    assert precise_but_partial.recall == complete_but_noisy.precision == 0.5
+    assert precise_but_partial.score > complete_but_noisy.score
+
+
+def test_heavy_noise_dampens_score_without_erasing_recall() -> None:
     case = parse_case(truth())
     findings = [finding(10, "Off-by-one")]
     findings.extend(finding(100 + index, f"Noise {index}") for index in range(68))
@@ -241,6 +262,12 @@ def test_false_positive_penalty_cannot_reduce_score_below_zero() -> None:
     result = score_case(case, parse_findings(findings))
 
     assert result.false_positives == 68
+    assert 0.0 < result.score < 0.05
+
+
+def test_no_findings_scores_zero() -> None:
+    result = score_case(parse_case(truth()), parse_findings([]))
+
     assert result.score == 0.0
 
 
@@ -383,7 +410,38 @@ def test_balanced_recall_averages_70_cells_and_precision_pools_adjudicated_findi
     assert result.false_positives == 6
     assert result.precision == pytest.approx(10 / 16)
     assert result.clean_pass_rate == pytest.approx(1 / 7)
-    assert result.balanced_f1 == pytest.approx(2 * (1 / 7) * (10 / 16) / ((1 / 7) + (10 / 16)))
+    assert result.balanced_f1 == pytest.approx(
+        1.25 * (10 / 16) * (1 / 7) / (0.25 * (10 / 16) + (1 / 7))
+    )
+
+
+def test_both_suites_share_the_precision_weighted_formula() -> None:
+    case_score = score_case(
+        parse_case(truth()),
+        parse_findings(
+            [
+                finding(10, "Off-by-one"),
+                finding(20, "Missing test"),
+                finding(100, "Noise a"),
+                finding(200, "Noise b"),
+            ]
+        ),
+    )
+    suite_score = score_suite(
+        [
+            SuiteObservation(
+                _suite_case("python", "security"),
+                (
+                    _scored_finding("tp", 10, "python-security"),
+                    _scored_finding("near-noise", 11, "different concern"),
+                ),
+            )
+        ]
+    )
+
+    assert case_score.recall == suite_score.balanced_recall == 1.0
+    assert case_score.precision == suite_score.precision == 0.5
+    assert case_score.score == pytest.approx(suite_score.balanced_f1)
 
 
 def test_false_positive_classes_duplicates_unadjudicated_and_later_adjudication() -> None:
@@ -455,7 +513,7 @@ def test_suite_repeat_aggregation_reports_medians_and_full_ranges() -> None:
     result = aggregate_suite_repeats(repeats)
 
     assert (result.balanced_recall.median, result.balanced_recall.minimum) == (1.0, 0.0)
-    assert result.balanced_f1.median == pytest.approx(2 / 3)
+    assert result.balanced_f1.median == pytest.approx(1.25 * 0.5 / (0.25 * 0.5 + 1.0))
     assert (result.clean_pass_rate.minimum, result.clean_pass_rate.maximum) == (0.0, 1.0)
     assert result.true_positives.maximum == 1
     assert result.false_positives.maximum == 1

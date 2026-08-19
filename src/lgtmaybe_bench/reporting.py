@@ -70,7 +70,7 @@ def _combine(scores: list[CaseScore]) -> CaseScore:
     adjudicable = sum(score.adjudicable for score in scores)
     recall = caught / planted
     precision = 1.0 if adjudicable == 0 else caught / adjudicable
-    combined = overall_score(recall, forbidden + unexpected)
+    combined = overall_score(recall, precision)
     lenses = {lens for score in scores for lens in score.per_lens_counts}
     per_lens_counts: dict[str, tuple[int, int]] = {}
     for lens in lenses:
@@ -350,67 +350,52 @@ def _render_breadth_canonical(
     ]
     if not eligible:
         return None
-    partitions: dict[tuple[str, str, str], list[dict[str, Any]]] = {}
-    for raw in eligible:
-        key = (_stored_suite(raw), _stored_profile(raw), raw["lgtmaybe_version"])
-        partitions.setdefault(key, []).append(raw)
-
-    blocks: list[str] = []
-    for key, partition in sorted(
-        partitions.items(),
-        key=lambda item: max(str(raw["timestamp"]) for raw in item[1]),
+    runs = sorted(
+        (_score_suite_run(raw, adjudications) for raw in eligible),
+        key=lambda run: (
+            run.aggregate.balanced_f1.median,
+            str(run.raw["timestamp"]),
+            str(run.raw.get("run_id", "")),
+        ),
         reverse=True,
-    ):
-        runs = sorted(
-            (_score_suite_run(raw, adjudications) for raw in partition),
-            key=lambda run: (
-                run.aggregate.balanced_f1.median,
-                str(run.raw["timestamp"]),
-                str(run.raw.get("run_id", "")),
-            ),
-            reverse=True,
-        )[:README_RESULT_LIMIT]
-        rows: list[str] = []
-        for run in runs:
-            score = _range(run.aggregate.balanced_f1, percent=True)
-            if any(repeat.score.provisional for repeat in run.repeats):
-                score += " provisional"
-            rows.append(
-                "| "
-                + " | ".join(
-                    (
-                        _iso_date(run.raw["timestamp"]),
-                        run.raw["configuration"]["provider"],
-                        run.raw["configuration"]["model"],
-                        score,
-                        _range(run.aggregate.balanced_recall, percent=True),
-                        _range(run.aggregate.precision, percent=True),
-                        _count_range(run.aggregate.false_positives),
-                        _range(run.aggregate.clean_pass_rate, percent=True),
-                        _range(run.aggregate.adjudication_coverage, percent=True),
-                        _audit_label(run.raw),
-                        _settings(run.raw["configuration"]),
-                    )
+    )[:README_RESULT_LIMIT]
+    rows: list[str] = []
+    for run in runs:
+        score = _range(run.aggregate.balanced_f1, percent=True)
+        if any(repeat.score.provisional for repeat in run.repeats):
+            score += " provisional"
+        rows.append(
+            "| "
+            + " | ".join(
+                (
+                    _iso_date(run.raw["timestamp"]),
+                    run.raw["configuration"]["provider"],
+                    run.raw["configuration"]["model"],
+                    str(run.raw["lgtmaybe_version"]),
+                    score,
+                    _range(run.aggregate.balanced_recall, percent=True),
+                    _range(run.aggregate.precision, percent=True),
+                    _count_range(run.aggregate.false_positives),
+                    _range(run.aggregate.clean_pass_rate, percent=True),
+                    _range(run.aggregate.adjudication_coverage, percent=True),
+                    _audit_label(run.raw),
+                    _settings(run.raw["configuration"]),
                 )
-                + " |"
             )
-        blocks.append(
-            f"Comparison key: `{key[0]} / {key[1]} / {key[2]}`.\n\n"
-            "| date | provider | model | balanced F1 | balanced recall | precision | "
-            "false positives | clean pass | adjudication | audit | settings |\n"
-            "|---|---|---|---:|---:|---:|---:|---:|---:|---|---|\n"
-            + "\n".join(rows)
+            + " |"
         )
     return (
         "## Breadth — top 10\n\n"
         "Complete `breadth` runs with profile `canonical-breadth` only. Cases span seven "
         "programming languages plus GitHub Actions and Terraform, planting one finding per "
         "language and review lens, so the score measures coverage across kinds of issue rather "
-        "than diff size. Scored as balanced F1, which is not comparable with the long-horizon "
-        "overall score. Rows are ranked highest to lowest by median balanced F1. The first row "
-        "is the current leader.\n\n"
-        + "\n\n".join(blocks)
-        + "\n"
+        "than diff size. Scored as balanced F0.5, which is not comparable with the long-horizon "
+        "overall score. Rows rank runs across lgtmaybe versions; the `lgtmaybe` column names the "
+        "version each run used. Rows are ranked highest to lowest by median balanced F0.5. The "
+        "first row is the current leader.\n\n"
+        "| date | provider | model | lgtmaybe | balanced F0.5 | balanced recall | precision | "
+        "false positives | clean pass | adjudication | audit | settings |\n"
+        "|---|---|---|---|---:|---:|---:|---:|---:|---:|---|---|\n" + "\n".join(rows) + "\n"
     )
 
 
@@ -519,6 +504,7 @@ def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
                     _iso_date(str(raw["timestamp"])),
                     str(config.get("provider", "")),
                     str(config.get("model", "")),
+                    str(raw["lgtmaybe_version"]),
                     _range(metrics.score, percent=True),
                     _range(metrics.recall, percent=True),
                     _range(metrics.precision, percent=True),
@@ -529,9 +515,9 @@ def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
             + " |"
         )
     summary_header = (
-        "| date | provider | model | score | recall | precision | true positives | "
+        "| date | provider | model | lgtmaybe | score | recall | precision | true positives | "
         "false positives |\n"
-        "|---|---|---|---:|---:|---:|---:|---:|\n"
+        "|---|---|---|---|---:|---:|---:|---:|---:|\n"
     )
     return (
         "## Long horizon — top 10\n\n"
@@ -539,7 +525,9 @@ def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
         "Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting "
         "eight bugs at the same relative positions; the clean case plants none. Model recall "
         "covers the 32 planted findings across the four defect-bearing cases. Scored as the "
-        "closed-world overall score, which is not comparable with the breadth balanced F1.\n\n"
+        "closed-world F0.5 overall score, which is not comparable with the breadth balanced "
+        "F0.5. Rows rank runs across lgtmaybe versions; the `lgtmaybe` column names the version "
+        "each run used.\n\n"
         "### Model summary\n\n" + summary_header + "\n".join(summary_rows) + "\n"
     )
 
@@ -743,7 +731,7 @@ def render_dashboard(data: dict[str, Any]) -> str:
           <th aria-sort="none"><button type="button" data-sort="suite" data-type="text">Suite</button></th>
           <th aria-sort="none"><button type="button" data-sort="profile" data-type="text">Profile</button></th>
           <th aria-sort="none"><button type="button" data-sort="lgtmaybe_version" data-type="text">lgtmaybe</button></th>
-          <th aria-sort="none"><button type="button" data-sort="balanced_f1" data-type="number">Balanced F1</button></th>
+          <th aria-sort="none"><button type="button" data-sort="balanced_f1" data-type="number">Balanced F0.5</button></th>
           <th aria-sort="none"><button type="button" data-sort="balanced_recall" data-type="number">Recall</button></th>
           <th aria-sort="none"><button type="button" data-sort="precision" data-type="number">Precision</button></th>
           <th aria-sort="none"><button type="button" data-sort="true_positives" data-type="number">True positives</button></th>
@@ -1000,8 +988,9 @@ def render_detailed_results(data: dict[str, Any]) -> str:
     sections = [
         "## All stored runs\n\n"
         "Canonical, diagnostic, focused, and legacy completed runs are retained here. "
-        "Only identical comparison keys are directly rankable.\n\n"
-        "| date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | "
+        "Ranked tables compare runs of one suite and profile across lgtmaybe versions; "
+        "the suite and profile columns identify what each run measured.\n\n"
+        "| date | provider | model | suite | profile | lgtmaybe | status | balanced F0.5 | "
         "balanced recall | precision | true positives | false positives | clean pass | "
         "adjudication | audit | raw | traces | settings |\n"
         "|---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|\n"
