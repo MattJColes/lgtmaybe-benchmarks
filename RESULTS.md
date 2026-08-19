@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Ran
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F0.5 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-19 | openai-compatible | openai/gpt-oss-20b | long-horizon | diagnostic-custom-v1 | lgtmaybe 2.3.0 | complete | 11.3% | 31.2% | 9.7% | 10.0 | 93.0 | — | — | no | [raw](results/raw/20260819-070031-openai-compatible-openai-gpt-oss-20b.json) | — | effort low; api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-18 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon | canonical-long-horizon | lgtmaybe 2.3.0 | complete | 23.5% | 50.0% | 20.8% | 16.0 | 61.0 | — | — | no | [raw](results/raw/20260818-213455-openai-compatible-nvidia-gemma-4-26b-a4b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-18 | openai-compatible | RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 50.3% | 44.3% | 51.6% | 32.0 | 31.0 | 11.1% | 98.5% | no | [raw](results/raw/20260818-185208-openai-compatible-redhatai-gemma-4-12b-it-fp8-dynamic.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-18 | openai-compatible | RedHatAI/gemma-4-12B-it-FP8-Dynamic | long-horizon | canonical-long-horizon | lgtmaybe 2.2.0 | complete | 55.6% | 37.5% | 63.2% | 12.0 | 7.0 | — | — | no | [raw](results/raw/20260818-125254-openai-compatible-redhatai-gemma-4-12b-it-fp8-dynamic.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
@@ -483,6 +484,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Ran
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| openai/gpt-oss-20b | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.3.0 | complexity | 0.0% |
+| openai/gpt-oss-20b | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.3.0 | correctness | 37.5% |
+| openai/gpt-oss-20b | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.3.0 | deprecation | 50.0% |
+| openai/gpt-oss-20b | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.3.0 | documentation | 25.0% |
+| openai/gpt-oss-20b | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.3.0 | intent | 25.0% |
+| openai/gpt-oss-20b | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.3.0 | performance | 0.0% |
+| openai/gpt-oss-20b | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.3.0 | security | 75.0% |
 | nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.3.0 | complexity | 25.0% |
 | nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.3.0 | correctness | 50.0% |
 | nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.3.0 | deprecation | 75.0% |
