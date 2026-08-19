@@ -62,7 +62,7 @@
       "lgtmaybe_version": "lgtmaybe 2.3.0",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.0,
+        "balanced_f1": 0.05666666666666664,
         "balanced_recall": 0.5,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -245,7 +245,7 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.4054545454545454,
+        "balanced_f1": 0.4754545454545454,
         "balanced_recall": 0.375,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -354,7 +354,7 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.29162790697674423,
+        "balanced_f1": 0.4016279069767442,
         "balanced_recall": 0.34375,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -466,7 +466,7 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.7171428571428571,
+        "balanced_f1": 0.7871428571428571,
         "balanced_recall": 0.75,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -931,7 +931,7 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.0,
+        "balanced_f1": 0.040270270270270275,
         "balanced_recall": 0.15625,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -1332,7 +1332,7 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.2957894736842105,
+        "balanced_f1": 0.3057894736842105,
         "balanced_recall": 0.1875,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -1387,7 +1387,7 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.0,
+        "balanced_f1": 0.28714285714285703,
         "balanced_recall": 0.75,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -2089,7 +2089,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.5450980392156863,
+        "balanced_f1": 0.6450980392156863,
         "balanced_recall": 0.59375,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -3579,7 +3579,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.040606060606060604,
+        "balanced_f1": 0.050606060606060606,
         "balanced_recall": 0.03125,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -3689,7 +3689,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.4752542372881356,
+        "balanced_f1": 0.6952542372881356,
         "balanced_recall": 0.84375,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -3790,7 +3790,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.6348148148148147,
+        "balanced_f1": 0.7248148148148148,
         "balanced_recall": 0.6875,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -3913,7 +3913,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.3486956521739131,
+        "balanced_f1": 0.4786956521739131,
         "balanced_recall": 0.4375,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -4045,7 +4045,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.5292307692307693,
+        "balanced_f1": 0.6492307692307693,
         "balanced_recall": 0.625,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -4151,7 +4151,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.7165517241379311,
+        "balanced_f1": 0.8065517241379311,
         "balanced_recall": 0.8125,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -4275,7 +4275,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.5054545454545454,
+        "balanced_f1": 0.5254545454545454,
         "balanced_recall": 0.375,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -4383,7 +4383,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.27481481481481473,
+        "balanced_f1": 0.5448148148148148,
         "balanced_recall": 0.6875,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -4490,7 +4490,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.43387755102040815,
+        "balanced_f1": 0.5638775510204082,
         "balanced_recall": 0.53125,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -4599,7 +4599,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.31719298245614025,
+        "balanced_f1": 0.5971929824561403,
         "balanced_recall": 0.78125,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -4829,7 +4829,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.0,
+        "balanced_f1": 0.3771929824561403,
         "balanced_recall": 0.78125,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -4932,7 +4932,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.4654545454545454,
+        "balanced_f1": 0.5054545454545454,
         "balanced_recall": 0.375,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -5033,7 +5033,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.0,
+        "balanced_f1": 0.01774193548387093,
         "balanced_recall": 0.9375,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -5134,7 +5134,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.29655172413793107,
+        "balanced_f1": 0.596551724137931,
         "balanced_recall": 0.8125,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -5235,7 +5235,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.0,
+        "balanced_f1": 0.34509803921568627,
         "balanced_recall": 0.59375,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -5336,7 +5336,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.43387755102040815,
+        "balanced_f1": 0.5638775510204082,
         "balanced_recall": 0.53125,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -5437,7 +5437,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.19719298245614025,
+        "balanced_f1": 0.5371929824561403,
         "balanced_recall": 0.78125,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -5540,7 +5540,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.15142857142857144,
+        "balanced_f1": 0.16142857142857142,
         "balanced_recall": 0.09375,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -5641,7 +5641,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.45999999999999996,
+        "balanced_f1": 0.59,
         "balanced_recall": 0.5625,
         "clean_pass_rate": null,
         "duplicates": null,
@@ -5944,7 +5944,7 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.29829787234042554,
+        "balanced_f1": 0.4682978723404255,
         "balanced_recall": 0.46875,
         "clean_pass_rate": null,
         "duplicates": null,

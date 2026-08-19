@@ -10,7 +10,7 @@ from statistics import median
 from typing import Any
 
 LINE_WINDOW = 3
-FALSE_POSITIVE_PENALTY = 0.02
+FALSE_POSITIVE_PENALTY = 0.01
 SEVERITY_ORDER = {"info": 0, "low": 1, "medium": 2, "high": 3, "critical": 4}
 ADJUDICATION_CLASSES = frozenset(
     {"true_positive", "false_positive", "duplicate", "invalid_case_evidence", "unadjudicated"}
