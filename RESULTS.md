@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Ran
 
 | date | provider | model | suite | profile | lgtmaybe | status | score | completeness | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-19 | openai-compatible | openai/gpt-oss-20b | breadth | canonical-breadth | lgtmaybe 2.3.0 | complete | 31.0% | 62.8% | 47.1% | 50.0% | 34.0 | 32.0 | 22.2% | 92.3% | no | [raw](results/raw/20260819-131633-openai-compatible-openai-gpt-oss-20b.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-19 | openai-compatible | openai/gpt-oss-20b | long-horizon | diagnostic-custom-v1 | lgtmaybe 2.3.0 | complete | 4.5% | 40.0% | 31.2% | 9.7% | 10.0 | 93.0 | — | — | no | [raw](results/raw/20260819-070031-openai-compatible-openai-gpt-oss-20b.json) | — | effort low; api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-18 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon | canonical-long-horizon | lgtmaybe 2.3.0 | complete | 9.7% | 41.1% | 50.0% | 20.8% | 16.0 | 61.0 | — | — | no | [raw](results/raw/20260818-213455-openai-compatible-nvidia-gemma-4-26b-a4b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-18 | openai-compatible | RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 39.1% | 77.5% | 44.3% | 51.6% | 32.0 | 31.0 | 11.1% | 98.5% | no | [raw](results/raw/20260818-185208-openai-compatible-redhatai-gemma-4-12b-it-fp8-dynamic.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
@@ -262,6 +263,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Ran
 
 | model | comparison key | language | recall |
 |---|---|---|---:|
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | dart | 50.0% |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | go | 50.0% |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | java | 60.0% |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | javascript | 40.0% |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | python | 50.0% |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | rust | 40.0% |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | typescript | 30.0% |
 | RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | dart | 40.0% |
 | RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | go | 50.0% |
 | RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | java | 30.0% |
@@ -484,6 +492,16 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Ran
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | complexity | 0.0% |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | correctness | 85.7% |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | deprecation | 57.1% |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | documentation | 57.1% |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | intent | 42.9% |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | performance | 71.4% |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | ponytail | 14.3% |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | security | 100.0% |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | spec | 0.0% |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | tests | 42.9% |
 | openai/gpt-oss-20b | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.3.0 | complexity | 0.0% |
 | openai/gpt-oss-20b | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.3.0 | correctness | 37.5% |
 | openai/gpt-oss-20b | long-horizon / diagnostic-custom-v1 / lgtmaybe 2.3.0 | deprecation | 50.0% |
@@ -1065,6 +1083,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Ran
 
 | model | comparison key | class | median count |
 |---|---|---|---:|
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | adjudicated | 0.0 |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | clean_case | 11.0 |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | duplicate | 3.0 |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | forbidden | 0.0 |
+| openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | unexpected_near | 17.0 |
 | RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | adjudicated | 0.0 |
 | RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | clean_case | 8.0 |
 | RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | duplicate | 4.0 |
