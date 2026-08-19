@@ -10,7 +10,7 @@ from statistics import median
 from typing import Any
 
 LINE_WINDOW = 3
-FALSE_POSITIVE_PENALTY = 0.01
+PRECISION_WEIGHT = 0.25
 SEVERITY_ORDER = {"info": 0, "low": 1, "medium": 2, "high": 3, "critical": 4}
 ADJUDICATION_CLASSES = frozenset(
     {"true_positive", "false_positive", "duplicate", "invalid_case_evidence", "unadjudicated"}
@@ -426,9 +426,12 @@ def _matches(finding: Finding, entry: CatalogEntry) -> bool:
     )
 
 
-def overall_score(recall: float, false_positives: int) -> float:
-    base_score = 2 * recall / (recall + 1)
-    return max(0.0, base_score - false_positives * FALSE_POSITIVE_PENALTY)
+def overall_score(recall: float, precision: float) -> float:
+    """F0.5: PRECISION_WEIGHT is beta squared, weighting precision twice as heavily as recall."""
+    denominator = PRECISION_WEIGHT * precision + recall
+    if denominator == 0:
+        return 0.0
+    return (1 + PRECISION_WEIGHT) * precision * recall / denominator
 
 
 def score_case(case: CaseTruth, findings: tuple[Finding, ...]) -> CaseScore:
@@ -462,7 +465,7 @@ def score_case(case: CaseTruth, findings: tuple[Finding, ...]) -> CaseScore:
     recall = caught / planted if planted else 0.0
     false_positives = forbidden_hits + unexpected
     precision = 1.0 if adjudicable == 0 else caught / (caught + false_positives)
-    combined = overall_score(recall, false_positives)
+    combined = overall_score(recall, precision)
     totals: dict[str, int] = {}
     for entry in case.expected:
         totals[entry.lens] = totals.get(entry.lens, 0) + 1
@@ -588,11 +591,7 @@ def score_suite(
     classified = precision_denominator
     coverage_denominator = classified + unadjudicated
     adjudication_coverage = 1.0 if coverage_denominator == 0 else classified / coverage_denominator
-    balanced_f1 = (
-        0.0
-        if balanced_recall + precision == 0
-        else 2 * balanced_recall * precision / (balanced_recall + precision)
-    )
+    balanced_f1 = overall_score(balanced_recall, precision)
     return SuiteScore(
         language_lens_cells=len(per_cell_values),
         caught=caught,

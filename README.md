@@ -8,10 +8,10 @@ The corpus holds two suites. They measure different things and are not two gener
 
 | suite | question it answers | shape | published runs |
 |---|---|---|---:|
-| `long-horizon` | Does recall survive as the diff grows? | One language (Python), 5 cases whose diffs scale from roughly 3% to 90% of the 100,000-token input cap. Each defect-bearing case plants the same 8 bugs at the same relative positions, so recall differences come from size alone. One clean case at a large size. | **30** |
-| `breadth` | Does it catch every kind of issue in every language? | 32 cases across Python, TypeScript, JavaScript, Rust, Dart, Java, Go, GitHub Actions, and Terraform. 72 planted findings spread over ten review lenses, plus 9 verified-clean changes. Small diffs. | **0** |
+| `long-horizon` | Does recall survive as the diff grows? | One language (Python), 5 cases whose diffs scale from roughly 3% to 90% of the 100,000-token input cap. Each defect-bearing case plants the same 8 bugs at the same relative positions, so recall differences come from size alone. One clean case at a large size. | **34** |
+| `breadth` | Does it catch every kind of issue in every language? | 32 cases across Python, TypeScript, JavaScript, Rust, Dart, Java, Go, GitHub Actions, and Terraform. 72 planted findings spread over ten review lenses, plus 9 verified-clean changes. Small diffs. | **30** |
 
-Every result published below comes from `long-horizon`. **`breadth` has never been run**, so nothing in this repository reports a breadth score yet.
+Both suites have published runs below; each gets its own leaderboard section, and their scores are never ranked against each other.
 
 ## Running the benchmark
 
@@ -33,7 +33,7 @@ uv run bench run --provider openrouter --model google/gemini-3.7-flash --suite b
 
 `canonical-breadth` uses the fast preset, three repeats, a 16,384-token output budget per provider call, and `low` reasoning effort. Both budgets bound runaway generations: a call that hits either cap is retained as truncation evidence, not as a finding. The reasoning budget is set explicitly so every model reviews under the same one — left to the provider default, a model that spends its context on reasoning can exhaust it before emitting parseable output, which reads as a truncation failure rather than a low score. `low` is the cheapest explicit bound and the only rung this repository has stored evidence for.
 
-Runs published before that budget existed ran with provider-resolved reasoning, and their `profile_schema_version` is 1 where later runs record 2. The profile ID was deliberately kept stable rather than versioned, so those runs still rank under the same comparison key; until each model is re-run, the breadth ranking mixes the two reasoning budgets. Every run's own `reasoning_effort` is stored in its raw record.
+Runs published before that budget existed ran with provider-resolved reasoning, and their `profile_schema_version` is 1 where later runs record 2. The profile ID was deliberately kept stable rather than versioned, so those runs still rank in the same breadth leaderboard; until each model is re-run, the breadth ranking mixes the two reasoning budgets. Every run's own `reasoning_effort` is stored in its raw record.
 
 Each run uses `uv` to download and cache the latest stable `lgtmaybe` release before benchmarking, including in a fresh container. Provider credentials stay in the environment and are never written to raw results. Hosted providers use their usual environment credentials:
 
@@ -48,61 +48,44 @@ Named diagnostic profiles — `diagnostic-full-v1`, `diagnostic-4k-v1`, `diagnos
 
 ## Results
 
-Top 10 per suite. Each suite gets its own section — **Long horizon** and **Breadth** — headed by the suite it reports and naming its comparison key. Rows are comparable within a section and never across them: the two suites measure different properties and are scored by different formulas. A suite with no runs renders no section.
+Top 10 per suite. Each suite gets its own section — **Long horizon** and **Breadth** — headed by the suite it reports. Each section ranks its complete canonical runs across lgtmaybe versions in one table, and the `lgtmaybe` column names the version each run used. Rows are never compared across sections: the two suites measure different properties over different corpora. A suite with no runs renders no section.
 
 <!-- BENCH_RESULTS_START -->
 ## Breadth — top 10
 
-Complete `breadth` runs with profile `canonical-breadth` only. Cases span seven programming languages plus GitHub Actions and Terraform, planting one finding per language and review lens, so the score measures coverage across kinds of issue rather than diff size. Scored as balanced F1, which is not comparable with the long-horizon overall score. Rows are ranked highest to lowest by median balanced F1. The first row is the current leader.
+Complete `breadth` runs with profile `canonical-breadth` only. Cases span seven programming languages plus GitHub Actions and Terraform, planting one finding per language and review lens, so the score measures coverage across kinds of issue rather than diff size. Scored as balanced F0.5, which is not comparable with the long-horizon overall score. Rows rank runs across lgtmaybe versions; the `lgtmaybe` column names the version each run used. Rows are ranked highest to lowest by median balanced F0.5. The first row is the current leader.
 
-Comparison key: `breadth / canonical-breadth / lgtmaybe 2.2.0`.
-
-| date | provider | model | balanced F1 | balanced recall | precision | false positives | clean pass | adjudication | audit | settings |
-|---|---|---|---:|---:|---:|---:|---:|---:|---|---|
-| 2026-08-18 | openrouter | z-ai/glm-5.2 | 72.2% [68.9–72.5%] provisional | 72.9% [72.9–75.7%] | 69.6% [65.4–71.6%] | 24 [21–28] | 11.1% [11.1–22.2%] | 98.8% [98.7–98.8%] | no | — |
-| 2026-08-17 | openrouter | qwen/qwen3.8-max | 71.4% [71.3–72.6%] provisional | 61.4% [58.6–67.1%] | 84.9% [79.0–91.5%] | 8 [4–13] | 77.8% [66.7–100.0%] | 98.1% [97.9–98.4%] | no | — |
-| 2026-08-18 | openrouter | minimax/minimax-m3 | 62.8% [58.7–65.0%] provisional | 58.6% [54.3–60.0%] | 67.7% [63.9–71.0%] | 20 [18–22] | 33.3% [22.2–44.4%] | 98.4% [96.9–98.4%] | no | — |
-| 2026-08-17 | openrouter | google/gemini-3.7-flash | 62.2% [62.0–63.9%] | 54.3% [52.9–57.1%] | 72.7% [72.4–75.0%] | 15 [13–16] | 44.4% [33.3–44.4%] | 100.0% | no | — |
-| 2026-08-17 | openrouter | openai/gpt-5.4-nano | 58.7% [58.0–59.6%] provisional | 52.9% [48.6–52.9%] | 68.4% [66.1–72.0%] | 18 [14–20] | 22.2% [22.2–44.4%] | 98.3% [96.2–98.3%] | no | — |
-| 2026-08-17 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | 57.1% [51.1–60.7%] provisional | 47.1% [42.9–51.4%] | 72.3% [63.3–74.0%] | 13 [13–18] | 44.4% [22.2–55.6%] | 98.0% [98.0–100.0%] | no | api base http://127.0.0.1:8000/v1; concurrency 3 |
-| 2026-08-18 | openrouter | deepseek/deepseek-v4-flash-0731 | 54.1% [49.5–54.5%] provisional | 50.0% [44.3–50.0%] | 59.0% [56.1–60.0%] | 25 [24–25] | 33.3% [22.2–33.3%] | 98.4% [98.3–98.4%] | no | — |
-| 2026-08-18 | openrouter | moonshotai/kimi-k2.7-code | 52.4% [48.7–57.2%] provisional | 52.9% [50.0–58.6%] | 52.0% [47.4–55.8%] | 36 [34–41] | 11.1% [0.0–22.2%] | 98.7% [97.5–98.7%] | no | — |
-| 2026-08-18 | openrouter | deepseek/deepseek-v4-pro-0813 | 52.0% [46.3–53.9%] provisional | 40.0% [37.1–42.9%] | 72.7% [61.4–74.4%] | 12 [10–17] | 44.4% [22.2–66.7%] | 97.5% [95.7–97.8%] | no | — |
-| 2026-08-17 | openrouter | openai/gpt-5.4-mini | 49.7% [47.5–51.8%] provisional | 42.9% [38.6–42.9%] | 61.7% [59.3–65.3%] | 18 [17–22] | 33.3% | 97.9% [96.4–98.0%] | no | — |
-
-Comparison key: `breadth / canonical-breadth / lgtmaybe 2.1.4`.
-
-| date | provider | model | balanced F1 | balanced recall | precision | false positives | clean pass | adjudication | audit | settings |
-|---|---|---|---:|---:|---:|---:|---:|---:|---|---|
-| 2026-08-16 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | 67.4% [62.1–69.5%] provisional | 72.9% [67.1–75.7%] | 62.7% [57.8–64.3%] | 31 [30–35] | 0.0% | 98.8% [98.8–98.8%] | no | api base http://127.0.0.1:8000/v1; concurrency 2 |
-| 2026-08-16 | openrouter | openai/gpt-5.6-sol | 64.5% [64.1–65.5%] provisional | 58.6% [55.7–60.0%] | 72.1% [71.7–75.5%] | 17 [13–17] | 33.3% [33.3–44.4%] | 98.4% [98.1–100.0%] | no | — |
-| 2026-08-16 | openrouter | moonshotai/kimi-k3 | 63.6% [61.5–65.7%] provisional | 65.7% [65.7–67.1%] | 60.5% [57.8–65.8%] | 32 [25–35] | 0.0% [0.0–11.1%] | 98.8% [98.6–98.8%] | no | — |
-| 2026-08-16 | openrouter | openai/gpt-5.6-luna | 62.1% [52.1–65.6%] provisional | 58.6% [47.1–62.9%] | 66.2% [58.3–68.7%] | 22 [21–25] | 22.2% [11.1–22.2%] | 100.0% [98.4–100.0%] | no | — |
-| 2026-08-16 | openrouter | x-ai/grok-4.6 | 61.1% [57.4–66.6%] provisional | 57.1% [52.9–62.9%] | 65.6% [62.9–70.8%] | 22 [19–23] | 22.2% [22.2–33.3%] | 98.5% [98.4–98.5%] | no | — |
-| 2026-08-16 | openrouter | kwaipilot/kat-coder-pro-v2.5 | 60.5% [55.8–64.8%] provisional | 55.7% [50.0–58.6%] | 66.1% [63.2–72.4%] | 21 [16–21] | 22.2% [11.1–44.4%] | 98.3% [98.3–98.4%] | no | — |
-| 2026-08-16 | openrouter | google/gemini-3.7-flash | 59.8% [58.7–63.0%] provisional | 48.6% [47.1–52.9%] | 77.8% [77.8–78.0%] | 10 [10–11] | 55.6% [44.4–55.6%] | 100.0% [98.0–100.0%] | no | — |
-| 2026-08-16 | openrouter | google/gemini-3.1-pro-preview | 59.3% [58.3–61.2%] provisional | 55.7% [55.7–58.6%] | 63.5% [61.2–64.2%] | 24 [23–26] | 22.2% [11.1–22.2%] | 98.5% [98.4–98.5%] | no | — |
-| 2026-08-16 | openrouter | kwaipilot/kat-coder-air-v2.5 | 58.3% [57.2–58.8%] provisional | 52.9% [51.4–54.3%] | 62.9% [62.3–68.5%] | 23 [17–23] | 11.1% [11.1–22.2%] | 98.2% [96.8–98.4%] | no | — |
-| 2026-08-16 | openrouter | mistralai/mistral-small-2603 | 57.8% [52.8–58.0%] provisional | 62.9% [61.4–67.1%] | 51.1% [46.3–53.6%] | 46 [39–51] | 33.3% [33.3–44.4%] | 96.9% [95.9–97.7%] | no | — |
+| date | provider | model | lgtmaybe | balanced F0.5 | balanced recall | precision | false positives | clean pass | adjudication | audit | settings |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|---|---|
+| 2026-08-17 | openrouter | qwen/qwen3.8-max | lgtmaybe 2.2.0 | 78.9% [76.3–82.2%] provisional | 61.4% [58.6–67.1%] | 84.9% [79.0–91.5%] | 8 [4–13] | 77.8% [66.7–100.0%] | 98.1% [97.9–98.4%] | no | — |
+| 2026-08-18 | openrouter | z-ai/glm-5.2 | lgtmaybe 2.2.0 | 70.8% [66.8–71.9%] provisional | 72.9% [72.9–75.7%] | 69.6% [65.4–71.6%] | 24 [21–28] | 11.1% [11.1–22.2%] | 98.8% [98.7–98.8%] | no | — |
+| 2026-08-16 | openrouter | google/gemini-3.7-flash | lgtmaybe 2.1.4 | 69.4% [68.8–71.2%] provisional | 48.6% [47.1–52.9%] | 77.8% [77.8–78.0%] | 10 [10–11] | 55.6% [44.4–55.6%] | 100.0% [98.0–100.0%] | no | — |
+| 2026-08-16 | openrouter | openai/gpt-5.6-sol | lgtmaybe 2.1.4 | 69.3% [68.6–70.5%] provisional | 58.6% [55.7–60.0%] | 72.1% [71.7–75.5%] | 17 [13–17] | 33.3% [33.3–44.4%] | 98.4% [98.1–100.0%] | no | — |
+| 2026-08-17 | openrouter | google/gemini-3.7-flash | lgtmaybe 2.2.0 | 68.7% [68.1–69.2%] | 54.3% [52.9–57.1%] | 72.7% [72.4–75.0%] | 15 [13–16] | 44.4% [33.3–44.4%] | 100.0% | no | — |
+| 2026-08-18 | openrouter | minimax/minimax-m3 | lgtmaybe 2.2.0 | 65.7% [61.7–68.5%] provisional | 58.6% [54.3–60.0%] | 67.7% [63.9–71.0%] | 20 [18–22] | 33.3% [22.2–44.4%] | 98.4% [96.9–98.4%] | no | — |
+| 2026-08-17 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | lgtmaybe 2.2.0 | 65.4% [57.8–68.0%] provisional | 47.1% [42.9–51.4%] | 72.3% [63.3–74.0%] | 13 [13–18] | 44.4% [22.2–55.6%] | 98.0% [98.0–100.0%] | no | api base http://127.0.0.1:8000/v1; concurrency 3 |
+| 2026-08-17 | openrouter | openai/gpt-5.4-nano | lgtmaybe 2.2.0 | 64.6% [62.9–65.7%] provisional | 52.9% [48.6–52.9%] | 68.4% [66.1–72.0%] | 18 [14–20] | 22.2% [22.2–44.4%] | 98.3% [96.2–98.3%] | no | — |
+| 2026-08-16 | openrouter | openai/gpt-5.6-luna | lgtmaybe 2.1.4 | 64.5% [55.7–67.4%] provisional | 58.6% [47.1–62.9%] | 66.2% [58.3–68.7%] | 22 [21–25] | 22.2% [11.1–22.2%] | 100.0% [98.4–100.0%] | no | — |
+| 2026-08-16 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | lgtmaybe 2.1.4 | 64.5% [59.5–66.3%] provisional | 72.9% [67.1–75.7%] | 62.7% [57.8–64.3%] | 31 [30–35] | 0.0% | 98.8% [98.8–98.8%] | no | api base http://127.0.0.1:8000/v1; concurrency 2 |
 
 ## Long horizon — top 10
 
-Complete `long-horizon` runs with profile `canonical-long-horizon` only. Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting eight bugs at the same relative positions; the clean case plants none. Model recall covers the 32 planted findings across the four defect-bearing cases. Scored as the closed-world overall score, which is not comparable with the breadth balanced F1.
+Complete `long-horizon` runs with profile `canonical-long-horizon` only. Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting eight bugs at the same relative positions; the clean case plants none. Model recall covers the 32 planted findings across the four defect-bearing cases. Scored as the closed-world F0.5 overall score, which is not comparable with the breadth balanced F0.5. Rows rank runs across lgtmaybe versions; the `lgtmaybe` column names the version each run used.
 
 ### Model summary
 
-| date | provider | model | score | recall | precision | true positives | false positives |
-|---|---|---|---:|---:|---:|---:|---:|
-| 2026-08-15 | openrouter | google/gemini-3.7-flash | 80.7% | 81.2% | 74.3% | 26 | 9 |
-| 2026-08-18 | openrouter | qwen/qwen3.8-max | 78.7% | 75.0% | 77.4% | 24 | 7 |
-| 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | 72.5% | 68.8% | 71.0% | 22 | 9 |
-| 2026-08-15 | openrouter | x-ai/grok-4.6 | 69.5% | 84.4% | 55.1% | 27 | 22 |
-| 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | 64.9% | 62.5% | 62.5% | 20 | 12 |
-| 2026-08-15 | openrouter | z-ai/glm-5.2 | 59.7% | 78.1% | 47.2% | 25 | 28 |
-| 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | 59.7% | 81.2% | 46.4% | 26 | 30 |
-| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | 59.0% | 56.2% | 58.1% | 18 | 13 |
-| 2026-08-15 | openrouter | minimax/minimax-m3 | 56.4% | 53.1% | 56.7% | 17 | 13 |
-| 2026-08-15 | openrouter | openai/gpt-5.6-terra | 56.4% | 53.1% | 56.7% | 17 | 13 |
+| date | provider | model | lgtmaybe | score | recall | precision | true positives | false positives |
+|---|---|---|---|---:|---:|---:|---:|---:|
+| 2026-08-18 | openrouter | qwen/qwen3.8-max | lgtmaybe 2.2.0 | 76.9% | 75.0% | 77.4% | 24 | 7 |
+| 2026-08-15 | openrouter | google/gemini-3.7-flash | lgtmaybe 2.1.4 | 75.6% | 81.2% | 74.3% | 26 | 9 |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | lgtmaybe 2.1.4 | 70.5% | 68.8% | 71.0% | 22 | 9 |
+| 2026-08-15 | openrouter | deepseek/deepseek-v4-pro-0813 | lgtmaybe 2.1.4 | 68.2% | 37.5% | 85.7% | 12 | 2 |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | lgtmaybe 2.1.4 | 62.5% | 62.5% | 62.5% | 20 | 12 |
+| 2026-08-15 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | lgtmaybe 2.1.4 | 62.5% | 37.5% | 75.0% | 12 | 4 |
+| 2026-08-15 | openrouter | x-ai/grok-4.6 | lgtmaybe 2.1.4 | 59.2% | 84.4% | 55.1% | 27 | 22 |
+| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | lgtmaybe 2.1.4 | 57.7% | 56.2% | 58.1% | 18 | 13 |
+| 2026-08-15 | openrouter | minimax/minimax-m3 | lgtmaybe 2.1.4 | 55.9% | 53.1% | 56.7% | 17 | 13 |
+| 2026-08-15 | openrouter | openai/gpt-5.6-terra | lgtmaybe 2.1.4 | 55.9% | 53.1% | 56.7% | 17 | 13 |
 <!-- BENCH_RESULTS_END -->
 
 ## Further results
@@ -121,12 +104,12 @@ Each configuration run writes an append-only JSON document under `results/raw/` 
 1. **Setup.** Each case is a small Git repository with a clean base revision and a changed revision. The runner invokes lgtmaybe as an external command against the diff.
 2. **Matching.** A finding matches a planted entry only when the file agrees, the line is within three lines, an expected keyword appears in its title or body, and any minimum severity is met. Each planted entry can be caught once.
 3. **Closed-world precision.** Every finding that does not match an uncaught planted entry is a false positive, even if it may identify a real uncatalogued issue. `precision = true positives / (true positives + false positives)`.
-4. **Score.** `score = 2 × recall / (recall + 1) − 0.01 × false positives`, floored at 0%. That is the harmonic mean of recall against 100% precision, less one percentage point per false positive. This is the `score` column in the Long horizon table.
+4. **Score.** `score = 1.25 × precision × recall / (0.25 × precision + recall)`, and 0% when that denominator is zero. That is the F0.5 measure: a harmonic-family mean of precision and recall that weights precision twice as heavily, so noise costs more than misses without ever erasing nonzero recall. Both suites share this formula — the Long horizon `score` column applies it to planted-finding recall and closed-world precision, and the Breadth `balanced F0.5` column applies it to balanced recall and pooled precision. The suites are still never ranked against each other.
 5. **Aggregation.** Each repeat is scored independently, and every reported metric is the median across repeats with the full minimum–maximum range. Published runs use one repeat, so no range is shown.
 
-Recall in the Long horizon table is measured over the 32 planted findings in the four defect-bearing cases. The fifth case is clean and plants none; findings raised against it count as false positives.
+Recall in the Long horizon table is measured over the 32 planted findings in the four defect-bearing cases. The fifth case is clean and plants none; findings raised against it count as false positives. Balanced recall in the Breadth table is the arithmetic mean of recall across the suite's 70 primary language/lens cells, so every language and lens counts equally; published runs use three repeats, and each metric is the median with its full range. A breadth run with unresolved findings is marked provisional until adjudicated.
 
-Compare only rows sharing a `suite / profile / lgtmaybe version` key. Provider, model, clean pass, timing, tokens, truncations, and changed settings stay visible separately.
+Compare only rows within one suite's table; the `lgtmaybe` column identifies the version behind each row, and the dashboard can filter to a single version for strict like-for-like comparisons. Provider, model, clean pass, timing, tokens, truncations, and changed settings stay visible separately.
 
 ## Contributing cases
 
