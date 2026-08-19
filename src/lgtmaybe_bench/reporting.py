@@ -21,6 +21,7 @@ from lgtmaybe_bench.scoring import (
     SuiteRepeatMetrics,
     aggregate_repeats,
     aggregate_suite_repeats,
+    call_completeness,
     effort_label,
     load_adjudications,
     overall_score,
@@ -62,7 +63,7 @@ class ScoredSuiteRun:
     aggregate: SuiteAggregateMetrics
 
 
-def _combine(scores: list[CaseScore]) -> CaseScore:
+def _combine(scores: list[CaseScore], completeness: float | None = None) -> CaseScore:
     caught = sum(score.caught for score in scores)
     planted = sum(score.planted for score in scores)
     forbidden = sum(score.forbidden_hits for score in scores)
@@ -71,6 +72,8 @@ def _combine(scores: list[CaseScore]) -> CaseScore:
     recall = caught / planted
     precision = 1.0 if adjudicable == 0 else caught / adjudicable
     combined = overall_score(recall, precision)
+    if completeness is not None:
+        combined *= completeness
     lenses = {lens for score in scores for lens in score.per_lens_counts}
     per_lens_counts: dict[str, tuple[int, int]] = {}
     for lens in lenses:
@@ -109,7 +112,8 @@ def _score_run(raw: dict[str, Any]) -> ScoredRun:
             score_case(parse_case(obs["ground_truth"]), parse_findings(obs["findings"]))
             for obs in repeat_observations
         ]
-        combined = _combine(scores)
+        completeness = call_completeness(repeat_observations)
+        combined = _combine(scores, completeness)
         clean = clean and combined.clean
         for lens, value in combined.per_lens.items():
             lens_values.setdefault(lens, []).append(value)
@@ -136,6 +140,7 @@ def _score_run(raw: dict[str, Any]) -> ScoredRun:
         repeats.append(
             RepeatMetrics(
                 combined,
+                completeness,
                 sum(float(obs["wall_seconds"]) for obs in repeat_observations),
                 wall_excluding_truncation,
                 tuple(truncation_lenses),
@@ -176,6 +181,7 @@ def _score_suite_run(
                 for observation in repeat_observations
             ],
             adjudications,
+            call_completeness(repeat_observations),
         )
         truncation_lenses: list[str] = []
         wall_excluding_truncation = 0.0
@@ -373,6 +379,7 @@ def _render_breadth_canonical(
                     run.raw["configuration"]["model"],
                     str(run.raw["lgtmaybe_version"]),
                     score,
+                    _completeness_label(run.aggregate.completeness),
                     _range(run.aggregate.balanced_recall, percent=True),
                     _range(run.aggregate.precision, percent=True),
                     _count_range(run.aggregate.false_positives),
@@ -389,14 +396,26 @@ def _render_breadth_canonical(
         "Complete `breadth` runs with profile `canonical-breadth` only. Cases span seven "
         "programming languages plus GitHub Actions and Terraform, planting one finding per "
         "language and review lens, so the score measures coverage across kinds of issue rather "
-        "than diff size. Scored as balanced F0.5, which is not comparable with the long-horizon "
-        "overall score. Rows rank runs across lgtmaybe versions; the `lgtmaybe` column names the "
-        "version each run used. Rows are ranked highest to lowest by median balanced F0.5. The "
+        "than diff size. The score is balanced F0.5 scaled by `completeness`, the share of lens "
+        "calls that returned parseable findings: precision counts only findings that exist, so "
+        "without that factor a run whose calls mostly failed is scored on the few that "
+        "survived. It is not comparable with the long-horizon score, which measures a "
+        "different corpus. Rows rank runs across lgtmaybe versions; the `lgtmaybe` column names "
+        "the version each run used. Rows are ranked highest to lowest by median score. The "
         "first row is the current leader.\n\n"
-        "| date | provider | model | lgtmaybe | balanced F0.5 | balanced recall | precision | "
-        "false positives | clean pass | adjudication | audit | settings |\n"
-        "|---|---|---|---|---:|---:|---:|---:|---:|---:|---|---|\n" + "\n".join(rows) + "\n"
+        "| date | provider | model | lgtmaybe | score | completeness | balanced recall | "
+        "precision | false positives | clean pass | adjudication | audit | settings |\n"
+        "|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|\n" + "\n".join(rows) + "\n"
     )
+
+
+def _completeness_label(value: float | None) -> str:
+    """The completeness factor, or an em dash when the run does not report calls.
+
+    Distinct from `100%`: an unmeasured run is not a complete one, and the score
+    beside it was left unscaled.
+    """
+    return "—" if value is None else f"{value * 100:.1f}%"
 
 
 def _audit_label(raw: dict[str, Any]) -> str:
@@ -506,6 +525,7 @@ def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
                     str(config.get("model", "")),
                     str(raw["lgtmaybe_version"]),
                     _range(metrics.score, percent=True),
+                    _completeness_label(metrics.completeness),
                     _range(metrics.recall, percent=True),
                     _range(metrics.precision, percent=True),
                     _count_range(_true_positive_range(scored.repeats)),
@@ -515,9 +535,9 @@ def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
             + " |"
         )
     summary_header = (
-        "| date | provider | model | lgtmaybe | score | recall | precision | true positives | "
-        "false positives |\n"
-        "|---|---|---|---|---:|---:|---:|---:|---:|\n"
+        "| date | provider | model | lgtmaybe | score | completeness | recall | precision | "
+        "true positives | false positives |\n"
+        "|---|---|---|---|---:|---:|---:|---:|---:|---:|\n"
     )
     return (
         "## Long horizon — top 10\n\n"
@@ -525,7 +545,8 @@ def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
         "Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting "
         "eight bugs at the same relative positions; the clean case plants none. Model recall "
         "covers the 32 planted findings across the four defect-bearing cases. Scored as the "
-        "closed-world F0.5 overall score, which is not comparable with the breadth balanced "
+        "closed-world F0.5 overall score scaled by `completeness` (the share of lens calls that "
+        "returned parseable findings), which is not comparable with the breadth balanced "
         "F0.5. Rows rank runs across lgtmaybe versions; the `lgtmaybe` column names the version "
         "each run used.\n\n"
         "### Model summary\n\n" + summary_header + "\n".join(summary_rows) + "\n"
@@ -575,6 +596,7 @@ def build_dashboard_data(
                 metrics = {
                     "score_kind": "balanced_f1",
                     "balanced_f1": aggregate.balanced_f1.median,
+                    "completeness": aggregate.completeness,
                     "balanced_recall": aggregate.balanced_recall.median,
                     "precision": aggregate.precision.median,
                     "false_positives": aggregate.false_positives.median,
@@ -612,6 +634,7 @@ def build_dashboard_data(
                 metrics = {
                     "score_kind": "legacy_f1",
                     "balanced_f1": aggregate_legacy.score.median,
+                    "completeness": aggregate_legacy.completeness,
                     "balanced_recall": aggregate_legacy.recall.median,
                     "precision": aggregate_legacy.precision.median,
                     "false_positives": (
@@ -731,7 +754,8 @@ def render_dashboard(data: dict[str, Any]) -> str:
           <th aria-sort="none"><button type="button" data-sort="suite" data-type="text">Suite</button></th>
           <th aria-sort="none"><button type="button" data-sort="profile" data-type="text">Profile</button></th>
           <th aria-sort="none"><button type="button" data-sort="lgtmaybe_version" data-type="text">lgtmaybe</button></th>
-          <th aria-sort="none"><button type="button" data-sort="balanced_f1" data-type="number">Balanced F0.5</button></th>
+          <th aria-sort="none"><button type="button" data-sort="balanced_f1" data-type="number">Score</button></th>
+          <th aria-sort="none"><button type="button" data-sort="completeness" data-type="number">Completeness</button></th>
           <th aria-sort="none"><button type="button" data-sort="balanced_recall" data-type="number">Recall</button></th>
           <th aria-sort="none"><button type="button" data-sort="precision" data-type="number">Precision</button></th>
           <th aria-sort="none"><button type="button" data-sort="true_positives" data-type="number">True positives</button></th>
@@ -802,7 +826,8 @@ def render_dashboard(data: dict[str, Any]) -> str:
       document.querySelector('#results-table tbody').innerHTML = filtered.map(run => `<tr>
         <td>${escapeHtml(run.date)}</td><td>${escapeHtml(run.provider)}</td><td>${escapeHtml(run.model)}</td>
         <td>${escapeHtml(run.suite)}</td><td>${escapeHtml(run.profile)}</td><td>${escapeHtml(run.lgtmaybe_version)}</td>
-        <td class="numeric">${percent(metric(run, 'balanced_f1'))}</td><td class="numeric">${percent(metric(run, 'balanced_recall'))}</td>
+        <td class="numeric">${percent(metric(run, 'balanced_f1'))}</td><td class="numeric">${percent(metric(run, 'completeness'))}</td>
+        <td class="numeric">${percent(metric(run, 'balanced_recall'))}</td>
         <td class="numeric">${percent(metric(run, 'precision'))}</td><td class="numeric">${escapeHtml(metric(run, 'true_positives'))}</td>
         <td class="numeric">${escapeHtml(metric(run, 'false_positives'))}</td>
         <td class="numeric">${percent(metric(run, 'clean_pass_rate'))}</td><td>${escapeHtml(run.audit)}</td><td>${escapeHtml(run.status)}</td>
@@ -935,6 +960,7 @@ def render_detailed_results(data: dict[str, Any]) -> str:
                     run["lgtmaybe_version"],
                     run["status"],
                     percentage(metrics.get("balanced_f1")),
+                    _completeness_label(metrics.get("completeness")),
                     percentage(metrics.get("balanced_recall")),
                     percentage(metrics.get("precision")),
                     metrics.get("true_positives", "—"),
@@ -990,7 +1016,7 @@ def render_detailed_results(data: dict[str, Any]) -> str:
         "Canonical, diagnostic, focused, and legacy completed runs are retained here. "
         "Ranked tables compare runs of one suite and profile across lgtmaybe versions; "
         "the suite and profile columns identify what each run measured.\n\n"
-        "| date | provider | model | suite | profile | lgtmaybe | status | balanced F0.5 | "
+        "| date | provider | model | suite | profile | lgtmaybe | status | score | completeness | "
         "balanced recall | precision | true positives | false positives | clean pass | "
         "adjudication | audit | raw | traces | settings |\n"
         "|---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|\n"

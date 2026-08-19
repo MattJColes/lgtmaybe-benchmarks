@@ -53,39 +53,39 @@ Top 10 per suite. Each suite gets its own section — **Long horizon** and **Bre
 <!-- BENCH_RESULTS_START -->
 ## Breadth — top 10
 
-Complete `breadth` runs with profile `canonical-breadth` only. Cases span seven programming languages plus GitHub Actions and Terraform, planting one finding per language and review lens, so the score measures coverage across kinds of issue rather than diff size. Scored as balanced F0.5, which is not comparable with the long-horizon overall score. Rows rank runs across lgtmaybe versions; the `lgtmaybe` column names the version each run used. Rows are ranked highest to lowest by median balanced F0.5. The first row is the current leader.
+Complete `breadth` runs with profile `canonical-breadth` only. Cases span seven programming languages plus GitHub Actions and Terraform, planting one finding per language and review lens, so the score measures coverage across kinds of issue rather than diff size. The score is balanced F0.5 scaled by `completeness`, the share of lens calls that returned parseable findings: precision counts only findings that exist, so without that factor a run whose calls mostly failed is scored on the few that survived. It is not comparable with the long-horizon score, which measures a different corpus. Rows rank runs across lgtmaybe versions; the `lgtmaybe` column names the version each run used. Rows are ranked highest to lowest by median score. The first row is the current leader.
 
-| date | provider | model | lgtmaybe | balanced F0.5 | balanced recall | precision | false positives | clean pass | adjudication | audit | settings |
-|---|---|---|---|---:|---:|---:|---:|---:|---:|---|---|
-| 2026-08-17 | openrouter | qwen/qwen3.8-max | lgtmaybe 2.2.0 | 78.9% [76.3–82.2%] provisional | 61.4% [58.6–67.1%] | 84.9% [79.0–91.5%] | 8 [4–13] | 77.8% [66.7–100.0%] | 98.1% [97.9–98.4%] | no | — |
-| 2026-08-18 | openrouter | z-ai/glm-5.2 | lgtmaybe 2.2.0 | 70.8% [66.8–71.9%] provisional | 72.9% [72.9–75.7%] | 69.6% [65.4–71.6%] | 24 [21–28] | 11.1% [11.1–22.2%] | 98.8% [98.7–98.8%] | no | — |
-| 2026-08-16 | openrouter | google/gemini-3.7-flash | lgtmaybe 2.1.4 | 69.4% [68.8–71.2%] provisional | 48.6% [47.1–52.9%] | 77.8% [77.8–78.0%] | 10 [10–11] | 55.6% [44.4–55.6%] | 100.0% [98.0–100.0%] | no | — |
-| 2026-08-16 | openrouter | openai/gpt-5.6-sol | lgtmaybe 2.1.4 | 69.3% [68.6–70.5%] provisional | 58.6% [55.7–60.0%] | 72.1% [71.7–75.5%] | 17 [13–17] | 33.3% [33.3–44.4%] | 98.4% [98.1–100.0%] | no | — |
-| 2026-08-17 | openrouter | google/gemini-3.7-flash | lgtmaybe 2.2.0 | 68.7% [68.1–69.2%] | 54.3% [52.9–57.1%] | 72.7% [72.4–75.0%] | 15 [13–16] | 44.4% [33.3–44.4%] | 100.0% | no | — |
-| 2026-08-18 | openrouter | minimax/minimax-m3 | lgtmaybe 2.2.0 | 65.7% [61.7–68.5%] provisional | 58.6% [54.3–60.0%] | 67.7% [63.9–71.0%] | 20 [18–22] | 33.3% [22.2–44.4%] | 98.4% [96.9–98.4%] | no | — |
-| 2026-08-17 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | lgtmaybe 2.2.0 | 65.4% [57.8–68.0%] provisional | 47.1% [42.9–51.4%] | 72.3% [63.3–74.0%] | 13 [13–18] | 44.4% [22.2–55.6%] | 98.0% [98.0–100.0%] | no | api base http://127.0.0.1:8000/v1; concurrency 3 |
-| 2026-08-17 | openrouter | openai/gpt-5.4-nano | lgtmaybe 2.2.0 | 64.6% [62.9–65.7%] provisional | 52.9% [48.6–52.9%] | 68.4% [66.1–72.0%] | 18 [14–20] | 22.2% [22.2–44.4%] | 98.3% [96.2–98.3%] | no | — |
-| 2026-08-16 | openrouter | openai/gpt-5.6-luna | lgtmaybe 2.1.4 | 64.5% [55.7–67.4%] provisional | 58.6% [47.1–62.9%] | 66.2% [58.3–68.7%] | 22 [21–25] | 22.2% [11.1–22.2%] | 100.0% [98.4–100.0%] | no | — |
-| 2026-08-16 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | lgtmaybe 2.1.4 | 64.5% [59.5–66.3%] provisional | 72.9% [67.1–75.7%] | 62.7% [57.8–64.3%] | 31 [30–35] | 0.0% | 98.8% [98.8–98.8%] | no | api base http://127.0.0.1:8000/v1; concurrency 2 |
+| date | provider | model | lgtmaybe | score | completeness | balanced recall | precision | false positives | clean pass | adjudication | audit | settings |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|
+| 2026-08-17 | openrouter | qwen/qwen3.8-max | lgtmaybe 2.2.0 | 67.0% [64.0–71.2%] provisional | 84.9% | 61.4% [58.6–67.1%] | 84.9% [79.0–91.5%] | 8 [4–13] | 77.8% [66.7–100.0%] | 98.1% [97.9–98.4%] | no | — |
+| 2026-08-16 | openrouter | openai/gpt-5.6-sol | lgtmaybe 2.1.4 | 55.8% [55.5–57.0%] provisional | 80.8% | 58.6% [55.7–60.0%] | 72.1% [71.7–75.5%] | 17 [13–17] | 33.3% [33.3–44.4%] | 98.4% [98.1–100.0%] | no | — |
+| 2026-08-17 | openrouter | google/gemini-3.7-flash | lgtmaybe 2.2.0 | 55.5% [55.1–55.6%] | 80.8% | 54.3% [52.9–57.1%] | 72.7% [72.4–75.0%] | 15 [13–16] | 44.4% [33.3–44.4%] | 100.0% | no | — |
+| 2026-08-16 | openrouter | google/gemini-3.7-flash | lgtmaybe 2.1.4 | 54.8% [54.7–55.5%] provisional | 79.6% | 48.6% [47.1–52.9%] | 77.8% [77.8–78.0%] | 10 [10–11] | 55.6% [44.4–55.6%] | 100.0% [98.0–100.0%] | no | — |
+| 2026-08-18 | openrouter | z-ai/glm-5.2 | lgtmaybe 2.2.0 | 53.2% [49.8–55.2%] provisional | 75.1% | 72.9% [72.9–75.7%] | 69.6% [65.4–71.6%] | 24 [21–28] | 11.1% [11.1–22.2%] | 98.8% [98.7–98.8%] | no | — |
+| 2026-08-17 | openrouter | openai/gpt-5.4-nano | lgtmaybe 2.2.0 | 51.6% [50.5–52.8%] provisional | 80.2% | 52.9% [48.6–52.9%] | 68.4% [66.1–72.0%] | 18 [14–20] | 22.2% [22.2–44.4%] | 98.3% [96.2–98.3%] | no | — |
+| 2026-08-18 | openrouter | minimax/minimax-m3 | lgtmaybe 2.2.0 | 51.6% [44.9–54.1%] provisional | 78.6% | 58.6% [54.3–60.0%] | 67.7% [63.9–71.0%] | 20 [18–22] | 33.3% [22.2–44.4%] | 98.4% [96.9–98.4%] | no | — |
+| 2026-08-16 | openrouter | x-ai/grok-4.6 | lgtmaybe 2.1.4 | 51.5% [49.0–55.8%] provisional | 80.8% | 57.1% [52.9–62.9%] | 65.6% [62.9–70.8%] | 22 [19–23] | 22.2% [22.2–33.3%] | 98.5% [98.4–98.5%] | no | — |
+| 2026-08-16 | openrouter | openai/gpt-5.6-luna | lgtmaybe 2.1.4 | 51.4% [43.0–52.3%] provisional | 77.5% | 58.6% [47.1–62.9%] | 66.2% [58.3–68.7%] | 22 [21–25] | 22.2% [11.1–22.2%] | 100.0% [98.4–100.0%] | no | — |
+| 2026-08-16 | openrouter | openai/gpt-5.6-terra | lgtmaybe 2.1.4 | 50.9% [48.9–56.8%] provisional | 80.8% | 48.6% [45.7–60.0%] | 67.9% [66.7–73.3%] | 17 [16–17] | 33.3% [22.2–33.3%] | 98.4% [98.1–100.0%] | no | — |
 
 ## Long horizon — top 10
 
-Complete `long-horizon` runs with profile `canonical-long-horizon` only. Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting eight bugs at the same relative positions; the clean case plants none. Model recall covers the 32 planted findings across the four defect-bearing cases. Scored as the closed-world F0.5 overall score, which is not comparable with the breadth balanced F0.5. Rows rank runs across lgtmaybe versions; the `lgtmaybe` column names the version each run used.
+Complete `long-horizon` runs with profile `canonical-long-horizon` only. Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting eight bugs at the same relative positions; the clean case plants none. Model recall covers the 32 planted findings across the four defect-bearing cases. Scored as the closed-world F0.5 overall score scaled by `completeness` (the share of lens calls that returned parseable findings), which is not comparable with the breadth balanced F0.5. Rows rank runs across lgtmaybe versions; the `lgtmaybe` column names the version each run used.
 
 ### Model summary
 
-| date | provider | model | lgtmaybe | score | recall | precision | true positives | false positives |
-|---|---|---|---|---:|---:|---:|---:|---:|
-| 2026-08-18 | openrouter | qwen/qwen3.8-max | lgtmaybe 2.2.0 | 76.9% | 75.0% | 77.4% | 24 | 7 |
-| 2026-08-15 | openrouter | google/gemini-3.7-flash | lgtmaybe 2.1.4 | 75.6% | 81.2% | 74.3% | 26 | 9 |
-| 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | lgtmaybe 2.1.4 | 70.5% | 68.8% | 71.0% | 22 | 9 |
-| 2026-08-15 | openrouter | deepseek/deepseek-v4-pro-0813 | lgtmaybe 2.1.4 | 68.2% | 37.5% | 85.7% | 12 | 2 |
-| 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | lgtmaybe 2.1.4 | 62.5% | 62.5% | 62.5% | 20 | 12 |
-| 2026-08-15 | openai-compatible | nvidia/Qwen3.6-35B-A3B-NVFP4 | lgtmaybe 2.1.4 | 62.5% | 37.5% | 75.0% | 12 | 4 |
-| 2026-08-15 | openrouter | x-ai/grok-4.6 | lgtmaybe 2.1.4 | 59.2% | 84.4% | 55.1% | 27 | 22 |
-| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | lgtmaybe 2.1.4 | 57.7% | 56.2% | 58.1% | 18 | 13 |
-| 2026-08-15 | openrouter | minimax/minimax-m3 | lgtmaybe 2.1.4 | 55.9% | 53.1% | 56.7% | 17 | 13 |
-| 2026-08-15 | openrouter | openai/gpt-5.6-terra | lgtmaybe 2.1.4 | 55.9% | 53.1% | 56.7% | 17 | 13 |
+| date | provider | model | lgtmaybe | score | completeness | recall | precision | true positives | false positives |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|
+| 2026-08-18 | openrouter | qwen/qwen3.8-max | lgtmaybe 2.2.0 | 70.6% | 91.8% | 75.0% | 77.4% | 24 | 7 |
+| 2026-08-15 | openrouter | google/gemini-3.7-flash | lgtmaybe 2.1.4 | 64.8% | 85.7% | 81.2% | 74.3% | 26 | 9 |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | lgtmaybe 2.1.4 | 59.7% | 84.6% | 68.8% | 71.0% | 22 | 9 |
+| 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | lgtmaybe 2.1.4 | 54.1% | 93.8% | 56.2% | 58.1% | 18 | 13 |
+| 2026-08-15 | openrouter | x-ai/grok-4.6 | lgtmaybe 2.1.4 | 53.3% | 90.0% | 84.4% | 55.1% | 27 | 22 |
+| 2026-08-15 | openrouter | deepseek/deepseek-v4-pro-0813 | lgtmaybe 2.1.4 | 51.1% | 75.0% | 37.5% | 85.7% | 12 | 2 |
+| 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | lgtmaybe 2.1.4 | 50.5% | 80.8% | 62.5% | 62.5% | 20 | 12 |
+| 2026-08-15 | openrouter | openai/gpt-5.6-terra | lgtmaybe 2.1.4 | 50.3% | 90.0% | 53.1% | 56.7% | 17 | 13 |
+| 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | lgtmaybe 2.1.4 | 45.7% | 90.0% | 81.2% | 46.4% | 26 | 30 |
+| 2026-08-15 | openrouter | z-ai/glm-5.2 | lgtmaybe 2.1.4 | 44.6% | 87.0% | 78.1% | 47.2% | 25 | 28 |
 <!-- BENCH_RESULTS_END -->
 
 ## Further results

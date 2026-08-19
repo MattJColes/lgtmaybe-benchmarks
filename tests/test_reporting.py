@@ -219,8 +219,8 @@ def test_v2_leaderboard_exposes_balanced_quality_false_positives_and_audit() -> 
 
     header = next(line for line in rendered.splitlines() if line.startswith("| date"))
     assert header == (
-        "| date | provider | model | lgtmaybe | balanced F0.5 | balanced recall | precision | "
-        "false positives | clean pass | adjudication | audit | settings |"
+        "| date | provider | model | lgtmaybe | score | completeness | balanced recall | "
+        "precision | false positives | clean pass | adjudication | audit | settings |"
     )
     row = next(line for line in rendered.splitlines() if line.startswith("| 2026-"))
     assert "100.0%" in row
@@ -639,11 +639,11 @@ def test_context_scaling_section_renders_model_summary() -> None:
     rendered = render_results([run])
 
     assert (
-        "| date | provider | model | lgtmaybe | score | recall | precision | true positives | "
-        "false positives |" in rendered
+        "| date | provider | model | lgtmaybe | score | completeness | recall | precision | "
+        "true positives | false positives |" in rendered
     )
     assert (
-        "| 2026-08-14 | openrouter | scaler | lgtmaybe 2.0 | 55.6% | 100.0% | 50.0% | 1 | 1 |"
+        "| 2026-08-14 | openrouter | scaler | lgtmaybe 2.0 | 55.6% | — | 100.0% | 50.0% | 1 | 1 |"
         in rendered
     )
 
@@ -900,8 +900,7 @@ def test_breadth_section_explains_ranking_order() -> None:
     rendered = render_results([v2_raw("2026-08-16T00:00:00Z", "ranked")])
 
     assert (
-        "Rows are ranked highest to lowest by median balanced F0.5. "
-        "The first row is the current leader."
+        "Rows are ranked highest to lowest by median score. The first row is the current leader."
     ) in rendered
 
 
@@ -923,3 +922,54 @@ def test_both_sections_disclaim_cross_suite_ranking() -> None:
     breadth, long_horizon = rendered.split("## Long horizon", 1)
     assert "not comparable" in breadth
     assert "not comparable" in long_horizon
+
+
+def _with_calls(run: dict[str, object], calls: list[dict[str, object]]) -> dict[str, object]:
+    observations = list(run["observations"])  # type: ignore[arg-type]
+    observations[0] = {**observations[0], "calls": calls}
+    return {**run, "observations": observations}
+
+
+def test_a_run_whose_calls_mostly_failed_is_scored_down() -> None:
+    """A lens call that returned nothing is invisible to precision, so without
+    the completeness factor a run scored on its few surviving findings can
+    outrank one that found far more. Measured on the stored corpus,
+    `z-ai/glm-4.7-flash` failed to parse 73.8% of its calls and still scored
+    50.0%, above a run that found 24 planted bugs to its 14."""
+    complete = _with_calls(
+        raw("2026-01-01T00:00:00Z", "complete", True),
+        [{"findings": 1, "label": "security"}, {"findings": 0, "label": "tests"}],
+    )
+    degraded = _with_calls(
+        raw("2026-02-01T00:00:00Z", "degraded", True),
+        [{"findings": 1, "label": "security"}, {"findings": None, "label": "tests"}],
+    )
+
+    rendered = render_results([complete, degraded])
+
+    assert rendered.index("complete") < rendered.index("degraded"), (
+        "identical findings, but half the degraded run's calls returned nothing"
+    )
+
+
+def test_the_completeness_factor_is_shown_not_just_applied() -> None:
+    """Baked invisibly into one number, a reader cannot tell a low score from a
+    run that barely executed."""
+    run = _with_calls(
+        raw("2026-01-01T00:00:00Z", "partial", True),
+        [{"findings": 1, "label": "security"}, {"findings": None, "label": "tests"}],
+    )
+
+    rendered = render_detailed_results(build_dashboard_data([run]))
+
+    assert "completeness" in rendered
+    assert "50.0%" in rendered
+
+
+def test_a_run_that_cannot_report_its_calls_is_marked_not_assumed_complete() -> None:
+    """None, not 100%: an unmeasured run must not read as a complete one."""
+    data = build_dashboard_data([raw("2026-01-01T00:00:00Z", "unmeasured", True)])
+    rendered = render_detailed_results(data)
+
+    assert "completeness" in rendered
+    assert data["runs"][0]["metrics"]["completeness"] is None
