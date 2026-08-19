@@ -8,6 +8,7 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | suite | profile | lgtmaybe | status | balanced F1 | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-08-18 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon | canonical-long-horizon | lgtmaybe 2.3.0 | complete | 0.0% | 50.0% | 20.8% | 16.0 | 61.0 | — | — | no | [raw](results/raw/20260818-213455-openai-compatible-nvidia-gemma-4-26b-a4b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-18 | openai-compatible | RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth | canonical-breadth | lgtmaybe 2.2.0 | complete | 48.5% | 44.3% | 51.6% | 32.0 | 31.0 | 11.1% | 98.5% | no | [raw](results/raw/20260818-185208-openai-compatible-redhatai-gemma-4-12b-it-fp8-dynamic.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-18 | openai-compatible | RedHatAI/gemma-4-12B-it-FP8-Dynamic | long-horizon | canonical-long-horizon | lgtmaybe 2.2.0 | complete | 40.5% | 37.5% | 63.2% | 12.0 | 7.0 | — | — | no | [raw](results/raw/20260818-125254-openai-compatible-redhatai-gemma-4-12b-it-fp8-dynamic.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-18 | openai-compatible | poolside/Laguna-XS-2.1-NVFP4 | long-horizon | canonical-long-horizon | lgtmaybe 2.2.0 | complete | 29.2% | 34.4% | 50.0% | 11.0 | 11.0 | — | — | no | [raw](results/raw/20260818-071529-openai-compatible-poolside-laguna-xs-2-1-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
@@ -85,6 +86,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-08-18 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | python-context-small-v1 | 75.0% | 85.7% | 7 | 54,414 | 625,854 | yes | 3993.4 |
+| 2026-08-18 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | python-context-medium-v1 | 50.0% | 57.1% | 7 | 193,468 | 682,037 | yes | 4759.1 |
+| 2026-08-18 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | python-context-large-v1 | 50.0% | 21.1% | 19 | 846,698 | 759,274 | yes | 4815.5 |
+| 2026-08-18 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | python-context-xlarge-v1 | 25.0% | 5.9% | 34 | 1,536,458 | 745,368 | yes | 4845.5 |
+| 2026-08-18 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | python-context-clean-large-v1 | — | 0.0% | 10 | 735,478 | 710,398 | yes | 4259.4 |
 | 2026-08-18 | openai-compatible | RedHatAI/gemma-4-12B-it-FP8-Dynamic | python-context-small-v1 | 62.5% | 83.3% | 6 | 97,095 | 255,000 | yes | 2483.8 |
 | 2026-08-18 | openai-compatible | RedHatAI/gemma-4-12B-it-FP8-Dynamic | python-context-medium-v1 | 37.5% | 37.5% | 8 | 233,591 | 327,681 | yes | 4301.1 |
 | 2026-08-18 | openai-compatible | RedHatAI/gemma-4-12B-it-FP8-Dynamic | python-context-large-v1 | 25.0% | 66.7% | 3 | 597,973 | 4,120 | no | 84.0 |
@@ -477,6 +483,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Onl
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.3.0 | complexity | 25.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.3.0 | correctness | 50.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.3.0 | deprecation | 75.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.3.0 | documentation | 25.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.3.0 | intent | 75.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.3.0 | performance | 0.0% |
+| nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon / canonical-long-horizon / lgtmaybe 2.3.0 | security | 100.0% |
 | RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | complexity | 0.0% |
 | RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | correctness | 85.7% |
 | RedHatAI/gemma-4-12B-it-FP8-Dynamic | breadth / canonical-breadth / lgtmaybe 2.2.0 | deprecation | 57.1% |
