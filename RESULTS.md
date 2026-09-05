@@ -8,6 +8,8 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Ran
 
 | date | provider | model | suite | profile | lgtmaybe | status | score | completeness | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-09-04 | openrouter | z-ai/glm-5.3-flash | breadth | canonical-breadth | lgtmaybe 2.7.0 | complete | 49.4% | 76.6% | 58.6% | 66.7% | 42.0 | 21.0 | 0.0% | 96.8% | no | [raw](results/raw/20260904-234226-openrouter-z-ai-glm-5-3-flash.json) | — | — |
+| 2026-09-04 | openrouter | z-ai/glm-5.3-flash | long-horizon | canonical-long-horizon | lgtmaybe 2.7.0 | complete | 27.5% | 43.2% | 87.5% | 59.6% | 28.0 | 19.0 | — | — | no | [raw](results/raw/20260904-234220-openrouter-z-ai-glm-5-3-flash.json) | — | — |
 | 2026-08-19 | openai-compatible | openai/gpt-oss-20b | breadth | canonical-breadth | lgtmaybe 2.3.0 | complete | 31.0% | 62.8% | 47.1% | 50.0% | 34.0 | 32.0 | 22.2% | 92.3% | no | [raw](results/raw/20260819-131633-openai-compatible-openai-gpt-oss-20b.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-19 | openai-compatible | openai/gpt-oss-20b | long-horizon | diagnostic-custom-v1 | lgtmaybe 2.3.0 | complete | 4.5% | 40.0% | 31.2% | 9.7% | 10.0 | 93.0 | — | — | no | [raw](results/raw/20260819-070031-openai-compatible-openai-gpt-oss-20b.json) | — | effort low; api base http://127.0.0.1:8000/v1; concurrency 2 |
 | 2026-08-18 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | long-horizon | canonical-long-horizon | lgtmaybe 2.3.0 | complete | 9.7% | 41.1% | 50.0% | 20.8% | 16.0 | 61.0 | — | — | no | [raw](results/raw/20260818-213455-openai-compatible-nvidia-gemma-4-26b-a4b-nvfp4.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
@@ -88,6 +90,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Ran
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-09-04 | openrouter | z-ai/glm-5.3-flash | python-context-small-v1 | 100.0% | 80.0% | 10 | 130,573 | 207,745 | yes | 689.2 |
+| 2026-09-04 | openrouter | z-ai/glm-5.3-flash | python-context-medium-v1 | 75.0% | 75.0% | 8 | 393,791 | 233,524 | yes | 672.3 |
+| 2026-09-04 | openrouter | z-ai/glm-5.3-flash | python-context-large-v1 | 75.0% | 54.5% | 11 | 977,446 | 199,686 | yes | 486.3 |
+| 2026-09-04 | openrouter | z-ai/glm-5.3-flash | python-context-xlarge-v1 | 100.0% | 80.0% | 10 | 1,647,461 | 170,187 | yes | 518.6 |
+| 2026-09-04 | openrouter | z-ai/glm-5.3-flash | python-context-clean-large-v1 | — | 0.0% | 8 | 811,225 | 124,096 | yes | 336.6 |
 | 2026-08-18 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | python-context-small-v1 | 75.0% | 85.7% | 7 | 54,414 | 625,854 | yes | 3993.4 |
 | 2026-08-18 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | python-context-medium-v1 | 50.0% | 57.1% | 7 | 193,468 | 682,037 | yes | 4759.1 |
 | 2026-08-18 | openai-compatible | nvidia/Gemma-4-26B-A4B-NVFP4 | python-context-large-v1 | 50.0% | 21.1% | 19 | 846,698 | 759,274 | yes | 4815.5 |
@@ -263,6 +270,13 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Ran
 
 | model | comparison key | language | recall |
 |---|---|---|---:|
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | dart | 60.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | go | 60.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | java | 50.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | javascript | 50.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | python | 50.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | rust | 60.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | typescript | 60.0% |
 | openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | dart | 50.0% |
 | openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | go | 50.0% |
 | openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | java | 60.0% |
@@ -492,6 +506,23 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Ran
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | complexity | 14.3% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | correctness | 100.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | deprecation | 57.1% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | documentation | 57.1% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | intent | 42.9% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | performance | 100.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | ponytail | 14.3% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | security | 100.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | spec | 0.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | tests | 85.7% |
+| z-ai/glm-5.3-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.7.0 | complexity | 100.0% |
+| z-ai/glm-5.3-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.7.0 | correctness | 87.5% |
+| z-ai/glm-5.3-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.7.0 | deprecation | 75.0% |
+| z-ai/glm-5.3-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.7.0 | documentation | 100.0% |
+| z-ai/glm-5.3-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.7.0 | intent | 100.0% |
+| z-ai/glm-5.3-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.7.0 | performance | 50.0% |
+| z-ai/glm-5.3-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.7.0 | security | 100.0% |
 | openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | complexity | 0.0% |
 | openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | correctness | 85.7% |
 | openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | deprecation | 57.1% |
@@ -1083,6 +1114,11 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Ran
 
 | model | comparison key | class | median count |
 |---|---|---|---:|
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | adjudicated | 0.0 |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | clean_case | 10.0 |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | duplicate | 5.0 |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | forbidden | 0.0 |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | unexpected_near | 7.0 |
 | openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | adjudicated | 0.0 |
 | openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | clean_case | 11.0 |
 | openai/gpt-oss-20b | breadth / canonical-breadth / lgtmaybe 2.3.0 | duplicate | 3.0 |
