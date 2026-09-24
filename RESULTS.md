@@ -8,6 +8,28 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Ran
 
 | date | provider | model | suite | profile | lgtmaybe | status | score | completeness | balanced recall | precision | true positives | false positives | clean pass | adjudication | audit | raw | traces | settings |
 |---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| 2026-09-24 | openrouter | moonshotai/kimi-k3 | long-horizon | canonical-long-horizon | lgtmaybe 2.8.5 | complete | 30.4% | 70.8% | 100.0% | 37.6% | 32.0 | 53.0 | — | — | no | [raw](results/raw/20260924-060040-openrouter-moonshotai-kimi-k3.json) | — | — |
+| 2026-09-24 | openrouter | z-ai/glm-5.3 | long-horizon | canonical-long-horizon | lgtmaybe 2.8.5 | complete | 8.1% | 54.0% | 81.2% | 12.4% | 26.0 | 183.0 | — | — | no | [raw](results/raw/20260924-050416-openrouter-z-ai-glm-5-3.json) | — | — |
+| 2026-09-24 | openrouter | qwen/qwen3.8-flash | long-horizon | canonical-long-horizon | lgtmaybe 2.8.5 | complete | 28.3% | 46.2% | 78.1% | 58.1% | 25.0 | 18.0 | — | — | no | [raw](results/raw/20260924-050416-openrouter-qwen-qwen3-8-flash.json) | — | — |
+| 2026-09-24 | openrouter | z-ai/glm-5.3-flash | long-horizon | canonical-long-horizon | lgtmaybe 2.8.5 | complete | 24.3% | 48.1% | 59.4% | 48.7% | 19.0 | 20.0 | — | — | no | [raw](results/raw/20260924-040343-openrouter-z-ai-glm-5-3-flash.json) | — | — |
+| 2026-09-24 | openrouter | x-ai/grok-4.7 | long-horizon | canonical-long-horizon | lgtmaybe 2.8.5 | complete | 21.9% | 55.1% | 65.6% | 36.2% | 21.0 | 37.0 | — | — | no | [raw](results/raw/20260924-040343-openrouter-x-ai-grok-4-7.json) | — | — |
+| 2026-09-24 | openrouter | xiaomi/mimo-v2.6-flash | long-horizon | canonical-long-horizon | lgtmaybe 2.8.5 | complete | 21.5% | 44.9% | 71.9% | 44.2% | 23.0 | 29.0 | — | — | no | [raw](results/raw/20260924-032242-openrouter-xiaomi-mimo-v2-6-flash.json) | — | — |
+| 2026-09-24 | openrouter | google/gemini-3.8-flash | long-horizon | canonical-long-horizon | lgtmaybe 2.8.5 | complete | 71.4% | 91.8% | 87.5% | 75.7% | 28.0 | 9.0 | — | — | no | [raw](results/raw/20260924-032242-openrouter-google-gemini-3-8-flash.json) | — | — |
+| 2026-09-24 | openrouter | openai/gpt-6-astra | long-horizon | canonical-long-horizon | lgtmaybe 2.8.5 | complete | 25.5% | 60.0% | 56.2% | 40.0% | 18.0 | 27.0 | — | — | no | [raw](results/raw/20260924-031155-openrouter-openai-gpt-6-astra.json) | — | — |
+| 2026-09-24 | openrouter | anthropic/claude-opus-5.5 | long-horizon | canonical-long-horizon | lgtmaybe 2.8.5 | complete | 0.0% | 97.8% | 0.0% | 100.0% | 0.0 | 0.0 | — | — | no | [raw](results/raw/20260924-031155-openrouter-anthropic-claude-opus-5-5.json) | — | — |
+| 2026-09-24 | openrouter | openai/gpt-6-sol | long-horizon | canonical-long-horizon | lgtmaybe 2.8.5 | complete | 30.6% | 90.0% | 78.1% | 29.8% | 25.0 | 59.0 | — | — | no | [raw](results/raw/20260924-030241-openrouter-openai-gpt-6-sol.json) | — | — |
+| 2026-09-24 | openrouter | openai/gpt-6-luna | long-horizon | canonical-long-horizon | lgtmaybe 2.8.5 | complete | 64.6% | 90.0% | 84.4% | 69.2% | 27.0 | 12.0 | — | — | no | [raw](results/raw/20260924-030241-openrouter-openai-gpt-6-luna.json) | — | — |
+| 2026-09-24 | openrouter | qwen/qwen3.8-flash | breadth | canonical-breadth | lgtmaybe 2.8.5 | complete | 45.4% | 75.3% | 62.9% | 59.5% | 46.0 | 32.0 | 11.1% | 98.6% | no | [raw](results/raw/20260924-025256-openrouter-qwen-qwen3-8-flash.json) | — | — |
+| 2026-09-24 | openrouter | moonshotai/kimi-k3 | breadth | canonical-breadth | lgtmaybe 2.8.5 | complete | 52.0% | 80.8% | 65.7% | 63.3% | 48.0 | 27.0 | 0.0% | 98.6% | no | [raw](results/raw/20260924-025256-openrouter-moonshotai-kimi-k3.json) | — | — |
+| 2026-09-24 | openrouter | z-ai/glm-5.3-flash | breadth | canonical-breadth | lgtmaybe 2.8.5 | complete | 55.1% | 80.0% | 62.9% | 70.0% | 45.0 | 21.0 | 11.1% | 98.5% | no | [raw](results/raw/20260924-023758-openrouter-z-ai-glm-5-3-flash.json) | — | — |
+| 2026-09-24 | openrouter | z-ai/glm-5.3 | breadth | canonical-breadth | lgtmaybe 2.8.5 | complete | 49.9% | 74.9% | 64.3% | 67.6% | 46.0 | 22.0 | 11.1% | 98.6% | no | [raw](results/raw/20260924-023758-openrouter-z-ai-glm-5-3.json) | — | — |
+| 2026-09-24 | openrouter | xiaomi/mimo-v2.6-flash | breadth | canonical-breadth | lgtmaybe 2.8.5 | complete | 46.2% | 75.7% | 62.9% | 61.3% | 46.0 | 29.0 | 0.0% | 98.7% | no | [raw](results/raw/20260924-022726-openrouter-xiaomi-mimo-v2-6-flash.json) | — | — |
+| 2026-09-24 | openrouter | x-ai/grok-4.7 | breadth | canonical-breadth | lgtmaybe 2.8.5 | complete | 55.7% | 80.8% | 62.9% | 70.1% | 46.0 | 20.0 | 11.1% | 98.5% | no | [raw](results/raw/20260924-022726-openrouter-x-ai-grok-4-7.json) | — | — |
+| 2026-09-24 | openrouter | google/gemini-3.8-flash | breadth | canonical-breadth | lgtmaybe 2.8.5 | complete | 60.9% | 80.8% | 62.9% | 79.3% | 46.0 | 12.0 | 22.2% | 100.0% | no | [raw](results/raw/20260924-022143-openrouter-google-gemini-3-8-flash.json) | — | — |
+| 2026-09-24 | openrouter | anthropic/claude-opus-5.5 | breadth | canonical-breadth | lgtmaybe 2.8.5 | complete | 6.0% | 99.3% | 1.4% | 100.0% | 1.0 | 0.0 | 100.0% | 100.0% | no | [raw](results/raw/20260924-022143-openrouter-anthropic-claude-opus-5-5.json) | — | — |
+| 2026-09-24 | openrouter | openai/gpt-6-sol | breadth | canonical-breadth | lgtmaybe 2.8.5 | complete | 50.0% | 80.2% | 60.0% | 62.9% | 44.0 | 26.0 | 11.1% | 100.0% | no | [raw](results/raw/20260924-020228-openrouter-openai-gpt-6-sol.json) | — | — |
+| 2026-09-24 | openrouter | openai/gpt-6-luna | breadth | canonical-breadth | lgtmaybe 2.8.5 | complete | 50.0% | 80.8% | 42.9% | 70.5% | 31.0 | 13.0 | 22.2% | 98.0% | no | [raw](results/raw/20260924-020228-openrouter-openai-gpt-6-luna.json) | — | — |
+| 2026-09-24 | openrouter | openai/gpt-6-astra | breadth | canonical-breadth | lgtmaybe 2.8.5 | complete | 27.7% | 45.3% | 44.3% | 66.7% | 32.0 | 16.0 | 44.4% | 100.0% | no | [raw](results/raw/20260924-020228-openrouter-openai-gpt-6-astra.json) | — | — |
 | 2026-09-04 | openrouter | z-ai/glm-5.3-flash | breadth | canonical-breadth | lgtmaybe 2.7.0 | complete | 49.4% | 76.6% | 58.6% | 66.7% | 42.0 | 21.0 | 0.0% | 96.8% | no | [raw](results/raw/20260904-234226-openrouter-z-ai-glm-5-3-flash.json) | — | — |
 | 2026-09-04 | openrouter | z-ai/glm-5.3-flash | long-horizon | canonical-long-horizon | lgtmaybe 2.7.0 | complete | 27.5% | 43.2% | 87.5% | 59.6% | 28.0 | 19.0 | — | — | no | [raw](results/raw/20260904-234220-openrouter-z-ai-glm-5-3-flash.json) | — | — |
 | 2026-08-19 | openai-compatible | openai/gpt-oss-20b | breadth | canonical-breadth | lgtmaybe 2.3.0 | complete | 31.0% | 62.8% | 47.1% | 50.0% | 34.0 | 32.0 | 22.2% | 92.3% | no | [raw](results/raw/20260819-131633-openai-compatible-openai-gpt-oss-20b.json) | — | api base http://127.0.0.1:8000/v1; concurrency 2 |
@@ -90,6 +112,61 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Ran
 
 | date | provider | model | case | recall | precision | findings | input tokens | output tokens | truncated | wall (s) |
 |---|---|---|---|---:|---:|---:|---:|---:|---|---:|
+| 2026-09-24 | openrouter | moonshotai/kimi-k3 | python-context-small-v1 | 100.0% | 34.8% | 23 | 92,666 | 112,567 | yes | 282.1 |
+| 2026-09-24 | openrouter | moonshotai/kimi-k3 | python-context-medium-v1 | 100.0% | 61.5% | 13 | 313,136 | 133,766 | yes | 306.2 |
+| 2026-09-24 | openrouter | moonshotai/kimi-k3 | python-context-large-v1 | 100.0% | 42.1% | 19 | 718,342 | 127,234 | yes | 316.1 |
+| 2026-09-24 | openrouter | moonshotai/kimi-k3 | python-context-xlarge-v1 | 100.0% | 50.0% | 16 | 1,176,598 | 120,298 | yes | 297.3 |
+| 2026-09-24 | openrouter | moonshotai/kimi-k3 | python-context-clean-large-v1 | — | 0.0% | 14 | 610,968 | 111,304 | yes | 258.6 |
+| 2026-09-24 | openrouter | z-ai/glm-5.3 | python-context-small-v1 | 87.5% | 22.6% | 31 | 73,139 | 22,810 | no | 23.0 |
+| 2026-09-24 | openrouter | z-ai/glm-5.3 | python-context-medium-v1 | 87.5% | 12.3% | 57 | 363,995 | 219,432 | yes | 261.6 |
+| 2026-09-24 | openrouter | z-ai/glm-5.3 | python-context-large-v1 | 62.5% | 14.3% | 35 | 806,056 | 190,171 | yes | 327.3 |
+| 2026-09-24 | openrouter | z-ai/glm-5.3 | python-context-xlarge-v1 | 87.5% | 8.1% | 86 | 1,480,961 | 188,347 | yes | 227.8 |
+| 2026-09-24 | openrouter | z-ai/glm-5.3 | python-context-clean-large-v1 | — | 100.0% | 0 | 609,169 | 82,139 | yes | 119.7 |
+| 2026-09-24 | openrouter | qwen/qwen3.8-flash | python-context-small-v1 | 75.0% | 66.7% | 9 | 182,344 | 303,885 | yes | 1185.7 |
+| 2026-09-24 | openrouter | qwen/qwen3.8-flash | python-context-medium-v1 | 75.0% | 75.0% | 8 | 456,423 | 255,604 | yes | 1075.8 |
+| 2026-09-24 | openrouter | qwen/qwen3.8-flash | python-context-large-v1 | 87.5% | 63.6% | 11 | 720,230 | 134,089 | yes | 698.2 |
+| 2026-09-24 | openrouter | qwen/qwen3.8-flash | python-context-xlarge-v1 | 75.0% | 66.7% | 9 | 2,023,878 | 214,978 | yes | 868.8 |
+| 2026-09-24 | openrouter | qwen/qwen3.8-flash | python-context-clean-large-v1 | — | 0.0% | 6 | 803,995 | 145,190 | yes | 799.1 |
+| 2026-09-24 | openrouter | z-ai/glm-5.3-flash | python-context-small-v1 | 62.5% | 50.0% | 10 | 128,351 | 184,100 | yes | 595.6 |
+| 2026-09-24 | openrouter | z-ai/glm-5.3-flash | python-context-medium-v1 | 62.5% | 71.4% | 7 | 493,768 | 430,112 | yes | 755.5 |
+| 2026-09-24 | openrouter | z-ai/glm-5.3-flash | python-context-large-v1 | 62.5% | 62.5% | 8 | 606,797 | 109,030 | yes | 324.6 |
+| 2026-09-24 | openrouter | z-ai/glm-5.3-flash | python-context-xlarge-v1 | 50.0% | 28.6% | 14 | 1,843,532 | 242,578 | yes | 742.4 |
+| 2026-09-24 | openrouter | z-ai/glm-5.3-flash | python-context-clean-large-v1 | — | 100.0% | 0 | 792,772 | 133,887 | yes | 218.7 |
+| 2026-09-24 | openrouter | x-ai/grok-4.7 | python-context-small-v1 | 75.0% | 40.0% | 15 | 154,961 | 283,180 | yes | 700.3 |
+| 2026-09-24 | openrouter | x-ai/grok-4.7 | python-context-medium-v1 | 75.0% | 35.3% | 17 | 404,876 | 243,069 | yes | 864.1 |
+| 2026-09-24 | openrouter | x-ai/grok-4.7 | python-context-large-v1 | 50.0% | 26.7% | 15 | 801,918 | 176,529 | yes | 618.7 |
+| 2026-09-24 | openrouter | x-ai/grok-4.7 | python-context-xlarge-v1 | 62.5% | 45.5% | 11 | 1,957,452 | 274,217 | yes | 1298.9 |
+| 2026-09-24 | openrouter | x-ai/grok-4.7 | python-context-clean-large-v1 | — | 100.0% | 0 | 575,731 | 34,056 | no | 168.1 |
+| 2026-09-24 | openrouter | xiaomi/mimo-v2.6-flash | python-context-small-v1 | 75.0% | 42.9% | 14 | 105,740 | 148,218 | yes | 734.2 |
+| 2026-09-24 | openrouter | xiaomi/mimo-v2.6-flash | python-context-medium-v1 | 87.5% | 77.8% | 9 | 405,160 | 223,341 | yes | 841.2 |
+| 2026-09-24 | openrouter | xiaomi/mimo-v2.6-flash | python-context-large-v1 | 75.0% | 66.7% | 9 | 1,067,016 | 237,412 | yes | 1307.9 |
+| 2026-09-24 | openrouter | xiaomi/mimo-v2.6-flash | python-context-xlarge-v1 | 50.0% | 66.7% | 6 | 2,165,591 | 264,651 | yes | 1022.1 |
+| 2026-09-24 | openrouter | xiaomi/mimo-v2.6-flash | python-context-clean-large-v1 | — | 0.0% | 14 | 782,674 | 160,915 | yes | 1004.9 |
+| 2026-09-24 | openrouter | google/gemini-3.8-flash | python-context-small-v1 | 87.5% | 70.0% | 10 | 84,611 | 80,595 | no | 150.1 |
+| 2026-09-24 | openrouter | google/gemini-3.8-flash | python-context-medium-v1 | 75.0% | 66.7% | 9 | 248,951 | 73,211 | no | 145.7 |
+| 2026-09-24 | openrouter | google/gemini-3.8-flash | python-context-large-v1 | 100.0% | 100.0% | 8 | 615,957 | 80,486 | no | 191.4 |
+| 2026-09-24 | openrouter | google/gemini-3.8-flash | python-context-xlarge-v1 | 87.5% | 70.0% | 10 | 1,179,866 | 93,673 | no | 250.5 |
+| 2026-09-24 | openrouter | google/gemini-3.8-flash | python-context-clean-large-v1 | — | 100.0% | 0 | 550,269 | 20,897 | no | 60.8 |
+| 2026-09-24 | openrouter | openai/gpt-6-astra | python-context-small-v1 | 62.5% | 38.5% | 13 | 115,374 | 94,803 | yes | 420.5 |
+| 2026-09-24 | openrouter | openai/gpt-6-astra | python-context-medium-v1 | 62.5% | 41.7% | 12 | 285,915 | 118,707 | yes | 869.6 |
+| 2026-09-24 | openrouter | openai/gpt-6-astra | python-context-large-v1 | 50.0% | 36.4% | 11 | 675,023 | 129,723 | yes | 831.9 |
+| 2026-09-24 | openrouter | openai/gpt-6-astra | python-context-xlarge-v1 | 50.0% | 50.0% | 8 | 1,180,377 | 63,138 | yes | 664.2 |
+| 2026-09-24 | openrouter | openai/gpt-6-astra | python-context-clean-large-v1 | — | 0.0% | 1 | 680,510 | 103,974 | yes | 682.3 |
+| 2026-09-24 | openrouter | anthropic/claude-opus-5.5 | python-context-small-v1 | 0.0% | 100.0% | 0 | 102,561 | 20,013 | no | 45.8 |
+| 2026-09-24 | openrouter | anthropic/claude-opus-5.5 | python-context-medium-v1 | 0.0% | 100.0% | 0 | 292,740 | 25,418 | no | 65.5 |
+| 2026-09-24 | openrouter | anthropic/claude-opus-5.5 | python-context-large-v1 | 0.0% | 100.0% | 0 | 733,704 | 27,799 | no | 68.7 |
+| 2026-09-24 | openrouter | anthropic/claude-opus-5.5 | python-context-xlarge-v1 | 0.0% | 100.0% | 0 | 1,427,082 | 31,089 | no | 72.6 |
+| 2026-09-24 | openrouter | anthropic/claude-opus-5.5 | python-context-clean-large-v1 | — | 100.0% | 0 | 837,984 | 8,742 | no | 44.5 |
+| 2026-09-24 | openrouter | openai/gpt-6-sol | python-context-small-v1 | 62.5% | 26.3% | 19 | 73,284 | 23,674 | no | 106.9 |
+| 2026-09-24 | openrouter | openai/gpt-6-sol | python-context-medium-v1 | 87.5% | 53.8% | 13 | 214,934 | 27,527 | no | 116.4 |
+| 2026-09-24 | openrouter | openai/gpt-6-sol | python-context-large-v1 | 75.0% | 31.6% | 19 | 543,256 | 29,165 | no | 112.1 |
+| 2026-09-24 | openrouter | openai/gpt-6-sol | python-context-xlarge-v1 | 87.5% | 38.9% | 18 | 978,103 | 26,388 | no | 122.8 |
+| 2026-09-24 | openrouter | openai/gpt-6-sol | python-context-clean-large-v1 | — | 0.0% | 15 | 551,215 | 16,923 | no | 93.1 |
+| 2026-09-24 | openrouter | openai/gpt-6-luna | python-context-small-v1 | 75.0% | 60.0% | 10 | 73,912 | 28,781 | no | 95.8 |
+| 2026-09-24 | openrouter | openai/gpt-6-luna | python-context-medium-v1 | 87.5% | 70.0% | 10 | 213,407 | 33,220 | no | 96.6 |
+| 2026-09-24 | openrouter | openai/gpt-6-luna | python-context-large-v1 | 87.5% | 87.5% | 8 | 511,461 | 29,355 | no | 100.3 |
+| 2026-09-24 | openrouter | openai/gpt-6-luna | python-context-xlarge-v1 | 87.5% | 70.0% | 10 | 978,171 | 38,280 | no | 91.4 |
+| 2026-09-24 | openrouter | openai/gpt-6-luna | python-context-clean-large-v1 | — | 0.0% | 1 | 511,282 | 13,796 | no | 55.9 |
 | 2026-09-04 | openrouter | z-ai/glm-5.3-flash | python-context-small-v1 | 100.0% | 80.0% | 10 | 130,573 | 207,745 | yes | 689.2 |
 | 2026-09-04 | openrouter | z-ai/glm-5.3-flash | python-context-medium-v1 | 75.0% | 75.0% | 8 | 393,791 | 233,524 | yes | 672.3 |
 | 2026-09-04 | openrouter | z-ai/glm-5.3-flash | python-context-large-v1 | 75.0% | 54.5% | 11 | 977,446 | 199,686 | yes | 486.3 |
@@ -270,6 +347,83 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Ran
 
 | model | comparison key | language | recall |
 |---|---|---|---:|
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | dart | 80.0% |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | go | 70.0% |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | java | 70.0% |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | javascript | 60.0% |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | python | 60.0% |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | rust | 50.0% |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | typescript | 50.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | dart | 60.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | go | 70.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | java | 60.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | javascript | 70.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | python | 70.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | rust | 60.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | typescript | 70.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | dart | 60.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | go | 60.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | java | 60.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | javascript | 50.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | python | 70.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | rust | 70.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | typescript | 60.0% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | dart | 60.0% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | go | 80.0% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | java | 70.0% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | javascript | 60.0% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | python | 70.0% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | rust | 70.0% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | typescript | 70.0% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | dart | 80.0% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | go | 70.0% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | java | 60.0% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | javascript | 60.0% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | python | 60.0% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | rust | 60.0% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | typescript | 70.0% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | dart | 70.0% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | go | 70.0% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | java | 70.0% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | javascript | 60.0% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | python | 60.0% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | rust | 60.0% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | typescript | 50.0% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | dart | 70.0% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | go | 70.0% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | java | 60.0% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | javascript | 60.0% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | python | 60.0% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | rust | 60.0% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | typescript | 70.0% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | dart | 0.0% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | go | 0.0% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | java | 0.0% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | javascript | 0.0% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | python | 0.0% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | rust | 0.0% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | typescript | 0.0% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | dart | 70.0% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | go | 60.0% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | java | 50.0% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | javascript | 50.0% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | python | 60.0% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | rust | 70.0% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | typescript | 60.0% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | dart | 60.0% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | go | 40.0% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | java | 40.0% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | javascript | 30.0% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | python | 40.0% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | rust | 40.0% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | typescript | 40.0% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | dart | 60.0% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | go | 50.0% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | java | 40.0% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | javascript | 50.0% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | python | 20.0% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | rust | 40.0% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | typescript | 40.0% |
 | z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | dart | 60.0% |
 | z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | go | 60.0% |
 | z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | java | 50.0% |
@@ -506,6 +660,193 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Ran
 
 | model | comparison key | lens | recall |
 |---|---|---|---:|
+| moonshotai/kimi-k3 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | complexity | 100.0% |
+| moonshotai/kimi-k3 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | correctness | 100.0% |
+| moonshotai/kimi-k3 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | deprecation | 100.0% |
+| moonshotai/kimi-k3 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | documentation | 100.0% |
+| moonshotai/kimi-k3 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | intent | 100.0% |
+| moonshotai/kimi-k3 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | performance | 100.0% |
+| moonshotai/kimi-k3 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | security | 100.0% |
+| z-ai/glm-5.3 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | complexity | 50.0% |
+| z-ai/glm-5.3 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | correctness | 100.0% |
+| z-ai/glm-5.3 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | deprecation | 75.0% |
+| z-ai/glm-5.3 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | documentation | 75.0% |
+| z-ai/glm-5.3 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | intent | 100.0% |
+| z-ai/glm-5.3 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | performance | 50.0% |
+| z-ai/glm-5.3 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | security | 100.0% |
+| qwen/qwen3.8-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | complexity | 25.0% |
+| qwen/qwen3.8-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | correctness | 100.0% |
+| qwen/qwen3.8-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | deprecation | 100.0% |
+| qwen/qwen3.8-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | documentation | 100.0% |
+| qwen/qwen3.8-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | intent | 100.0% |
+| qwen/qwen3.8-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | performance | 0.0% |
+| qwen/qwen3.8-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | security | 100.0% |
+| z-ai/glm-5.3-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | complexity | 50.0% |
+| z-ai/glm-5.3-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | correctness | 62.5% |
+| z-ai/glm-5.3-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | deprecation | 75.0% |
+| z-ai/glm-5.3-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | documentation | 25.0% |
+| z-ai/glm-5.3-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | intent | 100.0% |
+| z-ai/glm-5.3-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | performance | 0.0% |
+| z-ai/glm-5.3-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | security | 100.0% |
+| x-ai/grok-4.7 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | complexity | 50.0% |
+| x-ai/grok-4.7 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | correctness | 37.5% |
+| x-ai/grok-4.7 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | deprecation | 0.0% |
+| x-ai/grok-4.7 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | documentation | 100.0% |
+| x-ai/grok-4.7 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | intent | 100.0% |
+| x-ai/grok-4.7 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | performance | 100.0% |
+| x-ai/grok-4.7 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | security | 100.0% |
+| xiaomi/mimo-v2.6-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | complexity | 50.0% |
+| xiaomi/mimo-v2.6-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | correctness | 87.5% |
+| xiaomi/mimo-v2.6-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | deprecation | 75.0% |
+| xiaomi/mimo-v2.6-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | documentation | 75.0% |
+| xiaomi/mimo-v2.6-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | intent | 100.0% |
+| xiaomi/mimo-v2.6-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | performance | 0.0% |
+| xiaomi/mimo-v2.6-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | security | 100.0% |
+| google/gemini-3.8-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | complexity | 100.0% |
+| google/gemini-3.8-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | correctness | 87.5% |
+| google/gemini-3.8-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | deprecation | 100.0% |
+| google/gemini-3.8-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | documentation | 100.0% |
+| google/gemini-3.8-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | intent | 100.0% |
+| google/gemini-3.8-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | performance | 25.0% |
+| google/gemini-3.8-flash | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | security | 100.0% |
+| openai/gpt-6-astra | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | complexity | 100.0% |
+| openai/gpt-6-astra | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | correctness | 0.0% |
+| openai/gpt-6-astra | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | deprecation | 0.0% |
+| openai/gpt-6-astra | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | documentation | 50.0% |
+| openai/gpt-6-astra | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | intent | 100.0% |
+| openai/gpt-6-astra | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | performance | 100.0% |
+| openai/gpt-6-astra | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | security | 100.0% |
+| anthropic/claude-opus-5.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | complexity | 0.0% |
+| anthropic/claude-opus-5.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | correctness | 0.0% |
+| anthropic/claude-opus-5.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | deprecation | 0.0% |
+| anthropic/claude-opus-5.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | documentation | 0.0% |
+| anthropic/claude-opus-5.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | intent | 0.0% |
+| anthropic/claude-opus-5.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | performance | 0.0% |
+| anthropic/claude-opus-5.5 | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | security | 0.0% |
+| openai/gpt-6-sol | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | complexity | 75.0% |
+| openai/gpt-6-sol | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | correctness | 50.0% |
+| openai/gpt-6-sol | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | deprecation | 75.0% |
+| openai/gpt-6-sol | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | documentation | 100.0% |
+| openai/gpt-6-sol | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | intent | 100.0% |
+| openai/gpt-6-sol | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | performance | 75.0% |
+| openai/gpt-6-sol | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | security | 100.0% |
+| openai/gpt-6-luna | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | complexity | 25.0% |
+| openai/gpt-6-luna | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | correctness | 87.5% |
+| openai/gpt-6-luna | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | deprecation | 75.0% |
+| openai/gpt-6-luna | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | documentation | 100.0% |
+| openai/gpt-6-luna | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | intent | 100.0% |
+| openai/gpt-6-luna | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | performance | 100.0% |
+| openai/gpt-6-luna | long-horizon / canonical-long-horizon / lgtmaybe 2.8.5 | security | 100.0% |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | complexity | 14.3% |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | correctness | 85.7% |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | deprecation | 71.4% |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | documentation | 57.1% |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | intent | 42.9% |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | performance | 100.0% |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | ponytail | 42.9% |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | security | 100.0% |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | spec | 14.3% |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | tests | 85.7% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | complexity | 14.3% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | correctness | 100.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | deprecation | 71.4% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | documentation | 85.7% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | intent | 28.6% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | performance | 100.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | ponytail | 100.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | security | 100.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | spec | 0.0% |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | tests | 57.1% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | complexity | 28.6% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | correctness | 100.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | deprecation | 57.1% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | documentation | 85.7% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | intent | 42.9% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | performance | 85.7% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | ponytail | 42.9% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | security | 100.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | spec | 0.0% |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | tests | 57.1% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | complexity | 28.6% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | correctness | 100.0% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | deprecation | 85.7% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | documentation | 85.7% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | intent | 28.6% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | performance | 100.0% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | ponytail | 42.9% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | security | 100.0% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | spec | 0.0% |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | tests | 57.1% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | complexity | 14.3% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | correctness | 85.7% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | deprecation | 71.4% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | documentation | 85.7% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | intent | 42.9% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | performance | 85.7% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | ponytail | 57.1% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | security | 100.0% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | spec | 14.3% |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | tests | 85.7% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | complexity | 0.0% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | correctness | 85.7% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | deprecation | 71.4% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | documentation | 85.7% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | intent | 42.9% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | performance | 85.7% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | ponytail | 100.0% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | security | 100.0% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | spec | 0.0% |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | tests | 71.4% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | complexity | 0.0% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | correctness | 57.1% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | deprecation | 85.7% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | documentation | 85.7% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | intent | 28.6% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | performance | 100.0% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | ponytail | 100.0% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | security | 100.0% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | spec | 0.0% |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | tests | 71.4% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | complexity | 0.0% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | correctness | 0.0% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | deprecation | 0.0% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | documentation | 0.0% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | intent | 0.0% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | performance | 0.0% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | ponytail | 0.0% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | security | 0.0% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | spec | 0.0% |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | tests | 0.0% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | complexity | 14.3% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | correctness | 85.7% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | deprecation | 42.9% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | documentation | 71.4% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | intent | 57.1% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | performance | 85.7% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | ponytail | 71.4% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | security | 85.7% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | spec | 14.3% |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | tests | 57.1% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | complexity | 0.0% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | correctness | 71.4% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | deprecation | 42.9% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | documentation | 57.1% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | intent | 42.9% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | performance | 57.1% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | ponytail | 28.6% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | security | 85.7% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | spec | 28.6% |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | tests | 0.0% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | complexity | 0.0% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | correctness | 100.0% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | deprecation | 0.0% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | documentation | 71.4% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | intent | 71.4% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | performance | 14.3% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | ponytail | 57.1% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | security | 71.4% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | spec | 0.0% |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | tests | 42.9% |
 | z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | complexity | 14.3% |
 | z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | correctness | 100.0% |
 | z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | deprecation | 57.1% |
@@ -1114,6 +1455,61 @@ Canonical, diagnostic, focused, and legacy completed runs are retained here. Ran
 
 | model | comparison key | class | median count |
 |---|---|---|---:|
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | adjudicated | 0.0 |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | clean_case | 10.0 |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | duplicate | 10.0 |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | forbidden | 0.0 |
+| qwen/qwen3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | unexpected_near | 6.0 |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | adjudicated | 0.0 |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | clean_case | 12.0 |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | duplicate | 7.0 |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | forbidden | 0.0 |
+| moonshotai/kimi-k3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | unexpected_near | 8.0 |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | adjudicated | 0.0 |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | clean_case | 10.0 |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | duplicate | 4.0 |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | forbidden | 0.0 |
+| z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | unexpected_near | 7.0 |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | adjudicated | 0.0 |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | clean_case | 10.0 |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | duplicate | 8.0 |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | forbidden | 0.0 |
+| z-ai/glm-5.3 | breadth / canonical-breadth / lgtmaybe 2.8.5 | unexpected_near | 4.0 |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | adjudicated | 0.0 |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | clean_case | 13.0 |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | duplicate | 8.0 |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | forbidden | 0.0 |
+| xiaomi/mimo-v2.6-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | unexpected_near | 7.0 |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | adjudicated | 0.0 |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | clean_case | 11.0 |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | duplicate | 2.0 |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | forbidden | 0.0 |
+| x-ai/grok-4.7 | breadth / canonical-breadth / lgtmaybe 2.8.5 | unexpected_near | 6.0 |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | adjudicated | 0.0 |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | clean_case | 7.0 |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | duplicate | 1.0 |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | forbidden | 0.0 |
+| google/gemini-3.8-flash | breadth / canonical-breadth / lgtmaybe 2.8.5 | unexpected_near | 4.0 |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | adjudicated | 0.0 |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | clean_case | 0.0 |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | duplicate | 0.0 |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | forbidden | 0.0 |
+| anthropic/claude-opus-5.5 | breadth / canonical-breadth / lgtmaybe 2.8.5 | unexpected_near | 0.0 |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | adjudicated | 0.0 |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | clean_case | 9.0 |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | duplicate | 5.0 |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | forbidden | 0.0 |
+| openai/gpt-6-sol | breadth / canonical-breadth / lgtmaybe 2.8.5 | unexpected_near | 12.0 |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | adjudicated | 0.0 |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | clean_case | 7.0 |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | duplicate | 1.0 |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | forbidden | 0.0 |
+| openai/gpt-6-luna | breadth / canonical-breadth / lgtmaybe 2.8.5 | unexpected_near | 6.0 |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | adjudicated | 0.0 |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | clean_case | 5.0 |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | duplicate | 2.0 |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | forbidden | 0.0 |
+| openai/gpt-6-astra | breadth / canonical-breadth / lgtmaybe 2.8.5 | unexpected_near | 11.0 |
 | z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | adjudicated | 0.0 |
 | z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | clean_case | 10.0 |
 | z-ai/glm-5.3-flash | breadth / canonical-breadth / lgtmaybe 2.7.0 | duplicate | 5.0 |

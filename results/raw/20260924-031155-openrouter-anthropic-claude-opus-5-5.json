@@ -1,0 +1,1293 @@
+{
+  "configuration": {
+    "api_base": null,
+    "audit_available": false,
+    "base_profile": "canonical-long-horizon",
+    "cases": [
+      "python-context-small-v1",
+      "python-context-medium-v1",
+      "python-context-large-v1",
+      "python-context-xlarge-v1",
+      "python-context-clean-large-v1"
+    ],
+    "concurrency": 6,
+    "diagnostic_overrides": [],
+    "full_corpus": true,
+    "max_input_tokens": 100000,
+    "max_tokens": null,
+    "mid_review_retrieval": false,
+    "model": "anthropic/claude-opus-5.5",
+    "preset": "full",
+    "profile": "canonical-long-horizon",
+    "profile_canonical": false,
+    "profile_schema_version": 1,
+    "provider": "openrouter",
+    "reasoning_effort": null,
+    "recursive": true,
+    "reflect": true,
+    "repeats": 1,
+    "resolved_profile": {
+      "base_profile_id": "canonical-long-horizon",
+      "canonical": false,
+      "diagnostic_overrides": [],
+      "id": "canonical-long-horizon",
+      "max_input_tokens": 100000,
+      "max_tokens": null,
+      "mid_review_retrieval": false,
+      "preset": "full",
+      "reasoning_effort": null,
+      "recursive": true,
+      "reflect": true,
+      "repeats": 1,
+      "schema_version": 1,
+      "spec_review": true,
+      "static_analysis": false
+    },
+    "spec_review": true,
+    "static_analysis": false,
+    "suite": "long-horizon",
+    "timeout": 7200
+  },
+  "lgtmaybe_version": "lgtmaybe 2.8.5",
+  "observations": [
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 10511,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 5.728217291994952,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 11876,
+          "label": "security",
+          "output_tokens": 398,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 10511,
+          "elapsed_seconds": 4.78106295800535,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 11296,
+          "label": "deprecation",
+          "output_tokens": 318,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 10511,
+          "elapsed_seconds": 14.509572625000146,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 11065,
+          "label": "documentation",
+          "output_tokens": 1394,
+          "reasoning_tokens": 799,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 10511,
+          "elapsed_seconds": 20.14730054100073,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 11360,
+          "label": "performance",
+          "output_tokens": 2399,
+          "reasoning_tokens": 1265,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 10511,
+          "elapsed_seconds": 21.51232537499891,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 11251,
+          "label": "complexity",
+          "output_tokens": 2444,
+          "reasoning_tokens": 1418,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 10511,
+          "elapsed_seconds": 23.270554791000905,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 11559,
+          "label": "correctness",
+          "output_tokens": 2815,
+          "reasoning_tokens": 1499,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 10511,
+          "elapsed_seconds": 26.374621417002345,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 11631,
+          "label": "intent",
+          "output_tokens": 3144,
+          "reasoning_tokens": 1310,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 10511,
+          "elapsed_seconds": 33.458696749999945,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 11311,
+          "label": "tests",
+          "output_tokens": 4209,
+          "reasoning_tokens": 1306,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 10511,
+          "elapsed_seconds": 23.832163792001666,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 11212,
+          "label": "ponytail",
+          "output_tokens": 2892,
+          "reasoning_tokens": 1797,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-small-v1",
+      "exit_code": 0,
+      "failure_class": null,
+      "failures": 0,
+      "findings": [],
+      "ground_truth": {
+        "changed_file": "billing/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 2 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 13
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 58
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 90
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 10
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 36
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 88
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 118
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-small-v1"
+      },
+      "input_tokens": 102561,
+      "observation_id": "20260924-031155-openrouter-anthropic-claude-opus-5-5:repeat:1:case:python-context-small-v1",
+      "output_tokens": 20013,
+      "profile": "{\n  \"schema_version\": 1,\n  \"wall_seconds\": 45.283230417000595,\n  \"total_tokens\": 122574,\n  \"total_cost_usd\": 0.501481,\n  \"returned_findings\": 0,\n  \"stages\": [\n    {\n      \"name\": \"redact\",\n      \"elapsed\": 0.0015590830007568002\n    },\n    {\n      \"name\": \"spec_context\",\n      \"elapsed\": 0.0001748750000842847\n    },\n    {\n      \"name\": \"split\",\n      \"elapsed\": 9.675000183051452e-05\n    },\n    {\n      \"name\": \"expand\",\n      \"elapsed\": 0.021590958000160754\n    },\n    {\n      \"name\": \"batch\",\n      \"elapsed\": 0.003092749997449573\n    },\n    {\n      \"name\": \"directory_context\",\n      \"elapsed\": 7.500057108700275e-07\n    },\n    {\n      \"name\": \"review\",\n      \"elapsed\": 44.08044020799571\n    },\n    {\n      \"name\": \"snap\",\n      \"elapsed\": 0.0003079169982811436\n    },\n    {\n      \"name\": \"dedupe\",\n      \"elapsed\": 5.959002010058612e-06\n    },\n    {\n      \"name\": \"suppress\",\n      \"elapsed\": 7.708003977313638e-06\n    },\n    {\n      \"name\": \"failure_scenario\",\n      \"elapsed\": 5.00003807246685e-07\n    },\n    {\n      \"name\": \"filter\",\n      \"elapsed\": 6.250047590583563e-07\n    }\n  ],\n  \"calls\": [\n    {\n      \"label\": \"security\",\n      \"batch\": 1,\n      \"elapsed\": 5.728217291994952,\n      \"attempts\": 1,\n      \"input_tokens\": 11876,\n      \"output_tokens\": 398,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 10511,\n      \"error\": null,\n      \"reasoning_tokens\": 0,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.065975,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"deprecation\",\n      \"batch\": 1,\n      \"elapsed\": 4.78106295800535,\n      \"attempts\": 1,\n      \"input_tokens\": 11296,\n      \"output_tokens\": 318,\n      \"cache_read_tokens\": 10511,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 0,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.0116022,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"documentation\",\n      \"batch\": 1,\n      \"elapsed\": 14.509572625000146,\n      \"attempts\": 1,\n      \"input_tokens\": 11065,\n      \"output_tokens\": 1394,\n      \"cache_read_tokens\": 10511,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 799,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.0321982,\n      \"reasoning_share\": 0.04876708984375\n    },\n    {\n      \"label\": \"performance\",\n      \"batch\": 1,\n      \"elapsed\": 20.14730054100073,\n      \"attempts\": 1,\n      \"input_tokens\": 11360,\n      \"output_tokens\": 2399,\n      \"cache_read_tokens\": 10511,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1265,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.053478200000000004,\n      \"reasoning_share\": 0.07720947265625\n    },\n    {\n      \"label\": \"complexity\",\n      \"batch\": 1,\n      \"elapsed\": 21.51232537499891,\n      \"attempts\": 1,\n      \"input_tokens\": 11251,\n      \"output_tokens\": 2444,\n      \"cache_read_tokens\": 10511,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1418,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.05394220000000001,\n      \"reasoning_share\": 0.0865478515625\n    },\n    {\n      \"label\": \"correctness\",\n      \"batch\": 1,\n      \"elapsed\": 23.270554791000905,\n      \"attempts\": 1,\n      \"input_tokens\": 11559,\n      \"output_tokens\": 2815,\n      \"cache_read_tokens\": 10511,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1499,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.0625942,\n      \"reasoning_share\": 0.09149169921875\n    },\n    {\n      \"label\": \"intent\",\n      \"batch\": 1,\n      \"elapsed\": 26.374621417002345,\n      \"attempts\": 1,\n      \"input_tokens\": 11631,\n      \"output_tokens\": 3144,\n      \"cache_read_tokens\": 10511,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1310,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.0694622,\n      \"reasoning_share\": 0.0799560546875\n    },\n    {\n      \"label\": \"tests\",\n      \"batch\": 1,\n      \"elapsed\": 33.458696749999945,\n      \"attempts\": 1,\n      \"input_tokens\": 11311,\n      \"output_tokens\": 4209,\n      \"cache_read_tokens\": 10511,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1306,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.08948220000000001,\n      \"reasoning_share\": 0.0797119140625\n    },\n    {\n      \"label\": \"ponytail\",\n      \"batch\": 1,\n      \"elapsed\": 23.832163792001666,\n      \"attempts\": 1,\n      \"input_tokens\": 11212,\n      \"output_tokens\": 2892,\n      \"cache_read_tokens\": 10511,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1797,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.0627462,\n      \"reasoning_share\": 0.10968017578125\n    }\n  ]\n}",
+      "reasoning_tokens": 9394,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.8.5\", \"provider\": \"openrouter\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 6, \"max_tokens\": 16384, \"max_tokens_source\": \"provider default\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.002}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.022}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.003}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 2, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 0, \"cache_creation_tokens\": 10511}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 11876, \"output_tokens\": 398, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 10511, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.065975, \"elapsed_s\": 5.728}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 10511, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 11296, \"output_tokens\": 318, \"cache_read_tokens\": 10511, \"cache_creation_tokens\": 0, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.0116022, \"elapsed_s\": 4.781}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 10511, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 11065, \"output_tokens\": 1394, \"cache_read_tokens\": 10511, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 799, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.0321982, \"elapsed_s\": 14.51}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 10511, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 11360, \"output_tokens\": 2399, \"cache_read_tokens\": 10511, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1265, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.053478200000000004, \"elapsed_s\": 20.147}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 10511, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 11251, \"output_tokens\": 2444, \"cache_read_tokens\": 10511, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1418, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.05394220000000001, \"elapsed_s\": 21.512}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 10511, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 11559, \"output_tokens\": 2815, \"cache_read_tokens\": 10511, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1499, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.0625942, \"elapsed_s\": 23.271}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 10511, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 11631, \"output_tokens\": 3144, \"cache_read_tokens\": 10511, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1310, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.0694622, \"elapsed_s\": 26.375}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 10511, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 11311, \"output_tokens\": 4209, \"cache_read_tokens\": 10511, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1306, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.08948220000000001, \"elapsed_s\": 33.459}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 10511, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 11212, \"output_tokens\": 2892, \"cache_read_tokens\": 10511, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1797, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.0627462, \"elapsed_s\": 23.832}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 44.08}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n== lgtmaybe profile ==\ntotal wall time: 45.3s\n\nstage              elapsed\nredact               0.00s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.02s\nbatch                0.00s\ndirectory_context     0.00s\nreview              44.08s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ntests                1     1    33.46s    11311     4209      1306       8%    10511        0        0  -\nintent               1     1    26.37s    11631     3144      1310       8%    10511        0        0  -\nponytail             1     1    23.83s    11212     2892      1797      11%    10511        0        0  -\ncorrectness          1     1    23.27s    11559     2815      1499       9%    10511        0        0  -\ncomplexity           1     1    21.51s    11251     2444      1418       9%    10511        0        0  -\nperformance          1     1    20.15s    11360     2399      1265       8%    10511        0        0  -\ndocumentation        1     1    14.51s    11065     1394       799       5%    10511        0        0  -\nsecurity             1     1     5.73s    11876      398         0        -        0    10511        0  -\ndeprecation          1     1     4.78s    11296      318         0        -    10511        0        0  -\n\ncache: 84088 tokens read / 10511 created across 9 calls\nfindings: 0 parsed / 0 returned\nreasoning: 9,394 of 20,013 output tokens (47%)\nlargest reasoning share: 11% of the 16,384-token ceiling (1,797 tokens, ponytail, batch 1)\ntokens: 122,574 billable (102,561 in / 20,013 out) across 9 calls\nestimated cost: $0.5015 (litellm pricing map)\n",
+      "stdout": "[]\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 45.79375420800352,
+      "wall_seconds": 45.79375420800352
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 27369,
+          "cache_read_tokens": 4273,
+          "elapsed_seconds": 5.864197791997867,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 33007,
+          "label": "security",
+          "output_tokens": 357,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 31642,
+          "elapsed_seconds": 5.247952750003606,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 32427,
+          "label": "deprecation",
+          "output_tokens": 331,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 31642,
+          "elapsed_seconds": 19.087375457995222,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 32196,
+          "label": "documentation",
+          "output_tokens": 2232,
+          "reasoning_tokens": 1163,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 31642,
+          "elapsed_seconds": 20.38587529099459,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 32382,
+          "label": "complexity",
+          "output_tokens": 2314,
+          "reasoning_tokens": 1490,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 31642,
+          "elapsed_seconds": 26.160863250006514,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 32491,
+          "label": "performance",
+          "output_tokens": 3197,
+          "reasoning_tokens": 1979,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 31642,
+          "elapsed_seconds": 27.646852707999642,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 32442,
+          "label": "tests",
+          "output_tokens": 3122,
+          "reasoning_tokens": 1464,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 31642,
+          "elapsed_seconds": 34.38737899999978,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 32690,
+          "label": "correctness",
+          "output_tokens": 4393,
+          "reasoning_tokens": 2706,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 31642,
+          "elapsed_seconds": 39.11225983299664,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 32762,
+          "label": "intent",
+          "output_tokens": 4750,
+          "reasoning_tokens": 2330,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 31642,
+          "elapsed_seconds": 38.85088683300273,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 32343,
+          "label": "ponytail",
+          "output_tokens": 4722,
+          "reasoning_tokens": 3100,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-medium-v1",
+      "exit_code": 0,
+      "failure_class": null,
+      "failures": 0,
+      "findings": [],
+      "ground_truth": {
+        "changed_file": "billing/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 8 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 143
+          },
+          {
+            "file": "inventory/pipeline.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 21
+          },
+          {
+            "file": "ledger/pipeline.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 86
+          },
+          {
+            "file": "orders/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 145
+          },
+          {
+            "file": "routing/pipeline.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 23
+          },
+          {
+            "file": "routing/pipeline.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 234
+          },
+          {
+            "file": "shipping/pipeline.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 161
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-medium-v1"
+      },
+      "input_tokens": 292740,
+      "observation_id": "20260924-031155-openrouter-anthropic-claude-opus-5-5:repeat:1:case:python-context-medium-v1",
+      "output_tokens": 25418,
+      "profile": "{\n  \"schema_version\": 1,\n  \"wall_seconds\": 65.00340941600007,\n  \"total_tokens\": 318158,\n  \"total_cost_usd\": 0.728535,\n  \"returned_findings\": 0,\n  \"stages\": [\n    {\n      \"name\": \"redact\",\n      \"elapsed\": 0.005655667002429254\n    },\n    {\n      \"name\": \"spec_context\",\n      \"elapsed\": 0.00021741700038546696\n    },\n    {\n      \"name\": \"split\",\n      \"elapsed\": 0.0002680830002645962\n    },\n    {\n      \"name\": \"expand\",\n      \"elapsed\": 0.050026208999042865\n    },\n    {\n      \"name\": \"batch\",\n      \"elapsed\": 0.006222040996362921\n    },\n    {\n      \"name\": \"directory_context\",\n      \"elapsed\": 1.4999968698248267e-06\n    },\n    {\n      \"name\": \"review\",\n      \"elapsed\": 63.81067691700446\n    },\n    {\n      \"name\": \"snap\",\n      \"elapsed\": 0.0016079999986686744\n    },\n    {\n      \"name\": \"dedupe\",\n      \"elapsed\": 1.958993379957974e-06\n    },\n    {\n      \"name\": \"suppress\",\n      \"elapsed\": 2.1457999537233263e-05\n    },\n    {\n      \"name\": \"failure_scenario\",\n      \"elapsed\": 1.0830044629983604e-06\n    },\n    {\n      \"name\": \"filter\",\n      \"elapsed\": 5.839974619448185e-07\n    }\n  ],\n  \"calls\": [\n    {\n      \"label\": \"security\",\n      \"batch\": 1,\n      \"elapsed\": 5.864197791997867,\n      \"attempts\": 1,\n      \"input_tokens\": 33007,\n      \"output_tokens\": 357,\n      \"cache_read_tokens\": 4273,\n      \"cache_creation_tokens\": 27369,\n      \"error\": null,\n      \"reasoning_tokens\": 0,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.15029960000000003,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"deprecation\",\n      \"batch\": 1,\n      \"elapsed\": 5.247952750003606,\n      \"attempts\": 1,\n      \"input_tokens\": 32427,\n      \"output_tokens\": 331,\n      \"cache_read_tokens\": 31642,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 0,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.016088400000000003,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"documentation\",\n      \"batch\": 1,\n      \"elapsed\": 19.087375457995222,\n      \"attempts\": 1,\n      \"input_tokens\": 32196,\n      \"output_tokens\": 2232,\n      \"cache_read_tokens\": 31642,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1163,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.05318440000000001,\n      \"reasoning_share\": 0.07098388671875\n    },\n    {\n      \"label\": \"complexity\",\n      \"batch\": 1,\n      \"elapsed\": 20.38587529099459,\n      \"attempts\": 1,\n      \"input_tokens\": 32382,\n      \"output_tokens\": 2314,\n      \"cache_read_tokens\": 31642,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1490,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.055568400000000004,\n      \"reasoning_share\": 0.0909423828125\n    },\n    {\n      \"label\": \"performance\",\n      \"batch\": 1,\n      \"elapsed\": 26.160863250006514,\n      \"attempts\": 1,\n      \"input_tokens\": 32491,\n      \"output_tokens\": 3197,\n      \"cache_read_tokens\": 31642,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1979,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.0736644,\n      \"reasoning_share\": 0.12078857421875\n    },\n    {\n      \"label\": \"tests\",\n      \"batch\": 1,\n      \"elapsed\": 27.646852707999642,\n      \"attempts\": 1,\n      \"input_tokens\": 32442,\n      \"output_tokens\": 3122,\n      \"cache_read_tokens\": 31642,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1464,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.0719684,\n      \"reasoning_share\": 0.08935546875\n    },\n    {\n      \"label\": \"correctness\",\n      \"batch\": 1,\n      \"elapsed\": 34.38737899999978,\n      \"attempts\": 1,\n      \"input_tokens\": 32690,\n      \"output_tokens\": 4393,\n      \"cache_read_tokens\": 31642,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 2706,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.0983804,\n      \"reasoning_share\": 0.1651611328125\n    },\n    {\n      \"label\": \"intent\",\n      \"batch\": 1,\n      \"elapsed\": 39.11225983299664,\n      \"attempts\": 1,\n      \"input_tokens\": 32762,\n      \"output_tokens\": 4750,\n      \"cache_read_tokens\": 31642,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 2330,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.1058084,\n      \"reasoning_share\": 0.1422119140625\n    },\n    {\n      \"label\": \"ponytail\",\n      \"batch\": 1,\n      \"elapsed\": 38.85088683300273,\n      \"attempts\": 1,\n      \"input_tokens\": 32343,\n      \"output_tokens\": 4722,\n      \"cache_read_tokens\": 31642,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 3100,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.10357240000000001,\n      \"reasoning_share\": 0.189208984375\n    }\n  ]\n}",
+      "reasoning_tokens": 14232,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.8.5\", \"provider\": \"openrouter\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 6, \"max_tokens\": 16384, \"max_tokens_source\": \"provider default\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.006}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.05}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.006}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 8, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 4273, \"cache_creation_tokens\": 27369}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 33007, \"output_tokens\": 357, \"cache_read_tokens\": 4273, \"cache_creation_tokens\": 27369, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.15029960000000003, \"elapsed_s\": 5.864}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 31642, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 32427, \"output_tokens\": 331, \"cache_read_tokens\": 31642, \"cache_creation_tokens\": 0, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.016088400000000003, \"elapsed_s\": 5.248}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 31642, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 32196, \"output_tokens\": 2232, \"cache_read_tokens\": 31642, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1163, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.05318440000000001, \"elapsed_s\": 19.087}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 31642, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 32382, \"output_tokens\": 2314, \"cache_read_tokens\": 31642, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1490, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.055568400000000004, \"elapsed_s\": 20.386}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 31642, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 32491, \"output_tokens\": 3197, \"cache_read_tokens\": 31642, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1979, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.0736644, \"elapsed_s\": 26.161}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 31642, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 32442, \"output_tokens\": 3122, \"cache_read_tokens\": 31642, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1464, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.0719684, \"elapsed_s\": 27.647}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 31642, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 32690, \"output_tokens\": 4393, \"cache_read_tokens\": 31642, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 2706, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.0983804, \"elapsed_s\": 34.387}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 31642, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 32762, \"output_tokens\": 4750, \"cache_read_tokens\": 31642, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 2330, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.1058084, \"elapsed_s\": 39.112}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 31642, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 32343, \"output_tokens\": 4722, \"cache_read_tokens\": 31642, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 3100, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.10357240000000001, \"elapsed_s\": 38.851}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 63.811}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.002}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n== lgtmaybe profile ==\ntotal wall time: 65.0s\n\nstage              elapsed\nredact               0.01s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.05s\nbatch                0.01s\ndirectory_context     0.00s\nreview              63.81s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nintent               1     1    39.11s    32762     4750      2330      14%    31642        0        0  -\nponytail             1     1    38.85s    32343     4722      3100      19%    31642        0        0  -\ncorrectness          1     1    34.39s    32690     4393      2706      17%    31642        0        0  -\ntests                1     1    27.65s    32442     3122      1464       9%    31642        0        0  -\nperformance          1     1    26.16s    32491     3197      1979      12%    31642        0        0  -\ncomplexity           1     1    20.39s    32382     2314      1490       9%    31642        0        0  -\ndocumentation        1     1    19.09s    32196     2232      1163       7%    31642        0        0  -\nsecurity             1     1     5.86s    33007      357         0        -     4273    27369        0  -\ndeprecation          1     1     5.25s    32427      331         0        -    31642        0        0  -\n\ncache: 257409 tokens read / 27369 created across 9 calls\nfindings: 0 parsed / 0 returned\nreasoning: 14,232 of 25,418 output tokens (56%)\nlargest reasoning share: 19% of the 16,384-token ceiling (3,100 tokens, ponytail, batch 1)\ntokens: 318,158 billable (292,740 in / 25,418 out) across 9 calls\nestimated cost: $0.7285 (litellm pricing map)\n",
+      "stdout": "[]\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 65.45099245799793,
+      "wall_seconds": 65.45099245799793
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 76365,
+          "cache_read_tokens": 4273,
+          "elapsed_seconds": 6.728428000002168,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 82003,
+          "label": "security",
+          "output_tokens": 369,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 80638,
+          "elapsed_seconds": 4.801214999999502,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 81423,
+          "label": "deprecation",
+          "output_tokens": 312,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 80638,
+          "elapsed_seconds": 26.04553916700388,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 81192,
+          "label": "documentation",
+          "output_tokens": 2628,
+          "reasoning_tokens": 1359,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 80638,
+          "elapsed_seconds": 28.77565866599616,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 81487,
+          "label": "performance",
+          "output_tokens": 3104,
+          "reasoning_tokens": 1606,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 80638,
+          "elapsed_seconds": 33.89115433299594,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 81686,
+          "label": "correctness",
+          "output_tokens": 3658,
+          "reasoning_tokens": 1957,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 80638,
+          "elapsed_seconds": 35.91298245800135,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 81378,
+          "label": "complexity",
+          "output_tokens": 3869,
+          "reasoning_tokens": 2317,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 80638,
+          "elapsed_seconds": 37.21865895900555,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 81438,
+          "label": "tests",
+          "output_tokens": 4634,
+          "reasoning_tokens": 1880,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 80638,
+          "elapsed_seconds": 47.236207750000176,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 81758,
+          "label": "intent",
+          "output_tokens": 5512,
+          "reasoning_tokens": 2500,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 80638,
+          "elapsed_seconds": 34.20493508299842,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 81339,
+          "label": "ponytail",
+          "output_tokens": 3713,
+          "reasoning_tokens": 2362,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-large-v1",
+      "exit_code": 0,
+      "failure_class": null,
+      "failures": 0,
+      "findings": [],
+      "ground_truth": {
+        "changed_file": "audit/pipeline.py",
+        "clean": false,
+        "commit_message": "Refactor 24 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "audit/pipeline.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 121
+          },
+          {
+            "file": "catalog/summaries.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 99
+          },
+          {
+            "file": "inventory/summaries.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 83
+          },
+          {
+            "file": "ledger/pipeline.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 30
+          },
+          {
+            "file": "orders/validation.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 4
+          },
+          {
+            "file": "routing/summaries.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 7
+          },
+          {
+            "file": "shipping/validation.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 156
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-large-v1"
+      },
+      "input_tokens": 733704,
+      "observation_id": "20260924-031155-openrouter-anthropic-claude-opus-5-5:repeat:1:case:python-context-large-v1",
+      "output_tokens": 27799,
+      "profile": "{\n  \"schema_version\": 1,\n  \"wall_seconds\": 68.27314274999662,\n  \"total_tokens\": 761503,\n  \"total_cost_usd\": 1.099528,\n  \"returned_findings\": 0,\n  \"stages\": [\n    {\n      \"name\": \"redact\",\n      \"elapsed\": 0.016050457998062484\n    },\n    {\n      \"name\": \"spec_context\",\n      \"elapsed\": 0.0002482920026523061\n    },\n    {\n      \"name\": \"split\",\n      \"elapsed\": 0.0006770829932065681\n    },\n    {\n      \"name\": \"expand\",\n      \"elapsed\": 0.11758333300531376\n    },\n    {\n      \"name\": \"batch\",\n      \"elapsed\": 0.013159875001292676\n    },\n    {\n      \"name\": \"directory_context\",\n      \"elapsed\": 1.3750031939707696e-06\n    },\n    {\n      \"name\": \"review\",\n      \"elapsed\": 66.98655837499973\n    },\n    {\n      \"name\": \"snap\",\n      \"elapsed\": 0.00637191699934192\n    },\n    {\n      \"name\": \"dedupe\",\n      \"elapsed\": 4.292000085115433e-06\n    },\n    {\n      \"name\": \"suppress\",\n      \"elapsed\": 1.4417004422284663e-05\n    },\n    {\n      \"name\": \"failure_scenario\",\n      \"elapsed\": 2.4170003598555923e-06\n    },\n    {\n      \"name\": \"filter\",\n      \"elapsed\": 1.2919990695081651e-06\n    }\n  ],\n  \"calls\": [\n    {\n      \"label\": \"security\",\n      \"batch\": 1,\n      \"elapsed\": 6.728428000002168,\n      \"attempts\": 1,\n      \"input_tokens\": 82003,\n      \"output_tokens\": 369,\n      \"cache_read_tokens\": 4273,\n      \"cache_creation_tokens\": 76365,\n      \"error\": null,\n      \"reasoning_tokens\": 0,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.3955196,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"deprecation\",\n      \"batch\": 1,\n      \"elapsed\": 4.801214999999502,\n      \"attempts\": 1,\n      \"input_tokens\": 81423,\n      \"output_tokens\": 312,\n      \"cache_read_tokens\": 80638,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 0,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.0255076,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"documentation\",\n      \"batch\": 1,\n      \"elapsed\": 26.04553916700388,\n      \"attempts\": 1,\n      \"input_tokens\": 81192,\n      \"output_tokens\": 2628,\n      \"cache_read_tokens\": 80638,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1359,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.0709036,\n      \"reasoning_share\": 0.08294677734375\n    },\n    {\n      \"label\": \"performance\",\n      \"batch\": 1,\n      \"elapsed\": 28.77565866599616,\n      \"attempts\": 1,\n      \"input_tokens\": 81487,\n      \"output_tokens\": 3104,\n      \"cache_read_tokens\": 80638,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1606,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.0816036,\n      \"reasoning_share\": 0.0980224609375\n    },\n    {\n      \"label\": \"correctness\",\n      \"batch\": 1,\n      \"elapsed\": 33.89115433299594,\n      \"attempts\": 1,\n      \"input_tokens\": 81686,\n      \"output_tokens\": 3658,\n      \"cache_read_tokens\": 80638,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1957,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.0934796,\n      \"reasoning_share\": 0.11944580078125\n    },\n    {\n      \"label\": \"complexity\",\n      \"batch\": 1,\n      \"elapsed\": 35.91298245800135,\n      \"attempts\": 1,\n      \"input_tokens\": 81378,\n      \"output_tokens\": 3869,\n      \"cache_read_tokens\": 80638,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 2317,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.0964676,\n      \"reasoning_share\": 0.14141845703125\n    },\n    {\n      \"label\": \"tests\",\n      \"batch\": 1,\n      \"elapsed\": 37.21865895900555,\n      \"attempts\": 1,\n      \"input_tokens\": 81438,\n      \"output_tokens\": 4634,\n      \"cache_read_tokens\": 80638,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1880,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.11200760000000001,\n      \"reasoning_share\": 0.11474609375\n    },\n    {\n      \"label\": \"intent\",\n      \"batch\": 1,\n      \"elapsed\": 47.236207750000176,\n      \"attempts\": 1,\n      \"input_tokens\": 81758,\n      \"output_tokens\": 5512,\n      \"cache_read_tokens\": 80638,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 2500,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.1308476,\n      \"reasoning_share\": 0.152587890625\n    },\n    {\n      \"label\": \"ponytail\",\n      \"batch\": 1,\n      \"elapsed\": 34.20493508299842,\n      \"attempts\": 1,\n      \"input_tokens\": 81339,\n      \"output_tokens\": 3713,\n      \"cache_read_tokens\": 80638,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 2362,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.09319160000000001,\n      \"reasoning_share\": 0.1441650390625\n    }\n  ]\n}",
+      "reasoning_tokens": 13981,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.8.5\", \"provider\": \"openrouter\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 6, \"max_tokens\": 16384, \"max_tokens_source\": \"provider default\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.016}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.118}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.013}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 24, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 4273, \"cache_creation_tokens\": 76365}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 82003, \"output_tokens\": 369, \"cache_read_tokens\": 4273, \"cache_creation_tokens\": 76365, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.3955196, \"elapsed_s\": 6.728}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 80638, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 81423, \"output_tokens\": 312, \"cache_read_tokens\": 80638, \"cache_creation_tokens\": 0, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.0255076, \"elapsed_s\": 4.801}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 80638, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 81192, \"output_tokens\": 2628, \"cache_read_tokens\": 80638, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1359, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.0709036, \"elapsed_s\": 26.046}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 80638, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 81487, \"output_tokens\": 3104, \"cache_read_tokens\": 80638, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1606, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.0816036, \"elapsed_s\": 28.776}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 80638, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 81686, \"output_tokens\": 3658, \"cache_read_tokens\": 80638, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1957, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.0934796, \"elapsed_s\": 33.891}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 80638, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 81378, \"output_tokens\": 3869, \"cache_read_tokens\": 80638, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 2317, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.0964676, \"elapsed_s\": 35.913}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 80638, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 81438, \"output_tokens\": 4634, \"cache_read_tokens\": 80638, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1880, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.11200760000000001, \"elapsed_s\": 37.219}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 80638, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 81758, \"output_tokens\": 5512, \"cache_read_tokens\": 80638, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 2500, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.1308476, \"elapsed_s\": 47.236}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 80638, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 81339, \"output_tokens\": 3713, \"cache_read_tokens\": 80638, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 2362, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.09319160000000001, \"elapsed_s\": 34.205}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 66.987}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.006}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n== lgtmaybe profile ==\ntotal wall time: 68.3s\n\nstage              elapsed\nredact               0.02s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.12s\nbatch                0.01s\ndirectory_context     0.00s\nreview              66.99s\nsnap                 0.01s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nintent               1     1    47.24s    81758     5512      2500      15%    80638        0        0  -\ntests                1     1    37.22s    81438     4634      1880      11%    80638        0        0  -\ncomplexity           1     1    35.91s    81378     3869      2317      14%    80638        0        0  -\nponytail             1     1    34.20s    81339     3713      2362      14%    80638        0        0  -\ncorrectness          1     1    33.89s    81686     3658      1957      12%    80638        0        0  -\nperformance          1     1    28.78s    81487     3104      1606      10%    80638        0        0  -\ndocumentation        1     1    26.05s    81192     2628      1359       8%    80638        0        0  -\nsecurity             1     1     6.73s    82003      369         0        -     4273    76365        0  -\ndeprecation          1     1     4.80s    81423      312         0        -    80638        0        0  -\n\ncache: 649377 tokens read / 76365 created across 9 calls\nfindings: 0 parsed / 0 returned\nreasoning: 13,981 of 27,799 output tokens (50%)\nlargest reasoning share: 15% of the 16,384-token ceiling (2,500 tokens, intent, batch 1)\ntokens: 761,503 billable (733,704 in / 27,799 out) across 9 calls\nestimated cost: $1.0995 (litellm pricing map)\n",
+      "stdout": "[]\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 68.70515129200066,
+      "wall_seconds": 68.70515129200066
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 153407,
+          "cache_read_tokens": 4273,
+          "elapsed_seconds": 8.709930832999817,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 159045,
+          "label": "security",
+          "output_tokens": 358,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 157680,
+          "elapsed_seconds": 13.212610540998867,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 158465,
+          "label": "deprecation",
+          "output_tokens": 1042,
+          "reasoning_tokens": 629,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 157680,
+          "elapsed_seconds": 24.139555000001565,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 158529,
+          "label": "performance",
+          "output_tokens": 2753,
+          "reasoning_tokens": 1642,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 157680,
+          "elapsed_seconds": 26.56863095799781,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 158234,
+          "label": "documentation",
+          "output_tokens": 2579,
+          "reasoning_tokens": 1702,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 157680,
+          "elapsed_seconds": 36.148619208004675,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 158420,
+          "label": "complexity",
+          "output_tokens": 4105,
+          "reasoning_tokens": 2799,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 157680,
+          "elapsed_seconds": 41.79119766600343,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 158480,
+          "label": "tests",
+          "output_tokens": 5261,
+          "reasoning_tokens": 2541,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 157680,
+          "elapsed_seconds": 47.23014220899495,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 158728,
+          "label": "correctness",
+          "output_tokens": 5446,
+          "reasoning_tokens": 3278,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 157680,
+          "elapsed_seconds": 34.339144208002836,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 158381,
+          "label": "ponytail",
+          "output_tokens": 3844,
+          "reasoning_tokens": 2461,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 157680,
+          "elapsed_seconds": 48.93711137500213,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 158800,
+          "label": "intent",
+          "output_tokens": 5701,
+          "reasoning_tokens": 2979,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-xlarge-v1",
+      "exit_code": 0,
+      "failure_class": null,
+      "failures": 0,
+      "findings": [],
+      "ground_truth": {
+        "changed_file": "audit/allocation.py",
+        "clean": false,
+        "commit_message": "Refactor 48 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [
+          {
+            "file": "audit/allocation.py",
+            "keywords": [
+              "sql",
+              "injection",
+              "interpolat"
+            ],
+            "label": "sql-injection @ first-file",
+            "lens": "security",
+            "line": 5
+          },
+          {
+            "file": "billing/pipeline.py",
+            "keywords": [
+              "off by one",
+              "off-by-one",
+              "skip",
+              "skips",
+              "first element"
+            ],
+            "label": "off-by-one-skip @ 10%",
+            "lens": "correctness",
+            "line": 44
+          },
+          {
+            "file": "catalog/validation.py",
+            "keywords": [
+              "mutable",
+              "default argument",
+              "default value"
+            ],
+            "label": "mutable-default-argument @ 25%",
+            "lens": "correctness",
+            "line": 21
+          },
+          {
+            "file": "inventory/summaries.py",
+            "keywords": [
+              "quadratic",
+              "o(n",
+              "performance",
+              "set",
+              "membership"
+            ],
+            "label": "quadratic-membership-scan @ 40%",
+            "lens": "performance",
+            "line": 9
+          },
+          {
+            "file": "orders/allocation.py",
+            "keywords": [
+              "nested",
+              "complexity",
+              "cyclomatic"
+            ],
+            "label": "nested-routing-loops @ 55%",
+            "lens": "complexity",
+            "line": 166
+          },
+          {
+            "file": "pricing/summaries.py",
+            "keywords": [
+              "docstring",
+              "documentation",
+              "constant time",
+              "constant-time",
+              "misleading",
+              "contradict"
+            ],
+            "label": "misleading-constant-time-docstring @ 70%",
+            "lens": "documentation",
+            "line": 141
+          },
+          {
+            "file": "routing/reconciliation.py",
+            "keywords": [
+              "utcnow",
+              "deprecat"
+            ],
+            "label": "deprecated-utcnow @ 85%",
+            "lens": "deprecation",
+            "line": 807
+          },
+          {
+            "file": "shipping/validation.py",
+            "keywords": [
+              "threshold",
+              "hardcod",
+              "ignor",
+              "unused"
+            ],
+            "label": "ignored-threshold @ last-file",
+            "lens": "intent",
+            "line": 151
+          }
+        ],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-xlarge-v1"
+      },
+      "input_tokens": 1427082,
+      "observation_id": "20260924-031155-openrouter-anthropic-claude-opus-5-5:repeat:1:case:python-context-xlarge-v1",
+      "output_tokens": 31089,
+      "profile": "{\n  \"schema_version\": 1,\n  \"wall_seconds\": 72.17141587499646,\n  \"total_tokens\": 1458171,\n  \"total_cost_usd\": 1.673806,\n  \"returned_findings\": 0,\n  \"stages\": [\n    {\n      \"name\": \"redact\",\n      \"elapsed\": 0.030936790994019248\n    },\n    {\n      \"name\": \"spec_context\",\n      \"elapsed\": 0.0003282089965068735\n    },\n    {\n      \"name\": \"split\",\n      \"elapsed\": 0.001302666001720354\n    },\n    {\n      \"name\": \"expand\",\n      \"elapsed\": 0.19775529199978337\n    },\n    {\n      \"name\": \"batch\",\n      \"elapsed\": 0.023617499995452818\n    },\n    {\n      \"name\": \"directory_context\",\n      \"elapsed\": 1.4170000213198364e-06\n    },\n    {\n      \"name\": \"review\",\n      \"elapsed\": 70.8671039999972\n    },\n    {\n      \"name\": \"snap\",\n      \"elapsed\": 0.010435249998408835\n    },\n    {\n      \"name\": \"dedupe\",\n      \"elapsed\": 2.8750000637955964e-06\n    },\n    {\n      \"name\": \"suppress\",\n      \"elapsed\": 1.200000406242907e-05\n    },\n    {\n      \"name\": \"failure_scenario\",\n      \"elapsed\": 1.7499987734481692e-06\n    },\n    {\n      \"name\": \"filter\",\n      \"elapsed\": 9.590003173798323e-07\n    }\n  ],\n  \"calls\": [\n    {\n      \"label\": \"security\",\n      \"batch\": 1,\n      \"elapsed\": 8.709930832999817,\n      \"attempts\": 1,\n      \"input_tokens\": 159045,\n      \"output_tokens\": 358,\n      \"cache_read_tokens\": 4273,\n      \"cache_creation_tokens\": 153407,\n      \"error\": null,\n      \"reasoning_tokens\": 0,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.7805096,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"deprecation\",\n      \"batch\": 1,\n      \"elapsed\": 13.212610540998867,\n      \"attempts\": 1,\n      \"input_tokens\": 158465,\n      \"output_tokens\": 1042,\n      \"cache_read_tokens\": 157680,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 629,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.055515999999999996,\n      \"reasoning_share\": 0.03839111328125\n    },\n    {\n      \"label\": \"performance\",\n      \"batch\": 1,\n      \"elapsed\": 24.139555000001565,\n      \"attempts\": 1,\n      \"input_tokens\": 158529,\n      \"output_tokens\": 2753,\n      \"cache_read_tokens\": 157680,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1642,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.08999200000000002,\n      \"reasoning_share\": 0.1002197265625\n    },\n    {\n      \"label\": \"documentation\",\n      \"batch\": 1,\n      \"elapsed\": 26.56863095799781,\n      \"attempts\": 1,\n      \"input_tokens\": 158234,\n      \"output_tokens\": 2579,\n      \"cache_read_tokens\": 157680,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1702,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.085332,\n      \"reasoning_share\": 0.1038818359375\n    },\n    {\n      \"label\": \"complexity\",\n      \"batch\": 1,\n      \"elapsed\": 36.148619208004675,\n      \"attempts\": 1,\n      \"input_tokens\": 158420,\n      \"output_tokens\": 4105,\n      \"cache_read_tokens\": 157680,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 2799,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.116596,\n      \"reasoning_share\": 0.17083740234375\n    },\n    {\n      \"label\": \"tests\",\n      \"batch\": 1,\n      \"elapsed\": 41.79119766600343,\n      \"attempts\": 1,\n      \"input_tokens\": 158480,\n      \"output_tokens\": 5261,\n      \"cache_read_tokens\": 157680,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 2541,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.13995600000000002,\n      \"reasoning_share\": 0.15509033203125\n    },\n    {\n      \"label\": \"correctness\",\n      \"batch\": 1,\n      \"elapsed\": 47.23014220899495,\n      \"attempts\": 1,\n      \"input_tokens\": 158728,\n      \"output_tokens\": 5446,\n      \"cache_read_tokens\": 157680,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 3278,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.144648,\n      \"reasoning_share\": 0.2000732421875\n    },\n    {\n      \"label\": \"ponytail\",\n      \"batch\": 1,\n      \"elapsed\": 34.339144208002836,\n      \"attempts\": 1,\n      \"input_tokens\": 158381,\n      \"output_tokens\": 3844,\n      \"cache_read_tokens\": 157680,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 2461,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.11122000000000001,\n      \"reasoning_share\": 0.15020751953125\n    },\n    {\n      \"label\": \"intent\",\n      \"batch\": 1,\n      \"elapsed\": 48.93711137500213,\n      \"attempts\": 1,\n      \"input_tokens\": 158800,\n      \"output_tokens\": 5701,\n      \"cache_read_tokens\": 157680,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 2979,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.150036,\n      \"reasoning_share\": 0.18182373046875\n    }\n  ]\n}",
+      "reasoning_tokens": 18031,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.8.5\", \"provider\": \"openrouter\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 6, \"max_tokens\": 16384, \"max_tokens_source\": \"provider default\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.031}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.198}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.024}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 48, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 4273, \"cache_creation_tokens\": 153407}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 159045, \"output_tokens\": 358, \"cache_read_tokens\": 4273, \"cache_creation_tokens\": 153407, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.7805096, \"elapsed_s\": 8.71}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 157680, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 158465, \"output_tokens\": 1042, \"cache_read_tokens\": 157680, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 629, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.055515999999999996, \"elapsed_s\": 13.213}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 157680, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 158529, \"output_tokens\": 2753, \"cache_read_tokens\": 157680, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1642, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.08999200000000002, \"elapsed_s\": 24.14}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 157680, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 158234, \"output_tokens\": 2579, \"cache_read_tokens\": 157680, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1702, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.085332, \"elapsed_s\": 26.569}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 157680, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 158420, \"output_tokens\": 4105, \"cache_read_tokens\": 157680, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 2799, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.116596, \"elapsed_s\": 36.149}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 157680, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 158480, \"output_tokens\": 5261, \"cache_read_tokens\": 157680, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 2541, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.13995600000000002, \"elapsed_s\": 41.791}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 157680, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 158728, \"output_tokens\": 5446, \"cache_read_tokens\": 157680, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 3278, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.144648, \"elapsed_s\": 47.23}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 157680, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 158381, \"output_tokens\": 3844, \"cache_read_tokens\": 157680, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 2461, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.11122000000000001, \"elapsed_s\": 34.339}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 157680, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 158800, \"output_tokens\": 5701, \"cache_read_tokens\": 157680, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 2979, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.150036, \"elapsed_s\": 48.937}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 70.867}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.01}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n== lgtmaybe profile ==\ntotal wall time: 72.2s\n\nstage              elapsed\nredact               0.03s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.20s\nbatch                0.02s\ndirectory_context     0.00s\nreview              70.87s\nsnap                 0.01s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\nintent               1     1    48.94s   158800     5701      2979      18%   157680        0        0  -\ncorrectness          1     1    47.23s   158728     5446      3278      20%   157680        0        0  -\ntests                1     1    41.79s   158480     5261      2541      16%   157680        0        0  -\ncomplexity           1     1    36.15s   158420     4105      2799      17%   157680        0        0  -\nponytail             1     1    34.34s   158381     3844      2461      15%   157680        0        0  -\ndocumentation        1     1    26.57s   158234     2579      1702      10%   157680        0        0  -\nperformance          1     1    24.14s   158529     2753      1642      10%   157680        0        0  -\ndeprecation          1     1    13.21s   158465     1042       629       4%   157680        0        0  -\nsecurity             1     1     8.71s   159045      358         0        -     4273   153407        0  -\n\ncache: 1265713 tokens read / 153407 created across 9 calls\nfindings: 0 parsed / 0 returned\nreasoning: 18,031 of 31,089 output tokens (58%)\nlargest reasoning share: 20% of the 16,384-token ceiling (3,278 tokens, correctness, batch 1)\ntokens: 1,458,171 billable (1,427,082 in / 31,089 out) across 9 calls\nestimated cost: $1.6738 (litellm pricing map)\n",
+      "stdout": "[]\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 72.60264291599742,
+      "wall_seconds": 72.60264291599742
+    },
+    {
+      "audit": {
+        "path": null,
+        "schema_versions": [],
+        "sha256": null,
+        "state": "unsupported"
+      },
+      "calls": [
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 77757,
+          "cache_read_tokens": 4273,
+          "elapsed_seconds": 4.346121291993768,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 83395,
+          "label": "security",
+          "output_tokens": 15,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 82030,
+          "elapsed_seconds": 3.9003924170028768,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 83078,
+          "label": "correctness",
+          "output_tokens": 15,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 82030,
+          "elapsed_seconds": 5.445288667004206,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 82879,
+          "label": "performance",
+          "output_tokens": 15,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 82030,
+          "elapsed_seconds": 6.489744999998948,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 82815,
+          "label": "deprecation",
+          "output_tokens": 15,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 82030,
+          "elapsed_seconds": 2.694511624998995,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 82731,
+          "label": "ponytail",
+          "output_tokens": 15,
+          "reasoning_tokens": 0,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 82030,
+          "elapsed_seconds": 8.539531624999654,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 82584,
+          "label": "documentation",
+          "output_tokens": 232,
+          "reasoning_tokens": 217,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 82030,
+          "elapsed_seconds": 21.21630287500011,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 82770,
+          "label": "complexity",
+          "output_tokens": 1699,
+          "reasoning_tokens": 1090,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 82030,
+          "elapsed_seconds": 30.54819212500297,
+          "error": null,
+          "findings": 5,
+          "input_tokens": 82830,
+          "label": "tests",
+          "output_tokens": 3405,
+          "reasoning_tokens": 1325,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 1,
+          "cache_creation_tokens": 0,
+          "cache_read_tokens": 82030,
+          "elapsed_seconds": 28.525924124995072,
+          "error": null,
+          "findings": 0,
+          "input_tokens": 83150,
+          "label": "intent",
+          "output_tokens": 3164,
+          "reasoning_tokens": 1802,
+          "truncated": false
+        },
+        {
+          "attempts": 1,
+          "batch": 0,
+          "cache_creation_tokens": 80231,
+          "cache_read_tokens": 0,
+          "elapsed_seconds": 6.268656959000509,
+          "error": null,
+          "findings": null,
+          "input_tokens": 91752,
+          "label": "reflect",
+          "output_tokens": 167,
+          "reasoning_tokens": 0,
+          "truncated": false
+        }
+      ],
+      "case": "python-context-clean-large-v1",
+      "exit_code": 0,
+      "failure_class": null,
+      "failures": 0,
+      "findings": [],
+      "ground_truth": {
+        "changed_file": "audit/pipeline.py",
+        "clean": true,
+        "clean_trap": "A broad mechanical refactor with renamed locals and retuned constants; reviewers may mistake the churn for behaviour changes.",
+        "commit_message": "Refactor 24 pipeline modules ahead of the quarterly review",
+        "coverage": [
+          "context-scaling",
+          "multi-file",
+          "large-diff"
+        ],
+        "expected": [],
+        "forbidden": [],
+        "language": "python",
+        "name": "python-context-clean-large-v1"
+      },
+      "input_tokens": 837984,
+      "observation_id": "20260924-031155-openrouter-anthropic-claude-opus-5-5:repeat:1:case:python-context-clean-large-v1",
+      "output_tokens": 8742,
+      "profile": "{\n  \"schema_version\": 1,\n  \"wall_seconds\": 44.18830858300498,\n  \"total_tokens\": 846726,\n  \"total_cost_usd\": 1.174815,\n  \"returned_findings\": 0,\n  \"stages\": [\n    {\n      \"name\": \"redact\",\n      \"elapsed\": 0.015501125002629124\n    },\n    {\n      \"name\": \"spec_context\",\n      \"elapsed\": 0.000255916005698964\n    },\n    {\n      \"name\": \"split\",\n      \"elapsed\": 0.0006866670009912923\n    },\n    {\n      \"name\": \"expand\",\n      \"elapsed\": 0.09725116700428771\n    },\n    {\n      \"name\": \"batch\",\n      \"elapsed\": 0.01274129100056598\n    },\n    {\n      \"name\": \"directory_context\",\n      \"elapsed\": 7.500057108700275e-07\n    },\n    {\n      \"name\": \"review\",\n      \"elapsed\": 36.773593042002176\n    },\n    {\n      \"name\": \"snap\",\n      \"elapsed\": 0.002289833006216213\n    },\n    {\n      \"name\": \"dedupe\",\n      \"elapsed\": 3.3750038710422814e-06\n    },\n    {\n      \"name\": \"suppress\",\n      \"elapsed\": 4.895800520898774e-05\n    },\n    {\n      \"name\": \"failure_scenario\",\n      \"elapsed\": 1.624997821636498e-06\n    },\n    {\n      \"name\": \"reflect\",\n      \"elapsed\": 6.2988052500004414\n    },\n    {\n      \"name\": \"filter\",\n      \"elapsed\": 5.4580013966187835e-06\n    }\n  ],\n  \"calls\": [\n    {\n      \"label\": \"security\",\n      \"batch\": 1,\n      \"elapsed\": 4.346121291993768,\n      \"attempts\": 1,\n      \"input_tokens\": 83395,\n      \"output_tokens\": 15,\n      \"cache_read_tokens\": 4273,\n      \"cache_creation_tokens\": 77757,\n      \"error\": null,\n      \"reasoning_tokens\": 0,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.3953996000000001,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"correctness\",\n      \"batch\": 1,\n      \"elapsed\": 3.9003924170028768,\n      \"attempts\": 1,\n      \"input_tokens\": 83078,\n      \"output_tokens\": 15,\n      \"cache_read_tokens\": 82030,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 0,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.020898,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"performance\",\n      \"batch\": 1,\n      \"elapsed\": 5.445288667004206,\n      \"attempts\": 1,\n      \"input_tokens\": 82879,\n      \"output_tokens\": 15,\n      \"cache_read_tokens\": 82030,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 0,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.020102000000000002,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"deprecation\",\n      \"batch\": 1,\n      \"elapsed\": 6.489744999998948,\n      \"attempts\": 1,\n      \"input_tokens\": 82815,\n      \"output_tokens\": 15,\n      \"cache_read_tokens\": 82030,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 0,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.019846000000000003,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"ponytail\",\n      \"batch\": 1,\n      \"elapsed\": 2.694511624998995,\n      \"attempts\": 1,\n      \"input_tokens\": 82731,\n      \"output_tokens\": 15,\n      \"cache_read_tokens\": 82030,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 0,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.019510000000000003,\n      \"reasoning_share\": null\n    },\n    {\n      \"label\": \"documentation\",\n      \"batch\": 1,\n      \"elapsed\": 8.539531624999654,\n      \"attempts\": 1,\n      \"input_tokens\": 82584,\n      \"output_tokens\": 232,\n      \"cache_read_tokens\": 82030,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 217,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.023261999999999998,\n      \"reasoning_share\": 0.01324462890625\n    },\n    {\n      \"label\": \"complexity\",\n      \"batch\": 1,\n      \"elapsed\": 21.21630287500011,\n      \"attempts\": 1,\n      \"input_tokens\": 82770,\n      \"output_tokens\": 1699,\n      \"cache_read_tokens\": 82030,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1090,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.053346000000000005,\n      \"reasoning_share\": 0.0665283203125\n    },\n    {\n      \"label\": \"tests\",\n      \"batch\": 1,\n      \"elapsed\": 30.54819212500297,\n      \"attempts\": 1,\n      \"input_tokens\": 82830,\n      \"output_tokens\": 3405,\n      \"cache_read_tokens\": 82030,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1325,\n      \"output_ceiling\": 16384,\n      \"findings\": 5,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.087706,\n      \"reasoning_share\": 0.08087158203125\n    },\n    {\n      \"label\": \"intent\",\n      \"batch\": 1,\n      \"elapsed\": 28.525924124995072,\n      \"attempts\": 1,\n      \"input_tokens\": 83150,\n      \"output_tokens\": 3164,\n      \"cache_read_tokens\": 82030,\n      \"cache_creation_tokens\": 0,\n      \"error\": null,\n      \"reasoning_tokens\": 1802,\n      \"output_ceiling\": 16384,\n      \"findings\": 0,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.084166,\n      \"reasoning_share\": 0.1099853515625\n    },\n    {\n      \"label\": \"reflect\",\n      \"batch\": 0,\n      \"elapsed\": 6.268656959000509,\n      \"attempts\": 1,\n      \"input_tokens\": 91752,\n      \"output_tokens\": 167,\n      \"cache_read_tokens\": 0,\n      \"cache_creation_tokens\": 80231,\n      \"error\": null,\n      \"reasoning_tokens\": 0,\n      \"output_ceiling\": 16384,\n      \"findings\": null,\n      \"model\": \"openrouter/anthropic/claude-opus-5.5\",\n      \"cost_usd\": 0.45057900000000006,\n      \"reasoning_share\": null\n    }\n  ]\n}",
+      "reasoning_tokens": 4434,
+      "repeat": 1,
+      "stderr": "{\"level\": \"INFO\", \"logger\": \"lgtmaybe.cli\", \"message\": \"per-call budget resolved\", \"lgtmaybe_version\": \"2.8.5\", \"provider\": \"openrouter\", \"timeout_s\": 1800, \"timeout_source\": \"provider default\", \"concurrency\": 6, \"max_tokens\": 16384, \"max_tokens_source\": \"provider default\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"redact\", \"elapsed_s\": 0.016}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"spec_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"spec lens skipped \\u2014 no committed specification matches this PR\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"split\", \"elapsed_s\": 0.001}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"expand\", \"elapsed_s\": 0.097}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"batch\", \"elapsed_s\": 0.013}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"directory_context\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"review starting\", \"reviewable_files\": 24, \"batches\": 1, \"lenses\": 9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"security\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 4273, \"cache_creation_tokens\": 77757}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"security\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 83395, \"output_tokens\": 15, \"cache_read_tokens\": 4273, \"cache_creation_tokens\": 77757, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.3953996000000001, \"elapsed_s\": 4.346}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"security\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"correctness\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"deprecation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"tests\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"documentation\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"performance\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"complexity\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 82030, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"correctness\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 83078, \"output_tokens\": 15, \"cache_read_tokens\": 82030, \"cache_creation_tokens\": 0, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.020898, \"elapsed_s\": 3.9}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"correctness\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"intent\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 82030, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"performance\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 82879, \"output_tokens\": 15, \"cache_read_tokens\": 82030, \"cache_creation_tokens\": 0, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.020102000000000002, \"elapsed_s\": 5.445}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"performance\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reviewing lens\", \"lens\": \"ponytail\"}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 82030, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"deprecation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 82815, \"output_tokens\": 15, \"cache_read_tokens\": 82030, \"cache_creation_tokens\": 0, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.019846000000000003, \"elapsed_s\": 6.49}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"deprecation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 82030, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"ponytail\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 82731, \"output_tokens\": 15, \"cache_read_tokens\": 82030, \"cache_creation_tokens\": 0, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.019510000000000003, \"elapsed_s\": 2.695}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"ponytail\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 82030, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"documentation\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 82584, \"output_tokens\": 232, \"cache_read_tokens\": 82030, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 217, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.023261999999999998, \"elapsed_s\": 8.54}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"documentation\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 82030, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"complexity\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 82770, \"output_tokens\": 1699, \"cache_read_tokens\": 82030, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1090, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.053346000000000005, \"elapsed_s\": 21.216}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"complexity\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 82030, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"tests\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 82830, \"output_tokens\": 3405, \"cache_read_tokens\": 82030, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1325, \"output_ceiling\": 16384, \"findings\": 5, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.087706, \"elapsed_s\": 30.548}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"tests\", \"findings\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 82030, \"cache_creation_tokens\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"intent\", \"batch\": 1, \"attempts\": 1, \"input_tokens\": 83150, \"output_tokens\": 3164, \"cache_read_tokens\": 82030, \"cache_creation_tokens\": 0, \"reasoning_tokens\": 1802, \"output_ceiling\": 16384, \"findings\": 0, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.084166, \"elapsed_s\": 28.526}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"lens reviewed\", \"lens\": \"intent\", \"findings\": 0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"review\", \"elapsed_s\": 36.774}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"snap\", \"elapsed_s\": 0.002}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"dedupe\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"suppress\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"failure_scenario\", \"elapsed_s\": 0.0}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.engine\", \"message\": \"reflecting on findings\", \"findings\": 5}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.providers.litellm_provider\", \"message\": \"prompt cache usage\", \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cache_read_tokens\": 0, \"cache_creation_tokens\": 80231}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"provider call\", \"label\": \"reflect\", \"batch\": 0, \"attempts\": 1, \"input_tokens\": 91752, \"output_tokens\": 167, \"cache_read_tokens\": 0, \"cache_creation_tokens\": 80231, \"output_ceiling\": 16384, \"model\": \"openrouter/anthropic/claude-opus-5.5\", \"cost_usd\": 0.45057900000000006, \"elapsed_s\": 6.269}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"reflect\", \"elapsed_s\": 6.299}\n{\"level\": \"INFO\", \"logger\": \"lgtmaybe.engine.profiling\", \"message\": \"stage completed\", \"stage\": \"filter\", \"elapsed_s\": 0.0}\n== lgtmaybe profile ==\ntotal wall time: 44.2s\n\nstage              elapsed\nredact               0.02s\nspec_context         0.00s\nsplit                0.00s\nexpand               0.10s\nbatch                0.01s\ndirectory_context     0.00s\nreview              36.77s\nsnap                 0.00s\ndedupe               0.00s\nsuppress             0.00s\nfailure_scenario     0.00s\nreflect              6.30s\nfilter               0.00s\n\ncall             batch tries   elapsed   in_tok  out_tok think_tok  think_% cache_rd cache_wr findings  error\ntests                1     1    30.55s    82830     3405      1325       8%    82030        0        5  -\nintent               1     1    28.53s    83150     3164      1802      11%    82030        0        0  -\ncomplexity           1     1    21.22s    82770     1699      1090       7%    82030        0        0  -\ndocumentation        1     1     8.54s    82584      232       217       1%    82030        0        0  -\ndeprecation          1     1     6.49s    82815       15         0        -    82030        0        0  -\nreflect              0     1     6.27s    91752      167         0        -        0    80231        -  -\nperformance          1     1     5.45s    82879       15         0        -    82030        0        0  -\nsecurity             1     1     4.35s    83395       15         0        -     4273    77757        0  -\ncorrectness          1     1     3.90s    83078       15         0        -    82030        0        0  -\nponytail             1     1     2.69s    82731       15         0        -    82030        0        0  -\n\ncache: 660513 tokens read / 157988 created across 10 calls\nfindings: 5 parsed / 0 returned\nreasoning: 4,434 of 8,742 output tokens (51%)\nlargest reasoning share: 11% of the 16,384-token ceiling (1,802 tokens, intent, batch 1)\ntokens: 846,726 billable (837,984 in / 8,742 out) across 10 calls\nestimated cost: $1.1748 (litellm pricing map)\n",
+      "stdout": "[]\n",
+      "timed_out": false,
+      "truncation_lenses": [],
+      "wall_excluding_truncation_seconds": 44.5434336670005,
+      "wall_seconds": 44.5434336670005
+    }
+  ],
+  "run_id": "20260924-031155-openrouter-anthropic-claude-opus-5-5",
+  "schema_version": 2,
+  "status": "complete",
+  "termination": null,
+  "timestamp": "2026-09-24T03:11:55Z"
+}
