@@ -1,0 +1,46 @@
+{
+  "name": "dart-efficiency-design-v2",
+  "language": "dart",
+  "changed_file": "lib/enrichment.dart",
+  "clean": false,
+  "coverage": [],
+  "expected": [
+    {
+      "label": "per-item repository lookup",
+      "lens": "performance",
+      "file": "lib/enrichment.dart",
+      "line": 15,
+      "keywords": [
+        "n+1",
+        "per-item",
+        "loadmany"
+      ],
+      "severity_at_least": "medium"
+    },
+    {
+      "label": "nested eligibility checks",
+      "lens": "complexity",
+      "file": "lib/enrichment.dart",
+      "line": 18,
+      "keywords": [
+        "nesting",
+        "guard clause",
+        "predicate"
+      ],
+      "severity_at_least": "low"
+    },
+    {
+      "label": "one-use collection factory",
+      "lens": "ponytail",
+      "file": "lib/enrichment.dart",
+      "line": 8,
+      "keywords": [
+        "factory",
+        "indirection",
+        "direct collection"
+      ],
+      "severity_at_least": "low"
+    }
+  ],
+  "forbidden": []
+}

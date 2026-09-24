@@ -1,0 +1,24 @@
+{
+  "name": "python-triage-probe-v1",
+  "language": "python",
+  "changed_file": "review.py",
+  "clean": false,
+  "coverage": [
+    "multi-file"
+  ],
+  "expected": [
+    {
+      "label": "first report row is lost",
+      "lens": "correctness",
+      "file": "review.py",
+      "line": 2,
+      "keywords": [
+        "first row",
+        "drops",
+        "skips"
+      ],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

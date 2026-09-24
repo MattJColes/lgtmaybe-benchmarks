@@ -1,0 +1,47 @@
+{
+  "name": "dart-contract-evolution-v2",
+  "language": "dart",
+  "changed_file": "lib/client.dart",
+  "clean": false,
+  "commit_message": "refactor: keep fetchUser callers compatible",
+  "coverage": [],
+  "expected": [
+    {
+      "label": "status label documentation is stale",
+      "lens": "documentation",
+      "file": "lib/client.dart",
+      "line": 6,
+      "keywords": [
+        "stale documentation",
+        "status label",
+        "ready"
+      ],
+      "severity_at_least": "low"
+    },
+    {
+      "label": "deprecated API introduced",
+      "lens": "deprecation",
+      "file": "lib/client.dart",
+      "line": 11,
+      "keywords": [
+        "deprecated",
+        "replacement",
+        "legacy"
+      ],
+      "severity_at_least": "low"
+    },
+    {
+      "label": "fetch user breaks compatibility promise",
+      "lens": "intent",
+      "file": "lib/client.dart",
+      "line": 1,
+      "keywords": [
+        "compatibility",
+        "breaking",
+        "existing callers"
+      ],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

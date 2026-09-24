@@ -62,10 +62,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.304383788254756,
+        "balanced_f1": 0.32974910394265233,
         "balanced_recall": 1.0,
         "clean_pass_rate": null,
-        "completeness": 0.7076923076923077,
+        "completeness": 0.7666666666666667,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -86,6 +86,7 @@
         "provisional": false,
         "reasoning_tokens": 551781.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 32.0,
         "truncation_lenses": [
           "complexity",
@@ -170,10 +171,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.08091000582657981,
+        "balanced_f1": 0.08480928321581258,
         "balanced_recall": 0.8125,
         "clean_pass_rate": null,
-        "completeness": 0.5402298850574713,
+        "completeness": 0.5662650602409639,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -194,6 +195,9 @@
         "provisional": false,
         "reasoning_tokens": 271.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {
+          "reflect": 3
+        },
         "true_positives": 26.0,
         "truncation_lenses": [
           "complexity",
@@ -283,10 +287,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.28331224963103524,
+        "balanced_f1": 0.2994095365418895,
         "balanced_recall": 0.78125,
         "clean_pass_rate": null,
-        "completeness": 0.46236559139784944,
+        "completeness": 0.48863636363636365,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -307,6 +311,7 @@
         "provisional": false,
         "reasoning_tokens": 941507.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 25.0,
         "truncation_lenses": [
           "complexity",
@@ -394,10 +399,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.24312525090325168,
+        "balanced_f1": 0.25516115441331366,
         "balanced_recall": 0.59375,
         "clean_pass_rate": null,
-        "completeness": 0.4811320754716981,
+        "completeness": 0.504950495049505,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -418,6 +423,9 @@
         "provisional": false,
         "reasoning_tokens": 721187.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {
+          "reflect": 2
+        },
         "true_positives": 19.0,
         "truncation_lenses": [
           "complexity",
@@ -507,10 +515,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.21925990675990673,
+        "balanced_f1": 0.23427770859277705,
         "balanced_recall": 0.65625,
         "clean_pass_rate": null,
-        "completeness": 0.5512820512820513,
+        "completeness": 0.589041095890411,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -531,6 +539,7 @@
         "provisional": false,
         "reasoning_tokens": 952906.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 21.0,
         "truncation_lenses": [
           "complexity",
@@ -618,10 +627,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.21513605442176872,
+        "balanced_f1": 0.2267025089605735,
         "balanced_recall": 0.71875,
         "clean_pass_rate": null,
-        "completeness": 0.4489795918367347,
+        "completeness": 0.4731182795698925,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -642,6 +651,7 @@
         "provisional": false,
         "reasoning_tokens": 891587.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 23.0,
         "truncation_lenses": [
           "complexity",
@@ -730,10 +740,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.7142857142857144,
+        "balanced_f1": 0.7777777777777779,
         "balanced_recall": 0.875,
         "clean_pass_rate": null,
-        "completeness": 0.9183673469387755,
+        "completeness": 1.0,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -754,6 +764,7 @@
         "provisional": false,
         "reasoning_tokens": 326462.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 28.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -832,10 +843,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.25471698113207547,
+        "balanced_f1": 0.27169811320754716,
         "balanced_recall": 0.5625,
         "clean_pass_rate": null,
-        "completeness": 0.6,
+        "completeness": 0.64,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -856,6 +867,7 @@
         "provisional": false,
         "reasoning_tokens": 29259.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 18.0,
         "truncation_lenses": [
           "complexity",
@@ -944,7 +956,7 @@
         "balanced_f1": 0.0,
         "balanced_recall": 0.0,
         "clean_pass_rate": null,
-        "completeness": 0.9782608695652174,
+        "completeness": 1.0,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -965,6 +977,7 @@
         "provisional": false,
         "reasoning_tokens": 60072.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 0.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -1043,10 +1056,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.3057065217391305,
+        "balanced_f1": 0.3396739130434783,
         "balanced_recall": 0.78125,
         "clean_pass_rate": null,
-        "completeness": 0.9,
+        "completeness": 1.0,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -1067,6 +1080,7 @@
         "provisional": false,
         "reasoning_tokens": 77003.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 25.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -1145,10 +1159,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.6462765957446809,
+        "balanced_f1": 0.7180851063829787,
         "balanced_recall": 0.84375,
         "clean_pass_rate": null,
-        "completeness": 0.9,
+        "completeness": 1.0,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -1169,6 +1183,7 @@
         "provisional": false,
         "reasoning_tokens": 119678.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 27.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -1188,7 +1203,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.8.5",
       "context_cases": [],
       "date": "2026-09-24",
@@ -1196,10 +1211,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": 0.9857142857142858,
-        "balanced_f1": 0.4538116591928251,
+        "balanced_f1": 0.5553639185926182,
         "balanced_recall": 0.6285714285714286,
         "clean_pass_rate": 0.1111111111111111,
-        "completeness": 0.7528735632183908,
+        "completeness": 0.9225352112676056,
         "duplicates": 10.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -1237,6 +1252,9 @@
         "provisional": true,
         "reasoning_tokens": 1010208.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {
+          "reflect": 1
+        },
         "true_positives": 46.0,
         "truncation_lenses": [
           "artefacts",
@@ -1263,7 +1281,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.8.5",
       "context_cases": [],
       "date": "2026-09-24",
@@ -1271,10 +1289,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": 0.9864864864864865,
-        "balanced_f1": 0.5196378188555394,
+        "balanced_f1": 0.642811227769445,
         "balanced_recall": 0.6571428571428571,
         "clean_pass_rate": 0.0,
-        "completeness": 0.8083832335329342,
+        "completeness": 1.0,
         "duplicates": 7.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -1312,6 +1330,7 @@
         "provisional": true,
         "reasoning_tokens": 14787.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 48.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -1331,7 +1350,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.8.5",
       "context_cases": [],
       "date": "2026-09-24",
@@ -1339,10 +1358,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": 0.9850746268656716,
-        "balanced_f1": 0.5511109043187387,
+        "balanced_f1": 0.6817446001572545,
         "balanced_recall": 0.6285714285714286,
         "clean_pass_rate": 0.1111111111111111,
-        "completeness": 0.8,
+        "completeness": 0.9855072463768116,
         "duplicates": 4.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -1380,6 +1399,7 @@
         "provisional": true,
         "reasoning_tokens": 19035.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 45.0,
         "truncation_lenses": [
           "artefacts",
@@ -1404,7 +1424,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.8.5",
       "context_cases": [],
       "date": "2026-09-24",
@@ -1412,10 +1432,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": 0.9855072463768116,
-        "balanced_f1": 0.49878475488167356,
+        "balanced_f1": 0.6104009238062439,
         "balanced_recall": 0.6428571428571429,
         "clean_pass_rate": 0.1111111111111111,
-        "completeness": 0.7485714285714286,
+        "completeness": 0.916083916083916,
         "duplicates": 8.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -1453,6 +1473,7 @@
         "provisional": true,
         "reasoning_tokens": 0.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 46.0,
         "truncation_lenses": [
           "artefacts",
@@ -1478,7 +1499,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.8.5",
       "context_cases": [],
       "date": "2026-09-24",
@@ -1486,10 +1507,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": 0.9868421052631579,
-        "balanced_f1": 0.4622411693057247,
+        "balanced_f1": 0.5678962937184617,
         "balanced_recall": 0.6285714285714286,
         "clean_pass_rate": 0.0,
-        "completeness": 0.7572254335260116,
+        "completeness": 0.9290780141843972,
         "duplicates": 8.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -1527,6 +1548,7 @@
         "provisional": true,
         "reasoning_tokens": 245774.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 46.0,
         "truncation_lenses": [
           "artefacts",
@@ -1552,7 +1574,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.8.5",
       "context_cases": [],
       "date": "2026-09-24",
@@ -1560,10 +1582,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": 0.9846153846153847,
-        "balanced_f1": 0.5569154849909302,
+        "balanced_f1": 0.6889250814332247,
         "balanced_recall": 0.6285714285714286,
         "clean_pass_rate": 0.1111111111111111,
-        "completeness": 0.8083832335329342,
+        "completeness": 1.0,
         "duplicates": 2.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -1601,6 +1623,7 @@
         "provisional": true,
         "reasoning_tokens": 217648.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 46.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -1620,7 +1643,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.8.5",
       "context_cases": [],
       "date": "2026-09-24",
@@ -1628,10 +1651,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": 1.0,
-        "balanced_f1": 0.6092372894960749,
+        "balanced_f1": 0.7536490914507,
         "balanced_recall": 0.6285714285714286,
         "clean_pass_rate": 0.2222222222222222,
-        "completeness": 0.8083832335329342,
+        "completeness": 1.0,
         "duplicates": 1.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -1669,6 +1692,7 @@
         "provisional": false,
         "reasoning_tokens": 4813.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 46.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -1688,7 +1712,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.8.5",
       "context_cases": [],
       "date": "2026-09-24",
@@ -1696,10 +1720,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": 1.0,
-        "balanced_f1": 0.06008545486914723,
+        "balanced_f1": 0.06097560975609756,
         "balanced_recall": 0.014285714285714285,
         "clean_pass_rate": 1.0,
-        "completeness": 0.9926470588235294,
+        "completeness": 1.0,
         "duplicates": 0.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -1737,6 +1761,7 @@
         "provisional": false,
         "reasoning_tokens": 145.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 1.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -1756,7 +1781,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.8.5",
       "context_cases": [],
       "date": "2026-09-24",
@@ -1764,10 +1789,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": 1.0,
-        "balanced_f1": 0.49960456445599366,
+        "balanced_f1": 0.6180293501048217,
         "balanced_recall": 0.6,
         "clean_pass_rate": 0.1111111111111111,
-        "completeness": 0.8023952095808383,
+        "completeness": 0.9925925925925926,
         "duplicates": 5.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -1805,6 +1830,7 @@
         "provisional": false,
         "reasoning_tokens": 17206.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 44.0,
         "truncation_lenses": [
           "correctness",
@@ -1827,7 +1853,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.8.5",
       "context_cases": [],
       "date": "2026-09-24",
@@ -1835,10 +1861,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": 0.98,
-        "balanced_f1": 0.4995439420855842,
+        "balanced_f1": 0.6179543579873523,
         "balanced_recall": 0.42857142857142855,
         "clean_pass_rate": 0.2222222222222222,
-        "completeness": 0.8083832335329342,
+        "completeness": 1.0,
         "duplicates": 1.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -1876,6 +1902,7 @@
         "provisional": true,
         "reasoning_tokens": 35186.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 31.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -1895,7 +1922,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.8.5",
       "context_cases": [],
       "date": "2026-09-24",
@@ -1903,10 +1930,10 @@
       "lgtmaybe_version": "lgtmaybe 2.8.5",
       "metrics": {
         "adjudication_coverage": 1.0,
-        "balanced_f1": 0.2773822352216749,
+        "balanced_f1": 0.3292900219298246,
         "balanced_recall": 0.44285714285714284,
         "clean_pass_rate": 0.4444444444444444,
-        "completeness": 0.4527363184079602,
+        "completeness": 0.5384615384615384,
         "duplicates": 2.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -1944,6 +1971,7 @@
         "provisional": false,
         "reasoning_tokens": 7161.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 32.0,
         "truncation_lenses": [
           "artefacts",
@@ -1969,7 +1997,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.7.0",
       "context_cases": [],
       "date": "2026-09-04",
@@ -1977,10 +2005,10 @@
       "lgtmaybe_version": "lgtmaybe 2.7.0",
       "metrics": {
         "adjudication_coverage": 0.967741935483871,
-        "balanced_f1": 0.49376528372870726,
+        "balanced_f1": 0.6042582143533132,
         "balanced_recall": 0.5857142857142857,
         "clean_pass_rate": 0.0,
-        "completeness": 0.7657142857142857,
+        "completeness": 0.9370629370629371,
         "duplicates": 5.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -2018,6 +2046,7 @@
         "provisional": true,
         "reasoning_tokens": 17396.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 42.0,
         "truncation_lenses": [
           "artefacts",
@@ -2102,10 +2131,10 @@
       "lgtmaybe_version": "lgtmaybe 2.7.0",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.2746411483253588,
+        "balanced_f1": 0.2898989898989898,
         "balanced_recall": 0.875,
         "clean_pass_rate": null,
-        "completeness": 0.43157894736842106,
+        "completeness": 0.45555555555555555,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -2126,6 +2155,7 @@
         "provisional": false,
         "reasoning_tokens": 784077.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 28.0,
         "truncation_lenses": [
           "complexity",
@@ -2155,7 +2185,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.3.0",
       "context_cases": [],
       "date": "2026-08-19",
@@ -2163,10 +2193,10 @@
       "lgtmaybe_version": "lgtmaybe 2.3.0",
       "metrics": {
         "adjudication_coverage": 0.9230769230769231,
-        "balanced_f1": 0.3103740163651754,
+        "balanced_f1": 0.37283922720596546,
         "balanced_recall": 0.4714285714285714,
         "clean_pass_rate": 0.2222222222222222,
-        "completeness": 0.6282722513089005,
+        "completeness": 0.7547169811320755,
         "duplicates": 3.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -2204,6 +2234,9 @@
         "provisional": true,
         "reasoning_tokens": 0.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {
+          "reflect": 1
+        },
         "true_positives": 34.0,
         "truncation_lenses": [
           "artefacts",
@@ -2262,6 +2295,7 @@
         "provisional": false,
         "reasoning_tokens": 0.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 10.0,
         "truncation_lenses": [
           "complexity",
@@ -2373,6 +2407,7 @@
         "provisional": false,
         "reasoning_tokens": 0.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 16.0,
         "truncation_lenses": [
           "complexity",
@@ -2402,7 +2437,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.2.0",
       "context_cases": [],
       "date": "2026-08-18",
@@ -2410,10 +2445,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": 0.9846153846153847,
-        "balanced_f1": 0.3910366279438838,
+        "balanced_f1": 0.4810594487654973,
         "balanced_recall": 0.44285714285714284,
         "clean_pass_rate": 0.1111111111111111,
-        "completeness": 0.7751479289940828,
+        "completeness": 0.9562043795620438,
         "duplicates": 4.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -2451,6 +2486,7 @@
         "provisional": true,
         "reasoning_tokens": 0.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 32.0,
         "truncation_lenses": [
           "artefacts",
@@ -2534,10 +2570,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.4280510018214935,
+        "balanced_f1": 0.4580896686159843,
         "balanced_recall": 0.375,
         "clean_pass_rate": null,
-        "completeness": 0.7704918032786885,
+        "completeness": 0.8245614035087719,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -2558,6 +2594,9 @@
         "provisional": false,
         "reasoning_tokens": 0.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {
+          "reflect": 1
+        },
         "true_positives": 12.0,
         "truncation_lenses": [
           "deprecation",
@@ -2644,10 +2683,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.07889344262295081,
+        "balanced_f1": 0.08226495726495726,
         "balanced_recall": 0.34375,
         "clean_pass_rate": null,
-        "completeness": 0.1721311475409836,
+        "completeness": 0.1794871794871795,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -2668,6 +2707,9 @@
         "provisional": false,
         "reasoning_tokens": 0.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {
+          "reflect": 1
+        },
         "true_positives": 11.0,
         "truncation_lenses": [
           "complexity",
@@ -2757,10 +2799,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.706436420722135,
+        "balanced_f1": 0.7692307692307692,
         "balanced_recall": 0.75,
         "clean_pass_rate": null,
-        "completeness": 0.9183673469387755,
+        "completeness": 1.0,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -2781,6 +2823,7 @@
         "provisional": false,
         "reasoning_tokens": 784315.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 24.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -2800,7 +2843,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.2.0",
       "context_cases": [],
       "date": "2026-08-18",
@@ -2808,10 +2851,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": 0.975,
-        "balanced_f1": 0.4824241493595403,
+        "balanced_f1": 0.5934858240322403,
         "balanced_recall": 0.4,
         "clean_pass_rate": 0.4444444444444444,
-        "completeness": 0.7602339181286549,
+        "completeness": 0.935251798561151,
         "duplicates": 2.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -2849,6 +2892,9 @@
         "provisional": true,
         "reasoning_tokens": 608681.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {
+          "reflect": 2
+        },
         "true_positives": 29.0,
         "truncation_lenses": [
           "artefacts",
@@ -2874,7 +2920,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.2.0",
       "context_cases": [],
       "date": "2026-08-18",
@@ -2882,10 +2928,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": 0.9836065573770492,
-        "balanced_f1": 0.3478872706302006,
+        "balanced_f1": 0.41703256665607896,
         "balanced_recall": 0.5,
         "clean_pass_rate": 0.3333333333333333,
-        "completeness": 0.6528497409326425,
+        "completeness": 0.782608695652174,
         "duplicates": 6.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -2923,6 +2969,9 @@
         "provisional": true,
         "reasoning_tokens": 967281.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {
+          "reflect": 3
+        },
         "true_positives": 36.0,
         "truncation_lenses": [
           "artefacts",
@@ -2949,7 +2998,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.2.0",
       "context_cases": [],
       "date": "2026-08-18",
@@ -2957,10 +3006,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": 0.9875,
-        "balanced_f1": 0.5317414628064654,
+        "balanced_f1": 0.6559438482795085,
         "balanced_recall": 0.7285714285714285,
         "clean_pass_rate": 0.1111111111111111,
-        "completeness": 0.7514792899408284,
+        "completeness": 0.927007299270073,
         "duplicates": 7.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -2998,6 +3047,7 @@
         "provisional": true,
         "reasoning_tokens": 250601.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 53.0,
         "truncation_lenses": [
           "artefacts",
@@ -3022,7 +3072,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.2.0",
       "context_cases": [],
       "date": "2026-08-18",
@@ -3030,10 +3080,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": 0.9868421052631579,
-        "balanced_f1": 0.4043884531953946,
+        "balanced_f1": 0.4988441502921292,
         "balanced_recall": 0.5285714285714286,
         "clean_pass_rate": 0.1111111111111111,
-        "completeness": 0.7751479289940828,
+        "completeness": 0.9562043795620438,
         "duplicates": 8.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -3071,6 +3121,7 @@
         "provisional": true,
         "reasoning_tokens": 891643.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 39.0,
         "truncation_lenses": [
           "artefacts",
@@ -3096,7 +3147,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.2.0",
       "context_cases": [],
       "date": "2026-08-18",
@@ -3104,10 +3155,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": 0.9838709677419355,
-        "balanced_f1": 0.5160970399755873,
+        "balanced_f1": 0.6282920486659325,
         "balanced_recall": 0.5857142857142857,
         "clean_pass_rate": 0.3333333333333333,
-        "completeness": 0.7857142857142857,
+        "completeness": 0.9565217391304348,
         "duplicates": 6.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -3145,6 +3196,7 @@
         "provisional": true,
         "reasoning_tokens": 256619.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 42.0,
         "truncation_lenses": [
           "artefacts",
@@ -3228,10 +3280,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.1010900140646976,
+        "balanced_f1": 0.10648148148148147,
         "balanced_recall": 0.15625,
         "clean_pass_rate": null,
-        "completeness": 0.5822784810126582,
+        "completeness": 0.6133333333333333,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -3252,6 +3304,7 @@
         "provisional": false,
         "reasoning_tokens": 0.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 5.0,
         "truncation_lenses": [
           "correctness",
@@ -3278,7 +3331,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.2.0",
       "context_cases": [],
       "date": "2026-08-17",
@@ -3286,10 +3339,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": 1.0,
-        "balanced_f1": 0.26906723359022056,
+        "balanced_f1": 0.2830188679245283,
         "balanced_recall": 0.11428571428571428,
         "clean_pass_rate": 0.5555555555555556,
-        "completeness": 0.9115646258503401,
+        "completeness": 1.0,
         "duplicates": 1.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -3327,6 +3380,7 @@
         "provisional": true,
         "reasoning_tokens": 2791.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 8.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -3346,7 +3400,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.2.0",
       "context_cases": [],
       "date": "2026-08-17",
@@ -3354,10 +3408,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": 0.9827586206896551,
-        "balanced_f1": 0.5161616996651924,
+        "balanced_f1": 0.6367250163753103,
         "balanced_recall": 0.5285714285714286,
         "clean_pass_rate": 0.2222222222222222,
-        "completeness": 0.8023952095808383,
+        "completeness": 0.9925925925925926,
         "duplicates": 4.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -3395,6 +3449,7 @@
         "provisional": true,
         "reasoning_tokens": 76437.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 39.0,
         "truncation_lenses": [
           "artefacts",
@@ -3418,7 +3473,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.2.0",
       "context_cases": [],
       "date": "2026-08-17",
@@ -3426,10 +3481,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": 0.9791666666666666,
-        "balanced_f1": 0.44537297484962535,
+        "balanced_f1": 0.5509428651843513,
         "balanced_recall": 0.42857142857142855,
         "clean_pass_rate": 0.3333333333333333,
-        "completeness": 0.8083832335329342,
+        "completeness": 1.0,
         "duplicates": 5.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -3467,6 +3522,7 @@
         "provisional": true,
         "reasoning_tokens": 52069.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 32.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -3486,7 +3542,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.2.0",
       "context_cases": [],
       "date": "2026-08-17",
@@ -3494,10 +3550,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": 1.0,
-        "balanced_f1": 0.5552734929144205,
+        "balanced_f1": 0.686893876420061,
         "balanced_recall": 0.5428571428571428,
         "clean_pass_rate": 0.4444444444444444,
-        "completeness": 0.8083832335329342,
+        "completeness": 1.0,
         "duplicates": 0.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -3535,6 +3591,7 @@
         "provisional": false,
         "reasoning_tokens": 21665.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 40.0,
         "truncation_lenses": [
           "correctness",
@@ -3557,7 +3614,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.2.0",
       "context_cases": [],
       "date": "2026-08-17",
@@ -3565,10 +3622,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": 1.0,
-        "balanced_f1": 0.432781225596975,
+        "balanced_f1": 0.4648390941597139,
         "balanced_recall": 0.17142857142857143,
         "clean_pass_rate": 0.8888888888888888,
-        "completeness": 0.9310344827586207,
+        "completeness": 1.0,
         "duplicates": 0.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -3606,6 +3663,7 @@
         "provisional": true,
         "reasoning_tokens": 4270.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 13.0,
         "truncation_lenses": [
           "correctness"
@@ -3635,10 +3693,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.3898305084745763,
+        "balanced_f1": 0.41818181818181815,
         "balanced_recall": 0.1875,
         "clean_pass_rate": null,
-        "completeness": 0.7796610169491526,
+        "completeness": 0.8363636363636363,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -3659,6 +3717,7 @@
         "provisional": false,
         "reasoning_tokens": 0.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 6.0,
         "truncation_lenses": [
           "deprecation",
@@ -3691,10 +3750,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.26852028185107596,
+        "balanced_f1": 0.2880490296220633,
         "balanced_recall": 0.75,
         "clean_pass_rate": null,
-        "completeness": 0.7966101694915254,
+        "completeness": 0.8545454545454545,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -3715,6 +3774,7 @@
         "provisional": false,
         "reasoning_tokens": 0.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 24.0,
         "truncation_lenses": [
           "deprecation",
@@ -3739,7 +3799,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.2.0",
       "context_cases": [],
       "date": "2026-08-17",
@@ -3747,10 +3807,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": 0.9814814814814815,
-        "balanced_f1": 0.669706721140505,
+        "balanced_f1": 0.7887656937877059,
         "balanced_recall": 0.6142857142857143,
         "clean_pass_rate": 0.7777777777777778,
-        "completeness": 0.8490566037735849,
+        "completeness": 1.0,
         "duplicates": 2.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -3788,6 +3848,7 @@
         "provisional": true,
         "reasoning_tokens": 143919.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 45.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -3807,7 +3868,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.2.0",
       "context_cases": [],
       "date": "2026-08-17",
@@ -3815,10 +3876,10 @@
       "lgtmaybe_version": "lgtmaybe 2.2.0",
       "metrics": {
         "adjudication_coverage": 0.9803921568627451,
-        "balanced_f1": 0.48155687447883455,
+        "balanced_f1": 0.5898983549647492,
         "balanced_recall": 0.4714285714285714,
         "clean_pass_rate": 0.4444444444444444,
-        "completeness": 0.7341040462427746,
+        "completeness": 0.900709219858156,
         "duplicates": 1.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -3856,6 +3917,7 @@
         "provisional": true,
         "reasoning_tokens": 0.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 34.0,
         "truncation_lenses": [
           "artefacts",
@@ -3880,7 +3942,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-17",
@@ -3888,10 +3950,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 0.9166666666666666,
-        "balanced_f1": 0.4854191853920874,
+        "balanced_f1": 0.596885813148789,
         "balanced_recall": 0.3,
         "clean_pass_rate": 0.7777777777777778,
-        "completeness": 0.8132530120481928,
+        "completeness": 1.0,
         "duplicates": 1.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -3929,6 +3991,7 @@
         "provisional": true,
         "reasoning_tokens": 0.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 23.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -4007,10 +4070,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.3685897435897436,
+        "balanced_f1": 0.4078014184397163,
         "balanced_recall": 0.125,
         "clean_pass_rate": null,
-        "completeness": 0.8846153846153846,
+        "completeness": 0.9787234042553191,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -4031,6 +4094,7 @@
         "provisional": false,
         "reasoning_tokens": 0.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 4.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -4058,10 +4122,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 0.9818181818181818,
-        "balanced_f1": 0.5507125564236496,
+        "balanced_f1": 0.6601256471038448,
         "balanced_recall": 0.6285714285714286,
         "clean_pass_rate": 0.3333333333333333,
-        "completeness": 0.7458563535911602,
+        "completeness": 0.8940397350993378,
         "duplicates": 1.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -4099,6 +4163,7 @@
         "provisional": true,
         "reasoning_tokens": 0.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 46.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -4118,7 +4183,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-16",
@@ -4126,10 +4191,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 0.9878048780487805,
-        "balanced_f1": 0.49890304074025815,
+        "balanced_f1": 0.6171615392860971,
         "balanced_recall": 0.6571428571428571,
         "clean_pass_rate": 0.0,
-        "completeness": 0.8083832335329342,
+        "completeness": 1.0,
         "duplicates": 3.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -4167,6 +4232,7 @@
         "provisional": true,
         "reasoning_tokens": 402220.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 48.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -4186,7 +4252,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-16",
@@ -4194,10 +4260,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 1.0,
-        "balanced_f1": 0.5481825383797363,
+        "balanced_f1": 0.678853883054583,
         "balanced_recall": 0.4857142857142857,
         "clean_pass_rate": 0.5555555555555556,
-        "completeness": 0.7964071856287425,
+        "completeness": 0.9777777777777777,
         "duplicates": 1.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -4235,6 +4301,7 @@
         "provisional": true,
         "reasoning_tokens": 145175.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 35.0,
         "truncation_lenses": [
           "correctness",
@@ -4257,7 +4324,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-16",
@@ -4265,10 +4332,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 0.9852941176470589,
-        "balanced_f1": 0.4993181201739695,
+        "balanced_f1": 0.6176750079189104,
         "balanced_recall": 0.5571428571428572,
         "clean_pass_rate": 0.2222222222222222,
-        "completeness": 0.8083832335329342,
+        "completeness": 1.0,
         "duplicates": 3.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -4306,6 +4373,7 @@
         "provisional": true,
         "reasoning_tokens": 483122.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 41.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -4325,7 +4393,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-16",
@@ -4333,10 +4401,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 0.9838709677419355,
-        "balanced_f1": 0.5579036348267117,
+        "balanced_f1": 0.6882168925964546,
         "balanced_recall": 0.5857142857142857,
         "clean_pass_rate": 0.3333333333333333,
-        "completeness": 0.8083832335329342,
+        "completeness": 1.0,
         "duplicates": 2.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -4374,6 +4442,7 @@
         "provisional": true,
         "reasoning_tokens": 84010.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 43.0,
         "truncation_lenses": [
           "correctness"
@@ -4403,10 +4472,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.5115076013513513,
+        "balanced_f1": 0.5548557031607879,
         "balanced_recall": 0.59375,
         "clean_pass_rate": null,
-        "completeness": 0.796875,
+        "completeness": 0.864406779661017,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -4427,6 +4496,7 @@
         "provisional": false,
         "reasoning_tokens": 0.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 19.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -4446,7 +4516,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-16",
@@ -4454,10 +4524,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 0.9836065573770492,
-        "balanced_f1": 0.5085634651749132,
+        "balanced_f1": 0.629111842105263,
         "balanced_recall": 0.4857142857142857,
         "clean_pass_rate": 0.3333333333333333,
-        "completeness": 0.8083832335329342,
+        "completeness": 1.0,
         "duplicates": 1.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -4495,6 +4565,7 @@
         "provisional": true,
         "reasoning_tokens": 53955.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 36.0,
         "truncation_lenses": [
           "artefacts",
@@ -4517,7 +4588,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-16",
@@ -4525,10 +4596,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 1.0,
-        "balanced_f1": 0.5135573768337501,
+        "balanced_f1": 0.6352894957869354,
         "balanced_recall": 0.5857142857142857,
         "clean_pass_rate": 0.2222222222222222,
-        "completeness": 0.7751479289940828,
+        "completeness": 0.9562043795620438,
         "duplicates": 3.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -4566,6 +4637,7 @@
         "provisional": true,
         "reasoning_tokens": 97544.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 43.0,
         "truncation_lenses": [
           "artefacts",
@@ -4591,7 +4663,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-16",
@@ -4599,10 +4671,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 1.0,
-        "balanced_f1": 0.38892445582586427,
+        "balanced_f1": 0.4090909090909091,
         "balanced_recall": 0.12857142857142856,
         "clean_pass_rate": 1.0,
-        "completeness": 0.9507042253521126,
+        "completeness": 1.0,
         "duplicates": 0.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -4640,6 +4712,7 @@
         "provisional": false,
         "reasoning_tokens": 136486.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 9.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -4659,7 +4732,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-16",
@@ -4667,10 +4740,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 1.0,
-        "balanced_f1": 0.12017090973829446,
+        "balanced_f1": 0.12195121951219512,
         "balanced_recall": 0.02857142857142857,
         "clean_pass_rate": 1.0,
-        "completeness": 0.9854014598540146,
+        "completeness": 1.0,
         "duplicates": 0.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -4708,6 +4781,7 @@
         "provisional": true,
         "reasoning_tokens": 73873.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 2.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -4727,7 +4801,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-16",
@@ -4735,10 +4809,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 0.9555555555555556,
-        "balanced_f1": 0.3986014741413145,
+        "balanced_f1": 0.49308478653036686,
         "balanced_recall": 0.5714285714285714,
         "clean_pass_rate": 0.1111111111111111,
-        "completeness": 0.8083832335329342,
+        "completeness": 1.0,
         "duplicates": 5.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -4776,6 +4850,7 @@
         "provisional": true,
         "reasoning_tokens": 268969.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 41.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -4795,7 +4870,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-16",
@@ -4803,10 +4878,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 0.9693877551020408,
-        "balanced_f1": 0.39351700761420744,
+        "balanced_f1": 0.48543338895475224,
         "balanced_recall": 0.6285714285714286,
         "clean_pass_rate": 0.3333333333333333,
-        "completeness": 0.7368421052631579,
+        "completeness": 0.9064748201438849,
         "duplicates": 13.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -4844,6 +4919,7 @@
         "provisional": true,
         "reasoning_tokens": 0.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 45.0,
         "truncation_lenses": [
           "artefacts",
@@ -4869,7 +4945,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-16",
@@ -4877,10 +4953,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 0.9880952380952381,
-        "balanced_f1": 0.39443556086957776,
+        "balanced_f1": 0.4691215842294979,
         "balanced_recall": 0.7285714285714285,
         "clean_pass_rate": 0.0,
-        "completeness": 0.6169154228855721,
+        "completeness": 0.7337278106508875,
         "duplicates": 11.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -4918,6 +4994,7 @@
         "provisional": true,
         "reasoning_tokens": 0.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 52.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -4937,7 +5014,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-16",
@@ -4945,10 +5022,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 0.9777777777777777,
-        "balanced_f1": 0.4031656313541141,
+        "balanced_f1": 0.49873081804545966,
         "balanced_recall": 0.34285714285714286,
         "clean_pass_rate": 0.2222222222222222,
-        "completeness": 0.7964071856287425,
+        "completeness": 0.9851851851851852,
         "duplicates": 1.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -4986,6 +5063,7 @@
         "provisional": true,
         "reasoning_tokens": 0.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 25.0,
         "truncation_lenses": [
           "correctness",
@@ -5008,7 +5086,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-16",
@@ -5016,10 +5094,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 0.9846153846153847,
-        "balanced_f1": 0.5152063096871509,
+        "balanced_f1": 0.6373292867981791,
         "balanced_recall": 0.5714285714285714,
         "clean_pass_rate": 0.2222222222222222,
-        "completeness": 0.8083832335329342,
+        "completeness": 1.0,
         "duplicates": 3.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -5057,6 +5135,7 @@
         "provisional": true,
         "reasoning_tokens": 374368.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 42.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -5135,10 +5214,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.044534412955465584,
+        "balanced_f1": 0.04523026315789473,
         "balanced_recall": 0.34375,
         "clean_pass_rate": null,
-        "completeness": 0.4307692307692308,
+        "completeness": 0.4375,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -5159,6 +5238,7 @@
         "provisional": false,
         "reasoning_tokens": 0.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 11.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -5178,7 +5258,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-16",
@@ -5186,10 +5266,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 0.9830508474576272,
-        "balanced_f1": 0.4656879829879389,
+        "balanced_f1": 0.576073282659154,
         "balanced_recall": 0.5571428571428572,
         "clean_pass_rate": 0.2222222222222222,
-        "completeness": 0.7633136094674556,
+        "completeness": 0.9416058394160584,
         "duplicates": 6.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -5227,6 +5307,7 @@
         "provisional": true,
         "reasoning_tokens": 641981.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {},
         "true_positives": 41.0,
         "truncation_lenses": [
           "artefacts",
@@ -5251,7 +5332,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-16",
@@ -5259,10 +5340,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 0.984375,
-        "balanced_f1": 0.3091322143366753,
+        "balanced_f1": 0.380299342817061,
         "balanced_recall": 0.5285714285714286,
         "clean_pass_rate": 0.4444444444444444,
-        "completeness": 0.52046783625731,
+        "completeness": 0.6402877697841727,
         "duplicates": 5.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -5300,6 +5381,9 @@
         "provisional": true,
         "reasoning_tokens": 6013006.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {
+          "reflect": 10
+        },
         "true_positives": 38.0,
         "truncation_lenses": [
           "artefacts",
@@ -5326,7 +5410,7 @@
     {
       "audit": "no",
       "audit_paths": [],
-      "canonical": true,
+      "canonical": false,
       "comparison_key": "breadth / canonical-breadth / lgtmaybe 2.1.4",
       "context_cases": [],
       "date": "2026-08-16",
@@ -5334,10 +5418,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": 0.9818181818181818,
-        "balanced_f1": 0.3725652936831494,
+        "balanced_f1": 0.4595878440324982,
         "balanced_recall": 0.5285714285714286,
         "clean_pass_rate": 0.1111111111111111,
-        "completeness": 0.6047904191616766,
+        "completeness": 0.7481481481481481,
         "duplicates": 6.0,
         "failures": 0.0,
         "false_positive_classes": {
@@ -5375,6 +5459,9 @@
         "provisional": true,
         "reasoning_tokens": 955762.0,
         "score_kind": "balanced_f1",
+        "stage_failures": {
+          "reflect": 1
+        },
         "true_positives": 38.0,
         "truncation_lenses": [
           "artefacts",
@@ -5460,10 +5547,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.04358722894192001,
+        "balanced_f1": 0.045568466621098196,
         "balanced_recall": 0.3125,
         "clean_pass_rate": null,
-        "completeness": 0.463768115942029,
+        "completeness": 0.48484848484848486,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -5484,6 +5571,7 @@
         "provisional": false,
         "reasoning_tokens": 1931874.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 10.0,
         "truncation_lenses": [
           "complexity",
@@ -5572,10 +5660,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.06808278867102396,
+        "balanced_f1": 0.07503001200480193,
         "balanced_recall": 0.3125,
         "clean_pass_rate": null,
-        "completeness": 0.7407407407407407,
+        "completeness": 0.8163265306122449,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -5596,6 +5684,7 @@
         "provisional": false,
         "reasoning_tokens": 291702.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 10.0,
         "truncation_lenses": [
           "correctness",
@@ -5680,10 +5769,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.013003274898863418,
+        "balanced_f1": 0.014229998945926005,
         "balanced_recall": 0.28125,
         "clean_pass_rate": null,
-        "completeness": 0.8275862068965517,
+        "completeness": 0.9056603773584906,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -5704,6 +5793,7 @@
         "provisional": false,
         "reasoning_tokens": 0.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 9.0,
         "truncation_lenses": [
           "complexity",
@@ -5807,10 +5897,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.38265306122448983,
+        "balanced_f1": 0.4166666666666667,
         "balanced_recall": 0.125,
         "clean_pass_rate": null,
-        "completeness": 0.9183673469387755,
+        "completeness": 1.0,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -5831,6 +5921,7 @@
         "provisional": false,
         "reasoning_tokens": 0.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 4.0,
         "truncation_lenses": [
           "correctness"
@@ -5911,10 +6002,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.07196969696969698,
+        "balanced_f1": 0.07661290322580645,
         "balanced_recall": 0.03125,
         "clean_pass_rate": null,
-        "completeness": 0.5757575757575758,
+        "completeness": 0.6129032258064516,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -5935,6 +6026,7 @@
         "provisional": false,
         "reasoning_tokens": 1093764.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 1.0,
         "truncation_lenses": [
           "correctness",
@@ -6022,10 +6114,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.5328947368421052,
+        "balanced_f1": 0.5921052631578947,
         "balanced_recall": 0.84375,
         "clean_pass_rate": null,
-        "completeness": 0.9,
+        "completeness": 1.0,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -6046,6 +6138,7 @@
         "provisional": false,
         "reasoning_tokens": 284275.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 27.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -6124,10 +6217,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.596646942800789,
+        "balanced_f1": 0.6601200218221496,
         "balanced_recall": 0.6875,
         "clean_pass_rate": null,
-        "completeness": 0.8461538461538461,
+        "completeness": 0.9361702127659575,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -6148,6 +6241,7 @@
         "provisional": false,
         "reasoning_tokens": 771495.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 22.0,
         "truncation_lenses": [
           "performance"
@@ -6248,10 +6342,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.13114754098360656,
+        "balanced_f1": 0.14035087719298245,
         "balanced_recall": 0.4375,
         "clean_pass_rate": null,
-        "completeness": 0.26229508196721313,
+        "completeness": 0.2807017543859649,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -6272,6 +6366,9 @@
         "provisional": false,
         "reasoning_tokens": 1475301.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {
+          "reflect": 2
+        },
         "true_positives": 14.0,
         "truncation_lenses": [
           "complexity",
@@ -6381,10 +6478,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.5048076923076923,
+        "balanced_f1": 0.5585106382978723,
         "balanced_recall": 0.625,
         "clean_pass_rate": null,
-        "completeness": 0.8076923076923077,
+        "completeness": 0.8936170212765957,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -6405,6 +6502,7 @@
         "provisional": false,
         "reasoning_tokens": 643843.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 20.0,
         "truncation_lenses": [
           "complexity",
@@ -6488,10 +6586,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.6478405315614618,
+        "balanced_f1": 0.7054263565891473,
         "balanced_recall": 0.8125,
         "clean_pass_rate": null,
-        "completeness": 0.8571428571428571,
+        "completeness": 0.9333333333333333,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -6512,6 +6610,7 @@
         "provisional": false,
         "reasoning_tokens": 102363.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 26.0,
         "truncation_lenses": [
           "correctness",
@@ -6613,10 +6712,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.5113636363636365,
+        "balanced_f1": 0.5657640232108317,
         "balanced_recall": 0.375,
         "clean_pass_rate": null,
-        "completeness": 0.75,
+        "completeness": 0.8297872340425532,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -6637,6 +6736,7 @@
         "provisional": false,
         "reasoning_tokens": 1263364.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 12.0,
         "truncation_lenses": [
           "complexity",
@@ -6722,10 +6822,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.39311241065627023,
+        "balanced_f1": 0.42456140350877186,
         "balanced_recall": 0.6875,
         "clean_pass_rate": null,
-        "completeness": 0.8148148148148148,
+        "completeness": 0.88,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -6746,6 +6846,7 @@
         "provisional": false,
         "reasoning_tokens": 825834.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 22.0,
         "truncation_lenses": [
           "complexity",
@@ -6830,10 +6931,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.41489813242784385,
+        "balanced_f1": 0.4435117967332124,
         "balanced_recall": 0.53125,
         "clean_pass_rate": null,
-        "completeness": 0.7419354838709677,
+        "completeness": 0.7931034482758621,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -6854,6 +6955,7 @@
         "provisional": false,
         "reasoning_tokens": 0.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 17.0,
         "truncation_lenses": [
           "complexity",
@@ -6940,10 +7042,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.4458864602307225,
+        "balanced_f1": 0.4913850786216125,
         "balanced_recall": 0.78125,
         "clean_pass_rate": null,
-        "completeness": 0.8703703703703703,
+        "completeness": 0.9591836734693877,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -6964,6 +7066,7 @@
         "provisional": false,
         "reasoning_tokens": 472023.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 25.0,
         "truncation_lenses": [
           "performance",
@@ -7045,10 +7148,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.16713048855906,
+        "balanced_f1": 0.18023876217153526,
         "balanced_recall": 0.71875,
         "clean_pass_rate": null,
-        "completeness": 0.8545454545454545,
+        "completeness": 0.9215686274509803,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -7069,6 +7172,9 @@
         "provisional": false,
         "reasoning_tokens": 900328.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {
+          "reflect": 1
+        },
         "true_positives": 23.0,
         "truncation_lenses": [
           "deprecation",
@@ -7172,10 +7278,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.33132530120481923,
+        "balanced_f1": 0.3681392235609103,
         "balanced_recall": 0.78125,
         "clean_pass_rate": null,
-        "completeness": 0.88,
+        "completeness": 0.9777777777777777,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -7196,6 +7302,7 @@
         "provisional": false,
         "reasoning_tokens": 1160831.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 25.0,
         "truncation_lenses": [
           "tests"
@@ -7300,6 +7407,7 @@
         "provisional": false,
         "reasoning_tokens": 0.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 12.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -7378,10 +7486,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.25375939849624063,
+        "balanced_f1": 0.2819548872180451,
         "balanced_recall": 0.9375,
         "clean_pass_rate": null,
-        "completeness": 0.9,
+        "completeness": 1.0,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -7402,6 +7510,7 @@
         "provisional": false,
         "reasoning_tokens": 540052.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 30.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -7480,10 +7589,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.45703125,
+        "balanced_f1": 0.5078125,
         "balanced_recall": 0.8125,
         "clean_pass_rate": null,
-        "completeness": 0.9,
+        "completeness": 1.0,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -7504,6 +7613,7 @@
         "provisional": false,
         "reasoning_tokens": 629260.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 26.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -7582,10 +7692,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.31902985074626866,
+        "balanced_f1": 0.3544776119402985,
         "balanced_recall": 0.59375,
         "clean_pass_rate": null,
-        "completeness": 0.9,
+        "completeness": 1.0,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -7606,6 +7716,7 @@
         "provisional": false,
         "reasoning_tokens": 93810.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 19.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -7684,10 +7795,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.5032894736842105,
+        "balanced_f1": 0.5592105263157895,
         "balanced_recall": 0.53125,
         "clean_pass_rate": null,
-        "completeness": 0.9,
+        "completeness": 1.0,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -7708,6 +7819,7 @@
         "provisional": false,
         "reasoning_tokens": 80334.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 17.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -7786,10 +7898,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.41260045924225025,
+        "balanced_f1": 0.4564941251190854,
         "balanced_recall": 0.78125,
         "clean_pass_rate": null,
-        "completeness": 0.8846153846153846,
+        "completeness": 0.9787234042553191,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -7810,6 +7922,7 @@
         "provisional": false,
         "reasoning_tokens": 93175.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 25.0,
         "truncation_lenses": [
           "documentation"
@@ -7890,10 +8003,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.2992021276595745,
+        "balanced_f1": 0.3125,
         "balanced_recall": 0.09375,
         "clean_pass_rate": null,
-        "completeness": 0.9574468085106383,
+        "completeness": 1.0,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -7914,6 +8027,7 @@
         "provisional": false,
         "reasoning_tokens": 0.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 3.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -7992,10 +8106,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.5408653846153847,
+        "balanced_f1": 0.576923076923077,
         "balanced_recall": 0.5625,
         "clean_pass_rate": null,
-        "completeness": 0.9375,
+        "completeness": 1.0,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -8016,6 +8130,7 @@
         "provisional": false,
         "reasoning_tokens": 710785.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 18.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -8094,10 +8209,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.04649599899974994,
+        "balanced_f1": 0.04760304659498209,
         "balanced_recall": 0.53125,
         "clean_pass_rate": null,
-        "completeness": 0.813953488372093,
+        "completeness": 0.8333333333333334,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -8118,6 +8233,7 @@
         "provisional": false,
         "reasoning_tokens": 0.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 17.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -8220,6 +8336,7 @@
         "provisional": false,
         "reasoning_tokens": 169298.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 0.0,
         "truncation_lenses": [],
         "truncations": 0.0,
@@ -8298,10 +8415,10 @@
       "lgtmaybe_version": "lgtmaybe 2.1.4",
       "metrics": {
         "adjudication_coverage": null,
-        "balanced_f1": 0.353954081632653,
+        "balanced_f1": 0.38541666666666663,
         "balanced_recall": 0.46875,
         "clean_pass_rate": null,
-        "completeness": 0.7551020408163265,
+        "completeness": 0.8222222222222222,
         "duplicates": null,
         "failures": 0.0,
         "false_positive_classes": {},
@@ -8322,6 +8439,7 @@
         "provisional": false,
         "reasoning_tokens": 251280.0,
         "score_kind": "legacy_f1",
+        "stage_failures": {},
         "true_positives": 15.0,
         "truncation_lenses": [],
         "truncations": 0.0,

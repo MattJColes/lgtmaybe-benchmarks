@@ -1,0 +1,24 @@
+{
+  "name": "python-retrieval-probe-v1",
+  "language": "python",
+  "changed_file": "review.py",
+  "clean": false,
+  "coverage": [
+    "multi-file"
+  ],
+  "expected": [
+    {
+      "label": "viewer bypasses the export allowlist",
+      "lens": "security",
+      "file": "review.py",
+      "line": 4,
+      "keywords": [
+        "viewer",
+        "allowlist",
+        "export access"
+      ],
+      "severity_at_least": "high"
+    }
+  ],
+  "forbidden": []
+}

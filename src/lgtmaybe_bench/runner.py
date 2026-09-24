@@ -5,6 +5,7 @@ from __future__ import annotations
 import gzip
 import hashlib
 import json
+import math
 import re
 import shutil
 import subprocess
@@ -48,6 +49,7 @@ class ResolvedProfile:
     spec_review: bool
     static_analysis: bool
     mid_review_retrieval: bool
+    triage_model: str | None = None
     diagnostic_overrides: tuple[str, ...] = ()
 
 
@@ -77,6 +79,7 @@ def _profile(
         spec_review=True,
         static_analysis=False,
         mid_review_retrieval=False,
+        triage_model=None,
     )
 
 
@@ -116,6 +119,7 @@ def resolve_profile(profile_id: str, overrides: dict[str, Any]) -> ResolvedProfi
         "spec_review",
         "static_analysis",
         "mid_review_retrieval",
+        "triage_model",
     }
     unknown = sorted(overrides.keys() - allowed)
     if unknown:
@@ -140,6 +144,12 @@ def resolve_profile_args(args: Any) -> ResolvedProfile:
         "reasoning_effort",
         "max_tokens",
         "max_input_tokens",
+        "reflect",
+        "recursive",
+        "spec_review",
+        "static_analysis",
+        "mid_review_retrieval",
+        "triage_model",
     )
     overrides = {
         name: value for name in override_names if (value := getattr(args, name, None)) is not None
@@ -163,6 +173,7 @@ class RunConfig:
     spec_review: bool = True
     static_analysis: bool = False
     mid_review_retrieval: bool = False
+    triage_model: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -206,6 +217,7 @@ class Observation:
     output_tokens: int
     reasoning_tokens: int
     audit: AuditCapture
+    cost_usd: float | None = None
 
 
 def read_audit_trace(target: Path | None) -> AuditCapture:
@@ -318,7 +330,7 @@ def parse_review_output(stdout: str) -> tuple[tuple[Finding, ...], str, tuple[Pr
     return parse_findings(raw_findings), profile, tuple(calls)
 
 
-def parse_profile_json(path: Path) -> tuple[str, tuple[ProfileCall, ...]]:
+def parse_profile_json(path: Path) -> tuple[str, tuple[ProfileCall, ...], float | None]:
     if not path.is_file():
         raise ValueError("lgtmaybe profile JSON was not written")
     profile = path.read_text(encoding="utf-8")
@@ -334,6 +346,14 @@ def parse_profile_json(path: Path) -> tuple[str, tuple[ProfileCall, ...]]:
     raw_calls = raw.get("calls")
     if not isinstance(raw_calls, list) or not raw_calls:
         raise ValueError("lgtmaybe profile JSON contained no calls")
+    raw_cost = raw.get("total_cost_usd")
+    if raw_cost is not None and (
+        isinstance(raw_cost, bool)
+        or not isinstance(raw_cost, int | float)
+        or not math.isfinite(raw_cost)
+        or raw_cost < 0
+    ):
+        raise ValueError("lgtmaybe profile total_cost_usd must be a non-negative number or null")
 
     def integer(call: dict[str, Any], field: str, *, nullable: bool = False) -> int | None:
         value = call.get(field)
@@ -380,7 +400,7 @@ def parse_profile_json(path: Path) -> tuple[str, tuple[ProfileCall, ...]]:
                 ),
             )
         )
-    return profile, tuple(calls)
+    return profile, tuple(calls), None if raw_cost is None else float(raw_cost)
 
 
 def _command(
@@ -416,6 +436,7 @@ def _command(
         ("--max-tokens", config.max_tokens),
         ("--max-input-tokens", config.max_input_tokens),
         ("--api-base", config.api_base),
+        ("--triage-model", config.triage_model),
     )
     for flag, value in options:
         if value is not None:
@@ -479,9 +500,10 @@ def run_review(
         unparseable = True
         findings, legacy_profile, legacy_calls = (), "", ()
     profile, calls = legacy_profile, legacy_calls
+    cost_usd = None
     if profile_json_path is not None:
         try:
-            profile, calls = parse_profile_json(profile_json_path)
+            profile, calls, cost_usd = parse_profile_json(profile_json_path)
         except ValueError:
             if exit_code == 0 and not timed_out:
                 raise
@@ -512,6 +534,7 @@ def run_review(
         output_tokens=sum(call.output_tokens for call in calls),
         reasoning_tokens=sum(call.reasoning_tokens for call in calls),
         audit=read_audit_trace(audit_path),
+        cost_usd=cost_usd,
     )
 
 
@@ -636,7 +659,7 @@ def execute_benchmark(root: Path, args: Any, executable: str | list[str]) -> Pat
     from lgtmaybe_bench.reporting import regenerate_reports
 
     suite = load_suite(root / "corpus", getattr(args, "suite", "legacy-v1"))
-    if suite.id == "breadth":
+    if suite.id in {"breadth", "breadth-validated"}:
         validate_breadth_matrix(suite)
     cases = select_cases(list(suite.cases), args.case)
     profile = resolve_profile_args(args)
@@ -655,6 +678,7 @@ def execute_benchmark(root: Path, args: Any, executable: str | list[str]) -> Pat
         spec_review=profile.spec_review,
         static_analysis=profile.static_analysis,
         mid_review_retrieval=profile.mid_review_retrieval,
+        triage_model=profile.triage_model,
     )
     executable_parts = [executable] if isinstance(executable, str) else executable
     version = _lgtmaybe_version(executable_parts)
