@@ -1,0 +1,15 @@
+{
+  "name": "python-context-clean-large-v2",
+  "language": "python",
+  "changed_file": "audit/pipeline.py",
+  "clean": true,
+  "commit_message": "Refactor 24 pipeline modules ahead of the quarterly review",
+  "coverage": [
+    "context-scaling",
+    "multi-file",
+    "large-diff"
+  ],
+  "expected": [],
+  "forbidden": [],
+  "clean_trap": "Broad variable renames preserve every numeric threshold and output."
+}

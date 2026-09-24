@@ -1,0 +1,46 @@
+{
+  "name": "typescript-efficiency-design-v2",
+  "language": "typescript",
+  "changed_file": "enrichment.ts",
+  "clean": false,
+  "coverage": [],
+  "expected": [
+    {
+      "label": "per-item repository lookup",
+      "lens": "performance",
+      "file": "enrichment.ts",
+      "line": 14,
+      "keywords": [
+        "n+1",
+        "per-item",
+        "loadmany"
+      ],
+      "severity_at_least": "medium"
+    },
+    {
+      "label": "nested eligibility checks",
+      "lens": "complexity",
+      "file": "enrichment.ts",
+      "line": 17,
+      "keywords": [
+        "nesting",
+        "guard clause",
+        "predicate"
+      ],
+      "severity_at_least": "low"
+    },
+    {
+      "label": "one-use collection factory",
+      "lens": "ponytail",
+      "file": "enrichment.ts",
+      "line": 7,
+      "keywords": [
+        "factory",
+        "indirection",
+        "direct collection"
+      ],
+      "severity_at_least": "low"
+    }
+  ],
+  "forbidden": []
+}

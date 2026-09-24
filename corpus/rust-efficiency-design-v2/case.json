@@ -1,0 +1,46 @@
+{
+  "name": "rust-efficiency-design-v2",
+  "language": "rust",
+  "changed_file": "src/lib.rs",
+  "clean": false,
+  "coverage": [],
+  "expected": [
+    {
+      "label": "per-item repository lookup",
+      "lens": "performance",
+      "file": "src/lib.rs",
+      "line": 16,
+      "keywords": [
+        "n+1",
+        "per-item",
+        "loadmany"
+      ],
+      "severity_at_least": "medium"
+    },
+    {
+      "label": "nested eligibility checks",
+      "lens": "complexity",
+      "file": "src/lib.rs",
+      "line": 19,
+      "keywords": [
+        "nesting",
+        "guard clause",
+        "predicate"
+      ],
+      "severity_at_least": "low"
+    },
+    {
+      "label": "one-use collection factory",
+      "lens": "ponytail",
+      "file": "src/lib.rs",
+      "line": 10,
+      "keywords": [
+        "factory",
+        "indirection",
+        "direct collection"
+      ],
+      "severity_at_least": "low"
+    }
+  ],
+  "forbidden": []
+}

@@ -1,0 +1,46 @@
+{
+  "name": "java-efficiency-design-v2",
+  "language": "java",
+  "changed_file": "src/main/java/Enrichment.java",
+  "clean": false,
+  "coverage": [],
+  "expected": [
+    {
+      "label": "per-item repository lookup",
+      "lens": "performance",
+      "file": "src/main/java/Enrichment.java",
+      "line": 19,
+      "keywords": [
+        "n+1",
+        "per-item",
+        "loadmany"
+      ],
+      "severity_at_least": "medium"
+    },
+    {
+      "label": "nested eligibility checks",
+      "lens": "complexity",
+      "file": "src/main/java/Enrichment.java",
+      "line": 22,
+      "keywords": [
+        "nesting",
+        "guard clause",
+        "predicate"
+      ],
+      "severity_at_least": "low"
+    },
+    {
+      "label": "one-use collection factory",
+      "lens": "ponytail",
+      "file": "src/main/java/Enrichment.java",
+      "line": 11,
+      "keywords": [
+        "factory",
+        "indirection",
+        "direct collection"
+      ],
+      "severity_at_least": "low"
+    }
+  ],
+  "forbidden": []
+}

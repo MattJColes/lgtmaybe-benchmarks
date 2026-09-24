@@ -1,0 +1,12 @@
+{
+  "name": "python-triage-clean-probe-v1",
+  "language": "python",
+  "changed_file": "review.py",
+  "clean": true,
+  "coverage": [
+    "multi-file"
+  ],
+  "expected": [],
+  "forbidden": [],
+  "clean_trap": "Changing the wrapper leaves the committed allowlist intact."
+}

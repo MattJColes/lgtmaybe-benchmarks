@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import json
 from pathlib import Path
 
@@ -70,9 +71,7 @@ def test_defect_cases_plant_eight_bugs_and_clean_case_plants_none(tmp_path: Path
     corpus = generate(tmp_path)
 
     for name in CASE_NAMES:
-        truth = parse_case(
-            json.loads((corpus / name / "case.json").read_text(encoding="utf-8"))
-        )
+        truth = parse_case(json.loads((corpus / name / "case.json").read_text(encoding="utf-8")))
         if name == "python-context-clean-large-v1":
             assert truth.clean
             assert truth.expected == ()
@@ -101,6 +100,42 @@ def test_size_bands_grow_monotonically(tmp_path: Path) -> None:
     assert sizes["python-context-medium-v1"] < sizes["python-context-large-v1"]
     assert sizes["python-context-large-v1"] < sizes["python-context-xlarge-v1"]
     assert 150 <= sizes["python-context-small-v1"] <= 600
+
+
+def test_validated_long_horizon_keeps_only_planted_behavior_changes() -> None:
+    suite = load_suite(Path("corpus"), "long-horizon-validated")
+    sizes: list[int] = []
+    for case in suite.cases:
+        root = case.path
+        sizes.append(total_changed_lines(root))
+        assert len(case.truth.expected) == (0 if case.truth.clean else 8)
+        for changed in changed_python_files(root):
+            relative = changed.relative_to(root / "changed")
+            before = ast.parse((root / "base" / relative).read_text())
+            after = ast.parse(changed.read_text())
+            original = {
+                node.name: node for node in before.body if isinstance(node, ast.FunctionDef)
+            }
+            for function in after.body:
+                if not isinstance(function, ast.FunctionDef) or function.name not in original:
+                    continue
+                if any(
+                    entry.file == relative.as_posix()
+                    and function.lineno <= entry.line <= function.end_lineno
+                    for entry in case.truth.expected
+                ):
+                    continue
+
+                def numbers(node: ast.FunctionDef) -> list[int | float]:
+                    return [
+                        value.value
+                        for value in ast.walk(node)
+                        if isinstance(value, ast.Constant) and type(value.value) in (int, float)
+                    ]
+
+                assert numbers(function) == numbers(original[function.name])
+    assert sizes[0] < sizes[1] < sizes[2] < sizes[3]
+    assert sizes[4] >= sizes[2]
 
 
 def test_bug_positions_follow_target_fractions(tmp_path: Path) -> None:

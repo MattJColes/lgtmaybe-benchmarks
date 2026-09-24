@@ -1,0 +1,61 @@
+{
+  "name": "rust-runtime-safety-v2",
+  "language": "rust",
+  "changed_file": "src/lib.rs",
+  "clean": false,
+  "commit_message": "feat: preserve report rows for named users",
+  "coverage": [
+    "multi-file"
+  ],
+  "expected": [
+    {
+      "label": "user reaches a shell command",
+      "lens": "security",
+      "file": "src/lib.rs",
+      "line": 5,
+      "keywords": [
+        "command injection",
+        "shell",
+        "sh -c"
+      ],
+      "severity_at_least": "high"
+    },
+    {
+      "label": "first report row is dropped",
+      "lens": "correctness",
+      "file": "src/lib.rs",
+      "line": 6,
+      "keywords": [
+        "first row",
+        "drops",
+        "skips"
+      ],
+      "severity_at_least": "medium"
+    },
+    {
+      "label": "weak test misses lost report rows",
+      "lens": "tests",
+      "file": "tests/report.rs",
+      "line": 5,
+      "keywords": [
+        "weak assertion",
+        "row content",
+        "first row"
+      ],
+      "severity_at_least": "medium"
+    },
+    {
+      "label": "request tag loses required prefix",
+      "lens": "spec",
+      "file": "src/lib.rs",
+      "line": 10,
+      "keywords": [
+        "request prefix",
+        "request tag",
+        "request:"
+      ],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

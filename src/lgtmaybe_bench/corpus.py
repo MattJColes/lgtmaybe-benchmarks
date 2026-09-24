@@ -161,9 +161,9 @@ def infer_suite_id(raw_result: dict[str, Any]) -> str:
 
 
 def validate_breadth_matrix(suite: CorpusSuite) -> MatrixCoverage:
-    """Reject accidental weighting or missing behavior classes in the frozen breadth suite."""
-    if suite.id != "breadth":
-        raise ValueError("breadth matrix validation requires suite 'breadth'")
+    """Reject accidental weighting or missing behavior classes in either breadth suite."""
+    if suite.id not in {"breadth", "breadth-validated"}:
+        raise ValueError("breadth matrix validation requires a breadth suite")
     if len(suite.cases) != 32:
         raise ValueError(f"breadth requires 32 cases, found {len(suite.cases)}")
 

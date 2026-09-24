@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from dataclasses import replace
 from pathlib import Path
 
@@ -16,7 +18,7 @@ from lgtmaybe_bench.corpus import (
     select_cases,
     validate_breadth_matrix,
 )
-from lgtmaybe_bench.scoring import CaseTruth, CatalogEntry
+from lgtmaybe_bench.scoring import CaseTruth, CatalogEntry, Finding, _matches
 
 
 def make_case(root: Path, name: str, lens: str, *, file: str = "app.py", line: int = 1) -> None:
@@ -274,3 +276,40 @@ def test_repository_corpus_has_complete_coverage() -> None:
     assert lenses == LENSES
     assert len(cases) >= 20
     assert any(len({entry.file for entry in case.truth.expected}) > 1 for case in cases)
+
+
+def test_validated_breadth_has_independent_targets() -> None:
+    suite = load_suite(Path("corpus"), "breadth-validated")
+    coverage = validate_breadth_matrix(suite)
+
+    assert coverage.language_lens_cells == 70
+    assert sum(case.truth.clean for case in suite.cases) == 9
+    for case in suite.cases:
+        for target in case.truth.expected:
+            example = Finding(
+                target.file,
+                target.line,
+                "critical",
+                target.keywords[0],
+                target.label,
+                {},
+            )
+            matches = [entry.label for entry in case.truth.expected if _matches(example, entry)]
+            assert matches == [target.label], (case.truth.name, target.label, matches)
+
+
+def test_retrieval_probe_requires_unchanged_policy_context() -> None:
+    root = Path("corpus/python-retrieval-probe-v1")
+    assert (root / "base/policy.py").read_bytes() == (root / "changed/policy.py").read_bytes()
+    outcomes = []
+    for revision in ("base", "changed"):
+        result = subprocess.run(
+            [sys.executable, "-c", "from review import can_export; print(can_export('viewer'))"],
+            cwd=root / revision,
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=10,
+        )
+        outcomes.append(result.stdout.strip())
+    assert outcomes == ["False", "True"]

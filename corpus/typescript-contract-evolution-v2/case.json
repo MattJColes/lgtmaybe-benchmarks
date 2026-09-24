@@ -1,0 +1,47 @@
+{
+  "name": "typescript-contract-evolution-v2",
+  "language": "typescript",
+  "changed_file": "client.ts",
+  "clean": false,
+  "commit_message": "refactor: retain fetchUser compatibility",
+  "coverage": [],
+  "expected": [
+    {
+      "label": "status label documentation is stale",
+      "lens": "documentation",
+      "file": "client.ts",
+      "line": 7,
+      "keywords": [
+        "stale documentation",
+        "status label",
+        "ready"
+      ],
+      "severity_at_least": "low"
+    },
+    {
+      "label": "deprecated API introduced",
+      "lens": "deprecation",
+      "file": "client.ts",
+      "line": 15,
+      "keywords": [
+        "deprecated",
+        "substr",
+        "legacy suffix"
+      ],
+      "severity_at_least": "low"
+    },
+    {
+      "label": "fetch user breaks compatibility promise",
+      "lens": "intent",
+      "file": "client.ts",
+      "line": 1,
+      "keywords": [
+        "compatibility",
+        "breaking",
+        "existing callers"
+      ],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

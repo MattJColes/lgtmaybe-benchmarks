@@ -1,0 +1,47 @@
+{
+  "name": "javascript-contract-evolution-v2",
+  "language": "javascript",
+  "changed_file": "client.js",
+  "clean": false,
+  "commit_message": "refactor: preserve fetchUser compatibility",
+  "coverage": [],
+  "expected": [
+    {
+      "label": "status label documentation is stale",
+      "lens": "documentation",
+      "file": "client.js",
+      "line": 7,
+      "keywords": [
+        "stale documentation",
+        "status label",
+        "ready"
+      ],
+      "severity_at_least": "low"
+    },
+    {
+      "label": "deprecated API introduced",
+      "lens": "deprecation",
+      "file": "client.js",
+      "line": 15,
+      "keywords": [
+        "deprecated",
+        "substr",
+        "legacy suffix"
+      ],
+      "severity_at_least": "low"
+    },
+    {
+      "label": "fetch user breaks compatibility promise",
+      "lens": "intent",
+      "file": "client.js",
+      "line": 1,
+      "keywords": [
+        "compatibility",
+        "breaking",
+        "existing callers"
+      ],
+      "severity_at_least": "medium"
+    }
+  ],
+  "forbidden": []
+}

@@ -1,0 +1,10 @@
+{
+  "id": "long-horizon-validated",
+  "cases": [
+    "python-context-small-v2",
+    "python-context-medium-v2",
+    "python-context-large-v2",
+    "python-context-xlarge-v2",
+    "python-context-clean-large-v2"
+  ]
+}

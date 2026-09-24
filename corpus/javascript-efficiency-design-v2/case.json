@@ -1,0 +1,46 @@
+{
+  "name": "javascript-efficiency-design-v2",
+  "language": "javascript",
+  "changed_file": "enrichment.js",
+  "clean": false,
+  "coverage": [],
+  "expected": [
+    {
+      "label": "per-item repository lookup",
+      "lens": "performance",
+      "file": "enrichment.js",
+      "line": 8,
+      "keywords": [
+        "n+1",
+        "per-item",
+        "loadmany"
+      ],
+      "severity_at_least": "medium"
+    },
+    {
+      "label": "nested eligibility checks",
+      "lens": "complexity",
+      "file": "enrichment.js",
+      "line": 11,
+      "keywords": [
+        "nesting",
+        "guard clause",
+        "predicate"
+      ],
+      "severity_at_least": "low"
+    },
+    {
+      "label": "one-use collection factory",
+      "lens": "ponytail",
+      "file": "enrichment.js",
+      "line": 1,
+      "keywords": [
+        "factory",
+        "indirection",
+        "direct collection"
+      ],
+      "severity_at_least": "low"
+    }
+  ],
+  "forbidden": []
+}
