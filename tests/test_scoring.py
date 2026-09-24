@@ -23,6 +23,7 @@ from lgtmaybe_bench.scoring import (
     parse_findings,
     score_case,
     score_suite,
+    stage_failures,
 )
 
 
@@ -551,6 +552,25 @@ class TestCallCompleteness:
     def test_zero_findings_is_an_answer_not_a_failure(self) -> None:
         """A lens is entitled to find nothing; that is `[]`, not a failure."""
         assert call_completeness([{"calls": [{"findings": 0}, {"findings": 0}]}]) == 1.0
+
+    def test_successful_non_finding_stages_do_not_lower_completeness(self) -> None:
+        observations = [{"calls": [
+            {"label": "security", "findings": 1, "error": None},
+            {"label": "reflect", "findings": None, "error": None},
+            {"label": "triage", "findings": None, "error": None},
+            {"label": "repair:security", "findings": None, "error": None},
+        ]}]
+        assert call_completeness(observations) == 1.0
+        assert stage_failures(observations) == {}
+
+    def test_failed_review_and_stage_are_reported_separately(self) -> None:
+        observations = [{"calls": [
+            {"label": "security", "findings": 1, "error": None},
+            {"label": "correctness", "findings": None, "error": "invalid response"},
+            {"label": "reflect", "findings": None, "error": "timeout"},
+        ]}]
+        assert call_completeness(observations) == 0.5
+        assert stage_failures(observations) == {"reflect": 1}
 
     def test_it_falls_back_to_the_provider_call_log(self) -> None:
         """Nine stored runs predate the structured `calls` array. Their stderr

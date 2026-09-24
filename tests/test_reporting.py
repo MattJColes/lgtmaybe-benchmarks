@@ -1,10 +1,14 @@
 from __future__ import annotations
 
 import json
+from copy import deepcopy
 from pathlib import Path
+
+import pytest
 
 from lgtmaybe_bench.reporting import (
     build_dashboard_data,
+    compare_diagnostic_runs,
     regenerate_reports,
     render_dashboard,
     render_detailed_results,
@@ -106,6 +110,32 @@ def v2_raw(
     findings[0]["finding_id"] = f"finding-{model}"
     observation["audit"] = {"state": "completed", "path": f"results/audit/{model}.jsonl.gz"}
     return result
+
+
+def test_diagnostic_comparison_reports_one_setting_and_measured_cost() -> None:
+    baseline = v2_raw("2026-02-01T00:00:00Z", "paired")
+    variant = deepcopy(baseline)
+    variant["run_id"] = "run-variant"
+    variant["configuration"]["preset"] = "fast"
+    baseline["observations"][0]["cost_usd"] = 0.25
+    variant["observations"][0]["cost_usd"] = 0.20
+
+    comparison = compare_diagnostic_runs(baseline, variant)
+
+    assert comparison["suite"] == "breadth"
+    assert comparison["setting"] == "preset"
+    assert comparison["metrics"]["recall"]["baseline"] == 1.0
+    assert comparison["metrics"]["cost_usd"]["delta"] == pytest.approx(-0.05)
+
+
+def test_diagnostic_comparison_rejects_unpaired_runs() -> None:
+    baseline = v2_raw("2026-02-01T00:00:00Z", "paired")
+    variant = deepcopy(baseline)
+    variant["configuration"]["preset"] = "fast"
+    variant["configuration"]["cases"] = ["another-case"]
+
+    with pytest.raises(ValueError, match="same version, model, cases"):
+        compare_diagnostic_runs(baseline, variant)
 
 
 def test_render_contains_one_per_lens_table() -> None:
@@ -234,7 +264,7 @@ def test_noncanonical_profiles_never_join_the_canonical_partition() -> None:
 
     rendered = render_results([canonical, diagnostic])
 
-    assert "## Breadth — top 10" in rendered
+    assert "## Historical breadth — top 10" in rendered
     assert "ranked" in rendered
     assert "diagnostic" not in rendered
 
@@ -246,8 +276,8 @@ def test_dashboard_marks_superseded_and_current_canonical_profiles() -> None:
     data = build_dashboard_data([stored, renamed])
 
     by_model = {run["model"]: run for run in data["runs"]}
-    assert by_model["stored-model"]["canonical"] is True
-    assert by_model["renamed-model"]["canonical"] is True
+    assert by_model["stored-model"]["canonical"] is False
+    assert by_model["renamed-model"]["canonical"] is False
     assert {run["suite"] for run in data["runs"]} == {"breadth"}
     assert {run["profile"] for run in data["runs"]} == {"canonical-breadth"}
 
@@ -268,7 +298,7 @@ def test_dashboard_data_is_deterministic_and_keeps_every_run_class() -> None:
     by_model = {run["model"]: run for run in first["runs"]}
     assert set(by_model) == {"legacy", "canonical", "diagnostic", "focused", "incomplete"}
     assert by_model["legacy"]["suite"] == "legacy-v1"
-    assert by_model["canonical"]["canonical"] is True
+    assert by_model["canonical"]["canonical"] is False
     assert by_model["diagnostic"]["profile"] == "diagnostic-full-v1"
     assert by_model["focused"]["focused"] is True
     assert by_model["incomplete"]["status"] == "in_progress"
@@ -614,7 +644,7 @@ def context_raw(
 def test_context_readme_omits_case_detail() -> None:
     rendered = render_results([context_raw("2026-08-14T00:00:00Z", "scaler")])
 
-    assert "## Long horizon" in rendered
+    assert "## Historical long horizon" in rendered
     assert "### Model summary" in rendered
     assert "### Case detail" not in rendered
     assert "python-context-small-v1" not in rendered
@@ -791,7 +821,7 @@ def test_context_scaling_section_excludes_ineligible_runs() -> None:
 
     for run in (focused, diagnostic, incomplete):
         rendered = render_results([run])
-        assert "## Long horizon" not in rendered
+        assert "## Historical long horizon" not in rendered
         assert build_dashboard_data([run])["runs"][0]["context_cases"] == []
 
 
@@ -825,8 +855,8 @@ def test_context_scaling_section_coexists_with_breadth_leaderboard() -> None:
 
     rendered = render_results(runs)
 
-    assert "## Breadth — top 10" in rendered
-    assert "## Long horizon" in rendered
+    assert "## Historical breadth — top 10" in rendered
+    assert "## Historical long horizon" in rendered
 
 
 def test_superseded_context_identifiers_score_identically() -> None:
@@ -867,7 +897,7 @@ def test_superseded_breadth_identifiers_rank_together() -> None:
         ]
     )
 
-    assert "## Breadth — top 10" in rendered
+    assert "## Historical breadth — top 10" in rendered
     assert "stored" in rendered
     assert "renamed" in rendered
 
@@ -891,22 +921,69 @@ def test_unrecognised_identifiers_are_preserved() -> None:
 def test_breadth_section_is_identified_by_suite() -> None:
     rendered = render_results([v2_raw("2026-08-16T00:00:00Z", "ranked")])
 
-    assert "## Breadth — top 10" in rendered
+    assert "## Historical breadth — top 10" in rendered
     assert "`breadth`" in rendered
     assert "`canonical-breadth`" in rendered
+
+
+def test_validated_breadth_is_the_only_current_leaderboard() -> None:
+    old = v2_raw("2026-08-16T00:00:00Z", "historical")
+    current = v2_raw("2026-08-17T00:00:00Z", "current")
+    current["configuration"]["suite"] = "breadth-validated"
+
+    rendered = render_results([old, current])
+    data = build_dashboard_data([old, current])
+
+    assert "## Validated breadth — top 10" in rendered
+    assert "## Historical breadth — top 10" in rendered
+    assert rendered.index("| current |") < rendered.index("| historical |")
+    assert {run["model"]: run["canonical"] for run in data["runs"]} == {
+        "historical": False,
+        "current": True,
+    }
+
+
+def test_review_option_probe_never_enters_a_leaderboard() -> None:
+    diagnostic = v2_raw("2026-08-17T00:00:00Z", "probe", profile="diagnostic-custom-v1")
+    diagnostic["configuration"]["suite"] = "review-options"
+
+    assert build_dashboard_data([diagnostic])["runs"][0]["canonical"] is False
+    rendered = render_results([diagnostic])
+    assert "probe" not in rendered
+
+
+def test_diagnostic_validated_breadth_run_does_not_replace_empty_leaderboard() -> None:
+    diagnostic = v2_raw("2026-08-17T00:00:00Z", "probe", profile="diagnostic-custom-v1")
+    diagnostic["configuration"]["suite"] = "breadth-validated"
+
+    rendered = render_results([diagnostic])
+    assert "probe" not in rendered
+    assert "No complete `breadth-validated` canonical runs yet" in rendered
 
 
 def test_breadth_section_explains_ranking_order() -> None:
     rendered = render_results([v2_raw("2026-08-16T00:00:00Z", "ranked")])
 
     assert "ranked by median score across lgtmaybe versions" in rendered
-    assert "The first row is the leader." in rendered
+    assert "their ranking is archival" in rendered
 
 
 def test_long_horizon_section_is_identified_by_suite() -> None:
     rendered = render_results([context_raw("2026-08-16T00:00:00Z", "scaler")])
 
-    assert "## Long horizon — top 10" in rendered
+    assert "## Historical long horizon — top 10" in rendered
+
+
+def test_validated_long_horizon_is_separate_from_historical_runs() -> None:
+    historical = context_raw("2026-08-16T00:00:00Z", "historical")
+    current = context_raw("2026-08-17T00:00:00Z", "current")
+    current["configuration"]["suite"] = "long-horizon-validated"
+
+    rendered = render_results([historical, current])
+
+    assert "## Validated long horizon — top 10" in rendered
+    assert "## Historical long horizon — top 10" in rendered
+    assert rendered.index("| current |") < rendered.index("| historical |")
     assert "## Context scaling" not in rendered
 
 
@@ -918,7 +995,7 @@ def test_both_sections_disclaim_cross_suite_ranking() -> None:
         ]
     )
 
-    breadth, long_horizon = rendered.split("## Long horizon", 1)
+    breadth, long_horizon = rendered.split("## Historical long horizon", 1)
     assert "not comparable" in breadth
     assert "not comparable" in long_horizon
 
@@ -963,6 +1040,22 @@ def test_the_completeness_factor_is_shown_not_just_applied() -> None:
 
     assert "completeness" in rendered
     assert "50.0%" in rendered
+
+
+def test_non_review_stage_failure_is_reported_without_reducing_completeness() -> None:
+    run = _with_calls(
+        raw("2026-01-01T00:00:00Z", "stage-error", True),
+        [
+            {"label": "security", "findings": 1, "error": None},
+            {"label": "reflect", "findings": None, "error": "timeout"},
+        ],
+    )
+
+    data = build_dashboard_data([run])
+    metrics = data["runs"][0]["metrics"]
+    assert metrics["completeness"] == 1.0
+    assert metrics["stage_failures"] == {"reflect": 1}
+    assert "| stage-error |" in render_detailed_results(data)
 
 
 def test_a_run_that_cannot_report_its_calls_is_marked_not_assumed_complete() -> None:

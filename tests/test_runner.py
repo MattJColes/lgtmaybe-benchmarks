@@ -81,6 +81,7 @@ RUNAWAY_PROFILE = (
 
 STRUCTURED_PROFILE = {
     "schema_version": 1,
+    "total_cost_usd": 0.12,
     "wall_seconds": 9.0,
     "total_tokens": 240,
     "returned_findings": 0,
@@ -217,7 +218,7 @@ def test_cli_defaults_and_repeatable_cases() -> None:
         ["run", "--provider", "ollama", "--model", "qwen", "--case", "a", "--case", "b"]
     )
 
-    assert args.suite == "breadth"
+    assert args.suite == "breadth-validated"
     assert args.profile == "canonical-breadth"
     assert args.repeats is None
     assert args.preset is None
@@ -271,6 +272,34 @@ def test_cli_override_changes_canonical_profile_to_diagnostic_identity() -> None
     assert profile.id == "diagnostic-custom-v1"
     assert profile.canonical is False
     assert profile.diagnostic_overrides == ("max_tokens", "repeats")
+
+
+def test_cli_review_options_are_recorded_as_diagnostic_overrides() -> None:
+    args = build_parser().parse_args(
+        [
+            "run",
+            "--provider",
+            "ollama",
+            "--model",
+            "local",
+            "--no-reflect",
+            "--no-recursive",
+            "--no-spec",
+            "--static-analysis",
+            "--mid-review-retrieval",
+            "--triage-model",
+            "local-triage",
+        ]
+    )
+    profile = resolve_profile_args(args)
+
+    assert profile.id == "diagnostic-custom-v1"
+    assert profile.reflect is False
+    assert profile.recursive is False
+    assert profile.spec_review is False
+    assert profile.static_analysis is True
+    assert profile.mid_review_retrieval is True
+    assert profile.triage_model == "local-triage"
 
 
 def test_cli_budget_equal_to_canonical_breadth_keeps_canonical_identity() -> None:
@@ -645,6 +674,7 @@ def test_run_review_parses_structured_profile_json_when_human_profile_is_on_stde
     assert observation.input_tokens == 210
     assert observation.output_tokens == 30
     assert observation.reasoning_tokens == 5
+    assert observation.cost_usd == 0.12
     assert observation.truncation_lenses == ("security",)
 
 
@@ -655,6 +685,8 @@ def test_run_review_parses_structured_profile_json_when_human_profile_is_on_stde
         ("{", "profile JSON was not valid JSON"),
         (json.dumps({**STRUCTURED_PROFILE, "schema_version": 2}), "profile schema version"),
         (json.dumps({**STRUCTURED_PROFILE, "calls": []}), "contained no calls"),
+        (json.dumps({**STRUCTURED_PROFILE, "total_cost_usd": -1}), "total_cost_usd"),
+        (json.dumps({**STRUCTURED_PROFILE, "total_cost_usd": float("nan")}), "total_cost_usd"),
     ],
 )
 def test_run_review_rejects_unusable_structured_profile_json(
@@ -1003,6 +1035,33 @@ def test_fake_cli_runs_end_to_end_with_visible_truncation(tmp_path: Path) -> Non
     )
 
 
+def test_fake_cli_receives_diagnostic_review_settings(tmp_path: Path) -> None:
+    fake = _bench_workspace(tmp_path)
+    arguments = tmp_path / "review-args.json"
+    source = fake.read_text(encoding="utf-8")
+    source = source.replace(
+        "else:\n    page_case =",
+        f"else:\n    pathlib.Path({str(arguments)!r}).write_text(json.dumps(sys.argv))\n"
+        "    page_case =",
+    )
+    fake.write_text(source, encoding="utf-8")
+
+    raw_path = execute_benchmark(
+        tmp_path,
+        _bench_args(reflect=False, triage_model="local-triage"),
+        [sys.executable, str(fake)],
+    )
+    command = json.loads(arguments.read_text(encoding="utf-8"))
+    raw = json.loads(raw_path.read_text(encoding="utf-8"))
+
+    assert "--no-reflect" in command
+    assert command[command.index("--triage-model") + 1] == "local-triage"
+    assert raw["configuration"]["profile"] == "diagnostic-custom-v1"
+    assert raw["configuration"]["triage_model"] == "local-triage"
+    assert raw["observations"][0]["cost_usd"] == 0.12
+    assert "reflection off" in (tmp_path / "RESULTS.md").read_text(encoding="utf-8")
+
+
 def test_fake_cli_retains_completed_and_interrupted_audit_artifacts(tmp_path: Path) -> None:
     fake = _bench_workspace(tmp_path)
     args = _bench_args(case=["sql-injection-basic", "off-by-one-page"])
@@ -1070,7 +1129,7 @@ def test_canonical_fake_cli_connects_evidence_scoring_and_reports(tmp_path: Path
     dashboard_data = json.loads((tmp_path / "dashboard" / "data.json").read_text())
     dashboard_run = next(run for run in dashboard_data["runs"] if run["run_id"] == raw["run_id"])
     audit_path = observation["audit"]["path"]
-    assert dashboard_run["canonical"] is True
+    assert dashboard_run["canonical"] is False
     assert dashboard_run["metrics"]["adjudication_coverage"] > 0
     assert audit_path in dashboard_run["audit_paths"]
     assert raw_path.relative_to(tmp_path).as_posix() in (tmp_path / "RESULTS.md").read_text()

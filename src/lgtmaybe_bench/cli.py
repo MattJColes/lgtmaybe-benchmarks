@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import shutil
 import subprocess
 import sys
@@ -21,12 +22,17 @@ def build_parser() -> argparse.ArgumentParser:
     run = subparsers.add_parser("run", help="run lgtmaybe against the benchmark corpus")
     run.add_argument("--provider", required=True)
     run.add_argument("--model", required=True)
-    run.add_argument("--suite", default="breadth")
+    run.add_argument("--suite", default="breadth-validated")
     run.add_argument("--profile", default="canonical-breadth")
     run.add_argument("--reasoning-effort")
     run.add_argument("--max-tokens", type=int)
     run.add_argument("--max-input-tokens", type=int)
     run.add_argument("--preset", choices=("fast", "full"))
+    for option in ("reflect", "recursive", "spec", "static-analysis", "mid-review-retrieval"):
+        destination = "spec_review" if option == "spec" else option.replace("-", "_")
+        run.add_argument(f"--{option}", dest=destination, action="store_true", default=None)
+        run.add_argument(f"--no-{option}", dest=destination, action="store_false")
+    run.add_argument("--triage-model")
     run.add_argument("--repeats", type=int)
     run.add_argument("--case", action="append")
     run.add_argument("--api-base")
@@ -34,6 +40,9 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--timeout", type=int, default=7200)
     run.add_argument("--lgtmaybe", help=argparse.SUPPRESS)
     subparsers.add_parser("report", help="regenerate Markdown from stored raw results")
+    compare = subparsers.add_parser("compare", help="compare paired diagnostic raw runs")
+    compare.add_argument("--baseline", type=Path, required=True)
+    compare.add_argument("--variant", type=Path, required=True)
     return parser
 
 
@@ -89,6 +98,13 @@ def main(argv: list[str] | None = None) -> None:
             from lgtmaybe_bench.reporting import regenerate_reports
 
             regenerate_reports(root)
+            return
+        if args.command == "compare":
+            from lgtmaybe_bench.reporting import compare_diagnostic_runs
+
+            baseline = json.loads(args.baseline.read_text(encoding="utf-8"))
+            variant = json.loads(args.variant.read_text(encoding="utf-8"))
+            print(json.dumps(compare_diagnostic_runs(baseline, variant), indent=2))
             return
         from lgtmaybe_bench.runner import resolve_profile_args
 

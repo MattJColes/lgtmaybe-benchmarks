@@ -29,6 +29,7 @@ from lgtmaybe_bench.scoring import (
     parse_findings,
     score_case,
     score_suite,
+    stage_failures,
 )
 
 START = "<!-- BENCH_RESULTS_START -->"
@@ -293,6 +294,17 @@ def _settings(config: dict[str, Any]) -> str:
         or config.get("max_input_tokens") != profile_values.get("max_input_tokens")
     ):
         values.append(f"max input tokens {config['max_input_tokens']}")
+    for key, label in (
+        ("reflect", "reflection"),
+        ("recursive", "recursive review"),
+        ("spec_review", "spec review"),
+        ("static_analysis", "static analysis"),
+        ("mid_review_retrieval", "mid-review retrieval"),
+    ):
+        if key in config and (profile_values is None or config[key] != profile_values.get(key)):
+            values.append(f"{label} {'on' if config[key] else 'off'}")
+    if config.get("triage_model"):
+        values.append(f"triage {config['triage_model']}")
     if config.get("api_base"):
         values.append(f"api base {config['api_base']}")
     concurrency = int(config.get("concurrency", resolved_concurrency(provider, None)))
@@ -309,13 +321,15 @@ def _settings(config: dict[str, Any]) -> str:
 
 
 LONG_HORIZON_SUITE_ID = "long-horizon"
+VALIDATED_LONG_HORIZON_SUITE_ID = "long-horizon-validated"
 LONG_HORIZON_PROFILE_ID = "canonical-long-horizon"
-BREADTH_SUITE_ID = "breadth"
+BREADTH_SUITE_ID = "breadth-validated"
+HISTORICAL_BREADTH_SUITE_ID = "breadth"
 CANONICAL_PROFILE_IDS = frozenset({"canonical-breadth"})
 
 #: Suite and profile IDs recorded by runs stored before a rename. Published raw results are
 #: immutable, so reporting resolves the stored value instead of rewriting it.
-SUITE_ALIASES = {"context-v1": LONG_HORIZON_SUITE_ID, "v2": BREADTH_SUITE_ID}
+SUITE_ALIASES = {"context-v1": LONG_HORIZON_SUITE_ID, "v2": HISTORICAL_BREADTH_SUITE_ID}
 PROFILE_ALIASES = {
     "context-canonical-v1": LONG_HORIZON_PROFILE_ID,
     "canonical-v2": "canonical-breadth",
@@ -343,12 +357,13 @@ def _stored_profile(raw: dict[str, Any]) -> str:
 def _render_breadth_canonical(
     raw_runs: list[dict[str, Any]],
     adjudications: dict[str, str] | None,
+    suite_id: str = BREADTH_SUITE_ID,
 ) -> str | None:
     eligible = [
         raw
         for raw in raw_runs
         if raw.get("status", COMPLETE) == COMPLETE
-        and _stored_suite(raw) == BREADTH_SUITE_ID
+        and _stored_suite(raw) == suite_id
         and _stored_profile(raw) in CANONICAL_PROFILE_IDS
         and raw.get("configuration", {}).get("profile_canonical", True)
         and raw.get("configuration", {}).get("full_corpus", False)
@@ -391,14 +406,26 @@ def _render_breadth_canonical(
             )
             + " |"
         )
+    heading = "Validated breadth" if suite_id == BREADTH_SUITE_ID else "Historical breadth"
+    caveat = (
+        "The first row is the leader."
+        if suite_id == BREADTH_SUITE_ID
+        else "Historical breadth cases contain unvalidated targets; their ranking is archival."
+    )
+    correction = (
+        "Historical scores were recalculated from unchanged raw evidence. "
+        if suite_id == HISTORICAL_BREADTH_SUITE_ID
+        else ""
+    )
     return (
-        "## Breadth — top 10\n\n"
-        "Complete `breadth` runs using `canonical-breadth`, ranked by median score across "
+        f"## {heading} — top 10\n\n"
+        f"Complete `{suite_id}` runs using `canonical-breadth`, ranked by median score across "
         "lgtmaybe versions. "
         "Where measured, the score is balanced F0.5 multiplied by `completeness`, the share "
-        "of lens calls that returned parseable findings. This prevents a run with many failed "
-        "calls from scoring well on only the calls that succeeded. Scores are not comparable "
-        "with long horizon. The first row is the leader.\n\n"
+        "of review calls that returned parseable findings. Successful reflection and other "
+        "non-finding stages are excluded. "
+        f"{correction}Scores are not comparable "
+        f"with long horizon. {caveat}\n\n"
         "| date | provider | model | lgtmaybe | score | completeness | balanced recall | "
         "precision | false positives | clean pass | adjudication | audit | settings |\n"
         "|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|\n" + "\n".join(rows) + "\n"
@@ -431,10 +458,10 @@ def _true_positive_range(repeats: list[RepeatMetrics]) -> Range:
     return Range(float(median(values)), min(values), max(values))
 
 
-def _is_long_horizon_canonical(raw: dict[str, Any]) -> bool:
+def _is_long_horizon_canonical(raw: dict[str, Any], suite_id: str = LONG_HORIZON_SUITE_ID) -> bool:
     return (
         raw.get("status", COMPLETE) == COMPLETE
-        and _stored_suite(raw) == LONG_HORIZON_SUITE_ID
+        and _stored_suite(raw) == suite_id
         and _stored_profile(raw) == LONG_HORIZON_PROFILE_ID
         and raw.get("configuration", {}).get("full_corpus", False)
         and not any(observation.get("failures", 0) for observation in raw.get("observations", []))
@@ -483,9 +510,11 @@ def _context_case_metrics(raw: dict[str, Any]) -> list[dict[str, Any]]:
     return rows
 
 
-def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
+def _render_context_scaling(
+    raw_runs: list[dict[str, Any]], suite_id: str = LONG_HORIZON_SUITE_ID
+) -> str | None:
     """Render model metrics for complete canonical context-scaling runs."""
-    eligible = [raw for raw in raw_runs if _is_long_horizon_canonical(raw)]
+    eligible = [raw for raw in raw_runs if _is_long_horizon_canonical(raw, suite_id)]
     if not eligible:
         return None
     ordered = sorted(
@@ -535,13 +564,30 @@ def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
         "true positives | false positives |\n"
         "|---|---|---|---|---:|---:|---:|---:|---:|---:|\n"
     )
+    heading = (
+        "Validated long horizon"
+        if suite_id == VALIDATED_LONG_HORIZON_SUITE_ID
+        else "Historical long horizon"
+    )
+    caveat = (
+        "Scores are not comparable with breadth."
+        if suite_id == VALIDATED_LONG_HORIZON_SUITE_ID
+        else "Scores are not comparable with breadth. Historical cases include unplanted "
+        "threshold changes; their ranking is archival."
+    )
+    correction = (
+        "Historical scores were recalculated from unchanged raw evidence. "
+        if suite_id == LONG_HORIZON_SUITE_ID
+        else ""
+    )
     return (
-        "## Long horizon — top 10\n\n"
-        "Complete `long-horizon` runs using `canonical-long-horizon`, ranked by score across "
+        f"## {heading} — top 10\n\n"
+        f"Complete `{suite_id}` runs using `canonical-long-horizon`, ranked by score across "
         "lgtmaybe versions. "
         "Recall covers 32 planted bugs in four cases; a fifth case is clean. Where measured, "
-        "the score is F0.5 multiplied by `completeness`, the share of lens calls that returned "
-        "parseable findings. Scores are not comparable with breadth.\n\n"
+        "the score is F0.5 multiplied by `completeness`, the share of review calls that returned "
+        f"parseable findings. {correction}"
+        f"{caveat}\n\n"
         "### Model summary\n\n" + summary_header + "\n".join(summary_rows) + "\n"
     )
 
@@ -576,7 +622,7 @@ def build_dashboard_data(
         )
         metrics: dict[str, Any] | None = None
         if status == COMPLETE and raw.get("observations") and not failed:
-            if suite == BREADTH_SUITE_ID:
+            if suite in {BREADTH_SUITE_ID, HISTORICAL_BREADTH_SUITE_ID, "review-options"}:
                 scored = _score_suite_run(raw, adjudications)
                 aggregate = scored.aggregate
                 classes = sorted(
@@ -590,6 +636,7 @@ def build_dashboard_data(
                     "score_kind": "balanced_f1",
                     "balanced_f1": aggregate.balanced_f1.median,
                     "completeness": aggregate.completeness,
+                    "stage_failures": stage_failures(raw["observations"]),
                     "balanced_recall": aggregate.balanced_recall.median,
                     "precision": aggregate.precision.median,
                     "false_positives": aggregate.false_positives.median,
@@ -623,11 +670,12 @@ def build_dashboard_data(
             else:
                 scored_legacy = _score_run(raw)
                 aggregate_legacy = aggregate_repeats(scored_legacy.repeats)
-                context_metrics = suite == LONG_HORIZON_SUITE_ID
+                context_metrics = suite in {LONG_HORIZON_SUITE_ID, VALIDATED_LONG_HORIZON_SUITE_ID}
                 metrics = {
                     "score_kind": "legacy_f1",
                     "balanced_f1": aggregate_legacy.score.median,
                     "completeness": aggregate_legacy.completeness,
+                    "stage_failures": stage_failures(raw["observations"]),
                     "balanced_recall": aggregate_legacy.recall.median,
                     "precision": aggregate_legacy.precision.median,
                     "false_positives": (
@@ -691,7 +739,10 @@ def build_dashboard_data(
                 "settings": _settings(config),
                 "metrics": metrics,
                 "context_cases": (
-                    _context_case_metrics(raw) if _is_long_horizon_canonical(raw) else []
+                    _context_case_metrics(raw)
+                    if _is_long_horizon_canonical(raw)
+                    or _is_long_horizon_canonical(raw, VALIDATED_LONG_HORIZON_SUITE_ID)
+                    else []
                 ),
             }
         )
@@ -725,7 +776,7 @@ def render_dashboard(data: dict[str, Any]) -> str:
 <body>
   <main>
     <h1>lgtmaybe benchmark explorer</h1>
-    <p class="muted">Every stored run remains visible. Canonical rankings compare only one suite, profile, and lgtmaybe version.</p>
+    <p class="muted">Every stored run remains visible. Historical breadth and long-horizon scores are archival; validated suites have separate rankings.</p>
     <p><a href="../RESULTS.md">Open the complete Markdown results</a></p>
     <section class="filters" aria-label="Result filters">
       <label>Search model or provider<input id="search" type="search"></label>
@@ -858,23 +909,61 @@ def render_results(
     if not raw_runs:
         return "No benchmark runs recorded.\n"
     complete = [raw for raw in raw_runs if raw.get("status", COMPLETE) == COMPLETE]
-    context = _render_context_scaling(raw_runs)
+    context = _render_context_scaling(raw_runs, VALIDATED_LONG_HORIZON_SUITE_ID)
+    historical_context = _render_context_scaling(raw_runs)
     breadth = _render_breadth_canonical(raw_runs, adjudications)
-    if breadth is not None:
-        return breadth if context is None else breadth + "\n" + context
+    historical = _render_breadth_canonical(raw_runs, adjudications, HISTORICAL_BREADTH_SUITE_ID)
+    current = breadth or (
+        "## Validated breadth\n\nNo complete `breadth-validated` canonical runs yet. "
+        "Historical scores below were recalculated from unchanged raw results.\n"
+    )
+    if historical is not None or breadth is not None:
+        sections = [current]
+        if historical is not None:
+            sections.append(historical)
+        sections.append(
+            context
+            or "## Validated long horizon\n\nNo complete `long-horizon-validated` runs yet.\n"
+        )
+        if historical_context is not None:
+            sections.append(historical_context)
+        return "\n".join(sections)
     if not complete:
         return "No benchmark runs recorded.\n"
     full_runs = [
         raw
         for raw in complete
         if raw.get("configuration", {}).get("full_corpus", True)
-        and _stored_suite(raw) != LONG_HORIZON_SUITE_ID
+        and _stored_suite(raw)
+        not in {
+            LONG_HORIZON_SUITE_ID,
+            VALIDATED_LONG_HORIZON_SUITE_ID,
+            BREADTH_SUITE_ID,
+            HISTORICAL_BREADTH_SUITE_ID,
+            "review-options",
+        }
         and not any(observation.get("failures", 0) for observation in raw["observations"])
     ]
     if not full_runs:
-        if context is None:
+        if any(
+            _stored_suite(raw) in {BREADTH_SUITE_ID, HISTORICAL_BREADTH_SUITE_ID}
+            for raw in raw_runs
+        ):
+            return "\n".join(part for part in (current, context, historical_context) if part)
+        if context is None and historical_context is None:
             return "No full benchmark runs recorded.\n"
-        return context
+        return "\n".join(
+            part
+            for part in (
+                context
+                or (
+                    "## Validated long horizon\n\n"
+                    "No complete `long-horizon-validated` runs yet.\n"
+                ),
+                historical_context,
+            )
+            if part is not None
+        )
     runs = sorted(
         (_score_run(raw) for raw in full_runs),
         key=lambda run: (
@@ -914,6 +1003,91 @@ def render_results(
     ) + ("" if context is None else "\n" + context)
 
 
+def compare_diagnostic_runs(baseline: dict[str, Any], variant: dict[str, Any]) -> dict[str, Any]:
+    """Compare one review setting using identical cases and model conditions."""
+    first, second = baseline["configuration"], variant["configuration"]
+    required = (
+        "suite", "provider", "model", "cases", "repeats", "reasoning_effort",
+        "max_tokens", "max_input_tokens", "concurrency", "timeout", "api_base",
+    )
+    if any(first.get(name) != second.get(name) for name in required) or baseline.get(
+        "lgtmaybe_version"
+    ) != variant.get("lgtmaybe_version"):
+        raise ValueError(
+            "diagnostic comparison requires the same version, model, cases, and other settings"
+        )
+    if baseline.get("status") != COMPLETE or variant.get("status") != COMPLETE:
+        raise ValueError("diagnostic comparison requires complete runs")
+    settings = (
+        "preset",
+        "reflect",
+        "recursive",
+        "spec_review",
+        "static_analysis",
+        "mid_review_retrieval",
+        "triage_model",
+    )
+    changed = [name for name in settings if first.get(name) != second.get(name)]
+    if len(changed) != 1:
+        raise ValueError("diagnostic comparison requires exactly one changed review setting")
+
+    def metrics(raw: dict[str, Any]) -> dict[str, float | None]:
+        suite = resolve_suite_id(str(raw["configuration"]["suite"]))
+        if suite in {BREADTH_SUITE_ID, HISTORICAL_BREADTH_SUITE_ID, "review-options"}:
+            result = _score_suite_run(raw).aggregate
+            values = {
+                "recall": result.balanced_recall.median,
+                "false_positives": result.false_positives.median,
+                "completeness": result.completeness,
+                "input_tokens": result.input_tokens.median,
+                "output_tokens": result.output_tokens.median,
+                "wall_seconds": result.wall_seconds.median,
+            }
+        else:
+            result_legacy = aggregate_repeats(_score_run(raw).repeats)
+            values = {
+                "recall": result_legacy.recall.median,
+                "false_positives": result_legacy.false_positives.median,
+                "completeness": result_legacy.completeness,
+                "input_tokens": result_legacy.input_tokens.median,
+                "output_tokens": result_legacy.output_tokens.median,
+                "wall_seconds": result_legacy.wall_seconds.median,
+            }
+        cost = raw.get("cost_usd")
+        if not isinstance(cost, (int, float)):
+            costs_by_repeat: dict[int, float] = {}
+            for observation in raw["observations"]:
+                observation_cost = observation.get("cost_usd")
+                if not isinstance(observation_cost, (int, float)):
+                    costs_by_repeat.clear()
+                    break
+                repeat = int(observation["repeat"])
+                costs_by_repeat[repeat] = costs_by_repeat.get(repeat, 0.0) + observation_cost
+            cost = median(costs_by_repeat.values()) if costs_by_repeat else None
+        values["cost_usd"] = float(cost) if isinstance(cost, (int, float)) else None
+        return values
+
+    before, after = metrics(baseline), metrics(variant)
+
+    def difference(left: float | None, right: float | None) -> float | None:
+        return None if left is None or right is None else right - left
+
+    return {
+        "suite": resolve_suite_id(str(first["suite"])),
+        "setting": changed[0],
+        "baseline_run": baseline["run_id"],
+        "variant_run": variant["run_id"],
+        "metrics": {
+            name: {
+                "baseline": value,
+                "variant": after[name],
+                "delta": difference(value, after[name]),
+            }
+            for name, value in before.items()
+        },
+    }
+
+
 def render_detailed_results(data: dict[str, Any]) -> str:
     runs = [run for run in data["runs"] if run["status"] == COMPLETE]
     if not runs:
@@ -930,6 +1104,7 @@ def render_detailed_results(data: dict[str, Any]) -> str:
     language_rows: list[str] = []
     lens_rows: list[str] = []
     false_positive_rows: list[str] = []
+    stage_failure_rows: list[str] = []
     for run in runs:
         metrics = run["metrics"] or {}
         raw_link = f"[raw]({run['raw_path']})" if isinstance(run.get("raw_path"), str) else "—"
@@ -1003,10 +1178,17 @@ def render_detailed_results(data: dict[str, Any]) -> str:
                 f"| {escaped(run['model'])} | {escaped(run['comparison_key'])} | "
                 f"{escaped(classification)} | {escaped(count)} |"
             )
+        for stage, count in sorted(metrics.get("stage_failures", {}).items()):
+            stage_failure_rows.append(
+                f"| {escaped(run['model'])} | {escaped(run['comparison_key'])} | "
+                f"{escaped(stage)} | {count} |"
+            )
 
     sections = [
         "## All stored runs\n\n"
         "Canonical, diagnostic, focused, and legacy completed runs are retained here. "
+        "Historical `breadth` and `long-horizon` scores were recalculated from unchanged raw "
+        "evidence and are archival because their corpora have known validation issues. "
         "Ranked tables compare runs of one suite and profile across lgtmaybe versions; "
         "the suite and profile columns identify what each run measured.\n\n"
         "| date | provider | model | suite | profile | lgtmaybe | status | score | completeness | "
@@ -1023,6 +1205,13 @@ def render_detailed_results(data: dict[str, Any]) -> str:
             "output tokens | truncated | wall (s) |\n"
             "|---|---|---|---|---:|---:|---:|---:|---:|---|---:|\n"
             + "\n".join(context_case_rows)
+            + "\n"
+        )
+    if stage_failure_rows:
+        sections.append(
+            "\n## Non-review stage failures\n\n"
+            "| model | comparison key | stage | failures |\n|---|---|---|---:|\n"
+            + "\n".join(stage_failure_rows)
             + "\n"
         )
     if language_rows:

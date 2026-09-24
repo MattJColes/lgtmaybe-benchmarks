@@ -436,7 +436,7 @@ def _matches(finding: Finding, entry: CatalogEntry) -> bool:
 
 
 def call_completeness(observations: Iterable[dict[str, Any]]) -> float | None:
-    """Fraction of lens calls that returned parseable findings, or None if unknown.
+    """Fraction of review calls that returned parseable findings, or None if unknown.
 
     Precision counts only findings that exist, so it cannot see a call that
     returned nothing; recall can, but F0.5 weights it at half. Without this
@@ -444,9 +444,8 @@ def call_completeness(observations: Iterable[dict[str, Any]]) -> float | None:
     measured on the stored corpus, one run failed to parse 73.8% of its calls
     and still out-scored a run that found 24 planted bugs to its 14.
 
-    A failed call is one whose findings count is null: the model was asked and
-    produced nothing usable. `0` is an answer, not a failure — a lens is
-    entitled to find nothing.
+    Non-finding stages such as reflection legitimately report a null finding
+    count. A review call with a null count failed; `0` is a valid answer.
 
     Nine stored runs predate the structured `calls` array, so their stderr
     `provider call` lines are read instead. When neither is available the answer
@@ -458,6 +457,8 @@ def call_completeness(observations: Iterable[dict[str, Any]]) -> float | None:
         calls = observation.get("calls") or []
         if calls:
             for call in calls:
+                if _is_non_finding_stage(str(call.get("label", ""))):
+                    continue
                 total += 1
                 failed += call.get("findings") is None
             continue
@@ -470,11 +471,28 @@ def call_completeness(observations: Iterable[dict[str, Any]]) -> float | None:
                 continue
             if record.get("message") != "provider call":
                 continue
+            if _is_non_finding_stage(str(record.get("label", ""))):
+                continue
             total += 1
             failed += record.get("findings") is None
     if total == 0:
         return None
     return (total - failed) / total
+
+
+def _is_non_finding_stage(label: str) -> bool:
+    return label in {"reflect", "triage"} or label.startswith("repair:")
+
+
+def stage_failures(observations: Iterable[dict[str, Any]]) -> dict[str, int]:
+    """Report failed non-finding stages without treating them as failed lenses."""
+    failures: dict[str, int] = {}
+    for observation in observations:
+        for call in observation.get("calls") or []:
+            label = str(call.get("label", ""))
+            if _is_non_finding_stage(label) and call.get("error"):
+                failures[label] = failures.get(label, 0) + 1
+    return failures
 
 
 def overall_score(recall: float, precision: float) -> float:
