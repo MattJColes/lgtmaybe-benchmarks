@@ -393,16 +393,12 @@ def _render_breadth_canonical(
         )
     return (
         "## Breadth — top 10\n\n"
-        "Complete `breadth` runs with profile `canonical-breadth` only. Cases span seven "
-        "programming languages plus GitHub Actions and Terraform, planting one finding per "
-        "language and review lens, so the score measures coverage across kinds of issue rather "
-        "than diff size. The score is balanced F0.5 scaled by `completeness`, the share of lens "
-        "calls that returned parseable findings: precision counts only findings that exist, so "
-        "without that factor a run whose calls mostly failed is scored on the few that "
-        "survived. It is not comparable with the long-horizon score, which measures a "
-        "different corpus. Rows rank runs across lgtmaybe versions; the `lgtmaybe` column names "
-        "the version each run used. Rows are ranked highest to lowest by median score. The "
-        "first row is the current leader.\n\n"
+        "Complete `breadth` runs using `canonical-breadth`, ranked by median score across "
+        "lgtmaybe versions. "
+        "Where measured, the score is balanced F0.5 multiplied by `completeness`, the share "
+        "of lens calls that returned parseable findings. This prevents a run with many failed "
+        "calls from scoring well on only the calls that succeeded. Scores are not comparable "
+        "with long horizon. The first row is the leader.\n\n"
         "| date | provider | model | lgtmaybe | score | completeness | balanced recall | "
         "precision | false positives | clean pass | adjudication | audit | settings |\n"
         "|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|\n" + "\n".join(rows) + "\n"
@@ -541,14 +537,11 @@ def _render_context_scaling(raw_runs: list[dict[str, Any]]) -> str | None:
     )
     return (
         "## Long horizon — top 10\n\n"
-        "Complete `long-horizon` runs with profile `canonical-long-horizon` only. "
-        "Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting "
-        "eight bugs at the same relative positions; the clean case plants none. Model recall "
-        "covers the 32 planted findings across the four defect-bearing cases. Scored as the "
-        "closed-world F0.5 overall score scaled by `completeness` (the share of lens calls that "
-        "returned parseable findings), which is not comparable with the breadth balanced "
-        "F0.5. Rows rank runs across lgtmaybe versions; the `lgtmaybe` column names the version "
-        "each run used.\n\n"
+        "Complete `long-horizon` runs using `canonical-long-horizon`, ranked by score across "
+        "lgtmaybe versions. "
+        "Recall covers 32 planted bugs in four cases; a fifth case is clean. Where measured, "
+        "the score is F0.5 multiplied by `completeness`, the share of lens calls that returned "
+        "parseable findings. Scores are not comparable with breadth.\n\n"
         "### Model summary\n\n" + summary_header + "\n".join(summary_rows) + "\n"
     )
 

@@ -899,9 +899,8 @@ def test_breadth_section_is_identified_by_suite() -> None:
 def test_breadth_section_explains_ranking_order() -> None:
     rendered = render_results([v2_raw("2026-08-16T00:00:00Z", "ranked")])
 
-    assert (
-        "Rows are ranked highest to lowest by median score. The first row is the current leader."
-    ) in rendered
+    assert "ranked by median score across lgtmaybe versions" in rendered
+    assert "The first row is the leader." in rendered
 
 
 def test_long_horizon_section_is_identified_by_suite() -> None:

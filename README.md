@@ -1,59 +1,59 @@
 # lgtmaybe-bench
 
-Repeatable recall, precision, noise, token, truncation, and timing benchmarks for [lgtmaybe](https://github.com/MattJColes/lgtmaybe).
+Repeatable benchmarks for [lgtmaybe](https://github.com/MattJColes/lgtmaybe), measuring findings, false positives, token use, truncation, and run time.
 
 ## The two benchmarks
 
-The corpus holds two suites. They measure different things and are not two generations of one benchmark — neither replaces the other.
+The two suites measure different properties. Compare models within a suite, not across suites.
 
-| suite | question it answers | shape |
+| suite | question | corpus |
 |---|---|---|
-| `long-horizon` | Does recall survive as the diff grows? | One language (Python), 5 cases whose diffs scale from roughly 3% to 90% of the 100,000-token input cap. Each defect-bearing case plants the same 8 bugs at the same relative positions, so recall differences come from size alone. One clean case at a large size. |
-| `breadth` | Does it catch every kind of issue in every language? | 32 cases across Python, TypeScript, JavaScript, Rust, Dart, Java, Go, GitHub Actions, and Terraform. 72 planted findings spread over ten review lenses, plus 9 verified-clean changes. Small diffs. |
+| `long-horizon` | Does recall hold up as the diff grows? | Five Python cases, from roughly 3% to 90% of the 100,000-token input cap. Four plant the same eight bugs at the same relative positions; one large case is clean. |
+| `breadth` | Does the review catch different kinds of issues across languages? | 32 small changes across seven programming languages, GitHub Actions, and Terraform. They include 72 planted findings across ten review lenses and nine verified-clean changes. |
 
-Both suites have published runs below; each gets its own leaderboard section, and their scores are never ranked against each other.
+Each suite has its own leaderboard below.
 
 ## Running the benchmark
 
-To reproduce the published leaderboard:
+Install dependencies and run one canonical long-horizon benchmark:
 
-```powershell
+```sh
 uv sync --python 3.12
 uv run bench run --provider openrouter --model google/gemini-3.8-flash --suite long-horizon --profile canonical-long-horizon
 uv run bench report
 ```
 
-`canonical-long-horizon` runs the full lgtmaybe preset once per case with a 100,000-token input cap and no output-token ceiling.
+`canonical-long-horizon` uses lgtmaybe's full preset, one repeat per case, a 100,000-token input cap, and no output-token cap. A new run uses the latest stable lgtmaybe release, so it may differ from historical rows made with older versions.
 
-To run the breadth suite, which is what `bench run` does by default:
+To run the breadth suite (the default for `bench run`):
 
-```powershell
+```sh
 uv run bench run --provider openrouter --model google/gemini-3.8-flash --suite breadth --profile canonical-breadth
 ```
 
-`canonical-breadth` uses the fast preset, three repeats, a 16,384-token output budget per provider call, and `low` reasoning effort. Both budgets bound runaway generations: a call that hits either cap is retained as truncation evidence, not as a finding. The reasoning budget is set explicitly so every model reviews under the same one — left to the provider default, a model that spends its context on reasoning can exhaust it before emitting parseable output, which reads as a truncation failure rather than a low score. `low` is the cheapest explicit bound and the only rung this repository has stored evidence for.
+`canonical-breadth` uses the fast preset, three repeats, a 16,384-token output cap per provider call, and explicit `low` reasoning effort. The output cap and 100,000-token input cap limit oversized calls. A call that hits a cap is recorded as truncation evidence. Setting reasoning effort explicitly avoids provider defaults that can consume the context before the model returns parseable findings.
 
-Runs published before that budget existed ran with provider-resolved reasoning, and their `profile_schema_version` is 1 where later runs record 2. The profile ID was deliberately kept stable rather than versioned, so those runs still rank in the same breadth leaderboard; until each model is re-run, the breadth ranking mixes the two reasoning budgets. Every run's own `reasoning_effort` is stored in its raw record.
+Older breadth runs used provider-resolved reasoning (`profile_schema_version` 1); newer runs use `low` (`profile_schema_version` 2). They share a leaderboard until every model is rerun. Each raw result records its reasoning setting.
 
-Each run uses `uv` to download and cache the latest stable `lgtmaybe` release before benchmarking, including in a fresh container. Provider credentials stay in the environment and are never written to raw results. Hosted providers use their usual environment credentials:
+Each run uses `uv` to fetch and cache the latest stable lgtmaybe release. Set the provider's usual credentials in your environment; they are not written to raw results. For example, in PowerShell:
 
 ```powershell
 $env:OPENAI_API_KEY = "..."
 uv run bench run --provider openai --model gpt-5.5 --suite long-horizon --profile canonical-long-horizon
 ```
 
-Benchmark runs can spend provider money and take hours. Start with `--case` and `--repeats 1`, inspect the raw result, then run the full suite.
+Full runs can cost provider money and take hours. To try one case first, add `--case <case-name> --repeats 1`, then inspect its raw result before running the full suite.
 
-Named diagnostic profiles — `diagnostic-full-v1`, `diagnostic-4k-v1`, `diagnostic-large-diff-v1` — exist for investigation, not ranking. Any command-line setting override produces a `diagnostic-custom-v1` profile, so a changed configuration cannot silently enter the published ranking.
+The `diagnostic-full-v1`, `diagnostic-4k-v1`, and `diagnostic-large-diff-v1` profiles are for investigation. A setting override that changes a named profile is recorded as `diagnostic-custom-v1`. Diagnostic runs do not enter the leaderboards.
 
 ## Results
 
-Top 10 per suite. Each suite gets its own section — **Long horizon** and **Breadth** — headed by the suite it reports. Each section ranks its complete canonical runs across lgtmaybe versions in one table, and the `lgtmaybe` column names the version each run used. Rows are never compared across sections: the two suites measure different properties over different corpora. A suite with no runs renders no section.
+Each table shows the ten highest-scoring complete canonical runs for its suite, across lgtmaybe versions. The `lgtmaybe` column identifies the version used. Scores from different suites are not comparable.
 
 <!-- BENCH_RESULTS_START -->
 ## Breadth — top 10
 
-Complete `breadth` runs with profile `canonical-breadth` only. Cases span seven programming languages plus GitHub Actions and Terraform, planting one finding per language and review lens, so the score measures coverage across kinds of issue rather than diff size. The score is balanced F0.5 scaled by `completeness`, the share of lens calls that returned parseable findings: precision counts only findings that exist, so without that factor a run whose calls mostly failed is scored on the few that survived. It is not comparable with the long-horizon score, which measures a different corpus. Rows rank runs across lgtmaybe versions; the `lgtmaybe` column names the version each run used. Rows are ranked highest to lowest by median score. The first row is the current leader.
+Complete `breadth` runs using `canonical-breadth`, ranked by median score across lgtmaybe versions. Where measured, the score is balanced F0.5 multiplied by `completeness`, the share of lens calls that returned parseable findings. This prevents a run with many failed calls from scoring well on only the calls that succeeded. Scores are not comparable with long horizon. The first row is the leader.
 
 | date | provider | model | lgtmaybe | score | completeness | balanced recall | precision | false positives | clean pass | adjudication | audit | settings |
 |---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|
@@ -70,7 +70,7 @@ Complete `breadth` runs with profile `canonical-breadth` only. Cases span seven 
 
 ## Long horizon — top 10
 
-Complete `long-horizon` runs with profile `canonical-long-horizon` only. Cases grow from roughly 3% to 90% of the canonical input-token cap, each planting eight bugs at the same relative positions; the clean case plants none. Model recall covers the 32 planted findings across the four defect-bearing cases. Scored as the closed-world F0.5 overall score scaled by `completeness` (the share of lens calls that returned parseable findings), which is not comparable with the breadth balanced F0.5. Rows rank runs across lgtmaybe versions; the `lgtmaybe` column names the version each run used.
+Complete `long-horizon` runs using `canonical-long-horizon`, ranked by score across lgtmaybe versions. Recall covers 32 planted bugs in four cases; a fifth case is clean. Where measured, the score is F0.5 multiplied by `completeness`, the share of lens calls that returned parseable findings. Scores are not comparable with breadth.
 
 ### Model summary
 
@@ -90,27 +90,29 @@ Complete `long-horizon` runs with profile `canonical-long-horizon` only. Cases g
 
 ## Further results
 
-- [RESULTS.md](RESULTS.md) — every stored completed run, with per-case detail.
-- [dashboard/index.html](dashboard/index.html) — column sorting and filters by suite, profile, model, version, status, audit state, language, and lens.
+- [RESULTS.md](RESULTS.md) has every stored completed run and per-case detail.
+- [dashboard/index.html](dashboard/index.html) offers sorting and filters for runs, languages, and review lenses.
 
-Focused and diagnostic runs stay visible in both, but do not enter either published ranking.
+Focused and diagnostic runs appear in both, but not in the leaderboards.
 
-Each configuration run writes an append-only JSON document under `results/raw/` before reports are updated, retaining every final model finding including false-positive candidates, stable evidence IDs, token and truncation diagnostics, and the resolved profile. Its `status` is `in_progress` while the run is unfinished, `complete` once every repeat and case has been observed, and `ineligible` when a full-corpus canonical run was abandoned at its first failed observation. Because such a run can no longer be scored, it stops rather than paying for the remaining cases, and records the repeat, case, exit code, and failure classification that stopped it. Focused and diagnostic runs keep collecting failures instead, so a failure can still be investigated in full. Compatible lgtmaybe versions also write immutable gzip audit traces under `results/audit/`, preserving guessed candidates and later filtering decisions. Human classifications are append-only events under `results/adjudications/`, where later corrections supersede earlier ones without changing raw model output.
+Each run checkpoints a JSON result under `results/raw/`. It retains final findings (including false positives), evidence IDs, token and truncation data, and the resolved profile. The status is `in_progress` until all cases and repeats finish, then `complete`. A full-corpus canonical run stops at its first failed observation and becomes `ineligible`; its result records where and why it stopped. Focused and diagnostic runs continue collecting failures for investigation.
 
-`uv run bench report` reconstructs adjudications, recalculates scores, and regenerates `README.md`, `RESULTS.md`, and `dashboard/` deterministically. API endpoints are redacted and provider credentials are never stored.
+Compatible lgtmaybe versions also write immutable gzip audit traces under `results/audit/`, showing candidates and later filtering decisions. Human classifications are append-only events under `results/adjudications/`; corrections supersede earlier classifications without changing raw output.
+
+`uv run bench report` reapplies adjudications, recalculates scores, and regenerates the marked README results, `RESULTS.md`, and `dashboard/`. API endpoints are redacted; provider credentials are not stored.
 
 ## How the score is calculated
 
-1. **Setup.** Each case is a small Git repository with a clean base revision and a changed revision. The runner invokes lgtmaybe as an external command against the diff.
-2. **Matching.** A finding matches a planted entry only when the file agrees, the line is within three lines, an expected keyword appears in its title or body, and any minimum severity is met. Each planted entry can be caught once.
-3. **Closed-world precision.** Every finding that does not match an uncaught planted entry is a false positive, even if it may identify a real uncatalogued issue. `precision = true positives / (true positives + false positives)`.
-4. **Score.** `score = 1.25 × precision × recall / (0.25 × precision + recall)`, and 0% when that denominator is zero. That is the F0.5 measure: a harmonic-family mean of precision and recall that weights precision twice as heavily, so noise costs more than misses without ever erasing nonzero recall. Both suites share this formula — the Long horizon `score` column applies it to planted-finding recall and closed-world precision, and the Breadth `balanced F0.5` column applies it to balanced recall and pooled precision. The suites are still never ranked against each other.
-5. **Aggregation.** Each repeat is scored independently, and every reported metric is the median across repeats with the full minimum–maximum range. Published runs use one repeat, so no range is shown.
+1. Each case has a clean Git revision and a changed revision. The runner asks lgtmaybe to review their diff.
+2. A finding catches a planted bug when the file matches, its line is within three lines, an expected keyword appears in the title or body, and it meets any minimum severity. Each bug can be caught once.
+3. Every other finding is a false positive, including plausible issues not listed in the corpus. `precision = true positives / (true positives + false positives)`.
+4. Both suites use F0.5: `score = 1.25 × precision × recall / (0.25 × precision + recall)`, or 0% when the denominator is zero. It weights precision twice as heavily as recall. Long horizon uses recall over planted bugs; breadth uses balanced recall across language and lens combinations. Where call data is available, the score is also scaled by completeness: the share of provider calls that returned parseable findings.
+5. Each repeat is scored separately. Tables show the median and, when repeats differ, the minimum–maximum range.
 
-Recall in the Long horizon table is measured over the 32 planted findings in the four defect-bearing cases. The fifth case is clean and plants none; findings raised against it count as false positives. Balanced recall in the Breadth table is the arithmetic mean of recall across the suite's 70 primary language/lens cells, so every language and lens counts equally; published runs use three repeats, and each metric is the median with its full range. A breadth run with unresolved findings is marked provisional until adjudicated.
+Long horizon has 32 planted bugs across four cases; findings on its fifth, clean case are false positives. Breadth averages recall across 70 primary language and lens combinations, giving each equal weight. Breadth uses three repeats; long horizon uses one. A breadth run with unresolved findings is marked provisional until classified.
 
-Compare only rows within one suite's table; the `lgtmaybe` column identifies the version behind each row, and the dashboard can filter to a single version for strict like-for-like comparisons. Provider, model, clean pass, timing, tokens, truncations, and changed settings stay visible separately.
+For a closer comparison, use the dashboard to filter to one lgtmaybe version. It also shows timing, tokens, truncations, and settings.
 
 ## Contributing cases
 
-Each `corpus/<name>/` case has `base/`, `changed/`, and `case.json`. Expected bugs must be visible in the diff; plausible claims that would require unseen context belong in `forbidden`. Once a raw result names a case, do not edit it — add a versioned replacement such as `<name>-v2`.
+Each `corpus/<name>/` case contains `base/`, `changed/`, and `case.json`. Planted bugs must be visible in the diff. Claims requiring unseen context belong in `forbidden`. Once a raw result references a case, keep it unchanged and add a versioned replacement such as `<name>-v2`.
