@@ -6,10 +6,10 @@ Repeatable recall, precision, noise, token, truncation, and timing benchmarks fo
 
 The corpus holds two suites. They measure different things and are not two generations of one benchmark — neither replaces the other.
 
-| suite | question it answers | shape | published runs |
-|---|---|---|---:|
-| `long-horizon` | Does recall survive as the diff grows? | One language (Python), 5 cases whose diffs scale from roughly 3% to 90% of the 100,000-token input cap. Each defect-bearing case plants the same 8 bugs at the same relative positions, so recall differences come from size alone. One clean case at a large size. | **35** |
-| `breadth` | Does it catch every kind of issue in every language? | 32 cases across Python, TypeScript, JavaScript, Rust, Dart, Java, Go, GitHub Actions, and Terraform. 72 planted findings spread over ten review lenses, plus 9 verified-clean changes. Small diffs. | **31** |
+| suite | question it answers | shape |
+|---|---|---|
+| `long-horizon` | Does recall survive as the diff grows? | One language (Python), 5 cases whose diffs scale from roughly 3% to 90% of the 100,000-token input cap. Each defect-bearing case plants the same 8 bugs at the same relative positions, so recall differences come from size alone. One clean case at a large size. |
+| `breadth` | Does it catch every kind of issue in every language? | 32 cases across Python, TypeScript, JavaScript, Rust, Dart, Java, Go, GitHub Actions, and Terraform. 72 planted findings spread over ten review lenses, plus 9 verified-clean changes. Small diffs. |
 
 Both suites have published runs below; each gets its own leaderboard section, and their scores are never ranked against each other.
 
@@ -19,7 +19,7 @@ To reproduce the published leaderboard:
 
 ```powershell
 uv sync --python 3.12
-uv run bench run --provider openrouter --model google/gemini-3.7-flash --suite long-horizon --profile canonical-long-horizon
+uv run bench run --provider openrouter --model google/gemini-3.8-flash --suite long-horizon --profile canonical-long-horizon
 uv run bench report
 ```
 
@@ -28,7 +28,7 @@ uv run bench report
 To run the breadth suite, which is what `bench run` does by default:
 
 ```powershell
-uv run bench run --provider openrouter --model google/gemini-3.7-flash --suite breadth --profile canonical-breadth
+uv run bench run --provider openrouter --model google/gemini-3.8-flash --suite breadth --profile canonical-breadth
 ```
 
 `canonical-breadth` uses the fast preset, three repeats, a 16,384-token output budget per provider call, and `low` reasoning effort. Both budgets bound runaway generations: a call that hits either cap is retained as truncation evidence, not as a finding. The reasoning budget is set explicitly so every model reviews under the same one — left to the provider default, a model that spends its context on reasoning can exhaust it before emitting parseable output, which reads as a truncation failure rather than a low score. `low` is the cheapest explicit bound and the only rung this repository has stored evidence for.
@@ -58,15 +58,15 @@ Complete `breadth` runs with profile `canonical-breadth` only. Cases span seven 
 | date | provider | model | lgtmaybe | score | completeness | balanced recall | precision | false positives | clean pass | adjudication | audit | settings |
 |---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|
 | 2026-08-17 | openrouter | qwen/qwen3.8-max | lgtmaybe 2.2.0 | 67.0% [64.0–71.2%] provisional | 84.9% | 61.4% [58.6–67.1%] | 84.9% [79.0–91.5%] | 8 [4–13] | 77.8% [66.7–100.0%] | 98.1% [97.9–98.4%] | no | — |
+| 2026-09-24 | openrouter | google/gemini-3.8-flash | lgtmaybe 2.8.5 | 60.9% [60.1–62.6%] | 80.8% | 62.9% | 79.3% [78.0–82.1%] | 12 [10–13] | 22.2% [22.2–44.4%] | 100.0% | no | — |
 | 2026-08-16 | openrouter | openai/gpt-5.6-sol | lgtmaybe 2.1.4 | 55.8% [55.5–57.0%] provisional | 80.8% | 58.6% [55.7–60.0%] | 72.1% [71.7–75.5%] | 17 [13–17] | 33.3% [33.3–44.4%] | 98.4% [98.1–100.0%] | no | — |
+| 2026-09-24 | openrouter | x-ai/grok-4.7 | lgtmaybe 2.8.5 | 55.7% [54.0–56.5%] provisional | 80.8% | 62.9% [60.0–64.3%] | 70.1% [68.8–71.9%] | 20 [18–20] | 11.1% [11.1–22.2%] | 98.5% [98.5–98.5%] | no | — |
 | 2026-08-17 | openrouter | google/gemini-3.7-flash | lgtmaybe 2.2.0 | 55.5% [55.1–55.6%] | 80.8% | 54.3% [52.9–57.1%] | 72.7% [72.4–75.0%] | 15 [13–16] | 44.4% [33.3–44.4%] | 100.0% | no | — |
+| 2026-09-24 | openrouter | z-ai/glm-5.3-flash | lgtmaybe 2.8.5 | 55.1% [50.7–55.5%] provisional | 80.0% | 62.9% [58.6–67.1%] | 70.0% [65.2–70.3%] | 21 [19–23] | 11.1% [0.0–11.1%] | 98.5% [98.5–98.6%] | no | — |
 | 2026-08-16 | openrouter | google/gemini-3.7-flash | lgtmaybe 2.1.4 | 54.8% [54.7–55.5%] provisional | 79.6% | 48.6% [47.1–52.9%] | 77.8% [77.8–78.0%] | 10 [10–11] | 55.6% [44.4–55.6%] | 100.0% [98.0–100.0%] | no | — |
 | 2026-08-18 | openrouter | z-ai/glm-5.2 | lgtmaybe 2.2.0 | 53.2% [49.8–55.2%] provisional | 75.1% | 72.9% [72.9–75.7%] | 69.6% [65.4–71.6%] | 24 [21–28] | 11.1% [11.1–22.2%] | 98.8% [98.7–98.8%] | no | — |
+| 2026-09-24 | openrouter | moonshotai/kimi-k3 | lgtmaybe 2.8.5 | 52.0% [50.3–53.1%] provisional | 80.8% | 65.7% [61.4–68.6%] | 63.3% [62.5–65.8%] | 27 [25–29] | 0.0% | 98.6% [98.6–98.8%] | no | — |
 | 2026-08-17 | openrouter | openai/gpt-5.4-nano | lgtmaybe 2.2.0 | 51.6% [50.5–52.8%] provisional | 80.2% | 52.9% [48.6–52.9%] | 68.4% [66.1–72.0%] | 18 [14–20] | 22.2% [22.2–44.4%] | 98.3% [96.2–98.3%] | no | — |
-| 2026-08-18 | openrouter | minimax/minimax-m3 | lgtmaybe 2.2.0 | 51.6% [44.9–54.1%] provisional | 78.6% | 58.6% [54.3–60.0%] | 67.7% [63.9–71.0%] | 20 [18–22] | 33.3% [22.2–44.4%] | 98.4% [96.9–98.4%] | no | — |
-| 2026-08-16 | openrouter | x-ai/grok-4.6 | lgtmaybe 2.1.4 | 51.5% [49.0–55.8%] provisional | 80.8% | 57.1% [52.9–62.9%] | 65.6% [62.9–70.8%] | 22 [19–23] | 22.2% [22.2–33.3%] | 98.5% [98.4–98.5%] | no | — |
-| 2026-08-16 | openrouter | openai/gpt-5.6-luna | lgtmaybe 2.1.4 | 51.4% [43.0–52.3%] provisional | 77.5% | 58.6% [47.1–62.9%] | 66.2% [58.3–68.7%] | 22 [21–25] | 22.2% [11.1–22.2%] | 100.0% [98.4–100.0%] | no | — |
-| 2026-08-16 | openrouter | openai/gpt-5.6-terra | lgtmaybe 2.1.4 | 50.9% [48.9–56.8%] provisional | 80.8% | 48.6% [45.7–60.0%] | 67.9% [66.7–73.3%] | 17 [16–17] | 33.3% [22.2–33.3%] | 98.4% [98.1–100.0%] | no | — |
 
 ## Long horizon — top 10
 
@@ -76,16 +76,16 @@ Complete `long-horizon` runs with profile `canonical-long-horizon` only. Cases g
 
 | date | provider | model | lgtmaybe | score | completeness | recall | precision | true positives | false positives |
 |---|---|---|---|---:|---:|---:|---:|---:|---:|
+| 2026-09-24 | openrouter | google/gemini-3.8-flash | lgtmaybe 2.8.5 | 71.4% | 91.8% | 87.5% | 75.7% | 28 | 9 |
 | 2026-08-18 | openrouter | qwen/qwen3.8-max | lgtmaybe 2.2.0 | 70.6% | 91.8% | 75.0% | 77.4% | 24 | 7 |
 | 2026-08-15 | openrouter | google/gemini-3.7-flash | lgtmaybe 2.1.4 | 64.8% | 85.7% | 81.2% | 74.3% | 26 | 9 |
+| 2026-09-24 | openrouter | openai/gpt-6-luna | lgtmaybe 2.8.5 | 64.6% | 90.0% | 84.4% | 69.2% | 27 | 12 |
 | 2026-08-15 | openrouter | kwaipilot/kat-coder-pro-v2.5 | lgtmaybe 2.1.4 | 59.7% | 84.6% | 68.8% | 71.0% | 22 | 9 |
 | 2026-08-15 | openrouter | anthropic/claude-sonnet-5 | lgtmaybe 2.1.4 | 54.1% | 93.8% | 56.2% | 58.1% | 18 | 13 |
 | 2026-08-15 | openrouter | x-ai/grok-4.6 | lgtmaybe 2.1.4 | 53.3% | 90.0% | 84.4% | 55.1% | 27 | 22 |
 | 2026-08-15 | openrouter | deepseek/deepseek-v4-pro-0813 | lgtmaybe 2.1.4 | 51.1% | 75.0% | 37.5% | 85.7% | 12 | 2 |
 | 2026-08-15 | openrouter | kwaipilot/kat-coder-air-v2.5 | lgtmaybe 2.1.4 | 50.5% | 80.8% | 62.5% | 62.5% | 20 | 12 |
 | 2026-08-15 | openrouter | openai/gpt-5.6-terra | lgtmaybe 2.1.4 | 50.3% | 90.0% | 53.1% | 56.7% | 17 | 13 |
-| 2026-08-15 | openrouter | google/gemini-3.1-pro-preview | lgtmaybe 2.1.4 | 45.7% | 90.0% | 81.2% | 46.4% | 26 | 30 |
-| 2026-08-15 | openrouter | z-ai/glm-5.2 | lgtmaybe 2.1.4 | 44.6% | 87.0% | 78.1% | 47.2% | 25 | 28 |
 <!-- BENCH_RESULTS_END -->
 
 ## Further results
