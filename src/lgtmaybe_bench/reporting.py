@@ -1018,6 +1018,16 @@ def compare_diagnostic_runs(baseline: dict[str, Any], variant: dict[str, Any]) -
         )
     if baseline.get("status") != COMPLETE or variant.get("status") != COMPLETE:
         raise ValueError("diagnostic comparison requires complete runs")
+    for raw in (baseline, variant):
+        config = raw["configuration"]
+        expected = {
+            (case, repeat)
+            for case in config["cases"]
+            for repeat in range(1, config["repeats"] + 1)
+        }
+        observed = [(item["case"], item["repeat"]) for item in raw["observations"]]
+        if len(observed) != len(expected) or set(observed) != expected:
+            raise ValueError("diagnostic comparison requires one observation per case and repeat")
     settings = (
         "preset",
         "reflect",

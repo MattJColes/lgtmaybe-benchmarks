@@ -114,6 +114,7 @@ def v2_raw(
 
 def test_diagnostic_comparison_reports_one_setting_and_measured_cost() -> None:
     baseline = v2_raw("2026-02-01T00:00:00Z", "paired")
+    baseline["configuration"]["repeats"] = 1
     variant = deepcopy(baseline)
     variant["run_id"] = "run-variant"
     variant["configuration"]["preset"] = "fast"
@@ -130,11 +131,26 @@ def test_diagnostic_comparison_reports_one_setting_and_measured_cost() -> None:
 
 def test_diagnostic_comparison_rejects_unpaired_runs() -> None:
     baseline = v2_raw("2026-02-01T00:00:00Z", "paired")
+    baseline["configuration"]["repeats"] = 1
     variant = deepcopy(baseline)
     variant["configuration"]["preset"] = "fast"
     variant["configuration"]["cases"] = ["another-case"]
 
     with pytest.raises(ValueError, match="same version, model, cases"):
+        compare_diagnostic_runs(baseline, variant)
+
+
+@pytest.mark.parametrize("duplicate", [False, True])
+def test_diagnostic_comparison_rejects_missing_or_duplicate_observations(
+    duplicate: bool,
+) -> None:
+    baseline = v2_raw("2026-02-01T00:00:00Z", "paired")
+    baseline["configuration"]["repeats"] = 1
+    variant = deepcopy(baseline)
+    variant["configuration"]["preset"] = "fast"
+    variant["observations"] = variant["observations"] * 2 if duplicate else []
+
+    with pytest.raises(ValueError, match="one observation per case and repeat"):
         compare_diagnostic_runs(baseline, variant)
 
 
